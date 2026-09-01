@@ -1,0 +1,91 @@
+site_name: 바이브코딩으로 만드는 나만의 지도 웹
+site_description: AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼
+site_author: YLBook
+docs_dir: docs
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: orange
+      toggle:
+        icon: material/weather-sunny
+        name: 다크 모드
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: orange
+      toggle:
+        icon: material/weather-night
+        name: 라이트 모드
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - 시작: index.md
+  - 0장 이 책에서 만드는 것: ch00.md
+  - 1부 바이브코딩 준비운동:
+      - 1장 왜 바이브코딩인가: ch01.md
+      - 2장 Node.js 설치: ch02.md
+      - 3장 Git for Windows 설치: ch03.md
+      - 4장 Claude Code 설치하고 길들이기: ch04.md
+      - 5장 GitHub CLI로 깃허브 연결: ch05.md
+      - 6장 Orca로 에이전트 지휘하기: ch06.md
+  - 2부 카카오 지도 첫걸음:
+      - 7장 카카오 개발자 계정과 앱 만들기: ch07.md
+      - 8장 Vite로 프로젝트 시작: ch08.md
+      - 9장 첫 지도 띄우기: ch09.md
+      - 10장 지도 다루기: ch10.md
+  - 3부 나만의 장소 지도 만들기:
+      - 11장 마커 찍기: ch11.md
+      - 12장 장소 데이터 설계: ch12.md
+      - 13장 커스텀 오버레이 말풍선: ch13.md
+      - 14장 카테고리 필터: ch14.md
+      - 15장 키워드 장소 검색: ch15.md
+      - 16장 클릭·검색으로 장소 추가: ch16.md
+      - 17장 localStorage 저장: ch17.md
+      - 18장 사이드바 장소 목록: ch18.md
+      - 19장 상세 패널: ch19.md
+  - 4부 한 단계 더:
+      - 20장 내 위치 표시: ch20.md
+      - 21장 URL로 지도 공유: ch21.md
+      - 22장 마커 클러스터러: ch22.md
+      - 23장 모바일 대응: ch23.md
+  - 5부 세상에 공개하기:
+      - 24장 GitHub에 올리기: ch24.md
+      - 25장 GitHub Pages 배포: ch25.md
+      - 26장 README와 자랑하기: ch26.md
+  - 부록:
+      - 부록 A 프롬프트 템플릿 모음: ch27.md
+      - 부록 B 트러블슈팅 & 치트시트: ch28.md

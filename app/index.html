@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나만의 지도</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>" />
+  </head>
+  <body>
+    <div id="app">
+      <aside id="sidebar">
+        <header id="sidebar-header">
+          <h1>📍 나만의 지도</h1>
+          <button id="btn-collapse" title="사이드바 접기">◀</button>
+        </header>
+
+        <div id="search-box">
+          <input id="search-input" type="text" placeholder="장소 검색 (예: 성수동 카페)" />
+          <button id="btn-search">🔍</button>
+        </div>
+        <ul id="search-results" hidden></ul>
+
+        <nav id="filter-bar">
+          <button class="filter-btn active" data-category="all">전체</button>
+          <button class="filter-btn" data-category="food">🍜 맛집</button>
+          <button class="filter-btn" data-category="cafe">☕ 카페</button>
+          <button class="filter-btn" data-category="travel">🏝 여행</button>
+          <button class="filter-btn" data-category="date">💕 데이트</button>
+        </nav>
+
+        <ul id="place-list"></ul>
+
+        <footer id="sidebar-footer">
+          <button id="btn-export">내보내기</button>
+          <button id="btn-import">가져오기</button>
+          <input id="import-file" type="file" accept=".json" hidden />
+        </footer>
+      </aside>
+
+      <main id="map-wrap">
+        <div id="map"></div>
+        <button id="btn-expand" title="사이드바 열기" hidden>▶</button>
+        <button id="btn-mylocation" title="내 위치">🧭</button>
+        <button id="btn-share" title="지도 공유">🔗</button>
+      </main>
+
+      <section id="detail-panel" hidden></section>
+      <div id="toast" hidden></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+// 처음 실행할 때 보여줄 예시 장소들 (서울 유명 스팟)
+export const DEFAULT_PLACES = [
+  {
+    id: 'seed01',
+    name: '광장시장',
+    category: 'food',
+    lat: 37.5701,
+    lng: 126.9996,
+    rating: 5,
+    memo: '빈대떡과 마약김밥. 주말엔 사람이 아주 많다.',
+  },
+  {
+    id: 'seed02',
+    name: '성수동 카페거리',
+    category: 'cafe',
+    lat: 37.5446,
+    lng: 127.0562,
+    rating: 4,
+    memo: '공장 개조 카페 투어. 평일 오후 추천.',
+  },
+  {
+    id: 'seed03',
+    name: '경복궁',
+    category: 'travel',
+    lat: 37.5796,
+    lng: 126.977,
+    rating: 5,
+    memo: '한복 입으면 무료 입장. 수문장 교대식 10시/14시.',
+  },
+  {
+    id: 'seed04',
+    name: '남산서울타워',
+    category: 'date',
+    lat: 37.5512,
+    lng: 126.9882,
+    rating: 4,
+    memo: '야경 명소. 케이블카 타고 올라가기.',
+  },
+  {
+    id: 'seed05',
+    name: '망원한강공원',
+    category: 'date',
+    lat: 37.5546,
+    lng: 126.8957,
+    rating: 4,
+    memo: '라면 끓여 먹기 좋은 곳. 노을이 예쁘다.',
+  },
+];
