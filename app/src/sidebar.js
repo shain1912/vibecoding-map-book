@@ -64,8 +64,8 @@ export function initSidebar({ onSelectPlace, onFilter }) {
 export function toggleSidebar(open) {
   document.getElementById('sidebar').classList.toggle('collapsed', !open);
   document.getElementById('btn-expand').hidden = open;
-  // 지도 크기가 변하므로 카카오 지도에 알려준다
-  setTimeout(() => kakao.maps.event.trigger(window.__map, 'resize'), 250);
+  // 지도 크기가 변하므로 카카오 지도에 알려준다 (CSS 트랜지션 0.25s가 끝난 뒤)
+  setTimeout(() => window.__map.relayout(), 300);
 }
 
 export function renderList() {

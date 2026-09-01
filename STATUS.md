@@ -28,20 +28,20 @@
 
 | 장 | 상태 | 장 | 상태 |
 |---|---|---|---|
-| ch00 | doing(agent) | ch14 | todo |
-| ch01 | doing(agent) | ch15 | todo |
-| ch02 | doing(agent) | ch16 | todo |
-| ch03 | doing(agent) | ch17 | todo |
-| ch04 | doing(agent) | ch18 | todo |
-| ch05 | doing(agent) | ch19 | todo |
-| ch06 | doing(agent) | ch20 | todo |
-| ch07 | doing(agent) | ch21 | todo |
-| ch08 | todo | ch22 | todo |
-| ch09 | todo | ch23 | todo |
-| ch10 | todo | ch24 | todo |
-| ch11 | todo | ch25 | todo |
-| ch12 | todo | ch26 | todo |
-| ch13 | todo | ch27(부록A) | todo |
+| ch00 | draft | ch14 | draft |
+| ch01 | draft | ch15 | draft |
+| ch02 | draft | ch16 | doing(agent) |
+| ch03 | draft | ch17 | doing(agent) |
+| ch04 | draft | ch18 | doing(agent) |
+| ch05 | draft | ch19 | doing(agent) |
+| ch06 | draft | ch20 | doing(agent) |
+| ch07 | draft | ch21 | doing(agent) |
+| ch08 | draft | ch22 | doing(agent) |
+| ch09 | draft | ch23 | doing(agent) |
+| ch10 | draft | ch24 | todo |
+| ch11 | draft | ch25 | todo |
+| ch12 | draft | ch26 | todo |
+| ch13 | draft | ch27(부록A) | todo |
 | — | — | ch28(부록B) | todo |
 
 ## 이미지
@@ -62,4 +62,5 @@
 
 ## 루프 로그
 
-- 2026-09-02 08:30 — 부트스트랩 시작: 리포/문서 생성
+- 2026-09-02 08:30 — 부트스트랩: 리포/문서/앱 완성, E2E(지도·필터·검색) 통과, 커밋 e81a971
+- 2026-09-02 08:50 — ch00–07 초고 완료(커밋 f5d20ad), ch08–15 초고 완료(커밋 29b99d6), 앱 스크린샷 raw 4장 확보, ch16–23 에이전트 투입
