@@ -21,6 +21,7 @@
   type: 스크린샷
   caption: "마커 클릭 시 나타나는 커스텀 말풍선"
   file: images/ch00/ch00-f02.png
+  source: images/raw/app-bubble-gwangjang.png
   capture:
     kind: web
     command: null
@@ -29,13 +30,14 @@
     steps:
       - "스크린샷: 지도 위 마커 하나를 클릭해 말풍선(커스텀 오버레이)이 열린 모습. 말풍선 안에 장소 이름·카테고리 이모지·별점(★)이 보이고, 말풍선 아래로 뾰족한 꼬리가 마커를 가리키는 장면을 확대 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch00-f03
   chapter: 0
   type: 스크린샷
   caption: "카테고리 필터로 카페만 표시한 화면"
-  file: images/ch00/ch00-f03.png
+  file: images/ch00/ch00-f03.jpg
+  source: images/raw/app-cafe-filter.jpg
   capture:
     kind: web
     command: null
@@ -44,7 +46,7 @@
     steps:
       - "스크린샷: 사이드바에서 \"☕ 카페\" 필터 버튼이 활성화(active)된 상태. 지도에는 카페 마커만 남아 있고, 장소 목록에도 카페만 나열된 모습. 그림 0.1과 비교되도록 같은 지도 영역"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch00-f04
   chapter: 0
@@ -1236,7 +1238,8 @@
   chapter: 12
   type: 스크린샷
   caption: "DEFAULT_PLACES 다섯 곳이 카테고리 핀으로 찍힌 지도"
-  file: images/ch12/ch12-f04.png
+  file: images/ch12/ch12-f04.jpg
+  source: images/raw/app-default5-pins.jpg
   capture:
     kind: web
     command: null
@@ -1245,7 +1248,7 @@
     steps:
       - "스크린샷: 앱 실행 화면. 서울 중심부 지도에 🍜빨강(광장시장)·☕갈색(성수동)·🏝파랑(경복궁)·💕분홍(남산타워·망원한강공원) 핀 5개가 보이도록 레벨 조정 후 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch12-f05
   chapter: 12
@@ -1281,7 +1284,8 @@
   chapter: 13
   type: 스크린샷
   caption: "기본 InfoWindow가 열린 모습"
-  file: images/ch13/ch13-f01.png
+  file: images/ch13/ch13-f01.jpg
+  source: images/raw/app-infowindow.jpg
   capture:
     kind: web
     command: null
@@ -1290,7 +1294,7 @@
     steps:
       - "스크린샷: 지도 위 마커 하나를 클릭해 카카오 기본 InfoWindow가 열린 상태. 흰 사각형 테두리와 기본 꼬리가 보이도록 마커 주변을 확대 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch13-f02
   chapter: 13
@@ -1407,6 +1411,7 @@
   type: 스크린샷
   caption: "완성된 필터 바 UI (\"전체\"가 active 상태)"
   file: images/ch14/ch14-f03.png
+  source: images/raw/app-filterbar-all.png
   capture:
     kind: web
     command: null
@@ -1415,7 +1420,7 @@
     steps:
       - "스크린샷: 사이드바 부분 확대. 검색창 아래 알약 모양 필터 버튼 5개가 보이고 \"전체\" 버튼만 브랜드 색으로 채워진 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch14-f04
   chapter: 14
@@ -1484,6 +1489,7 @@
   type: 스크린샷
   caption: "사이드바 상단에 추가된 검색창"
   file: images/ch15/ch15-f02.png
+  source: images/raw/app-searchbox.png
   capture:
     kind: web
     command: null
@@ -1492,7 +1498,7 @@
     steps:
       - "스크린샷: 사이드바 위쪽. \"📍 나만의 지도\" 제목 아래에 검색 입력칸(\"장소 검색 (예: 성수동 카페)\" 플레이스홀더)과 🔍 버튼이 보이는 상태. 결과 목록은 아직 숨겨져 있음"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch15-f03
   chapter: 15
@@ -1513,7 +1519,8 @@
   chapter: 15
   type: 스크린샷
   caption: "\"성수동 카페\" 검색 결과 상위 7개"
-  file: images/ch15/ch15-f04.png
+  file: images/ch15/ch15-f04.jpg
+  source: images/raw/app-search-results-7.jpg
   capture:
     kind: web
     command: null
@@ -1522,7 +1529,7 @@
     steps:
       - "스크린샷: 검색창에 \"성수동 카페\" 입력 후 결과 목록이 펼쳐진 사이드바. 각 항목에 장소 이름(굵게)과 도로명 주소(작은 글씨)가 7개 표시된 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch15-f05
   chapter: 15
@@ -1543,7 +1550,8 @@
   chapter: 15
   type: 스크린샷
   caption: "결과가 없을 때의 토스트 알림"
-  file: images/ch15/ch15-f06.png
+  file: images/ch15/ch15-f06.jpg
+  source: images/raw/app-noresult-toast.jpg
   capture:
     kind: web
     command: null
@@ -1552,7 +1560,7 @@
     steps:
       - "스크린샷: 검색창에 \"ㅁㄴㅇㄹ\" 입력 후 화면 하단 중앙에 \"검색 결과가 없습니다.\" 검은 토스트가 떠 있는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch16-f01
   chapter: 16
@@ -1619,7 +1627,8 @@
   chapter: 16
   type: 스크린샷
   caption: "＋를 누르면 이름이 미리 채워진 다이얼로그가 열린다"
-  file: images/ch16/ch16-f05.png
+  file: images/ch16/ch16-f05.jpg
+  source: images/raw/app-add-dialog-cafe.jpg
   capture:
     kind: web
     command: null
@@ -1628,7 +1637,7 @@
     steps:
       - "스크린샷: 검색 결과에서 ＋를 누른 직후. 다이얼로그의 이름 칸에 검색한 장소 이름이 채워져 있고, 카테고리 select를 펼쳐 기본값 🍜 맛집에서 ☕ 카페로 바꾸는 중인 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch16-f06
   chapter: 16
@@ -1802,7 +1811,8 @@
   chapter: 18
   type: 스크린샷
   caption: "빈 목록 안내: 텅 빈 여백 대신 상황과 다음 행동을 알려준다"
-  file: images/ch18/ch18-f04.png
+  file: images/ch18/ch18-f04.jpg
+  source: images/raw/app-empty-list.jpg
   capture:
     kind: web
     command: null
@@ -1811,7 +1821,7 @@
     steps:
       - "스크린샷: 사이드바 확대. 목록 영역에 \"장소가 없습니다. 검색하거나 지도를 클릭해 추가해 보세요!\" 안내 문구가 흐린 회색으로 가운데 정렬되어 표시된 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch18-f05
   chapter: 18
@@ -1879,7 +1889,8 @@
   chapter: 19
   type: 스크린샷
   caption: "별 5개를 클릭한 직후, 패널과 말풍선의 별이 함께 바뀐 모습"
-  file: images/ch19/ch19-f03.png
+  file: images/ch19/ch19-f03.jpg
+  source: images/raw/app-detail-star-sync.jpg
   capture:
     kind: web
     command: null
@@ -1888,7 +1899,7 @@
     steps:
       - "스크린샷: 상세 패널에서 다섯 번째 별을 클릭해 별 5개가 모두 노랗게 된 상태. 같은 장소의 지도 말풍선에도 ★★★★★가 표시되어 두 곳이 동기화된 것이 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch19-f04
   chapter: 19
@@ -1925,7 +1936,8 @@
   chapter: 19
   type: 스크린샷
   caption: "escapeHtml 덕분에 태그가 글자 그대로 표시된 상세 패널"
-  file: images/ch19/ch19-f06.png
+  file: images/ch19/ch19-f06.jpg
+  source: images/raw/app-escapehtml.jpg
   capture:
     kind: web
     command: null
@@ -1934,7 +1946,7 @@
     steps:
       - "스크린샷: 이름을 \"<b>굵은 국밥집</b>\"으로 저장한 장소의 상세 패널. 제목에 꺾쇠 포함 문자열이 굵어지지 않고 그대로 보이는 상태. 말풍선에도 같은 문자열이 보이면 함께 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch20-f01
   chapter: 20
@@ -2142,7 +2154,8 @@
   chapter: 22
   type: 스크린샷
   caption: "마커 100개가 뒤덮은 지도 (클러스터러 적용 전)"
-  file: images/ch22/ch22-f01.png
+  file: images/ch22/ch22-f01.jpg
+  source: images/raw/app-clusterer-100.jpg
   capture:
     kind: web
     command: null
@@ -2151,7 +2164,7 @@
     steps:
       - "스크린샷: 서울 전역이 보이는 레벨 8~9 지도에 커스텀 핀 100개가 빽빽이 겹쳐 찍힌 상태. 마커끼리 서로 가려 지저분한 모습이 잘 드러나게. 사이드바 목록에도 \"테스트 장소 1~\" 항목들이 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch22-f02
   chapter: 22
