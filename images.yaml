@@ -1245,7 +1245,7 @@
     steps:
       - "스크린샷: map.kakao.com에서 임의 지점 우클릭 → 컨텍스트 메뉴가 열린 상태. 주소/길찾기 관련 메뉴 항목이 보이게 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch12-f06
   chapter: 12
@@ -2672,4 +2672,5 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
