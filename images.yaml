@@ -1,4 +1,4 @@
-# images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
+﻿# images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
 # Layout 에이전트가 chapters/ch00~ch28의 FIG 마커를 스캔해 생성 (2026-09-02, 3차 패스 갱신: ch14~ch18 재동기화)
 
 - id: ch00-f01
@@ -200,7 +200,7 @@
   chapter: 2
   type: 스크린샷
   caption: "nodejs.org 다운로드 페이지"
-  file: images/ch02/ch02-f02.png
+  file: images/ch02/ch02-f02.jpg
   capture:
     kind: web
     command: null
@@ -209,7 +209,7 @@
     steps:
       - "스크린샷: 크롬으로 https://nodejs.org 접속, LTS 다운로드 버튼이 화면 중앙에 보이는 첫 화면. \"LTS\" 글자와 Windows Installer(.msi) 선택 상태가 보이도록 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch02-f03
   chapter: 2
@@ -2672,3 +2672,4 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
