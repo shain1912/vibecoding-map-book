@@ -1444,7 +1444,7 @@
   chapter: 14
   type: 스크린샷
   caption: "💕 데이트 필터 적용: active 버튼과 걸러진 마커"
-  file: images/ch14/ch14-f05.png
+  file: images/ch14/ch14-f05.jpg
   capture:
     kind: web
     command: null
@@ -1453,7 +1453,7 @@
     steps:
       - "스크린샷: \"💕 데이트\" 버튼이 채워진 필터 바 확대 + 지도에 남산서울타워·망원한강공원 마커 2개만 보이는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch14-f06
   chapter: 14
@@ -2738,5 +2738,6 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
 
