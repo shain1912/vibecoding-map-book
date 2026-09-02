@@ -1,5 +1,5 @@
 # images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
-# Layout 에이전트가 chapters/ch00~ch28의 FIG 마커를 스캔해 생성 (2026-09-02)
+# Layout 에이전트가 chapters/ch00~ch28의 FIG 마커를 스캔해 생성 (2026-09-02, 2차 패스 갱신)
 
 - id: ch00-f01
   chapter: 0
@@ -276,15 +276,15 @@
   type: 스크린샷
   caption: "`node -v`와 `npm -v` 버전 확인 결과"
   file: images/ch02/ch02-f07.png
+  source: images/raw/term-node-npm-version.png
   capture:
     kind: terminal
     command: "node -v"
     url: null
     window_title: null
-    steps:
-      - "스크린샷: 새 터미널에서 `node -v` 입력 → v22.x.x 출력, 이어서 `npm -v` 입력 → 10.x.x 출력된 화면. 두 명령과 두 결과가 모두 보이게, 글자 크게"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch02-f08
   chapter: 2
@@ -366,15 +366,15 @@
   type: 스크린샷
   caption: "git 버전 확인 성공"
   file: images/ch03/ch03-f05.png
+  source: images/raw/term-git-version.png
   capture:
     kind: terminal
     command: "git -v"
     url: null
     window_title: null
-    steps:
-      - "스크린샷: 새 PowerShell 창에서 `git -v` 입력 후 `git version 2.xx.x.windows.1` 출력. 글자 크게"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch03-f06
   chapter: 3
@@ -456,15 +456,15 @@
   type: 스크린샷
   caption: "claude --version으로 설치 확인"
   file: images/ch04/ch04-f04.png
+  source: images/raw/term-claude-version.png
   capture:
     kind: terminal
     command: "claude --version"
     url: null
     window_title: null
-    steps:
-      - "스크린샷: 터미널에 `claude --version` 입력 후 버전 번호가 출력된 화면. 글자 크게"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch04-f05
   chapter: 4
@@ -546,15 +546,15 @@
   type: 스크린샷
   caption: "gh 버전 확인"
   file: images/ch05/ch05-f03.png
+  source: images/raw/term-gh-auth-status.png
   capture:
     kind: terminal
     command: "gh --version"
     url: null
     window_title: null
-    steps:
-      - "스크린샷: 새 터미널에서 `gh --version` 입력 후 버전 출력. 글자 크게"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch05-f04
   chapter: 5
@@ -606,15 +606,15 @@
   type: 스크린샷
   caption: "인증 완료, Logged in as"
   file: images/ch05/ch05-f07.png
+  source: images/raw/term-gh-auth-status.png
   capture:
     kind: terminal
     command: "gh auth status"
     url: null
     window_title: null
-    steps:
-      - "스크린샷: `✓ Logged in as ...` 가 표시된 터미널. 체크 표시가 잘 보이게"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch05-f08
   chapter: 5
@@ -740,16 +740,16 @@
   chapter: 7
   type: 스크린샷
   caption: "개발자 콘솔의 전체 앱 목록과 \"앱 생성\" 버튼"
-  file: images/ch07/ch07-f02.png
+  file: images/ch07/ch07-f02.jpg
+  source: images/raw/kakao-app-list.jpg
   capture:
     kind: web
     command: null
-    url: "https://developers.kakao.com"
+    url: null
     window_title: null
-    steps:
-      - "스크린샷: developers.kakao.com/console/app 의 \"전체 앱\" 목록 페이지. 화면 우측 상단의 \"+ 앱 생성\" 버튼이 잘 보이게 캡처 (참고: docs/images/raw/kakao-app-list.jpg)"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch07-f03
   chapter: 7
@@ -759,7 +759,7 @@
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: "https://developers.kakao.com/console/app"
     window_title: null
     steps:
       - "스크린샷: \"+ 앱 생성\"을 눌러 열린 앱 생성 화면. 앱 이름 \"나만의지도\", 회사명 입력란이 채워진 상태"
@@ -770,44 +770,44 @@
   chapter: 7
   type: 스크린샷
   caption: "앱 > 플랫폼 키 화면의 키 3종 (JavaScript 키에 강조 표시)"
-  file: images/ch07/ch07-f04.png
+  file: images/ch07/ch07-f04.jpg
+  source: images/raw/kakao-platform-keys.jpg
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: null
     window_title: null
-    steps:
-      - "스크린샷: 앱 > 플랫폼 키 페이지. REST API 키 / JavaScript 키 / 네이티브 앱 키 3열이 보이고 각 열에 기본 키(Default Key)가 하나씩 있는 상태. 실제 키 값은 모자이크 처리하고 JavaScript 키 열에 강조 박스 (참고: docs/images/raw/kakao-platform-keys.jpg)"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch07-f05
   chapter: 7
   type: 스크린샷
-  caption: "앱 설정 > 플랫폼 메뉴의 Web 플랫폼 등록 버튼"
-  file: images/ch07/ch07-f05.png
+  caption: "JavaScript 키 수정 화면의 JavaScript SDK 도메인 항목"
+  file: images/ch07/ch07-f05.jpg
+  source: images/raw/kakao-jskey-domain.jpg
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: null
     window_title: null
-    steps:
-      - "스크린샷: 플랫폼 설정 페이지. Android/iOS/Web 세 항목 중 Web의 \"Web 플랫폼 등록\" 버튼이 보이게 캡처"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch07-f06
   chapter: 7
   type: 스크린샷
-  caption: "사이트 도메인에 http://localhost:5173 이 등록된 모습"
+  caption: "JavaScript SDK 도메인에 http://localhost:5173 이 등록된 모습"
   file: images/ch07/ch07-f06.png
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: "https://developers.kakao.com"
     window_title: null
     steps:
-      - "스크린샷: Web 플랫폼의 사이트 도메인 목록에 http://localhost:5173 이 등록 완료된 상태"
+      - "스크린샷: JavaScript 키 수정 화면의 JavaScript SDK 도메인 목록에 http://localhost:5173 이 추가·저장 완료된 상태, 키 값은 모자이크 처리"
     crop: window
   status: pending
 
@@ -846,15 +846,15 @@
   type: 스크린샷
   caption: "npm run dev 실행 후 개발 서버가 켜진 터미널"
   file: images/ch08/ch08-f03.png
+  source: images/raw/term-vite-dev.png
   capture:
     kind: terminal
     command: "npm run dev"
     url: null
     window_title: null
-    steps:
-      - "스크린샷: 터미널에 VITE v7.x ready 메시지와 Local: http://localhost:5173/ 주소가 보이는 상태"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch08-f04
   chapter: 8
@@ -979,17 +979,17 @@
 - id: ch09-f06
   chapter: 9
   type: 스크린샷
-  caption: "카카오 콘솔의 Web 플랫폼 등록 화면 재확인"
-  file: images/ch09/ch09-f06.png
+  caption: "카카오 콘솔의 JavaScript SDK 도메인 등록 재확인"
+  file: images/ch09/ch09-f06.jpg
+  source: images/raw/kakao-jskey-domain.jpg
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: null
     window_title: null
-    steps:
-      - "스크린샷: developers.kakao.com 앱 설정 > 플랫폼 화면. Web 사이트 도메인에 http://localhost:5173 이 등록된 상태. 등록된 주소에 강조 박스"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch10-f01
   chapter: 10
@@ -2150,16 +2150,16 @@
   chapter: 22
   type: 스크린샷
   caption: "클러스터러 적용 후: 숫자 원으로 정리된 지도"
-  file: images/ch22/ch22-f04.png
+  file: images/ch22/ch22-f04.jpg
+  source: images/raw/app-clusterer.jpg
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: null
     window_title: null
-    steps:
-      - "스크린샷: 그림 22.1과 같은 축척(서울 전역)의 지도. 마커 100개 대신 \"23\", \"17\", \"9\" 같은 숫자가 적힌 클러스터 원 몇 개와 낱개 마커 한둘만 보이는 깔끔한 상태. 그림 22.1과 나란히 비교되도록 같은 구도로 캡처"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch22-f05
   chapter: 22
@@ -2270,16 +2270,16 @@
   chapter: 23
   type: 스크린샷
   caption: "사이드바를 접은 직후의 버그: 새로 넓어진 오른쪽 영역이 회색으로 남아 있다"
-  file: images/ch23/ch23-f06.png
+  file: images/ch23/ch23-f06.jpg
+  source: images/raw/app-sidebar-collapsed-tilebug.jpg
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: null
     window_title: null
-    steps:
-      - "스크린샷: PC 폭 화면에서 사이드바를 접은 직후. 지도 왼쪽 부분은 정상이지만 사이드바가 있던 만큼 넓어진 오른쪽 영역이 회색으로 비어 있는 상태"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch23-f07
   chapter: 23
@@ -2479,15 +2479,15 @@
 - id: ch25-f06
   chapter: 25
   type: 스크린샷
-  caption: "카카오 개발자 콘솔 플랫폼에 github.io 도메인 추가"
+  caption: "카카오 개발자 콘솔 JavaScript SDK 도메인에 github.io 도메인 추가"
   file: images/ch25/ch25-f06.png
   capture:
     kind: web
     command: null
-    url: "https://developers.kakao.com"
+    url: "http://localhost:5173과"
     window_title: null
     steps:
-      - "스크린샷: developers.kakao.com 내 애플리케이션 → 앱 설정 → 플랫폼 → Web의 사이트 도메인 편집 화면. http://localhost:5173과 https://아이디.github.io 두 줄이 등록된 상태"
+      - "스크린샷: developers.kakao.com 앱 > 플랫폼 키 > JavaScript 키 수정 화면의 JavaScript SDK 도메인 편집 영역. http://localhost:5173과 https://아이디.github.io 두 줄이 등록된 상태, 키 값은 모자이크 처리"
     crop: window
   status: pending
 

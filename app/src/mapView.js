@@ -94,6 +94,7 @@ export function renderPlaces(places) {
       position: pos,
       yAnchor: 1.35,
       zIndex: 10,
+      clickable: true, // 말풍선 클릭이 지도 클릭(장소 추가)으로 번지지 않게
     });
     el.querySelector('.bubble-close').addEventListener('click', (e) => {
       e.stopPropagation();

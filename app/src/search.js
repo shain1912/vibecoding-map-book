@@ -13,7 +13,10 @@ export function initSearch() {
 
   const run = () => {
     const q = input.value.trim();
-    if (!q) return;
+    if (!q) {
+      resultsEl.hidden = true; // 빈 검색어면 이전 결과를 닫는다
+      return;
+    }
     ps.keywordSearch(q, (data, status) => {
       if (status !== kakao.maps.services.Status.OK) {
         toast('검색 결과가 없습니다.');

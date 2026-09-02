@@ -34,8 +34,11 @@ export function openDetail(id) {
   panel.querySelectorAll('.star').forEach((btn) => {
     btn.addEventListener('click', () => {
       const n = Number(btn.dataset.n);
+      // 다시 그리기 전에 쓰던 메모를 잃지 않게 보관한다
+      const draft = panel.querySelector('#detail-memo').value;
       store.update(id, { rating: n });
       openDetail(id); // 다시 그려서 별 반영
+      panel.querySelector('#detail-memo').value = draft;
     });
   });
   panel.querySelector('#detail-save').addEventListener('click', () => {

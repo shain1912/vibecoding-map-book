@@ -22,5 +22,12 @@ export function initShare() {
 export function parseHash() {
   const m = location.hash.match(/^#(-?[\d.]+),(-?[\d.]+),(\d+)$/);
   if (!m) return null;
-  return { lat: Number(m[1]), lng: Number(m[2]), level: Number(m[3]) };
+  const lat = Number(m[1]);
+  const lng = Number(m[2]);
+  const level = Number(m[3]);
+  // 이상한 링크(#.,.,7 같은)로 들어와도 지도가 깨지지 않게 범위를 확인한다
+  if (!Number.isFinite(lat) || lat < -90 || lat > 90) return null;
+  if (!Number.isFinite(lng) || lng < -180 || lng > 180) return null;
+  if (!Number.isInteger(level) || level < 1 || level > 14) return null;
+  return { lat, lng, level };
 }
