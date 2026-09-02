@@ -395,7 +395,8 @@
   chapter: 3
   type: 일러스트
   caption: "저장소·커밋·브랜치 한 컷 개념도"
-  file: images/ch03/ch03-f07.png
+  file: images/ch03/ch03-f07.jpg
+  source: images/raw/ill-git-timemachine.jpg
   capture:
     kind: manual
     command: null
@@ -404,7 +405,7 @@
     steps:
       - "일러스트: 왼쪽에 폴더 아이콘(저장소), 그 안에서 오른쪽으로 이어지는 동그라미 3개의 타임라인(커밋 1→2→3), 커밋 2에서 위로 갈라져 나가는 실험용 샛길(브랜치). 각 요소에 한글 라벨: \"저장소 = 프로젝트 폴더 + 기록\", \"커밋 = 세이브 포인트\", \"브랜치 = 실험용 평행 작업\""
     crop: window
-  status: pending
+  status: captured
 
 - id: ch04-f01
   chapter: 4
@@ -1910,7 +1911,8 @@
   chapter: 20
   type: 일러스트
   caption: "브라우저가 위치를 알아내는 세 가지 단서"
-  file: images/ch20/ch20-f01.png
+  file: images/ch20/ch20-f01.jpg
+  source: images/raw/ill-geolocation-dot.jpg
   capture:
     kind: manual
     command: null
@@ -1919,7 +1921,7 @@
     steps:
       - "일러스트: 가운데에 노트북/스마트폰, 그 주위로 세 갈래 화살표. ① 위성 아이콘 \"GPS(수 미터, 실외 최강)\" ② 와이파이 공유기 아이콘 \"Wi-Fi 목록 대조(도시에서 정확)\" ③ 지구본 아이콘 \"IP 주소(시 단위, 부정확)\". 세 화살표가 모여 \"navigator.geolocation\" 상자로 들어가는 구성"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch20-f02
   chapter: 20
