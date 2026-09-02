@@ -1,0 +1,2672 @@
+# images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
+# Layout 에이전트가 chapters/ch00~ch28의 FIG 마커를 스캔해 생성 (2026-09-02)
+
+- id: ch00-f01
+  chapter: 0
+  type: 스크린샷
+  caption: "완성된 「나만의 지도」 전체 화면"
+  file: images/ch00/ch00-f01.jpg
+  source: images/raw/app-main.jpg
+  capture:
+    kind: web
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch00-f02
+  chapter: 0
+  type: 스크린샷
+  caption: "마커 클릭 시 나타나는 커스텀 말풍선"
+  file: images/ch00/ch00-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 지도 위 마커 하나를 클릭해 말풍선(커스텀 오버레이)이 열린 모습. 말풍선 안에 장소 이름·카테고리 이모지·별점(★)이 보이고, 말풍선 아래로 뾰족한 꼬리가 마커를 가리키는 장면을 확대 캡처"
+    crop: window
+  status: pending
+
+- id: ch00-f03
+  chapter: 0
+  type: 스크린샷
+  caption: "카테고리 필터로 카페만 표시한 화면"
+  file: images/ch00/ch00-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 사이드바에서 \"☕ 카페\" 필터 버튼이 활성화(active)된 상태. 지도에는 카페 마커만 남아 있고, 장소 목록에도 카페만 나열된 모습. 그림 0.1과 비교되도록 같은 지도 영역"
+    crop: window
+  status: pending
+
+- id: ch00-f04
+  chapter: 0
+  type: 스크린샷
+  caption: "키워드 검색 결과와 장소 추가 버튼"
+  file: images/ch00/ch00-f04.jpg
+  source: images/raw/app-search-results.jpg
+  capture:
+    kind: web
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch00-f05
+  chapter: 0
+  type: 스크린샷
+  caption: "별점과 메모를 편집하는 상세 패널"
+  file: images/ch00/ch00-f05.jpg
+  source: images/raw/app-detail-panel.jpg
+  capture:
+    kind: web
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch00-f06
+  chapter: 0
+  type: 일러스트
+  caption: "바이브코딩의 흐름: 말하기 → AI가 코드 작성 → 함께 읽기 → 확인하기"
+  file: images/ch00/ch00-f06.jpg
+  source: images/raw/ill-vibecoding-pair.jpg
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch00-f07
+  chapter: 0
+  type: 일러스트
+  caption: "이 책의 로드맵: 준비운동부터 세상에 공개하기까지"
+  file: images/ch00/ch00-f07.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 등산로 지도 스타일의 로드맵. 출발점(1부 준비운동: 도구 설치)부터 → 2부 첫 지도 → 3부 나만의 장소 지도 → 4부 한 단계 더 → 정상(5부 세상에 공개)까지 이어지는 길에 각 부의 아이콘(🔧🗺️📍✨🚀)이 찍힌 그림"
+    crop: window
+  status: pending
+
+- id: ch01-f01
+  chapter: 1
+  type: 일러스트
+  caption: "전통적 코딩과 바이브코딩의 순서 비교"
+  file: images/ch01/ch01-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽 \"전통 방식\" — 문법 공부 → 문서 읽기 → 코드 타이핑 → 에러와 씨름 → (한참 뒤) 결과물. 오른쪽 \"바이브코딩\" — 말로 요청 → AI가 코드 작성 → 결과 확인 → 말로 수정 요청, 짧은 순환 화살표. 두 경로의 길이 차이가 한눈에 보이게"
+    crop: window
+  status: pending
+
+- id: ch01-f02
+  chapter: 1
+  type: 일러스트
+  caption: "저자의 바이브코딩 워크플로 한눈에 보기"
+  file: images/ch01/ch01-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 가운데 \"나(지휘자)\" 아이콘. 그 아래 Orca 창 안에 Claude Code 에이전트 2~3개가 나란히 일하는 모습. 오른쪽으로 Git(되돌리기 화살표)과 GitHub CLI(클라우드 업로드) 아이콘으로 흐름이 이어짐. 각 도구에 짧은 역할 라벨"
+    crop: window
+  status: pending
+
+- id: ch01-f03
+  chapter: 1
+  type: 일러스트
+  caption: "외울 것과 이해할 것"
+  file: images/ch01/ch01-f03.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 저울 그림. 왼쪽 접시 \"외우지 않아도 되는 것: 문법·철자·옵션 순서\" 위에 AI 로봇이 대신 들고 있는 모습. 오른쪽 접시 \"이해해야 하는 것: 데이터 흐름·파일 구조·키 보안\" 위에 사람이 도면을 보는 모습. 오른쪽이 더 무겁게 기울어짐"
+    crop: window
+  status: pending
+
+- id: ch01-f04
+  chapter: 1
+  type: 일러스트
+  caption: "바이브코딩 3원칙: 작게 시키기 · 확인하기 · 되돌리기"
+  file: images/ch01/ch01-f04.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 세 개의 순환 아이콘. ① 큰 바위를 작은 돌 세 개로 쪼개는 그림(작게), ② 돋보기로 화면을 보는 그림(확인), ③ 시계 반대 방향 화살표와 안전벨트 그림(되돌리기). 셋이 원형 순환 구조로 연결"
+    crop: window
+  status: pending
+
+- id: ch01-f05
+  chapter: 1
+  type: 일러스트
+  caption: "도구 5종의 역할 지도"
+  file: images/ch01/ch01-f05.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 공사 현장 비유. 바닥 기초에 \"Node.js(전기·수도 같은 기반)\", 그 위에 작업자 \"Claude Code(일하는 에이전트)\", 지휘소 \"Orca(현장 사무소)\", 타임머신 \"Git(되돌리기)\", 물류 트럭 \"GitHub CLI(세상에 내보내기)\". 각 요소를 화살표로 연결"
+    crop: window
+  status: pending
+
+- id: ch02-f01
+  chapter: 2
+  type: 스크린샷
+  caption: "설치 전 `node -v` 실행 결과"
+  file: images/ch02/ch02-f01.png
+  capture:
+    kind: terminal
+    command: "node -v"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Windows Terminal(PowerShell)에서 `node -v` 입력 후 \"용어가 인식되지 않습니다\" 오류가 출력된 화면. 오류 메시지 전체가 보이도록 캡처, 글자 크게"
+    crop: window
+  status: pending
+
+- id: ch02-f02
+  chapter: 2
+  type: 스크린샷
+  caption: "nodejs.org 다운로드 페이지"
+  file: images/ch02/ch02-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "https://nodejs.org"
+    window_title: null
+    steps:
+      - "스크린샷: 크롬으로 https://nodejs.org 접속, LTS 다운로드 버튼이 화면 중앙에 보이는 첫 화면. \"LTS\" 글자와 Windows Installer(.msi) 선택 상태가 보이도록 캡처"
+    crop: window
+  status: pending
+
+- id: ch02-f03
+  chapter: 2
+  type: 스크린샷
+  caption: "설치 마법사 시작 화면"
+  file: images/ch02/ch02-f03.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Node.js Setup Wizard의 Welcome 화면. 창 전체 캡처, Next 버튼이 보이게"
+    crop: window
+  status: pending
+
+- id: ch02-f04
+  chapter: 2
+  type: 스크린샷
+  caption: "구성 요소 선택 화면 (npm과 Add to PATH 확인)"
+  file: images/ch02/ch02-f04.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Custom Setup 화면에서 트리 목록에 \"npm package manager\"와 \"Add to PATH\" 항목이 보이는 상태. 두 항목이 잘 보이도록 창 전체 캡처"
+    crop: window
+  status: pending
+
+- id: ch02-f05
+  chapter: 2
+  type: 스크린샷
+  caption: "Tools for Native Modules 화면 (체크 해제 상태)"
+  file: images/ch02/ch02-f05.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Tools for Native Modules 화면, \"Automatically install the necessary tools\" 체크박스가 해제된 상태로 캡처"
+    crop: window
+  status: pending
+
+- id: ch02-f06
+  chapter: 2
+  type: 스크린샷
+  caption: "설치 완료 화면"
+  file: images/ch02/ch02-f06.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: \"Completed the Node.js Setup Wizard\" 문구와 Finish 버튼이 보이는 마지막 화면. 창 전체 캡처"
+    crop: window
+  status: pending
+
+- id: ch02-f07
+  chapter: 2
+  type: 스크린샷
+  caption: "`node -v`와 `npm -v` 버전 확인 결과"
+  file: images/ch02/ch02-f07.png
+  capture:
+    kind: terminal
+    command: "node -v"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 새 터미널에서 `node -v` 입력 → v22.x.x 출력, 이어서 `npm -v` 입력 → 10.x.x 출력된 화면. 두 명령과 두 결과가 모두 보이게, 글자 크게"
+    crop: window
+  status: pending
+
+- id: ch02-f08
+  chapter: 2
+  type: 스크린샷
+  caption: "환경 변수 편집 창에서 Path에 nodejs 경로 확인"
+  file: images/ch02/ch02-f08.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: \"환경 변수 편집\" 창의 Path 목록에 `C:\\Program Files\\nodejs\\` 항목이 선택(하이라이트)된 상태. 창 전체 캡처"
+    crop: window
+  status: pending
+
+- id: ch03-f01
+  chapter: 3
+  type: 스크린샷
+  caption: "git이 설치되어 있지 않을 때의 터미널 화면"
+  file: images/ch03/ch03-f01.png
+  capture:
+    kind: terminal
+    command: "git -v"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: PowerShell에서 `git -v` 입력 후 \"'git' 용어가 cmdlet, 함수... 이름으로 인식되지 않습니다\" 오류 출력. 오류 문구가 잘 보이게"
+    crop: window
+  status: pending
+
+- id: ch03-f02
+  chapter: 3
+  type: 스크린샷
+  caption: "gitforwindows.org 다운로드 페이지"
+  file: images/ch03/ch03-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "https://gitforwindows.org"
+    window_title: null
+    steps:
+      - "스크린샷: gitforwindows.org 첫 화면. Download 버튼이 화면에 보이도록 캡처"
+    crop: window
+  status: pending
+
+- id: ch03-f03
+  chapter: 3
+  type: 스크린샷
+  caption: "기본 에디터 선택 화면에서 Notepad를 고른 모습"
+  file: images/ch03/ch03-f03.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 설치 마법사의 \"Choosing the default editor used by Git\" 화면. 드롭다운에서 \"Use the Notepad as Git's default editor\"가 선택된 상태"
+    crop: window
+  status: pending
+
+- id: ch03-f04
+  chapter: 3
+  type: 스크린샷
+  caption: "PATH 설정 화면. 가운데 Recommended 옵션이 선택된 모습"
+  file: images/ch03/ch03-f04.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: \"Adjusting your PATH environment\" 화면. 두 번째 옵션 \"Git from the command line and also from 3rd-party software\"가 선택된 상태"
+    crop: window
+  status: pending
+
+- id: ch03-f05
+  chapter: 3
+  type: 스크린샷
+  caption: "git 버전 확인 성공"
+  file: images/ch03/ch03-f05.png
+  capture:
+    kind: terminal
+    command: "git -v"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 새 PowerShell 창에서 `git -v` 입력 후 `git version 2.xx.x.windows.1` 출력. 글자 크게"
+    crop: window
+  status: pending
+
+- id: ch03-f06
+  chapter: 3
+  type: 스크린샷
+  caption: "user.name과 user.email이 등록된 모습"
+  file: images/ch03/ch03-f06.png
+  capture:
+    kind: terminal
+    command: "git config --global --list"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: `git config --global --list` 실행 결과에 user.name=..., user.email=... 두 줄이 보이는 터미널"
+    crop: window
+  status: pending
+
+- id: ch03-f07
+  chapter: 3
+  type: 일러스트
+  caption: "저장소·커밋·브랜치 한 컷 개념도"
+  file: images/ch03/ch03-f07.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽에 폴더 아이콘(저장소), 그 안에서 오른쪽으로 이어지는 동그라미 3개의 타임라인(커밋 1→2→3), 커밋 2에서 위로 갈라져 나가는 실험용 샛길(브랜치). 각 요소에 한글 라벨: \"저장소 = 프로젝트 폴더 + 기록\", \"커밋 = 세이브 포인트\", \"브랜치 = 실험용 평행 작업\""
+    crop: window
+  status: pending
+
+- id: ch04-f01
+  chapter: 4
+  type: 일러스트
+  caption: "챗봇 방식과 Claude Code 방식의 차이"
+  file: images/ch04/ch04-f01.jpg
+  source: images/raw/ill-chat-vs-terminal.jpg
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch04-f02
+  chapter: 4
+  type: 스크린샷
+  caption: "claude.ai 가입 화면"
+  file: images/ch04/ch04-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "https://claude.ai"
+    window_title: null
+    steps:
+      - "스크린샷: claude.ai 로그인/가입 페이지. 구글 계정 버튼과 이메일 입력란이 보이도록 캡처"
+    crop: window
+  status: pending
+
+- id: ch04-f03
+  chapter: 4
+  type: 스크린샷
+  caption: "npm으로 Claude Code 설치"
+  file: images/ch04/ch04-f03.png
+  capture:
+    kind: terminal
+    command: "npm install -g @anthropic-ai/claude-code"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 터미널에서 `npm install -g @anthropic-ai/claude-code` 실행 후 added ... packages 완료 메시지가 보이는 화면. 글자 크게"
+    crop: window
+  status: pending
+
+- id: ch04-f04
+  chapter: 4
+  type: 스크린샷
+  caption: "claude --version으로 설치 확인"
+  file: images/ch04/ch04-f04.png
+  capture:
+    kind: terminal
+    command: "claude --version"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 터미널에 `claude --version` 입력 후 버전 번호가 출력된 화면. 글자 크게"
+    crop: window
+  status: pending
+
+- id: ch04-f05
+  chapter: 4
+  type: 스크린샷
+  caption: "Claude Code 첫 실행 화면"
+  file: images/ch04/ch04-f05.png
+  capture:
+    kind: terminal
+    command: "claude"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 터미널에서 `claude` 실행 직후 나타나는 환영 화면(로고와 초기 설정 안내). 글자 크게"
+    crop: window
+  status: pending
+
+- id: ch04-f06
+  chapter: 4
+  type: 일러스트
+  caption: "프롬프트의 4요소"
+  file: images/ch04/ch04-f06.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 말풍선 하나를 네 조각 퍼즐로 나눈 개념도. 각 조각에 ①맥락(어떤 상황에서) ②목표(무엇을) ③제약(단, 이 조건으로) ④출력 형식(결과는 이렇게) 라벨. 지도 핀 아이콘 곁들임"
+    crop: window
+  status: pending
+
+- id: ch04-f07
+  chapter: 4
+  type: 스크린샷
+  caption: "권한 프롬프트 화면"
+  file: images/ch04/ch04-f07.png
+  capture:
+    kind: terminal
+    command: "claude"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Claude Code가 파일 수정 전 변경 내용을 보여주며 Yes/No 선택지를 제시하는 승인 화면. 선택지 부분이 잘 보이게 캡처"
+    crop: window
+  status: pending
+
+- id: ch05-f01
+  chapter: 5
+  type: 스크린샷
+  caption: "GitHub 가입 페이지"
+  file: images/ch05/ch05-f01.png
+  capture:
+    kind: web
+    command: null
+    url: "https://github.com"
+    window_title: null
+    steps:
+      - "스크린샷: github.com/signup 페이지. 이메일 입력란과 Continue 버튼이 보이게. 개인정보가 입력되지 않은 빈 상태로 캡처"
+    crop: window
+  status: pending
+
+- id: ch05-f02
+  chapter: 5
+  type: 스크린샷
+  caption: "winget으로 GitHub CLI 설치"
+  file: images/ch05/ch05-f02.png
+  capture:
+    kind: terminal
+    command: "winget install GitHub.cli"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: PowerShell에서 `winget install GitHub.cli` 실행 후 다운로드 진행 막대와 \"설치가 완료되었습니다\" 메시지까지 보이게 캡처"
+    crop: window
+  status: pending
+
+- id: ch05-f03
+  chapter: 5
+  type: 스크린샷
+  caption: "gh 버전 확인"
+  file: images/ch05/ch05-f03.png
+  capture:
+    kind: terminal
+    command: "gh --version"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 새 터미널에서 `gh --version` 입력 후 버전 출력. 글자 크게"
+    crop: window
+  status: pending
+
+- id: ch05-f04
+  chapter: 5
+  type: 스크린샷
+  caption: "gh auth login 질문 4단계"
+  file: images/ch05/ch05-f04.png
+  capture:
+    kind: terminal
+    command: "gh auth login"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 터미널에 네 가지 질문과 선택 결과(GitHub.com / HTTPS / Yes / Login with a web browser)가 모두 표시된 상태"
+    crop: window
+  status: pending
+
+- id: ch05-f05
+  chapter: 5
+  type: 스크린샷
+  caption: "일회용 코드 발급"
+  file: images/ch05/ch05-f05.png
+  capture:
+    kind: terminal
+    command: "gh auth login"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: one-time code가 표시된 터미널. 코드 부분이 잘 보이게. 실제 코드는 더미(A1B2-C3D4 형태)여도 무방"
+    crop: window
+  status: pending
+
+- id: ch05-f06
+  chapter: 5
+  type: 스크린샷
+  caption: "브라우저의 Device Activation 화면"
+  file: images/ch05/ch05-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "https://github.com"
+    window_title: null
+    steps:
+      - "스크린샷: github.com/login/device 페이지. 8자리 코드 입력 칸이 보이게. 코드 미입력 상태"
+    crop: window
+  status: pending
+
+- id: ch05-f07
+  chapter: 5
+  type: 스크린샷
+  caption: "인증 완료, Logged in as"
+  file: images/ch05/ch05-f07.png
+  capture:
+    kind: terminal
+    command: "gh auth status"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: `✓ Logged in as ...` 가 표시된 터미널. 체크 표시가 잘 보이게"
+    crop: window
+  status: pending
+
+- id: ch05-f08
+  chapter: 5
+  type: 스크린샷
+  caption: "깃허브에 올라간 첫 저장소"
+  file: images/ch05/ch05-f08.png
+  capture:
+    kind: web
+    command: null
+    url: "https://github.com"
+    window_title: null
+    steps:
+      - "스크린샷: github.com/사용자이름/hello-github 저장소 페이지. README 내용과 커밋 1개가 보이게"
+    crop: window
+  status: pending
+
+- id: ch06-f01
+  chapter: 6
+  type: 일러스트
+  caption: "에이전트 한 명 vs 여러 명 지휘"
+  file: images/ch06/ch06-f01.jpg
+  source: images/raw/ill-multiagent-tree.jpg
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch06-f02
+  chapter: 6
+  type: 일러스트
+  caption: "워크트리 개념도"
+  file: images/ch06/ch06-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 가운데에 \"저장소(.git)\" 원통 하나. 거기서 가지 세 개가 뻗어 나와 각각 폴더 아이콘 \"my-map (main)\", \"my-map-feature\", \"my-map-review\"로 연결. 각 폴더 앞에 로봇 에이전트가 한 명씩 앉아 작업 중. 폴더끼리는 점선으로 구분되어 \"서로 침범 금지\" 표시"
+    crop: window
+  status: pending
+
+- id: ch06-f03
+  chapter: 6
+  type: 스크린샷
+  caption: "Orca 첫 실행 화면"
+  file: images/ch06/ch06-f03.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Orca 앱을 처음 실행해 프로젝트 폴더를 연 직후 화면. 왼쪽에 워크트리 카드 목록(비어 있거나 main 하나), 오른쪽에 터미널 영역이 보이도록. 창 전체 캡처"
+    crop: window
+  status: pending
+
+- id: ch06-f04
+  chapter: 6
+  type: 스크린샷
+  caption: "워크트리 터미널에서 실행한 Claude Code"
+  file: images/ch06/ch06-f04.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Orca의 워크트리 카드 하나를 연 상태. 터미널 영역에 Claude Code가 실행되어 환영 배너와 프롬프트 입력창이 보이는 화면. 카드 이름(예: \"마커 기능\")이 함께 보이게"
+    crop: window
+  status: pending
+
+- id: ch06-f05
+  chapter: 6
+  type: 스크린샷
+  caption: "카드 세 장이 동시에 굴러가는 모습"
+  file: images/ch06/ch06-f05.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Orca 왼쪽 패널에 워크트리 카드 3장이 세로로 늘어선 화면. 각 카드에 작업 이름이 붙어 있고, 진행 중임을 알 수 있는 상태 표시가 보이게. 오른쪽에는 그중 한 카드의 터미널에서 에이전트가 작업 로그를 출력 중인 장면"
+    crop: window
+  status: pending
+
+- id: ch06-f06
+  chapter: 6
+  type: 일러스트
+  caption: "저자의 작업 화면 배치도"
+  file: images/ch06/ch06-f06.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 와이드 모니터 그림. 왼쪽 절반에 Orca(카드 목록+터미널) 영역, 오른쪽 절반에 브라우저(지도 앱) 영역을 블록으로 나눠 표시. 화살표로 \"시킨다 → 확인한다 → 합친다\" 순환 루프를 그려 넣기"
+    crop: window
+  status: pending
+
+- id: ch07-f01
+  chapter: 7
+  type: 스크린샷
+  caption: "카카오 디벨로퍼스 첫 화면"
+  file: images/ch07/ch07-f01.png
+  capture:
+    kind: web
+    command: null
+    url: "https://developers.kakao.com"
+    window_title: null
+    steps:
+      - "스크린샷: developers.kakao.com 메인 페이지. 우측 상단 \"로그인\" 버튼이 보이도록 전체 화면 캡처"
+    crop: window
+  status: pending
+
+- id: ch07-f02
+  chapter: 7
+  type: 스크린샷
+  caption: "개발자 콘솔의 전체 앱 목록과 \"앱 생성\" 버튼"
+  file: images/ch07/ch07-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "https://developers.kakao.com"
+    window_title: null
+    steps:
+      - "스크린샷: developers.kakao.com/console/app 의 \"전체 앱\" 목록 페이지. 화면 우측 상단의 \"+ 앱 생성\" 버튼이 잘 보이게 캡처 (참고: docs/images/raw/kakao-app-list.jpg)"
+    crop: window
+  status: pending
+
+- id: ch07-f03
+  chapter: 7
+  type: 스크린샷
+  caption: "앱 생성 창에 앱 이름 입력"
+  file: images/ch07/ch07-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: \"+ 앱 생성\"을 눌러 열린 앱 생성 화면. 앱 이름 \"나만의지도\", 회사명 입력란이 채워진 상태"
+    crop: window
+  status: pending
+
+- id: ch07-f04
+  chapter: 7
+  type: 스크린샷
+  caption: "앱 > 플랫폼 키 화면의 키 3종 (JavaScript 키에 강조 표시)"
+  file: images/ch07/ch07-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 앱 > 플랫폼 키 페이지. REST API 키 / JavaScript 키 / 네이티브 앱 키 3열이 보이고 각 열에 기본 키(Default Key)가 하나씩 있는 상태. 실제 키 값은 모자이크 처리하고 JavaScript 키 열에 강조 박스 (참고: docs/images/raw/kakao-platform-keys.jpg)"
+    crop: window
+  status: pending
+
+- id: ch07-f05
+  chapter: 7
+  type: 스크린샷
+  caption: "앱 설정 > 플랫폼 메뉴의 Web 플랫폼 등록 버튼"
+  file: images/ch07/ch07-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 플랫폼 설정 페이지. Android/iOS/Web 세 항목 중 Web의 \"Web 플랫폼 등록\" 버튼이 보이게 캡처"
+    crop: window
+  status: pending
+
+- id: ch07-f06
+  chapter: 7
+  type: 스크린샷
+  caption: "사이트 도메인에 http://localhost:5173 이 등록된 모습"
+  file: images/ch07/ch07-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: Web 플랫폼의 사이트 도메인 목록에 http://localhost:5173 이 등록 완료된 상태"
+    crop: window
+  status: pending
+
+- id: ch08-f01
+  chapter: 8
+  type: 스크린샷
+  caption: "Claude Code가 npm create vite로 프로젝트를 생성하는 모습"
+  file: images/ch08/ch08-f01.png
+  capture:
+    kind: terminal
+    command: "npm create vite@latest my-map -- --template vanilla"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Claude Code 세션에서 npm create vite@latest my-map -- --template vanilla 실행 승인 후 \"Scaffolding project...\" 출력이 보이는 터미널"
+    crop: window
+  status: pending
+
+- id: ch08-f02
+  chapter: 8
+  type: 스크린샷
+  caption: "생성된 my-map 프로젝트의 폴더 구조"
+  file: images/ch08/ch08-f02.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 탐색기 또는 VS Code 탐색기 패널에서 my-map 폴더 트리를 펼친 모습. index.html, package.json, src 폴더가 보이게"
+    crop: window
+  status: pending
+
+- id: ch08-f03
+  chapter: 8
+  type: 스크린샷
+  caption: "npm run dev 실행 후 개발 서버가 켜진 터미널"
+  file: images/ch08/ch08-f03.png
+  capture:
+    kind: terminal
+    command: "npm run dev"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 터미널에 VITE v7.x ready 메시지와 Local: http://localhost:5173/ 주소가 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch08-f04
+  chapter: 8
+  type: 스크린샷
+  caption: "브라우저에서 확인한 Vite 환영 페이지"
+  file: images/ch08/ch08-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 크롬에서 http://localhost:5173 접속. Vite 로고와 \"Hello Vite!\" 카운터 데모 페이지, 주소창의 localhost:5173이 보이게"
+    crop: window
+  status: pending
+
+- id: ch08-f05
+  chapter: 8
+  type: 스크린샷
+  caption: ".env 파일에 VITE_KAKAO_JS_KEY를 넣은 모습"
+  file: images/ch08/ch08-f05.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 에디터에서 .env 파일을 연 화면. VITE_KAKAO_JS_KEY=0123abcd... 형태의 더미 키 한 줄. 실제 키는 절대 노출 금지"
+    crop: window
+  status: pending
+
+- id: ch08-f06
+  chapter: 8
+  type: 스크린샷
+  caption: "브라우저 콘솔에서 키 로드 확인"
+  file: images/ch08/ch08-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 크롬 개발자도구 Console 탭에 \"카카오 키 로드: 0123... (OK)\" 메시지가 찍힌 화면. 더미 키 앞 4글자만 보이게"
+    crop: window
+  status: pending
+
+- id: ch09-f01
+  chapter: 9
+  type: 일러스트
+  caption: "SDK를 불러오는 두 가지 방법"
+  file: images/ch09/ch09-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 좌우 2단 비교. 왼쪽 \"HTML에 직접\" — index.html 문서 안에 script 태그와 열쇠 아이콘이 박혀 있고 GitHub 아이콘으로 화살표(경고 표시). 오른쪽 \"동적 로드\" — JS 파일이 .env 금고에서 열쇠를 꺼내 script 태그를 조립해 페이지에 꽂는 흐름. 오른쪽에 체크 표시"
+    crop: window
+  status: pending
+
+- id: ch09-f02
+  chapter: 9
+  type: 일러스트
+  caption: "autoload=false일 때 SDK가 준비되는 순서"
+  file: images/ch09/ch09-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽→오른쪽 타임라인 4단계. ① script 태그 삽입(코드 아이콘) → ② SDK 파일 다운로드 완료 = 택배 도착(상자 아이콘, \"아직 지도 못 만듦\" 말풍선) → ③ kakao.maps.load() 호출 = 조립 시작(공구 아이콘) → ④ 콜백 실행 = 조립 완료(완성된 지도 아이콘, \"이제 지도 만들기 OK\"). 단계 ②와 ③ 사이에 \"우리가 시점을 정한다\" 강조 화살표"
+    crop: window
+  status: pending
+
+- id: ch09-f03
+  chapter: 9
+  type: 일러스트
+  caption: "위도와 경도: 숫자 두 개로 지구 위 한 점 찍기"
+  file: images/ch09/ch09-f03.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 지구본 그림. 가로줄(위도선)과 세로줄(경도선) 격자, 적도에 \"위도 0°\", 그리니치에 \"경도 0°\" 라벨. 한반도 위 서울 위치에 핀을 꽂고 \"서울시청 (37.5665, 126.978)\" 말풍선. 위도는 남북 화살표, 경도는 동서 화살표로 표시"
+    crop: window
+  status: pending
+
+- id: ch09-f04
+  chapter: 9
+  type: 스크린샷
+  caption: "첫 지도! 서울시청을 중심으로 화면 가득 뜬 카카오지도"
+  file: images/ch09/ch09-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: localhost:5173을 연 Chrome 창 전체. 서울시청 일대가 중심에 오고 지도가 브라우저 화면을 꽉 채운 상태. 주소창의 localhost:5173이 보이게 캡처"
+    crop: window
+  status: pending
+
+- id: ch09-f05
+  chapter: 9
+  type: 스크린샷
+  caption: "도메인 미등록 시 콘솔에 찍히는 403 에러"
+  file: images/ch09/ch09-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: Chrome 개발자 도구 Console 탭. 카카오 SDK 요청이 403으로 실패한 빨간 에러 메시지가 보이는 화면. 주소창의 localhost:5173과 에러 줄에 강조 박스"
+    crop: window
+  status: pending
+
+- id: ch09-f06
+  chapter: 9
+  type: 스크린샷
+  caption: "카카오 콘솔의 Web 플랫폼 등록 화면 재확인"
+  file: images/ch09/ch09-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: developers.kakao.com 앱 설정 > 플랫폼 화면. Web 사이트 도메인에 http://localhost:5173 이 등록된 상태. 등록된 주소에 강조 박스"
+    crop: window
+  status: pending
+
+- id: ch10-f01
+  chapter: 10
+  type: 스크린샷
+  caption: "콘솔에서 `__map.setLevel(3)`을 실행해 확대된 지도"
+  file: images/ch10/ch10-f01.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 개발자도구 Console 탭에 `__map.setLevel(3)` 입력·실행된 상태, 왼쪽 지도는 서울시청 일대가 골목 수준으로 확대된 화면. 콘솔과 지도가 한 화면에 보이게"
+    crop: window
+  status: pending
+
+- id: ch10-f02
+  chapter: 10
+  type: 일러스트
+  caption: "setCenter는 순간이동, panTo는 미끄러지는 이동"
+  file: images/ch10/ch10-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽에는 지도 위에서 번쩍 하고 순간이동하는 핀(setCenter), 오른쪽에는 곡선 화살표를 따라 스르륵 이동하는 핀(panTo)을 대비시킨 개념도. 각각 \"순간이동\", \"부드럽게 이동\" 라벨"
+    crop: window
+  status: pending
+
+- id: ch10-f03
+  chapter: 10
+  type: 스크린샷
+  caption: "같은 위치, 다른 레벨: 레벨 3(왼쪽)과 레벨 7(오른쪽)"
+  file: images/ch10/ch10-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 서울시청을 중심으로 레벨 3으로 확대한 지도와 레벨 7로 축소한 지도를 좌우로 나란히 합성. 각 이미지 위에 \"level: 3\", \"level: 7\" 라벨"
+    crop: window
+  status: pending
+
+- id: ch10-f04
+  chapter: 10
+  type: 스크린샷
+  caption: "컨트롤이 달린 지도: 오른쪽 위 지도 타입 버튼, 오른쪽 줌 버튼"
+  file: images/ch10/ch10-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 지도 오른쪽 위에 \"지도/스카이뷰\" 전환 버튼, 오른쪽 가장자리에 +/− 줌 컨트롤이 표시된 전체 화면. 두 컨트롤에 강조 표시"
+    crop: window
+  status: pending
+
+- id: ch10-f05
+  chapter: 10
+  type: 스크린샷
+  caption: "스카이뷰로 전환한 지도"
+  file: images/ch10/ch10-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 스카이뷰(위성 사진) 모드로 전환된 서울시청 일대. 오른쪽 위 컨트롤에서 스카이뷰가 선택된 상태가 보이게"
+    crop: window
+  status: pending
+
+- id: ch10-f06
+  chapter: 10
+  type: 스크린샷
+  caption: "지도를 클릭할 때마다 콘솔에 찍히는 좌표"
+  file: images/ch10/ch10-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 지도와 개발자도구 콘솔이 함께 보이는 화면. 콘솔에 \"클릭한 곳: 37.56... 126.97...\" 형식의 로그가 서너 줄 찍혀 있는 상태"
+    crop: window
+  status: pending
+
+- id: ch11-f01
+  chapter: 11
+  type: 스크린샷
+  caption: "서울 시청 위에 찍힌 첫 마커"
+  file: images/ch11/ch11-f01.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 앱 실행 화면. 서울 시청 부근을 중심으로 한 지도 위에 카카오 기본 파란 마커 1개가 표시된 상태. 마커가 화면 중앙에 오도록 캡처"
+    crop: window
+  status: pending
+
+- id: ch11-f02
+  chapter: 11
+  type: 스크린샷
+  caption: "반복문으로 찍은 마커 4개"
+  file: images/ch11/ch11-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 서울 중심부 지도에 기본 마커 4개(경복궁·남산타워·광장시장·한강공원)가 표시된 화면. 마커 하나에 마우스를 올려 title 툴팁 \"남산타워\"가 보이는 순간 캡처"
+    crop: window
+  status: pending
+
+- id: ch11-f03
+  chapter: 11
+  type: 일러스트
+  caption: "offset 기준점의 의미"
+  file: images/ch11/ch11-f03.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 핀 모양 마커 이미지의 확대도 2개 비교. 왼쪽은 offset이 없어 이미지 좌상단 모서리가 좌표점(X 표시)에 붙어 핀이 엉뚱한 곳을 가리키는 그림, 오른쪽은 offset(27,69)으로 핀 끝이 좌표점에 정확히 닿은 그림. 좌상단에서 핀 끝까지 가로·세로 화살표로 27px, 69px 표기"
+    crop: window
+  status: pending
+
+- id: ch11-f04
+  chapter: 11
+  type: 스크린샷
+  caption: "MarkerImage로 옷을 갈아입은 마커"
+  file: images/ch11/ch11-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 지도 위에 카카오 예제 별 마커 이미지가 적용된 마커가 표시된 화면. 기본 마커와 비교되도록 기본 마커 1개를 옆에 함께 표시해도 좋음"
+    crop: window
+  status: pending
+
+- id: ch11-f05
+  chapter: 11
+  type: 스크린샷
+  caption: "markerImageFor로 만든 카테고리별 커스텀 핀 4종"
+  file: images/ch11/ch11-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 지도 위에 색이 다른 SVG 핀 4개 — 빨강🍜, 갈색☕, 파랑🏝, 분홍💕 — 이 나란히 표시된 화면. 핀 모양과 이모지가 잘 보이게 확대 레벨을 낮춰 캡처"
+    crop: window
+  status: pending
+
+- id: ch11-f06
+  chapter: 11
+  type: 스크린샷
+  caption: "renderPlaces가 그린 나만의 장소 지도"
+  file: images/ch11/ch11-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 서울 지도 위에 커스텀 핀 3개(빨강🍜 광장시장, 갈색☕ 연남동, 분홍💕 남산타워)가 표시된 앱 화면. 한 핀 위에 title 툴팁이 보이면 더 좋음"
+    crop: window
+  status: pending
+
+- id: ch12-f01
+  chapter: 12
+  type: 일러스트
+  caption: "데이터와 화면의 분리"
+  file: images/ch12/ch12-f01.jpg
+  source: images/raw/ill-data-to-map.jpg
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch12-f02
+  chapter: 12
+  type: 스크린샷
+  caption: "Claude Code가 defaultPlaces.js를 생성한 모습"
+  file: images/ch12/ch12-f02.png
+  capture:
+    kind: terminal
+    command: "claude"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: Claude Code 터미널 세션. 위 프롬프트를 입력하고 defaultPlaces.js 생성 diff(초록색 추가 줄)가 표시된 화면. 파일 경로 src/defaultPlaces.js가 보이게"
+    crop: window
+  status: pending
+
+- id: ch12-f03
+  chapter: 12
+  type: 일러스트
+  caption: "categories.js 한 곳을 여러 화면이 참조하는 구조"
+  file: images/ch12/ch12-f03.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 가운데에 categories.js 파일 아이콘(🍜맛집·☕카페·🏝여행·💕데이트 4행 표). 그로부터 화살표 3개가 뻗어 나가 각각 \"마커 핀(11장)\", \"필터 버튼(14장)\", \"사이드바 목록(18장)\"을 가리키는 방사형 다이어그램. \"한 곳만 고치면 전부 바뀐다\" 문구"
+    crop: window
+  status: pending
+
+- id: ch12-f04
+  chapter: 12
+  type: 스크린샷
+  caption: "DEFAULT_PLACES 다섯 곳이 카테고리 핀으로 찍힌 지도"
+  file: images/ch12/ch12-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 앱 실행 화면. 서울 중심부 지도에 🍜빨강(광장시장)·☕갈색(성수동)·🏝파랑(경복궁)·💕분홍(남산타워·망원한강공원) 핀 5개가 보이도록 레벨 조정 후 캡처"
+    crop: window
+  status: pending
+
+- id: ch12-f05
+  chapter: 12
+  type: 스크린샷
+  caption: "카카오맵에서 우클릭으로 지점 정보 확인"
+  file: images/ch12/ch12-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "https://map.kakao.com"
+    window_title: null
+    steps:
+      - "스크린샷: map.kakao.com에서 임의 지점 우클릭 → 컨텍스트 메뉴가 열린 상태. 주소/길찾기 관련 메뉴 항목이 보이게 캡처"
+    crop: window
+  status: pending
+
+- id: ch12-f06
+  chapter: 12
+  type: 스크린샷
+  caption: "지도 클릭으로 콘솔에 좌표 찍기"
+  file: images/ch12/ch12-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 우리 앱 실행 화면 + F12 개발자 도구 콘솔. 지도 위 클릭 지점과 콘솔에 출력된 \"lat: 37.xxxx, lng: 126.xxxx\" 텍스트가 함께 보이게 캡처"
+    crop: window
+  status: pending
+
+- id: ch13-f01
+  chapter: 13
+  type: 스크린샷
+  caption: "기본 InfoWindow가 열린 모습"
+  file: images/ch13/ch13-f01.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 지도 위 마커 하나를 클릭해 카카오 기본 InfoWindow가 열린 상태. 흰 사각형 테두리와 기본 꼬리가 보이도록 마커 주변을 확대 캡처"
+    crop: window
+  status: pending
+
+- id: ch13-f02
+  chapter: 13
+  type: 일러스트
+  caption: "yAnchor 값에 따라 달라지는 말풍선 위치"
+  file: images/ch13/ch13-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 같은 좌표점(빨간 점) 위에 yAnchor 0 / 0.5 / 1 / 1.35 네 가지 경우의 말풍선 위치를 나란히 비교. 1.35에서 마커 핀 그림 위로 말풍선이 떠 있는 모습 강조"
+    crop: window
+  status: pending
+
+- id: ch13-f03
+  chapter: 13
+  type: 일러스트
+  caption: "말풍선의 구조 분해도"
+  file: images/ch13/ch13-f03.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 말풍선을 분해한 다이어그램. .bubble 껍데기 안에 .bubble-inner(이모지+이름, 별점, × 버튼 위치 표시)와 .bubble-tail(꼬리 삼각형)이 세로로 배치된 구조를 화살표와 라벨로 표시"
+    crop: window
+  status: pending
+
+- id: ch13-f04
+  chapter: 13
+  type: 일러스트
+  caption: "border 트릭으로 삼각형이 만들어지는 과정"
+  file: images/ch13/ch13-f04.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 3단계 과정도. ① 두꺼운 4색 테두리 상자(모서리가 45도로 잘린 모습) ② 본체 크기를 0으로 줄여 테두리 삼각형 4개만 남은 모습 ③ 위쪽만 흰색, 나머지 투명 처리해 아래 방향 흰 삼각형만 남은 모습"
+    crop: window
+  status: pending
+
+- id: ch13-f05
+  chapter: 13
+  type: 일러스트
+  caption: "\"하나만 열기\" 상태 흐름도"
+  file: images/ch13/ch13-f05.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 상태 흐름 다이어그램. openOverlay=null 상태에서 \"마커 A 클릭\" → A 말풍선 열림(openOverlay=A) → \"마커 B 클릭\" 화살표에 closeOverlay() 표시 → B 말풍선 열림(openOverlay=B) → \"× 클릭\" → 다시 null. 각 상태를 둥근 상자로, 전이를 화살표로"
+    crop: window
+  status: pending
+
+- id: ch13-f06
+  chapter: 13
+  type: 스크린샷
+  caption: "완성된 커스텀 말풍선"
+  file: images/ch13/ch13-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 지도 위 여러 카테고리 마커 중 하나를 클릭해 흰색 둥근 말풍선(이모지+이름, 노란 별점, × 버튼, 아래 꼬리)이 마커 위에 열린 모습. 말풍선이 잘 보이게 확대"
+    crop: window
+  status: pending
+
+- id: ch14-f01
+  chapter: 14
+  type: 스크린샷
+  caption: "필터가 없을 때: 모든 카테고리 마커가 뒤섞여 표시된 지도"
+  file: images/ch14/ch14-f01.jpg
+  source: images/raw/app-main.jpg
+  capture:
+    kind: web
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch14-f02
+  chapter: 14
+  type: 일러스트
+  caption: "단방향 데이터 흐름: 버튼 → 상태 → 필터링 → 렌더링"
+  file: images/ch14/ch14-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽부터 \"필터 버튼 클릭\" → \"currentFilter 상태 변경\" → \"filteredPlaces()로 배열 거르기\" → \"renderPlaces()로 마커 다시 그리기\" 네 개의 박스가 오른쪽 화살표로만 연결된 개념도. 화살표가 한 방향으로만 흐른다는 점을 강조"
+    crop: window
+  status: pending
+
+- id: ch14-f03
+  chapter: 14
+  type: 스크린샷
+  caption: "완성된 필터 바 UI (\"전체\"가 active 상태)"
+  file: images/ch14/ch14-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 사이드바 부분 확대. 검색창 아래 알약 모양 필터 버튼 5개가 보이고 \"전체\" 버튼만 브랜드 색으로 채워진 상태"
+    crop: window
+  status: pending
+
+- id: ch14-f04
+  chapter: 14
+  type: 스크린샷
+  caption: "☕ 카페 필터 적용: 카페 마커만 남은 지도"
+  file: images/ch14/ch14-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 필터 바에서 \"☕ 카페\"가 active 상태이고, 지도에는 성수동 카페거리 마커 하나만 표시된 화면 전체"
+    crop: window
+  status: pending
+
+- id: ch14-f05
+  chapter: 14
+  type: 스크린샷
+  caption: "💕 데이트 필터 적용: active 버튼과 걸러진 마커"
+  file: images/ch14/ch14-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: \"💕 데이트\" 버튼이 채워진 필터 바 확대 + 지도에 남산서울타워·망원한강공원 마커 2개만 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch14-f06
+  chapter: 14
+  type: 일러스트
+  caption: "rerender 하나로 모이는 구조: 필터·추가·삭제 어떤 변화든 같은 길로 화면이 된다"
+  file: images/ch14/ch14-f06.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽에 \"필터 변경\", \"장소 추가(16장)\", \"장소 삭제(19장)\" 세 개의 입구가 모두 가운데 \"상태\" 박스로 화살표를 보내고, 상태에서 \"rerender()\" 하나를 거쳐 오른쪽 \"지도 화면\"으로 이어지는 깔때기 모양 개념도"
+    crop: window
+  status: pending
+
+- id: ch15-f01
+  chapter: 15
+  type: 일러스트
+  caption: "기본 SDK와 services 확장팩의 관계"
+  file: images/ch15/ch15-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 큰 상자 \"카카오지도 SDK(지도 그리기·마커·오버레이)\" 옆에 플러그처럼 꽂히는 작은 상자 \"libraries=services(장소 검색·주소 변환)\". \"&libraries=services\" 꼬리표가 연결선 위에 표시"
+    crop: window
+  status: pending
+
+- id: ch15-f02
+  chapter: 15
+  type: 스크린샷
+  caption: "사이드바 상단에 추가된 검색창"
+  file: images/ch15/ch15-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 사이드바 위쪽. \"📍 나만의 지도\" 제목 아래에 검색 입력칸(\"장소 검색 (예: 성수동 카페)\" 플레이스홀더)과 🔍 버튼이 보이는 상태. 결과 목록은 아직 숨겨져 있음"
+    crop: window
+  status: pending
+
+- id: ch15-f03
+  chapter: 15
+  type: 스크린샷
+  caption: "콘솔에서 keywordSearch 결과 확인"
+  file: images/ch15/ch15-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 개발자도구 콘솔. 위 코드를 실행해 \"OK\"와 배열(15개 안팎)이 출력되고, 첫 항목을 펼쳐 place_name, road_address_name, x, y, phone 등의 필드가 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch15-f04
+  chapter: 15
+  type: 스크린샷
+  caption: "\"성수동 카페\" 검색 결과 상위 7개"
+  file: images/ch15/ch15-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 검색창에 \"성수동 카페\" 입력 후 결과 목록이 펼쳐진 사이드바. 각 항목에 장소 이름(굵게)과 도로명 주소(작은 글씨)가 7개 표시된 상태"
+    crop: window
+  status: pending
+
+- id: ch15-f05
+  chapter: 15
+  type: 스크린샷
+  caption: "결과 클릭 후 레벨 3으로 확대 이동한 지도"
+  file: images/ch15/ch15-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 검색 결과 하나를 클릭한 직후. 지도가 해당 장소 중심으로 레벨 3까지 확대된 상태. 사이드바 결과 목록에서 클릭한 항목이 보이도록 함께 캡처"
+    crop: window
+  status: pending
+
+- id: ch15-f06
+  chapter: 15
+  type: 스크린샷
+  caption: "결과가 없을 때의 토스트 알림"
+  file: images/ch15/ch15-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 검색창에 \"ㅁㄴㅇㄹ\" 입력 후 화면 하단 중앙에 \"검색 결과가 없습니다.\" 검은 토스트가 떠 있는 상태"
+    crop: window
+  status: pending
+
+- id: ch16-f01
+  chapter: 16
+  type: 일러스트
+  caption: "입구는 둘, 문은 하나: 장소 추가의 전체 흐름"
+  file: images/ch16/ch16-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽에 입구 두 개 — \"🔍 검색 결과 ＋ 버튼(이름+좌표)\"과 \"🗺 지도 클릭(좌표만)\". 두 화살표가 가운데 하나의 문 \"openAddDialog(장소 추가 폼)\"으로 모이고, 문에서 나온 화살표가 \"store.add() → 마커가 찍힌 지도\"로 이어지는 구조"
+    crop: window
+  status: pending
+
+- id: ch16-f02
+  chapter: 16
+  type: 스크린샷
+  caption: "화면 가운데에 뜬 장소 추가 다이얼로그"
+  file: images/ch16/ch16-f02.jpg
+  source: images/raw/app-add-dialog.jpg
+  capture:
+    kind: web
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch16-f03
+  chapter: 16
+  type: 스크린샷
+  caption: "이름을 비우고 추가를 누르면 뜨는 검증 토스트"
+  file: images/ch16/ch16-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 장소 추가 다이얼로그가 열린 채 이름 칸이 비어 있고, 화면 하단 중앙에 \"이름을 입력하세요.\" 검은 토스트가 떠 있는 상태. 다이얼로그가 닫히지 않고 남아 있는 것이 보이게"
+    crop: window
+  status: pending
+
+- id: ch16-f04
+  chapter: 16
+  type: 스크린샷
+  caption: "검색 결과마다 달린 ＋ 버튼"
+  file: images/ch16/ch16-f04.jpg
+  source: images/raw/app-search-results.jpg
+  capture:
+    kind: web
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch16-f05
+  chapter: 16
+  type: 스크린샷
+  caption: "＋를 누르면 이름이 미리 채워진 다이얼로그가 열린다"
+  file: images/ch16/ch16-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 검색 결과에서 ＋를 누른 직후. 다이얼로그의 이름 칸에 검색한 장소 이름이 채워져 있고, 카테고리 select가 ☕ 카페로 선택된 상태"
+    crop: window
+  status: pending
+
+- id: ch16-f06
+  chapter: 16
+  type: 스크린샷
+  caption: "지도 클릭으로 추가한 장소에 마커가 찍힌 모습"
+  file: images/ch16/ch16-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 지도 클릭 → 빈 다이얼로그에 \"단골 산책길\" 입력 → 추가를 마친 직후. 클릭했던 위치에 🏝 여행 카테고리 마커가 새로 찍혀 있고 하단에 \"내 지도에 추가했습니다!\" 토스트가 남아 있는 상태"
+    crop: window
+  status: pending
+
+- id: ch17-f01
+  chapter: 17
+  type: 스크린샷
+  caption: "새로고침 전(왼쪽)과 후(오른쪽): 추가한 장소가 사라졌다"
+  file: images/ch17/ch17-f01.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 좌우 2분할 비교. 왼쪽은 장소를 2~3개 추가해 마커가 늘어난 지도, 오른쪽은 F5 새로고침 직후 추가한 마커가 사라지고 기본 장소만 남은 같은 지도. 사라진 마커 자리에 빨간 원 표시"
+    crop: window
+  status: pending
+
+- id: ch17-f02
+  chapter: 17
+  type: 일러스트
+  caption: "책상(메모리)과 서랍(localStorage)"
+  file: images/ch17/ch17-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽에 책상 위 서류 더미(\"places 변수 · 빠름 · 새로고침하면 증발\"), 오른쪽에 잠긴 서랍(\"localStorage · 새로고침에도 유지\"). 가운데에 save()/load() 화살표가 양방향으로 오가는 개념도"
+    crop: window
+  status: pending
+
+- id: ch17-f03
+  chapter: 17
+  type: 스크린샷
+  caption: "개발자도구 Application 탭에서 본 localStorage"
+  file: images/ch17/ch17-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 개발자도구 Application 탭. 왼쪽 트리에서 Local Storage > http://localhost:5173 선택, 오른쪽 표에 Key \"hello\" / Value \"반갑습니다\" 행이 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch17-f04
+  chapter: 17
+  type: 일러스트
+  caption: "직렬화 왕복 파이프라인"
+  file: images/ch17/ch17-f04.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽 \"places 배열(객체 모형)\" → JSON.stringify → 가운데 \"문자열(설계도 종이)\" → setItem → \"localStorage 서랍\" 아이콘. 아래쪽 복귀 경로: getItem → 문자열 → JSON.parse → 오른쪽 \"places 배열 복원\". 위 경로에 '포장', 아래 경로에 '개봉' 라벨"
+    crop: window
+  status: pending
+
+- id: ch17-f05
+  chapter: 17
+  type: 스크린샷
+  caption: "새로고침 후에도 살아남은 장소와 Application 탭의 저장 데이터"
+  file: images/ch17/ch17-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 장소 추가 → 새로고침 후에도 마커가 유지된 지도 화면. 개발자도구 Application 탭을 함께 열어 Key \"my-map-places-v1\"에 JSON 문자열 값이 저장된 행이 보이도록 캡처"
+    crop: window
+  status: pending
+
+- id: ch17-f06
+  chapter: 17
+  type: 스크린샷
+  caption: "내보내기로 받은 my-map-places.json 파일"
+  file: images/ch17/ch17-f06.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 내보내기 버튼 클릭 후 다운로드된 my-map-places.json을 메모장(또는 VS Code)으로 연 모습. 들여쓰기 2칸의 JSON 배열에 id/name/category/lat/lng/rating/memo 필드가 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch17-f07
+  chapter: 17
+  type: 스크린샷
+  caption: "가져오기 성공 토스트"
+  file: images/ch17/ch17-f07.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 가져오기 버튼으로 JSON 파일 선택 직후, 화면 하단에 \"가져오기 완료!\" 토스트가 떠 있고 장소 목록·마커가 복원된 상태"
+    crop: window
+  status: pending
+
+- id: ch18-f01
+  chapter: 18
+  type: 일러스트
+  caption: "하나의 데이터, 두 개의 화면: store를 지도(renderPlaces)와 목록(renderList)이 각자 그린다"
+  file: images/ch18/ch18-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 가운데에 \"store (장소 배열)\" 원통 모양 박스. 거기서 화살표 두 개가 갈라져 나와 왼쪽 아래 \"renderList() → 사이드바 목록\", 오른쪽 아래 \"renderPlaces() → 지도 마커\"로 이어지는 개념도. 두 화살표 모두 데이터에서 화면으로 한 방향"
+    crop: window
+  status: pending
+
+- id: ch18-f02
+  chapter: 18
+  type: 스크린샷
+  caption: "완성된 사이드바 장소 목록: 이모지·이름·카테고리·별점이 줄지어 표시된다"
+  file: images/ch18/ch18-f02.jpg
+  source: images/raw/app-main.jpg
+  capture:
+    kind: web
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch18-f03
+  chapter: 18
+  type: 스크린샷
+  caption: "필터와 목록의 동기화: ☕ 카페 필터를 누르면 마커와 목록이 함께 걸러진다"
+  file: images/ch18/ch18-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 필터 바에서 \"☕ 카페\"가 active인 상태. 사이드바 목록에는 카페 항목만 남아 있고 지도에도 카페 마커만 표시된 화면"
+    crop: window
+  status: pending
+
+- id: ch18-f04
+  chapter: 18
+  type: 스크린샷
+  caption: "빈 목록 안내: 텅 빈 여백 대신 상황과 다음 행동을 알려준다"
+  file: images/ch18/ch18-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 사이드바 확대. 목록 영역에 \"장소가 없습니다. 검색하거나 지도를 클릭해 추가해 보세요!\" 안내 문구가 흐린 회색으로 가운데 정렬되어 표시된 상태"
+    crop: window
+  status: pending
+
+- id: ch18-f05
+  chapter: 18
+  type: 스크린샷
+  caption: "목록 클릭 → focusPlace: 지도가 해당 장소로 이동·확대되고 말풍선이 열린 모습"
+  file: images/ch18/ch18-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 사이드바 목록에서 한 항목에 마우스 호버(배경색 표시)된 상태, 오른쪽 지도는 그 장소가 중앙에 레벨 4로 확대되어 말풍선이 열려 있는 화면 전체"
+    crop: window
+  status: pending
+
+- id: ch18-f06
+  chapter: 18
+  type: 일러스트
+  caption: "구독 패턴: 어떤 경로로 데이터가 바뀌든 save()가 방송하고, 구독자(지도·목록)가 각자 갱신한다"
+  file: images/ch18/ch18-f06.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽에 \"지도 클릭 추가\", \"검색 추가\", \"가져오기\", \"수정·삭제(19장)\" 네 입구가 가운데 \"store.save()\" 박스로 모이고, save()에서 확성기 아이콘과 함께 화살표 두 개가 \"rerender() → 지도\", \"renderList() → 목록\" 구독자 박스로 퍼져 나가는 방송 개념도"
+    crop: window
+  status: pending
+
+- id: ch19-f01
+  chapter: 19
+  type: 일러스트
+  caption: "상세 패널의 네 덩어리 구조"
+  file: images/ch19/ch19-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 카드 와이어프레임. 위에서부터 ①\"🍜 성수동 국밥집  ×\" 머리글, ②★★★☆☆ 별점 줄, ③\"메모를 남겨 보세요\" textarea, ④[저장][삭제] 버튼 두 개. 각 덩어리에 번호 말풍선"
+    crop: window
+  status: pending
+
+- id: ch19-f02
+  chapter: 19
+  type: 스크린샷
+  caption: "마커를 클릭하면 오른쪽 위에 열리는 상세 패널"
+  file: images/ch19/ch19-f02.jpg
+  source: images/raw/app-detail-panel.jpg
+  capture:
+    kind: web
+    command: null
+    url: null
+    window_title: null
+    steps: []
+    crop: window
+  status: captured
+
+- id: ch19-f03
+  chapter: 19
+  type: 스크린샷
+  caption: "별 5개를 클릭한 직후, 패널과 말풍선의 별이 함께 바뀐 모습"
+  file: images/ch19/ch19-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 상세 패널에서 다섯 번째 별을 클릭해 별 5개가 모두 노랗게 된 상태. 같은 장소의 지도 말풍선에도 ★★★★★가 표시되어 두 곳이 동기화된 것이 보이게"
+    crop: window
+  status: pending
+
+- id: ch19-f04
+  chapter: 19
+  type: 스크린샷
+  caption: "삭제 버튼을 누르면 뜨는 confirm 다이얼로그"
+  file: images/ch19/ch19-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 삭제 버튼 클릭 직후. 브라우저 기본 확인 창에 \"'장소이름'을(를) 삭제할까요?\" 메시지와 확인/취소 버튼이 떠 있는 상태. 뒤로 상세 패널이 보이게"
+    crop: window
+  status: pending
+
+- id: ch19-f05
+  chapter: 19
+  type: 일러스트
+  caption: "XSS 공격의 원리: 입력이 코드가 되는 순간"
+  file: images/ch19/ch19-f05.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽에 입력 폼(\"이름: <img src=x onerror=...>\")→ 가운데 innerHTML 관문 → 오른쪽 두 갈래. 위쪽 갈래(빨강, escapeHtml 없음): 브라우저에서 alert 창이 터지는 그림. 아래쪽 갈래(초록, escapeHtml 통과): 패널에 태그가 글자 그대로 표시되는 그림"
+    crop: window
+  status: pending
+
+- id: ch19-f06
+  chapter: 19
+  type: 스크린샷
+  caption: "escapeHtml 덕분에 태그가 글자 그대로 표시된 상세 패널"
+  file: images/ch19/ch19-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 이름을 \"<b>굵은 국밥집</b>\"으로 저장한 장소의 상세 패널. 제목에 꺾쇠 포함 문자열이 굵어지지 않고 그대로 보이는 상태. 말풍선에도 같은 문자열이 보이면 함께 캡처"
+    crop: window
+  status: pending
+
+- id: ch20-f01
+  chapter: 20
+  type: 일러스트
+  caption: "브라우저가 위치를 알아내는 세 가지 단서"
+  file: images/ch20/ch20-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 가운데에 노트북/스마트폰, 그 주위로 세 갈래 화살표. ① 위성 아이콘 \"GPS(수 미터, 실외 최강)\" ② 와이파이 공유기 아이콘 \"Wi-Fi 목록 대조(도시에서 정확)\" ③ 지구본 아이콘 \"IP 주소(시 단위, 부정확)\". 세 화살표가 모여 \"navigator.geolocation\" 상자로 들어가는 구성"
+    crop: window
+  status: pending
+
+- id: ch20-f02
+  chapter: 20
+  type: 스크린샷
+  caption: "크롬의 위치 권한 프롬프트"
+  file: images/ch20/ch20-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: localhost:5173 앱에서 🧭 버튼을 누른 직후. 주소창 왼쪽 아래로 \"localhost:5173에서 다음 권한을 요청합니다: 위치 액세스\" 프롬프트가 열리고 \"허용\" / \"차단\" 버튼이 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch20-f03
+  chapter: 20
+  type: 스크린샷
+  caption: "지도 오른쪽 아래에 자리 잡은 🧭 버튼"
+  file: images/ch20/ch20-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 앱 전체 화면. 지도 오른쪽 아래 모서리에 동그란 흰색 🧭 버튼이 떠 있는 모습. 버튼 주변을 원으로 강조"
+    crop: window
+  status: pending
+
+- id: ch20-f04
+  chapter: 20
+  type: 일러스트
+  caption: "getCurrentPosition의 두 갈래 흐름"
+  file: images/ch20/ch20-f04.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 순서도. \"🧭 클릭\" → \"getCurrentPosition 요청\" → 권한 프롬프트 분기점(마름모 \"사용자 선택\"). \"허용\" 화살표 → \"성공 콜백: pos.coords → showMyLocation(파란 점)\" / \"차단·실패\" 화살표 → \"실패 콜백: toast('위치 권한이 거부되었습니다')\". 두 길 모두 앱이 멈추지 않음을 강조"
+    crop: window
+  status: pending
+
+- id: ch20-f05
+  chapter: 20
+  type: 스크린샷
+  caption: "내 위치에 표시된 파란 점"
+  file: images/ch20/ch20-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 🧭 클릭 후 지도가 레벨 4로 확대되어 이동한 상태. 지도 중앙에 흰 테두리 + 반투명 링이 있는 파란 점이 표시됨. 파란 점 부분을 확대한 인셋 포함"
+    crop: window
+  status: pending
+
+- id: ch20-f06
+  chapter: 20
+  type: 스크린샷
+  caption: "권한 거부 시 토스트 안내"
+  file: images/ch20/ch20-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 사이트 설정에서 위치를 차단한 뒤 🧭 클릭. 화면 하단 중앙에 \"위치 권한이 거부되었습니다\" 토스트 메시지가 떠 있는 상태"
+    crop: window
+  status: pending
+
+- id: ch20-f07
+  chapter: 20
+  type: 일러스트
+  caption: "보안 컨텍스트: 위치 API의 문지방"
+  file: images/ch20/ch20-f07.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: \"navigator.geolocation\" 문 앞에 문지기. 통과하는 두 명: \"https:// (암호화 통신)\" 자물쇠 아이콘, \"localhost (내 컴퓨터 안)\" 집 아이콘. 막히는 한 명: \"http:// (암호화 없음)\" 열린 자물쇠 아이콘에 ❌ 표시"
+    crop: window
+  status: pending
+
+- id: ch21-f01
+  chapter: 21
+  type: 일러스트
+  caption: "URL 해부도와 해시의 특별한 성질"
+  file: images/ch21/ch21-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: URL \"http://localhost:5173/#37.54444,127.05611,4\"를 부위별 색깔로 나눈 해부도. 프로토콜·호스트·경로 구간에서 서버 아이콘으로 화살표가 가고, 해시 구간에서는 서버로 가는 화살표에 ✕ 표시 + \"서버로 전송 안 됨, 브라우저 전용 메모 칸\" 말풍선"
+    crop: window
+  status: pending
+
+- id: ch21-f02
+  chapter: 21
+  type: 스크린샷
+  caption: "공유 버튼 클릭: 주소창에 해시가 생기고 복사 토스트가 뜬 화면"
+  file: images/ch21/ch21-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 앱 전체 화면. 주소창에 http://localhost:5173/#37.5xxxx,127.0xxxx,4 형태의 해시가 보이도록 하고, 오른쪽 아래 🔗 버튼과 하단 중앙의 \"지도 링크를 복사했습니다!\" 토스트가 함께 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch21-f03
+  chapter: 21
+  type: 일러스트
+  caption: "정규식 해부도: 패턴과 해시 문자열의 대응"
+  file: images/ch21/ch21-f03.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 위에 정규식 /^#(-?[\\d.]+),(-?[\\d.]+),(\\d+)$/, 아래에 문자열 \"#37.54444,127.05611,4\"를 놓고 부품별로 같은 색 상자·연결선으로 대응시킨 그림. 괄호 세 쌍에는 m[1], m[2], m[3] 라벨"
+    crop: window
+  status: pending
+
+- id: ch21-f04
+  chapter: 21
+  type: 일러스트
+  caption: "공유의 왕복: 인코딩(쓰기)과 파싱(읽기)의 흐름"
+  file: images/ch21/ch21-f04.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽 브라우저 A에서 \"getCenter/getLevel → #37.5,127.0,4 → 클립보드 복사\", 가운데 메신저 아이콘을 거쳐, 오른쪽 브라우저 B에서 \"접속 → parseHash → createMap(같은 위치)\"로 이어지는 순환 화살표 다이어그램"
+    crop: window
+  status: pending
+
+- id: ch21-f05
+  chapter: 21
+  type: 스크린샷
+  caption: "복사한 링크를 새 탭에서 연 결과: 같은 위치·같은 레벨"
+  file: images/ch21/ch21-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 두 개의 브라우저 창(또는 탭)을 나란히 배치. 왼쪽은 공유 버튼을 누른 원래 탭, 오른쪽은 링크를 붙여 넣어 연 새 탭. 두 지도가 같은 위치·같은 레벨을 보여 주고, 두 주소창에 동일한 해시가 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch21-f06
+  chapter: 21
+  type: 일러스트
+  caption: "공유되는 것과 공유되지 않는 것"
+  file: images/ch21/ch21-f06.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 가운데 URL 화살표가 브라우저 A→B로 건너가는 그림. 화살표 위에는 \"카메라 상태(중심·레벨) ✅ 함께 감\", 브라우저 A 아래 localStorage 창고 아이콘에는 \"장소 데이터 ❌ 내 브라우저에 남음\" 라벨. 오른쪽 구석에 확장 아이디어 두 갈래(해시에 JSON / 서버+짧은 코드) 미니 분기도"
+    crop: window
+  status: pending
+
+- id: ch22-f01
+  chapter: 22
+  type: 스크린샷
+  caption: "마커 100개가 뒤덮은 지도 (클러스터러 적용 전)"
+  file: images/ch22/ch22-f01.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 서울 전역이 보이는 레벨 8~9 지도에 커스텀 핀 100개가 빽빽이 겹쳐 찍힌 상태. 마커끼리 서로 가려 지저분한 모습이 잘 드러나게. 사이드바 목록에도 \"테스트 장소 1~\" 항목들이 보이게"
+    crop: window
+  status: pending
+
+- id: ch22-f02
+  chapter: 22
+  type: 일러스트
+  caption: "클러스터링 개념도"
+  file: images/ch22/ch22-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 좌우 비교. 왼쪽 \"클러스터링 전\"은 지도 위에 핀 10여 개가 겹쳐 지저분한 모습. 오른쪽 \"클러스터링 후\"는 같은 지도에 \"7\", \"4\" 숫자 원 두 개와 낱개 핀 1개만 깔끔하게 표시. 아래에 돋보기 아이콘과 함께 \"확대하면 다시 낱개 핀으로\" 화살표"
+    crop: window
+  status: pending
+
+- id: ch22-f03
+  chapter: 22
+  type: 스크린샷
+  caption: "콘솔에서 MarkerClusterer 로드 확인"
+  file: images/ch22/ch22-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 개발자도구 콘솔에 `kakao.maps.MarkerClusterer` 입력 후 함수(클래스)가 출력된 상태. 비교를 위해 위쪽에 확장팩 추가 전 `undefined`가 찍힌 기록이 함께 보이면 더 좋음"
+    crop: window
+  status: pending
+
+- id: ch22-f04
+  chapter: 22
+  type: 스크린샷
+  caption: "클러스터러 적용 후: 숫자 원으로 정리된 지도"
+  file: images/ch22/ch22-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 그림 22.1과 같은 축척(서울 전역)의 지도. 마커 100개 대신 \"23\", \"17\", \"9\" 같은 숫자가 적힌 클러스터 원 몇 개와 낱개 마커 한둘만 보이는 깔끔한 상태. 그림 22.1과 나란히 비교되도록 같은 구도로 캡처"
+    crop: window
+  status: pending
+
+- id: ch22-f05
+  chapter: 22
+  type: 일러스트
+  caption: "옵션 3형제가 각각 결정하는 것"
+  file: images/ch22/ch22-f05.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 3분할 다이어그램. ① averageCenter: 마커 4개와 그 무게중심에 놓인 클러스터 원(화살표로 \"평균 좌표\"), ② minLevel: 지도 레벨 눈금자(1~14)에서 6 이상 구간에 \"묶음\", 5 이하 구간에 \"낱개\" 표시, ③ minClusterSize: 마커 2개는 그대로, 마커 3개부터 숫자 원 \"3\"으로 바뀌는 비교 그림"
+    crop: window
+  status: pending
+
+- id: ch22-f06
+  chapter: 22
+  type: 스크린샷
+  caption: "확대하면 클러스터가 낱개 마커로 풀린다"
+  file: images/ch22/ch22-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 그림 22.4에서 클러스터 하나를 확대해 들어간 레벨 4~5 화면. 숫자 원이 사라지고 카테고리별 커스텀 핀들이 낱개로 보이는 상태. 확대 전후를 좌우로 나란히 배치하면 더 좋음"
+    crop: window
+  status: pending
+
+- id: ch23-f01
+  chapter: 23
+  type: 스크린샷
+  caption: "크롬 개발자도구 디바이스 모드 진입 (기기 툴바 아이콘과 기기 선택 메뉴)"
+  file: images/ch23/ch23-f01.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 개발자도구가 열린 크롬 창. 좌상단 기기 툴바 아이콘에 강조 표시, 상단에 \"iPhone SE / 375 x 667\" 기기 선택 드롭다운이 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch23-f02
+  chapter: 23
+  type: 스크린샷
+  caption: "모바일 대응 전: 사이드바가 화면을 잡아먹고 지도는 오른쪽 띠로 전락한 모습"
+  file: images/ch23/ch23-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 디바이스 모드 iPhone SE(375px)에서 현재 앱을 연 화면. 320px 사이드바가 화면 대부분을 차지하고 지도가 오른쪽에 아주 가늘게 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch23-f03
+  chapter: 23
+  type: 일러스트
+  caption: "미디어쿼리 개념: 같은 HTML이 화면 폭에 따라 다른 CSS 옷을 입는다"
+  file: images/ch23/ch23-f03.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 가운데에 HTML 문서 아이콘 하나. 왼쪽 화살표는 넓은 모니터로 이어지며 \"기본 CSS: 사이드바+지도 나란히\", 오른쪽 화살표는 스마트폰으로 이어지며 \"@media ≤640px: 사이드바가 지도 위에 겹침\". 640px 지점에 점선으로 '브레이크포인트' 표시"
+    crop: window
+  status: pending
+
+- id: ch23-f04
+  chapter: 23
+  type: 스크린샷
+  caption: "미디어쿼리 적용 후: 지도가 전체 화면을 쓰고 사이드바가 그 위에 겹친 모바일 화면"
+  file: images/ch23/ch23-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 디바이스 모드 iPhone SE. 지도가 화면 전체에 깔리고, 왼쪽에서 84vw 폭 사이드바가 오른쪽 그림자와 함께 지도 위에 겹쳐 있으며 오른쪽 가장자리로 지도가 살짝 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch23-f05
+  chapter: 23
+  type: 스크린샷
+  caption: "사이드바를 접은 모바일 화면: 지도가 전체를 차지하고 좌상단에 ▶ 펼치기 버튼만 남는다"
+  file: images/ch23/ch23-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: 디바이스 모드 iPhone SE. 사이드바가 완전히 사라져 지도가 화면 전체에 보이고, 왼쪽 위에 ▶ 버튼이 떠 있는 상태"
+    crop: window
+  status: pending
+
+- id: ch23-f06
+  chapter: 23
+  type: 스크린샷
+  caption: "사이드바를 접은 직후의 버그: 새로 넓어진 오른쪽 영역이 회색으로 남아 있다"
+  file: images/ch23/ch23-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: PC 폭 화면에서 사이드바를 접은 직후. 지도 왼쪽 부분은 정상이지만 사이드바가 있던 만큼 넓어진 오른쪽 영역이 회색으로 비어 있는 상태"
+    crop: window
+  status: pending
+
+- id: ch23-f07
+  chapter: 23
+  type: 촬영
+  caption: "실제 스마트폰에서 열어 본 나만의 지도 (같은 와이파이, Network 주소 접속)"
+  file: images/ch23/ch23-f07.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "촬영: 스마트폰으로 앱을 연 실제 사진. 지도 전체 화면에 마커와 클러스터가 보이고 손가락이 화면을 조작하는 모습"
+    crop: window
+  status: pending
+
+- id: ch24-f01
+  chapter: 24
+  type: 스크린샷
+  caption: "점검을 마친 .gitignore 파일"
+  file: images/ch24/ch24-f01.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 에디터에서 my-map 프로젝트의 .gitignore를 연 화면. node_modules, dist, .env 세 항목이 잘 보이게. .env 줄을 강조 표시"
+    crop: window
+  status: pending
+
+- id: ch24-f02
+  chapter: 24
+  type: 스크린샷
+  caption: "커밋 전 git status 검문소"
+  file: images/ch24/ch24-f02.png
+  capture:
+    kind: terminal
+    command: "git status"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: git status 출력. Untracked files에 index.html, package.json, src/ 등이 보이고 .env와 node_modules는 없는 상태. 목록 부분이 잘 보이게"
+    crop: window
+  status: pending
+
+- id: ch24-f03
+  chapter: 24
+  type: 스크린샷
+  caption: "첫 커밋 완료"
+  file: images/ch24/ch24-f03.png
+  capture:
+    kind: terminal
+    command: "git commit -m \"첫 커밋\""
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: git commit 실행 후 root-commit 해시와 files changed 요약이 표시된 터미널. create mode 목록에 .env가 없는 것이 보이게"
+    crop: window
+  status: pending
+
+- id: ch24-f04
+  chapter: 24
+  type: 스크린샷
+  caption: "gh repo create 실행 결과"
+  file: images/ch24/ch24-f04.png
+  capture:
+    kind: terminal
+    command: "gh repo create my-map --public --source=. --push"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 터미널에서 gh repo create my-map --public --source=. --push 실행 후 체크 표시 세 줄(Created/Added/Pushed)이 표시된 화면"
+    crop: window
+  status: pending
+
+- id: ch24-f05
+  chapter: 24
+  type: 스크린샷
+  caption: "깃허브에 올라간 my-map 저장소"
+  file: images/ch24/ch24-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "https://github.com"
+    window_title: null
+    steps:
+      - "스크린샷: github.com의 my-map 저장소 첫 화면. 파일 목록(index.html, package.json, src 등)과 커밋 메시지, Public 배지가 보이게"
+    crop: window
+  status: pending
+
+- id: ch24-f06
+  chapter: 24
+  type: 스크린샷
+  caption: "검수 포인트: .env와 node_modules가 없다"
+  file: images/ch24/ch24-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "https://github.com"
+    window_title: null
+    steps:
+      - "스크린샷: 저장소 파일 목록 클로즈업. .gitignore·index.html·package.json·src는 있고 .env·node_modules는 없는 상태. 목록 전체가 한눈에 들어오게"
+    crop: window
+  status: pending
+
+- id: ch24-f07
+  chapter: 24
+  type: 스크린샷
+  caption: "git log --oneline으로 본 커밋 역사"
+  file: images/ch24/ch24-f07.png
+  capture:
+    kind: terminal
+    command: "git log --oneline"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 터미널에서 git log --oneline 실행. 해시와 한국어 커밋 메시지 몇 줄이 보이게. 글자 크게"
+    crop: window
+  status: pending
+
+- id: ch25-f01
+  chapter: 25
+  type: 스크린샷
+  caption: "npm run build 실행 결과와 dist 폴더"
+  file: images/ch25/ch25-f01.png
+  capture:
+    kind: terminal
+    command: "npm run build"
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 터미널에 `npm run build` 실행 후 dist/index.html, dist/assets/*.css, *.js 목록과 \"✓ built in ...\" 출력. 옆에 탐색기나 `ls dist` 결과로 dist 폴더 구조가 함께 보이면 더 좋음"
+    crop: window
+  status: pending
+
+- id: ch25-f02
+  chapter: 25
+  type: 일러스트
+  caption: "base 설정이 필요한 이유: 하위 경로 문제"
+  file: images/ch25/ch25-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 좌우 비교. 왼쪽 \"base 없음\": 브라우저가 `/assets/index.js`를 찾아 `github.io/assets/` 쪽으로 화살표를 보내지만 X표(404), 화면은 하얗게 빈 모습. 오른쪽 \"base: '/my-map/'\": 화살표가 `github.io/my-map/assets/`로 정확히 향하고 지도가 뜬 모습. 아래에 주소 구조 `https://아이디.github.io / my-map / assets/...`를 블록으로 나눠 표시"
+    crop: window
+  status: pending
+
+- id: ch25-f03
+  chapter: 25
+  type: 스크린샷
+  caption: "리포지토리 Secrets에 VITE_KAKAO_JS_KEY 등록"
+  file: images/ch25/ch25-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "https://github.com"
+    window_title: null
+    steps:
+      - "스크린샷: GitHub 리포 Settings → Secrets and variables → Actions 화면. New repository secret 폼에 Name: VITE_KAKAO_JS_KEY 입력, Secret 값은 더미 키(0123abcd... 형태)를 일부만 보이게. 등록 후 목록에 자물쇠 아이콘과 함께 표시된 모습이면 더 좋음"
+    crop: window
+  status: pending
+
+- id: ch25-f04
+  chapter: 25
+  type: 스크린샷
+  caption: "Settings → Pages에서 Source를 GitHub Actions로"
+  file: images/ch25/ch25-f04.png
+  capture:
+    kind: web
+    command: null
+    url: "https://github.com"
+    window_title: null
+    steps:
+      - "스크린샷: GitHub 리포 Settings → Pages 화면. Build and deployment 섹션의 Source 드롭다운이 열려 \"GitHub Actions\"와 \"Deploy from a branch\" 두 선택지가 보이고, GitHub Actions가 선택된 상태"
+    crop: window
+  status: pending
+
+- id: ch25-f05
+  chapter: 25
+  type: 스크린샷
+  caption: "Actions 탭: build → deploy 모두 초록 체크"
+  file: images/ch25/ch25-f05.png
+  capture:
+    kind: web
+    command: null
+    url: "https://github.com"
+    window_title: null
+    steps:
+      - "스크린샷: 리포 Actions 탭에서 \"Deploy to GitHub Pages\" 워크플로 실행 상세 화면. build와 deploy 두 작업이 모두 초록 체크로 성공했고, deploy 쪽에 배포 URL(https://아이디.github.io/my-map/)이 링크로 표시된 상태"
+    crop: window
+  status: pending
+
+- id: ch25-f06
+  chapter: 25
+  type: 스크린샷
+  caption: "카카오 개발자 콘솔 플랫폼에 github.io 도메인 추가"
+  file: images/ch25/ch25-f06.png
+  capture:
+    kind: web
+    command: null
+    url: "https://developers.kakao.com"
+    window_title: null
+    steps:
+      - "스크린샷: developers.kakao.com 내 애플리케이션 → 앱 설정 → 플랫폼 → Web의 사이트 도메인 편집 화면. http://localhost:5173과 https://아이디.github.io 두 줄이 등록된 상태"
+    crop: window
+  status: pending
+
+- id: ch25-f07
+  chapter: 25
+  type: 스크린샷
+  caption: "배포 완료: github.io 주소에서 동작하는 내 지도"
+  file: images/ch25/ch25-f07.png
+  capture:
+    kind: web
+    command: null
+    url: "https://아이디.github.io/my-map/"
+    window_title: null
+    steps:
+      - "스크린샷: 브라우저 주소창에 https://아이디.github.io/my-map/ 이 보이는 상태로 완성 앱 전체 화면. 지도·마커·사이드바·필터가 모두 표시된 모습. 가능하면 스마트폰으로 같은 주소를 연 사진을 작게 곁들이면 더 좋음"
+    crop: window
+  status: pending
+
+- id: ch26-f01
+  chapter: 26
+  type: 일러스트
+  caption: "README 4단 구성"
+  file: images/ch26/ch26-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 문서 모양 카드가 위에서 아래로 4개 구역으로 나뉜 구성도. ① 스크린샷(사진 아이콘, \"이게 뭐지?\"), ② 기능(체크리스트 아이콘, \"뭘 할 수 있지?\"), ③ 기술(부품 아이콘, \"뭘로 만들었지?\"), ④ 실행법(터미널 아이콘, \"나도 돌려 볼 수 있나?\"). 각 구역 옆에 방문자의 말풍선으로 궁금증 표기"
+    crop: window
+  status: pending
+
+- id: ch26-f02
+  chapter: 26
+  type: 스크린샷
+  caption: "Win+Shift+S 캡처 도구로 앱 화면 캡처"
+  file: images/ch26/ch26-f02.png
+  capture:
+    kind: window
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "스크린샷: 배포된 지도 앱이 열린 브라우저 위에 Win+Shift+S 캡처 도구 막대(사각형 영역 모드)가 떠 있고, 앱 영역이 드래그 선택된 순간. 지도에는 마커 여러 개와 열린 말풍선, 왼쪽에 사이드바 목록이 보이는 상태"
+    crop: window
+  status: pending
+
+- id: ch26-f03
+  chapter: 26
+  type: 스크린샷
+  caption: "GitHub 리포 첫 화면에 렌더링된 README"
+  file: images/ch26/ch26-f03.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: GitHub 리포지토리 메인 페이지. 파일 목록 아래로 README가 렌더링되어 제목 \"나만의 지도\", 배포 링크, 앱 스크린샷, 이모지 기능 목록이 보이는 상태. 오른쪽 About 영역도 함께 보이게"
+    crop: window
+  status: pending
+
+- id: ch26-f04
+  chapter: 26
+  type: 일러스트
+  caption: "자랑하기 3단계 코스"
+  file: images/ch26/ch26-f04.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 계단 3칸 그림. 1칸 \"친구에게 링크\"(메신저 말풍선 아이콘, #해시 링크 표시), 2칸 \"SNS에 스크린샷+링크\"(카메라·하트 아이콘), 3칸 \"커뮤니티에 리포 공유\"(GitHub 고양이·말풍선 아이콘). 계단 위로 올라갈수록 \"피드백\"이 커지는 화살표"
+    crop: window
+  status: pending
+
+- id: ch26-f05
+  chapter: 26
+  type: 일러스트
+  caption: "다음 단계 로드맵 네 갈래 길"
+  file: images/ch26/ch26-f05.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 가운데 \"나만의 지도(현재)\" 깃발에서 네 갈래로 뻗는 길 지도. ① 백엔드 저장(구름+데이터베이스 아이콘, \"어디서나 같은 지도\"), ② 로그인(사람+열쇠 아이콘, \"각자의 지도\"), ③ 사진 업로드(카메라 아이콘, \"장소에 추억을\"), ④ 다른 API(퍼즐 조각 아이콘, \"길찾기·공공데이터\"). 길마다 난이도 별 1~3개 표기"
+    crop: window
+  status: pending
+
+- id: ch26-f06
+  chapter: 26
+  type: 일러스트
+  caption: "이 책의 여정 지도 (0장→26장)"
+  file: images/ch26/ch26-f06.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 등산로 지도 스타일의 회고 일러스트. 출발점 \"0장 준비물\"에서 시작해 \"1부 작업대\"(공구 아이콘)→\"2부 첫 지도\"(지도 핀)→\"3부 앱의 심장\"(하트+마커)→\"4부 완성도\"(별)→정상 \"5부 배포 🚩\"까지 굽이치는 길. 길 중간중간 \"회색 화면\", \"403\", \"핀 지옥\" 같은 위기 푯말이 작게 꽂혀 있는 모습"
+    crop: window
+  status: pending
+
+- id: ch27-f01
+  chapter: 27
+  type: 일러스트
+  caption: "프롬프트 템플릿 사용법: 골격은 가져오고 살은 바꾼다"
+  file: images/ch27/ch27-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽에 뼈대만 있는 문장 템플릿 카드(맥락/목표/제약/출력 4칸), 오른쪽에 그 칸을 자기 프로젝트 내용으로 채워 완성한 말풍선. 가운데 화살표에 \"베껴 쓰되 바꿔 쓴다\" 라벨. 친근한 플랫 스타일"
+    crop: window
+  status: pending
+
+- id: ch27-f02
+  chapter: 27
+  type: 일러스트
+  caption: "버그 리포트 3종 세트: 증상, 재현 절차, 기대 결과"
+  file: images/ch27/ch27-f02.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 벌레(버그) 캐릭터를 가운데 두고 세 개의 돋보기가 비추는 그림. 각 돋보기에 \"증상: 무엇이 잘못됐나\", \"재현: 어떻게 하면 또 그러나\", \"기대: 원래는 어때야 하나\" 라벨. 아래에 에러 메시지 쪽지를 통째로 들고 있는 사람. 친근한 플랫 스타일"
+    crop: window
+  status: pending
+
+- id: ch27-f03
+  chapter: 27
+  type: 일러스트
+  caption: "프롬프트 발사 전 점검: 4요소 + 3습관"
+  file: images/ch27/ch27-f03.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 로켓 발사 전 점검판 콘셉트. 체크리스트 보드에 맥락·목표·제약·출력 4개의 큰 체크박스, 그 아래 작게·확인·되돌리기 3개의 작은 체크박스. 옆에서 사람이 마지막 항목에 체크하는 모습. 친근한 플랫 스타일"
+    crop: window
+  status: pending
+
+- id: ch28-f01
+  chapter: 28
+  type: 일러스트
+  caption: "고장 수리 3단계 흐름"
+  file: images/ch28/ch28-f01.png
+  capture:
+    kind: manual
+    command: null
+    url: null
+    window_title: null
+    steps:
+      - "일러스트: 왼쪽→오른쪽 3단계 흐름도. ① F12 콘솔 확인(브라우저 창에 빨간 에러 줄, 돋보기 아이콘) → ② 증상 표 대조(이 부록의 표를 펼친 책 아이콘) → ③ Claude Code에 에러 전문 붙여넣기(터미널 아이콘 + 말풍선 \"에러를 통째로 붙여넣기!\"). 각 단계 아래 짧은 라벨"
+    crop: window
+  status: pending
+
+- id: ch28-f02
+  chapter: 28
+  type: 스크린샷
+  caption: "403 Forbidden 에러가 찍힌 콘솔"
+  file: images/ch28/ch28-f02.png
+  capture:
+    kind: web
+    command: null
+    url: "http://localhost:5173"
+    window_title: null
+    steps:
+      - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
+    crop: window
+  status: pending
