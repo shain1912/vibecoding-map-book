@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그림 22.5 — 옵션 3형제가 각각 결정하는 것</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:22px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#374151;">옵션 3형제가 각각 결정하는 것</div>
+
+  <!-- ① averageCenter -->
+  <div style="position:absolute;top:90px;left:35px;width:360px;height:600px;border:3px solid #0d9488;border-radius:14px;background:#f0fdfa;">
+    <div style="padding:16px 18px 0;font-size:25px;font-weight:bold;color:#0d9488;">① averageCenter</div>
+    <div style="padding:4px 18px;font-size:20px;color:#374151;">원을 어디에 그릴까?</div>
+    <svg width="354" height="470" style="display:block;margin-top:10px;">
+      <!-- 마커 4개 -->
+      <g font-size="40">
+        <text x="60" y="150">📍</text>
+        <text x="230" y="120">📍</text>
+        <text x="100" y="300">📍</text>
+        <text x="250" y="280">📍</text>
+      </g>
+      <!-- 점선: 마커들 → 무게중심 -->
+      <g stroke="#9ca3af" stroke-width="2" stroke-dasharray="6 5">
+        <line x1="80" y1="140" x2="170" y2="205"/>
+        <line x1="250" y1="110" x2="180" y2="200"/>
+        <line x1="120" y1="290" x2="172" y2="220"/>
+        <line x1="270" y1="270" x2="185" y2="218"/>
+      </g>
+      <!-- 무게중심 클러스터 원 -->
+      <circle cx="176" cy="210" r="46" fill="#0d9488" stroke="#fff" stroke-width="5"/>
+      <text x="176" y="224" text-anchor="middle" font-size="36" font-weight="bold" fill="#fff">4</text>
+      <!-- 화살표 + 라벨 -->
+      <defs><marker id="a1" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f97316"/></marker></defs>
+      <line x1="176" y1="370" x2="176" y2="266" stroke="#f97316" stroke-width="5" marker-end="url(#a1)"/>
+      <text x="176" y="405" text-anchor="middle" font-size="22" font-weight="bold" fill="#f97316">평균 좌표</text>
+      <text x="176" y="435" text-anchor="middle" font-size="20" fill="#6b7280">무리의 무게중심에 원을 그린다</text>
+    </svg>
+  </div>
+
+  <!-- ② minLevel -->
+  <div style="position:absolute;top:90px;left:420px;width:360px;height:600px;border:3px solid #f97316;border-radius:14px;background:#fff7ed;">
+    <div style="padding:16px 18px 0;font-size:25px;font-weight:bold;color:#f97316;">② minLevel</div>
+    <div style="padding:4px 18px;font-size:20px;color:#374151;">몇 레벨부터 묶을까?</div>
+    <svg width="354" height="470" style="display:block;margin-top:10px;">
+      <!-- 눈금자 (세로): 레벨 1~14, 숫자가 클수록 축소 -->
+      <rect x="150" y="30" width="54" height="150" fill="#d1d5db" rx="6"/>
+      <rect x="150" y="180" width="54" height="270" fill="#0d9488" rx="6"/>
+      <!-- 눈금 숫자 -->
+      <g font-size="19" fill="#374151" text-anchor="end">
+        <text x="140" y="45">1</text>
+        <text x="140" y="120">3</text>
+        <text x="140" y="185">5</text>
+        <text x="140" y="222">6</text>
+        <text x="140" y="330">10</text>
+        <text x="140" y="448">14</text>
+      </g>
+      <!-- 경계선 -->
+      <line x1="120" y1="180" x2="240" y2="180" stroke="#f97316" stroke-width="4" stroke-dasharray="8 6"/>
+      <text x="248" y="172" font-size="21" font-weight="bold" fill="#f97316">레벨 6</text>
+      <!-- 라벨 -->
+      <text x="230" y="90" font-size="22" font-weight="bold" fill="#6b7280">낱개</text>
+      <text x="230" y="118" font-size="30">📍</text>
+      <text x="230" y="300" font-size="22" font-weight="bold" fill="#0d9488">묶음</text>
+      <g>
+        <circle cx="245" cy="335" r="22" fill="#0d9488" stroke="#fff" stroke-width="3"/>
+        <text x="245" y="343" text-anchor="middle" font-size="20" font-weight="bold" fill="#fff">5</text>
+      </g>
+      <text x="60" y="60" font-size="19" fill="#6b7280">확대</text>
+      <text x="60" y="440" font-size="19" fill="#6b7280">축소</text>
+      <text x="177" y="468" text-anchor="middle" font-size="20" fill="#6b7280">6 이상 축소면 묶고, 5 이하면 낱개</text>
+    </svg>
+  </div>
+
+  <!-- ③ minClusterSize -->
+  <div style="position:absolute;top:90px;left:805px;width:360px;height:600px;border:3px solid #6b7280;border-radius:14px;background:#f9fafb;">
+    <div style="padding:16px 18px 0;font-size:25px;font-weight:bold;color:#374151;">③ minClusterSize</div>
+    <div style="padding:4px 18px;font-size:20px;color:#374151;">몇 개부터 묶을까?</div>
+    <svg width="354" height="470" style="display:block;margin-top:10px;">
+      <!-- 위: 마커 2개는 그대로 -->
+      <rect x="30" y="30" width="294" height="170" rx="12" fill="#fff" stroke="#d1d5db" stroke-width="2"/>
+      <text x="70" y="120" font-size="42">📍</text>
+      <text x="130" y="120" font-size="42">📍</text>
+      <text x="220" y="105" font-size="24" font-weight="bold" fill="#6b7280">그대로</text>
+      <text x="177" y="180" text-anchor="middle" font-size="20" fill="#6b7280">2개는 안 묶는다</text>
+      <!-- 아래: 마커 3개 → 숫자 원 "3" -->
+      <rect x="30" y="240" width="294" height="200" rx="12" fill="#fff" stroke="#0d9488" stroke-width="2"/>
+      <text x="48" y="340" font-size="38">📍</text>
+      <text x="88" y="325" font-size="38">📍</text>
+      <text x="70" y="368" font-size="38">📍</text>
+      <defs><marker id="a3" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0d9488"/></marker></defs>
+      <line x1="150" y1="330" x2="215" y2="330" stroke="#0d9488" stroke-width="5" marker-end="url(#a3)"/>
+      <circle cx="262" cy="330" r="36" fill="#0d9488" stroke="#fff" stroke-width="4"/>
+      <text x="262" y="342" text-anchor="middle" font-size="30" font-weight="bold" fill="#fff">3</text>
+      <text x="177" y="422" text-anchor="middle" font-size="20" fill="#0d9488" font-weight="bold">3개부터 숫자 원으로!</text>
+    </svg>
+  </div>
+
+  <div style="position:absolute;bottom:22px;left:0;width:1200px;text-align:center;font-size:22px;color:#6b7280;">원의 위치 · 묶기 시작 레벨 · 묶기 시작 개수 — 세 옵션이 클러스터러의 성격을 정한다</div>
+</div>
+</body>
+</html>

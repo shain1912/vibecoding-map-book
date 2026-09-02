@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch19-f05</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 34px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .form { position: absolute; left: 50px; top: 280px; width: 330px; height: 190px; background: #f1f5f9; border: 3px solid #64748b; border-radius: 14px; box-sizing: border-box; padding: 18px; }
+  .form .flabel { font-size: 22px; font-weight: bold; color: #1e293b; }
+  .form .field { margin-top: 12px; background: #fff; border: 2px solid #94a3b8; border-radius: 8px; padding: 10px; font-size: 20px; font-family: Consolas, monospace; color: #dc2626; word-break: break-all; }
+  .gate { position: absolute; left: 470px; top: 300px; width: 190px; height: 150px; background: #ccfbf1; border: 4px solid #0d9488; border-radius: 16px; color: #134e4a; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .gate .icon { font-size: 40px; }
+  .gate .label { font-size: 24px; font-weight: bold; margin-top: 6px; font-family: Consolas, 'Malgun Gothic', monospace; }
+  .branch { position: absolute; left: 790px; width: 370px; border-radius: 14px; box-sizing: border-box; padding: 16px; }
+  .bad { top: 110px; height: 230px; background: #fee2e2; border: 4px solid #dc2626; color: #7f1d1d; }
+  .good { top: 420px; height: 230px; background: #dcfce7; border: 4px solid #16a34a; color: #14532d; }
+  .branch h3 { margin: 0 0 10px; font-size: 22px; }
+  .alertwin { background: #fff; border: 3px solid #dc2626; border-radius: 8px; width: 250px; margin-top: 6px; }
+  .alertwin .bar { background: #dc2626; color: #fff; font-size: 17px; padding: 4px 8px; border-radius: 4px 4px 0 0; }
+  .alertwin .msg { font-size: 24px; font-weight: bold; padding: 14px; text-align: center; color: #1e293b; }
+  .panelwin { background: #fff; border: 3px solid #16a34a; border-radius: 8px; width: 300px; margin-top: 6px; padding: 12px; font-size: 19px; font-family: Consolas, monospace; color: #1e293b; word-break: break-all; }
+  .blabel { position: absolute; font-size: 21px; font-weight: bold; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">XSS 공격의 원리 — 입력이 코드가 되는 순간</div>
+
+  <div class="form">
+    <div class="flabel">📝 입력 폼 — 이름:</div>
+    <div class="field">&lt;img src=x onerror=alert('해킹!')&gt;</div>
+  </div>
+
+  <div class="gate">
+    <div class="icon">🚧</div>
+    <div class="label">innerHTML<br>관문</div>
+  </div>
+
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="aG" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#64748b"/>
+      </marker>
+      <marker id="aR" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#dc2626"/>
+      </marker>
+      <marker id="aGr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#16a34a"/>
+      </marker>
+    </defs>
+    <line x1="385" y1="375" x2="458" y2="375" stroke="#64748b" stroke-width="6" marker-end="url(#aG)"/>
+    <!-- red branch up -->
+    <line x1="665" y1="345" x2="778" y2="240" stroke="#dc2626" stroke-width="6" marker-end="url(#aR)"/>
+    <!-- green branch down -->
+    <line x1="665" y1="405" x2="778" y2="520" stroke="#16a34a" stroke-width="6" marker-end="url(#aGr)"/>
+  </svg>
+
+  <div class="blabel" style="left:665px; top:245px; color:#dc2626;">escapeHtml 없음</div>
+  <div class="blabel" style="left:665px; top:480px; color:#16a34a;">escapeHtml 통과</div>
+
+  <div class="branch bad">
+    <h3>🚨 코드로 실행됨</h3>
+    <div class="alertwin">
+      <div class="bar">브라우저 알림</div>
+      <div class="msg">⚠️ 해킹!</div>
+    </div>
+    <div style="font-size:19px; margin-top:8px;">남이 쓴 스크립트가 내 브라우저에서 실행</div>
+  </div>
+
+  <div class="branch good">
+    <h3>✅ 글자 그대로 표시됨</h3>
+    <div class="panelwin">&lt;img src=x onerror=alert('해킹!')&gt;</div>
+    <div style="font-size:19px; margin-top:8px;">패널에 태그가 무해한 텍스트로만 보임</div>
+  </div>
+</div>
+</body>
+</html>

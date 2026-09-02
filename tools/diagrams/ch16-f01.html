@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch16-f01</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 42px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .entry { position: absolute; left: 60px; width: 300px; height: 150px; border-radius: 14px; background: #ffedd5; border: 3px solid #f97316; color: #9a3412; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; box-sizing: border-box; }
+  .entry .icon { font-size: 38px; margin-bottom: 8px; }
+  .entry .label { font-size: 23px; font-weight: bold; line-height: 1.4; }
+  .entry .sub { font-size: 20px; color: #c2410c; margin-top: 6px; }
+  .door { position: absolute; left: 470px; top: 265px; width: 280px; height: 220px; border-radius: 16px; background: #ccfbf1; border: 4px solid #0d9488; color: #134e4a; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; box-sizing: border-box; }
+  .door .icon { font-size: 48px; }
+  .door .label { font-size: 26px; font-weight: bold; margin-top: 10px; }
+  .door .sub { font-size: 21px; margin-top: 6px; color: #0f766e; }
+  .result { position: absolute; left: 860px; top: 250px; width: 290px; height: 250px; border-radius: 16px; background: #f1f5f9; border: 3px solid #64748b; color: #1e293b; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; box-sizing: border-box; }
+  .result .label { font-size: 24px; font-weight: bold; margin-top: 10px; line-height: 1.4; }
+  .capA { position: absolute; top: 640px; width: 100%; text-align: center; font-size: 23px; color: #0d9488; font-weight: bold; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">입구는 둘, 문은 하나 — 장소 추가의 전체 흐름</div>
+
+  <div class="entry" style="top:150px;">
+    <div class="icon">🔍</div>
+    <div class="label">검색 결과 ＋ 버튼</div>
+    <div class="sub">{ name, lat, lng }<br>이름 + 좌표</div>
+  </div>
+  <div class="entry" style="top:450px;">
+    <div class="icon">🗺</div>
+    <div class="label">지도 클릭</div>
+    <div class="sub">{ lat, lng }<br>좌표만</div>
+  </div>
+
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#0d9488"/>
+      </marker>
+      <marker id="ao" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#f97316"/>
+      </marker>
+    </defs>
+    <line x1="365" y1="230" x2="458" y2="330" stroke="#0d9488" stroke-width="6" marker-end="url(#ah)"/>
+    <line x1="365" y1="520" x2="458" y2="420" stroke="#0d9488" stroke-width="6" marker-end="url(#ah)"/>
+    <line x1="755" y1="375" x2="848" y2="375" stroke="#f97316" stroke-width="6" marker-end="url(#ao)"/>
+  </svg>
+
+  <div class="door">
+    <div class="icon">🚪</div>
+    <div class="label">openAddDialog</div>
+    <div class="sub">장소 추가 폼<br>(문은 이 하나뿐)</div>
+  </div>
+
+  <div class="result">
+    <svg width="110" height="110" viewBox="0 0 110 110">
+      <rect x="5" y="5" width="100" height="100" rx="10" fill="#a7f3d0"/>
+      <path d="M5 40 L40 25 L75 45 L105 30 L105 105 L5 105 Z" fill="#6ee7b7"/>
+      <path d="M55 22 C41 22 32 33 32 46 C32 60 55 84 55 84 C55 84 78 60 78 46 C78 33 69 22 55 22 Z" fill="#f97316"/>
+      <circle cx="55" cy="46" r="10" fill="#fff"/>
+    </svg>
+    <div class="label">store.add()<br>→ 마커가 찍힌 지도</div>
+  </div>
+
+  <div class="capA">입구는 둘이지만, 두 입구 모두 openAddDialog 하나의 문을 지나갑니다</div>
+</div>
+</body>
+</html>

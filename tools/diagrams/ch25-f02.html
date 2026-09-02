@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그림 25.2 — base 설정이 필요한 이유: 하위 경로 문제</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:20px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">base 설정이 필요한 이유 — 하위 경로 문제</div>
+
+  <!-- 왼쪽: base 없음 -->
+  <div style="position:absolute;top:80px;left:40px;width:540px;height:440px;border:3px solid #f97316;border-radius:14px;background:#fff7ed;padding:16px 20px;">
+    <div style="font-size:26px;font-weight:bold;color:#f97316;text-align:center;">base 없음</div>
+    <!-- 브라우저 -->
+    <div style="margin-top:14px;width:200px;background:#374151;border-radius:10px 10px 0 0;padding:8px 12px;color:#fff;font-size:18px;">🌐 브라우저</div>
+    <div style="width:200px;height:120px;background:#fff;border:3px solid #374151;border-top:none;border-radius:0 0 10px 10px;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+      <div style="font-size:19px;color:#6b7280;">화면이</div>
+      <div style="font-size:22px;color:#9ca3af;font-weight:bold;">하얗게 빔</div>
+    </div>
+    <div style="margin-top:8px;font-size:19px;color:#374151;">찾는 주소: <code style="background:#fde8d4;padding:2px 6px;border-radius:4px;font-size:18px;">/assets/index.js</code></div>
+    <!-- 화살표 + X -->
+    <svg width="500" height="120" style="display:block;">
+      <defs><marker id="ax" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f97316"/></marker></defs>
+      <line x1="60" y1="30" x2="330" y2="70" stroke="#f97316" stroke-width="6" marker-end="url(#ax)"/>
+      <!-- X표 -->
+      <g stroke="#dc2626" stroke-width="9" stroke-linecap="round">
+        <line x1="200" y1="20" x2="250" y2="70"/>
+        <line x1="250" y1="20" x2="200" y2="70"/>
+      </g>
+      <text x="240" y="110" font-size="24" font-weight="bold" fill="#dc2626">404</text>
+    </svg>
+    <div style="background:#fff;border:2px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:19px;color:#374151;width:330px;margin-left:180px;">
+      📁 <b>github.io/assets/</b><br><span style="color:#9ca3af;font-size:18px;">여기엔 파일이 없다!</span>
+    </div>
+  </div>
+
+  <!-- 오른쪽: base: '/my-map/' -->
+  <div style="position:absolute;top:80px;left:620px;width:540px;height:440px;border:3px solid #0d9488;border-radius:14px;background:#f0fdfa;padding:16px 20px;">
+    <div style="font-size:26px;font-weight:bold;color:#0d9488;text-align:center;">base: '/my-map/'</div>
+    <div style="margin-top:14px;width:200px;background:#374151;border-radius:10px 10px 0 0;padding:8px 12px;color:#fff;font-size:18px;">🌐 브라우저</div>
+    <div style="width:200px;height:120px;background:#e6f2ea;border:3px solid #0d9488;border-top:none;border-radius:0 0 10px 10px;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+      <div style="font-size:34px;">🗺️</div>
+      <div style="font-size:20px;color:#0d9488;font-weight:bold;">지도가 뜬다!</div>
+    </div>
+    <div style="margin-top:8px;font-size:19px;color:#374151;">찾는 주소: <code style="background:#ccfbf1;padding:2px 6px;border-radius:4px;font-size:18px;">/my-map/assets/index.js</code></div>
+    <svg width="500" height="120" style="display:block;">
+      <defs><marker id="ao" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0d9488"/></marker></defs>
+      <line x1="60" y1="30" x2="330" y2="70" stroke="#0d9488" stroke-width="6" marker-end="url(#ao)"/>
+      <text x="180" y="105" font-size="26" font-weight="bold" fill="#0d9488">✓ 정확히 도착</text>
+    </svg>
+    <div style="background:#fff;border:2px solid #0d9488;border-radius:8px;padding:10px 14px;font-size:19px;color:#374151;width:360px;margin-left:160px;">
+      📁 <b>github.io/my-map/assets/</b><br><span style="color:#0d9488;font-size:18px;">진짜 파일이 있는 곳!</span>
+    </div>
+  </div>
+
+  <!-- 하단: 주소 구조 블록 -->
+  <div style="position:absolute;top:560px;left:0;width:1200px;text-align:center;">
+    <div style="font-size:23px;font-weight:bold;color:#374151;margin-bottom:14px;">주소의 구조</div>
+    <div style="display:inline-flex;align-items:stretch;gap:10px;">
+      <div style="background:#374151;color:#fff;border-radius:10px;padding:16px 24px;font-size:24px;font-weight:bold;">https://아이디.github.io</div>
+      <div style="display:flex;align-items:center;font-size:28px;color:#9ca3af;">/</div>
+      <div style="background:#f97316;color:#fff;border-radius:10px;padding:16px 24px;font-size:24px;font-weight:bold;">my-map</div>
+      <div style="display:flex;align-items:center;font-size:28px;color:#9ca3af;">/</div>
+      <div style="background:#0d9488;color:#fff;border-radius:10px;padding:16px 24px;font-size:24px;font-weight:bold;">assets/...</div>
+    </div>
+    <div style="margin-top:12px;display:inline-flex;gap:10px;font-size:20px;color:#6b7280;">
+      <div style="width:330px;">도메인 뿌리</div>
+      <div style="width:150px;color:#f97316;font-weight:bold;">← 이 골목 이름이 base!</div>
+      <div style="width:200px;">파일 위치</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

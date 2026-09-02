@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그림 26.4 — 자랑하기 3단계 코스</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#374151;">자랑하기 3단계 코스</div>
+
+  <!-- 계단 3칸 -->
+  <!-- 1칸 -->
+  <div style="position:absolute;left:80px;top:470px;width:330px;height:200px;background:#0d9488;border-radius:14px 14px 0 0;padding:20px 24px;color:#fff;">
+    <div style="font-size:26px;font-weight:bold;">1단계 · 친구에게 링크</div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:14px;">
+      <div style="font-size:46px;">💬</div>
+      <div style="background:rgba(255,255,255,.92);color:#0d9488;border-radius:12px;padding:8px 14px;font-size:20px;font-weight:bold;">#37.5563,126.9236,5</div>
+    </div>
+    <div style="font-size:20px;margin-top:12px;">메신저에 해시 링크 붙여 넣기</div>
+  </div>
+
+  <!-- 2칸 -->
+  <div style="position:absolute;left:435px;top:340px;width:330px;height:330px;background:#f97316;border-radius:14px 14px 0 0;padding:20px 24px;color:#fff;">
+    <div style="font-size:26px;font-weight:bold;">2단계 · SNS에 올리기</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:16px;font-size:48px;">
+      <span>📷</span><span>❤️</span>
+    </div>
+    <div style="font-size:20px;margin-top:14px;line-height:1.5;">스크린샷 + 링크<br>"AI랑 지도 앱 만들어 봤다"<br>삽질 이야기(회색 지도! 403!)까지</div>
+  </div>
+
+  <!-- 3칸 -->
+  <div style="position:absolute;left:790px;top:210px;width:330px;height:460px;background:#374151;border-radius:14px 14px 0 0;padding:20px 24px;color:#fff;">
+    <div style="font-size:26px;font-weight:bold;">3단계 · 커뮤니티에 리포 공유</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:16px;font-size:48px;">
+      <span>🐙</span><span>💬</span>
+    </div>
+    <div style="font-size:20px;margin-top:14px;line-height:1.5;">GitHub 리포 링크 공유<br>개발 커뮤니티·스터디 모임<br>코드 피드백까지!</div>
+    <div style="margin-top:20px;background:rgba(255,255,255,.14);border-radius:10px;padding:10px 14px;font-size:19px;">README를 잘 갖춘 보람이<br>여기서 나온다</div>
+  </div>
+
+  <!-- 바닥선 -->
+  <div style="position:absolute;left:60px;top:670px;width:1080px;height:6px;background:#d1d5db;border-radius:3px;"></div>
+
+  <!-- 피드백 커지는 화살표 -->
+  <svg width="1200" height="150" style="position:absolute;top:80px;left:0;">
+    <defs>
+      <marker id="fb" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#0d9488"/></marker>
+    </defs>
+    <path d="M180,130 Q600,40 1000,90" stroke="#0d9488" stroke-width="8" fill="none" stroke-dasharray="1 0" marker-end="url(#fb)"/>
+    <text x="330" y="120" font-size="21" fill="#0d9488">피드백 작게</text>
+    <text x="590" y="60" font-size="26" font-weight="bold" fill="#0d9488">피드백</text>
+    <text x="860" y="60" font-size="34" font-weight="bold" fill="#0d9488">피드백 크게!</text>
+  </svg>
+
+  <div style="position:absolute;top:190px;left:80px;width:300px;font-size:21px;color:#6b7280;">계단을 오를수록<br>받는 피드백이 커진다 ↗</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch15-f01</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 48px; width: 100%; text-align: center; font-size: 32px; font-weight: bold; color: #334155; }
+  .sdk { position: absolute; left: 100px; top: 200px; width: 520px; height: 360px; border-radius: 20px; background: #ccfbf1; border: 4px solid #0d9488; color: #134e4a; box-sizing: border-box; padding: 30px; }
+  .sdk h2 { margin: 0 0 16px 0; font-size: 30px; }
+  .sdk .icon { font-size: 52px; }
+  .sdk ul { margin: 18px 0 0 0; padding: 0 0 0 30px; font-size: 24px; line-height: 1.8; }
+  .badge { display: inline-block; margin-top: 14px; background: #0d9488; color: #fff; font-size: 20px; padding: 6px 16px; border-radius: 20px; }
+  .dlc { position: absolute; left: 800px; top: 260px; width: 320px; height: 250px; border-radius: 20px; background: #ffedd5; border: 4px solid #f97316; color: #9a3412; box-sizing: border-box; padding: 24px; }
+  .dlc h2 { margin: 0 0 12px 0; font-size: 26px; }
+  .dlc .icon { font-size: 44px; }
+  .dlc ul { margin: 12px 0 0 0; padding: 0 0 0 26px; font-size: 23px; line-height: 1.7; }
+  .badge2 { display: inline-block; margin-top: 10px; background: #f97316; color: #fff; font-size: 19px; padding: 5px 14px; border-radius: 20px; }
+  .tag { position: absolute; left: 618px; top: 305px; width: 190px; text-align: center; font-size: 22px; font-weight: bold; color: #f97316; background: #fff7ed; border: 2px solid #f97316; border-radius: 12px; padding: 8px 4px; }
+  .caption { position: absolute; top: 630px; width: 100%; text-align: center; font-size: 22px; color: #64748b; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">기본 SDK와 services 확장팩의 관계</div>
+
+  <div class="sdk">
+    <div class="icon">🗺️</div>
+    <h2>카카오지도 SDK</h2>
+    <div class="badge">본편 (기본 패키지)</div>
+    <ul>
+      <li>지도 그리기</li>
+      <li>마커</li>
+      <li>오버레이</li>
+    </ul>
+  </div>
+
+  <!-- plug connector -->
+  <svg style="position:absolute;left:598px;top:355px;" width="230" height="80" viewBox="0 0 230 80">
+    <!-- socket on SDK box -->
+    <rect x="10" y="20" width="18" height="40" fill="#0d9488"/>
+    <rect x="28" y="30" width="12" height="8" fill="#0d9488"/>
+    <rect x="28" y="44" width="12" height="8" fill="#0d9488"/>
+    <!-- cord -->
+    <line x1="40" y1="40" x2="170" y2="40" stroke="#f97316" stroke-width="6"/>
+    <!-- plug prongs -->
+    <rect x="158" y="30" width="12" height="8" fill="#f97316"/>
+    <rect x="158" y="44" width="12" height="8" fill="#f97316"/>
+    <rect x="170" y="18" width="24" height="46" rx="6" fill="#f97316"/>
+    <line x1="194" y1="40" x2="222" y2="40" stroke="#f97316" stroke-width="6"/>
+  </svg>
+  <div class="tag">&amp;libraries=services</div>
+
+  <div class="dlc">
+    <div class="icon">🔌</div>
+    <h2>libraries=services</h2>
+    <div class="badge2">확장팩 (DLC)</div>
+    <ul>
+      <li>장소 검색</li>
+      <li>주소 변환</li>
+    </ul>
+  </div>
+
+  <div class="caption">SDK 주소 뒤에 "&amp;libraries=services" 꼬리표를 붙이면 확장팩이 꽂힙니다</div>
+</div>
+</body>
+</html>

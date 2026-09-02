@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그림 A.1 — 프롬프트 템플릿 사용법: 골격은 가져오고 살은 바꾼다</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">프롬프트 템플릿 사용법 — 골격은 가져오고 살은 바꾼다</div>
+
+  <!-- 왼쪽: 뼈대 템플릿 카드 -->
+  <div style="position:absolute;top:120px;left:60px;width:420px;">
+    <div style="text-align:center;font-size:25px;font-weight:bold;color:#6b7280;margin-bottom:14px;">🦴 뼈대 템플릿</div>
+    <div style="border:4px dashed #9ca3af;border-radius:16px;background:#f9fafb;overflow:hidden;">
+      <div style="border-bottom:3px dashed #d1d5db;padding:22px 24px;">
+        <span style="display:inline-block;background:#0d9488;color:#fff;border-radius:8px;padding:4px 14px;font-size:22px;font-weight:bold;">맥락</span>
+        <span style="font-size:21px;color:#9ca3af;margin-left:12px;">지금 ______ 상태야</span>
+      </div>
+      <div style="border-bottom:3px dashed #d1d5db;padding:22px 24px;">
+        <span style="display:inline-block;background:#0d9488;color:#fff;border-radius:8px;padding:4px 14px;font-size:22px;font-weight:bold;">목표</span>
+        <span style="font-size:21px;color:#9ca3af;margin-left:12px;">______ 를 해줘</span>
+      </div>
+      <div style="border-bottom:3px dashed #d1d5db;padding:22px 24px;">
+        <span style="display:inline-block;background:#0d9488;color:#fff;border-radius:8px;padding:4px 14px;font-size:22px;font-weight:bold;">제약</span>
+        <span style="font-size:21px;color:#9ca3af;margin-left:12px;">______ 는 건드리지 마</span>
+      </div>
+      <div style="padding:22px 24px;">
+        <span style="display:inline-block;background:#0d9488;color:#fff;border-radius:8px;padding:4px 14px;font-size:22px;font-weight:bold;">출력</span>
+        <span style="font-size:21px;color:#9ca3af;margin-left:12px;">먼저 ______ 를 보여줘</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 가운데 화살표 -->
+  <div style="position:absolute;top:330px;left:495px;width:210px;text-align:center;">
+    <svg width="210" height="70">
+      <defs><marker id="mid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f97316"/></marker></defs>
+      <line x1="15" y1="35" x2="185" y2="35" stroke="#f97316" stroke-width="9" marker-end="url(#mid)"/>
+    </svg>
+    <div style="background:#f97316;color:#fff;border-radius:20px;padding:10px 16px;font-size:23px;font-weight:bold;margin-top:8px;">베껴 쓰되 바꿔 쓴다</div>
+  </div>
+
+  <!-- 오른쪽: 채워 완성한 말풍선 -->
+  <div style="position:absolute;top:120px;left:720px;width:430px;">
+    <div style="text-align:center;font-size:25px;font-weight:bold;color:#0d9488;margin-bottom:14px;">💬 내 프로젝트로 채운 프롬프트</div>
+    <div style="position:relative;background:#f0fdfa;border:4px solid #0d9488;border-radius:20px;padding:26px 28px;font-size:22px;line-height:1.7;color:#374151;">
+      <div><b style="color:#0d9488;">[맥락]</b> 지금 산책 기록 앱을 만들고 있어. src/map.js에 지도가 떠 있는 상태야.</div>
+      <div style="margin-top:12px;"><b style="color:#0d9488;">[목표]</b> 산책 경로를 지도에 선으로 그려줘.</div>
+      <div style="margin-top:12px;"><b style="color:#0d9488;">[제약]</b> 마커 코드는 건드리지 마.</div>
+      <div style="margin-top:12px;"><b style="color:#0d9488;">[출력]</b> 고치기 전에 계획 먼저 보여줘.</div>
+      <!-- 말풍선 꼬리 -->
+      <div style="position:absolute;left:60px;bottom:-26px;width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-top:28px solid #0d9488;"></div>
+      <div style="position:absolute;left:64px;bottom:-18px;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:22px solid #f0fdfa;"></div>
+    </div>
+    <div style="margin-top:40px;font-size:40px;margin-left:30px;">🙋</div>
+  </div>
+
+  <div style="position:absolute;bottom:30px;left:0;width:1200px;text-align:center;font-size:22px;color:#6b7280;">골격(맥락·목표·제약·출력)만 있으면, 살은 어떤 프로젝트에든 바꿔 붙일 수 있다</div>
+</div>
+</body>
+</html>

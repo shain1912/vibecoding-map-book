@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ch04-f06</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <!-- 제목 -->
+  <div style="position:absolute;top:22px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">
+    프롬프트의 4요소 <span style="color:#6b7280;font-size:24px;">— 말풍선 하나 = 퍼즐 네 조각</span>
+  </div>
+
+  <!-- 말풍선 + 퍼즐 4분할 SVG -->
+  <svg width="1200" height="750" viewBox="0 0 1200 750" style="position:absolute;top:0;left:0;">
+    <defs>
+      <clipPath id="bubble">
+        <path d="M 250 110 h 700 a 48 48 0 0 1 48 48 v 380 a 48 48 0 0 1 -48 48 h -430 l -90 80 l 14 -80 h -194 a 48 48 0 0 1 -48 -48 v -380 a 48 48 0 0 1 48 -48 z"/>
+      </clipPath>
+    </defs>
+
+    <!-- 4개 사분면 (말풍선 모양으로 클리핑) -->
+    <g clip-path="url(#bubble)">
+      <rect x="200" y="100" width="400" height="248" fill="#ccebe7"/>
+      <rect x="600" y="100" width="400" height="248" fill="#0d9488"/>
+      <rect x="200" y="348" width="400" height="340" fill="#fed7aa"/>
+      <rect x="600" y="348" width="400" height="340" fill="#f97316"/>
+      <!-- 퍼즐 분할선 -->
+      <line x1="600" y1="100" x2="600" y2="688" stroke="#fff" stroke-width="8"/>
+      <line x1="200" y1="348" x2="1000" y2="348" stroke="#fff" stroke-width="8"/>
+      <!-- 퍼즐 탭(돌기) -->
+      <circle cx="600" cy="230" r="26" fill="#ccebe7" stroke="#fff" stroke-width="8"/>
+      <circle cx="600" cy="470" r="26" fill="#f97316" stroke="#fff" stroke-width="8"/>
+      <circle cx="420" cy="348" r="26" fill="#fed7aa" stroke="#fff" stroke-width="8"/>
+      <circle cx="800" cy="348" r="26" fill="#0d9488" stroke="#fff" stroke-width="8"/>
+    </g>
+
+    <!-- 말풍선 외곽선 -->
+    <path d="M 250 110 h 700 a 48 48 0 0 1 48 48 v 380 a 48 48 0 0 1 -48 48 h -430 l -90 80 l 14 -80 h -194 a 48 48 0 0 1 -48 -48 v -380 a 48 48 0 0 1 48 -48 z"
+          fill="none" stroke="#374151" stroke-width="6"/>
+  </svg>
+
+  <!-- ① 맥락 -->
+  <div style="position:absolute;left:250px;top:160px;width:300px;text-align:center;">
+    <div style="font-size:38px;">🗺️</div>
+    <div style="font-size:26px;font-weight:bold;color:#0f766e;">① 맥락</div>
+    <div style="font-size:21px;color:#374151;">어떤 상황에서</div>
+  </div>
+
+  <!-- ② 목표 -->
+  <div style="position:absolute;left:660px;top:160px;width:300px;text-align:center;">
+    <div style="font-size:38px;">🎯</div>
+    <div style="font-size:26px;font-weight:bold;color:#fff;">② 목표</div>
+    <div style="font-size:21px;color:#e6f5f3;">무엇을</div>
+  </div>
+
+  <!-- ③ 제약 -->
+  <div style="position:absolute;left:250px;top:410px;width:300px;text-align:center;">
+    <div style="font-size:38px;">🚧</div>
+    <div style="font-size:26px;font-weight:bold;color:#c2590f;">③ 제약</div>
+    <div style="font-size:21px;color:#374151;">단, 이 조건으로</div>
+  </div>
+
+  <!-- ④ 출력 형식 -->
+  <div style="position:absolute;left:660px;top:410px;width:300px;text-align:center;">
+    <div style="font-size:38px;">📋</div>
+    <div style="font-size:26px;font-weight:bold;color:#fff;">④ 출력 형식</div>
+    <div style="font-size:21px;color:#fff3e8;">결과는 이렇게</div>
+  </div>
+
+  <!-- 지도 핀 장식 -->
+  <svg width="120" height="150" viewBox="0 0 120 150" style="position:absolute;left:1020px;top:470px;">
+    <path d="M60 10 C 32 10 12 32 12 60 C 12 96 60 140 60 140 C 60 140 108 96 108 60 C 108 32 88 10 60 10 Z" fill="#f97316" stroke="#c2590f" stroke-width="4"/>
+    <circle cx="60" cy="58" r="20" fill="#fff"/>
+  </svg>
+
+  <!-- 하단 요약 -->
+  <div style="position:absolute;left:0;bottom:20px;width:1200px;text-align:center;font-size:22px;color:#4b5563;">
+    네 조각이 다 맞춰져야 <b style="color:#0d9488;">한 번에 알아듣는 프롬프트</b>가 된다
+  </div>
+
+</div>
+</body>
+</html>

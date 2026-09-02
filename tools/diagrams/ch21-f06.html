@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch21-f06</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 34px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .browser { position: absolute; top: 170px; width: 300px; height: 240px; border-radius: 16px; background: #fff; border: 4px solid; box-sizing: border-box; text-align: center; }
+  .bA { left: 80px; border-color: #0d9488; }
+  .bB { left: 700px; border-color: #f97316; }
+  .bbar { height: 46px; display: flex; align-items: center; justify-content: center; border-radius: 12px 12px 0 0; color: #fff; font-size: 22px; font-weight: bold; }
+  .bA .bbar { background: #0d9488; }
+  .bB .bbar { background: #f97316; }
+  .bicon { font-size: 84px; margin-top: 30px; }
+  .sharelabel { position: absolute; left: 330px; top: 200px; width: 420px; text-align: center; font-size: 23px; font-weight: bold; color: #16a34a; }
+  .storage { position: absolute; left: 105px; top: 470px; width: 250px; text-align: center; }
+  .storage .icon { font-size: 70px; }
+  .storage .label { font-size: 22px; font-weight: bold; color: #dc2626; margin-top: 6px; line-height: 1.45; }
+  .mini { position: absolute; left: 830px; top: 460px; width: 340px; background: #f8fafc; border: 3px dashed #94a3b8; border-radius: 14px; padding: 14px 18px; box-sizing: border-box; }
+  .mini h3 { margin: 0 0 8px; font-size: 21px; color: #334155; }
+  .mini .fork { font-size: 19px; color: #475569; line-height: 1.5; margin: 6px 0; font-weight: bold; }
+  .mini .fork span { color: #0d9488; }
+  .mini .fork.f2 span { color: #f97316; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">공유되는 것과 공유되지 않는 것</div>
+
+  <div class="browser bA">
+    <div class="bbar">브라우저 A (나)</div>
+    <div class="bicon">🗺️</div>
+  </div>
+  <div class="browser bB">
+    <div class="bbar">브라우저 B (친구)</div>
+    <div class="bicon">🗺️</div>
+  </div>
+
+  <!-- URL arrow A -> B -->
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="aGr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#16a34a"/>
+      </marker>
+      <marker id="aR" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#dc2626"/>
+      </marker>
+    </defs>
+    <line x1="385" y1="290" x2="688" y2="290" stroke="#16a34a" stroke-width="8" marker-end="url(#aGr)"/>
+    <!-- storage stays: short blocked arrow -->
+    <line x1="230" y1="415" x2="230" y2="460" stroke="#dc2626" stroke-width="6"/>
+    <line x1="345" y1="530" x2="440" y2="530" stroke="#dc2626" stroke-width="5" stroke-dasharray="12 9"/>
+    <line x1="450" y1="505" x2="500" y2="555" stroke="#dc2626" stroke-width="9"/>
+    <line x1="500" y1="505" x2="450" y2="555" stroke="#dc2626" stroke-width="9"/>
+  </svg>
+
+  <div class="sharelabel">URL 🔗<br>카메라 상태(중심·레벨) ✅ 함께 감</div>
+
+  <div class="storage">
+    <div class="icon">🏬</div>
+    <div class="label">localStorage 창고<br>장소 데이터 ❌<br>내 브라우저에 남음</div>
+  </div>
+
+  <div class="mini">
+    <h3>확장 아이디어 (두 갈래)</h3>
+    <div class="fork">① <span>해시에 JSON 통째로</span> — 서버 불필요, URL 길이 한계</div>
+    <div class="fork f2">② <span>서버 + 짧은 코드(#map=a1b2c3)</span> — 길이 무제한, 서버 필요</div>
+  </div>
+</div>
+</body>
+</html>

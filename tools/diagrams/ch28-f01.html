@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그림 B.1 — 고장 수리 3단계 흐름</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:26px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#374151;">고장 수리 3단계 흐름</div>
+
+  <!-- ① F12 콘솔 확인 -->
+  <div style="position:absolute;top:130px;left:40px;width:330px;height:470px;border:3px solid #0d9488;border-radius:16px;background:#f0fdfa;padding:18px 20px;text-align:center;">
+    <div style="font-size:25px;font-weight:bold;color:#0d9488;">① F12 콘솔 확인</div>
+    <!-- 브라우저 창 -->
+    <div style="margin:18px auto 0;width:270px;">
+      <div style="background:#374151;border-radius:10px 10px 0 0;height:34px;display:flex;align-items:center;padding:0 12px;gap:7px;">
+        <div style="width:12px;height:12px;border-radius:50%;background:#f97316;"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#9ca3af;"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#0d9488;"></div>
+      </div>
+      <div style="border:3px solid #374151;border-top:none;border-radius:0 0 10px 10px;background:#fff;height:180px;padding:10px;">
+        <div style="height:60px;background:#e6f2ea;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#6b7280;">지도가 안 뜸…</div>
+        <div style="margin-top:8px;text-align:left;background:#1f2937;border-radius:6px;padding:8px;">
+          <div style="font-size:15px;color:#9ca3af;">Console</div>
+          <div style="font-size:16px;color:#f87171;font-weight:bold;">✖ Uncaught TypeError: ...</div>
+          <div style="font-size:16px;color:#f87171;font-weight:bold;">✖ 403 Forbidden</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:44px;margin-top:14px;">🔍</div>
+    <div style="font-size:21px;color:#374151;margin-top:8px;">빨간 에러 줄부터 찾는다</div>
+  </div>
+
+  <!-- 화살표 1 -->
+  <svg width="60" height="80" style="position:absolute;top:330px;left:378px;">
+    <defs><marker id="s1" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f97316"/></marker></defs>
+    <line x1="5" y1="40" x2="48" y2="40" stroke="#f97316" stroke-width="8" marker-end="url(#s1)"/>
+  </svg>
+
+  <!-- ② 증상 표 대조 -->
+  <div style="position:absolute;top:130px;left:445px;width:330px;height:470px;border:3px solid #f97316;border-radius:16px;background:#fff7ed;padding:18px 20px;text-align:center;">
+    <div style="font-size:25px;font-weight:bold;color:#f97316;">② 증상 표 대조</div>
+    <div style="font-size:96px;margin-top:30px;">📖</div>
+    <div style="margin:20px auto 0;width:250px;background:#fff;border:2px solid #d1d5db;border-radius:10px;padding:12px 14px;text-align:left;">
+      <div style="font-size:19px;color:#374151;border-bottom:2px solid #f3f4f6;padding:6px 0;">🗺️ 지도·키</div>
+      <div style="font-size:19px;color:#374151;border-bottom:2px solid #f3f4f6;padding:6px 0;">🛠️ 개발 환경</div>
+      <div style="font-size:19px;color:#374151;border-bottom:2px solid #f3f4f6;padding:6px 0;">⚙️ 기능</div>
+      <div style="font-size:19px;color:#374151;padding:6px 0;">🚀 배포</div>
+    </div>
+    <div style="font-size:21px;color:#374151;margin-top:16px;">이 부록의 고장 사전을<br>펼쳐 증상을 찾는다</div>
+  </div>
+
+  <!-- 화살표 2 -->
+  <svg width="60" height="80" style="position:absolute;top:330px;left:783px;">
+    <defs><marker id="s2" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f97316"/></marker></defs>
+    <line x1="5" y1="40" x2="48" y2="40" stroke="#f97316" stroke-width="8" marker-end="url(#s2)"/>
+  </svg>
+
+  <!-- ③ Claude Code에 넘기기 -->
+  <div style="position:absolute;top:130px;left:850px;width:330px;height:470px;border:3px solid #374151;border-radius:16px;background:#f9fafb;padding:18px 20px;text-align:center;">
+    <div style="font-size:25px;font-weight:bold;color:#374151;">③ Claude Code에<br>에러 전문 붙여넣기</div>
+    <!-- 터미널 -->
+    <div style="margin:18px auto 0;width:270px;background:#1f2937;border-radius:10px;padding:12px;text-align:left;">
+      <div style="font-size:15px;color:#9ca3af;">터미널 — claude</div>
+      <div style="font-size:17px;color:#34d399;margin-top:8px;">&gt; 지도가 안 뜨고 콘솔에<br>&nbsp;&nbsp;이 에러가 나와:</div>
+      <div style="font-size:16px;color:#f87171;margin-top:6px;">Uncaught TypeError:<br>Cannot read properties...</div>
+    </div>
+    <!-- 말풍선 -->
+    <div style="position:relative;margin:26px auto 0;width:260px;background:#0d9488;color:#fff;border-radius:16px;padding:14px 16px;font-size:22px;font-weight:bold;">"에러를 통째로<br>붙여넣기!"
+      <div style="position:absolute;left:40px;top:-18px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:20px solid #0d9488;"></div>
+    </div>
+    <div style="font-size:21px;color:#374151;margin-top:16px;">"안 돼요"만으론<br>AI도 점쟁이가 된다</div>
+  </div>
+
+  <!-- 하단 단계 라벨 -->
+  <div style="position:absolute;top:630px;left:40px;width:330px;text-align:center;font-size:22px;font-weight:bold;color:#0d9488;">먼저 내 눈으로</div>
+  <div style="position:absolute;top:630px;left:445px;width:330px;text-align:center;font-size:22px;font-weight:bold;color:#f97316;">다음은 사전으로</div>
+  <div style="position:absolute;top:630px;left:850px;width:330px;text-align:center;font-size:22px;font-weight:bold;color:#374151;">그래도 안 되면 AI에게</div>
+
+  <div style="position:absolute;bottom:24px;left:0;width:1200px;text-align:center;font-size:21px;color:#6b7280;">무엇을 했더니 무엇이 나왔는지가 들어간 프롬프트는 해결 확률이 완전히 다르다</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch13-f03</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">말풍선의 구조 분해도</div>
+
+  <!-- .bubble 껍데기 (점선 테두리) -->
+  <div style="position:absolute;left:330px;top:150px;width:540px;height:420px;border:4px dashed #f97316;border-radius:20px;background:#fff7ed;"></div>
+  <div style="position:absolute;left:350px;top:162px;font-size:24px;font-weight:bold;color:#c2410c;font-family:Consolas,'Malgun Gothic',monospace;">.bubble <span style="font-weight:normal;font-size:20px;color:#9a3412;">(껍데기 · position: relative)</span></div>
+
+  <!-- .bubble-inner 본체 -->
+  <div style="position:absolute;left:400px;top:220px;width:400px;height:190px;background:#fff;border:4px solid #0d9488;border-radius:14px;box-shadow:0 6px 14px rgba(0,0,0,0.12);">
+    <!-- 이모지+이름 -->
+    <div style="position:absolute;left:28px;top:34px;font-size:30px;font-weight:bold;color:#1f2937;">☕ 카페 어반플랜트</div>
+    <!-- 별점 -->
+    <div style="position:absolute;left:28px;top:100px;font-size:28px;color:#f59e0b;">★★★★☆</div>
+    <!-- × 버튼 -->
+    <div style="position:absolute;right:16px;top:14px;width:44px;height:44px;background:#f3f4f6;border:2px solid #9ca3af;border-radius:50%;text-align:center;line-height:40px;font-size:28px;font-weight:bold;color:#6b7280;">×</div>
+  </div>
+
+  <!-- .bubble-tail 꼬리 삼각형 (본체 아래, 형제로 세로 배치) -->
+  <svg width="80" height="60" style="position:absolute;left:560px;top:436px;" viewBox="0 0 80 60">
+    <path d="M 8 4 L 72 4 L 40 52 z" fill="#fff" stroke="#0d9488" stroke-width="4"/>
+  </svg>
+
+  <!-- 라벨 + 화살표들 -->
+  <svg width="1200" height="750" style="position:absolute;left:0;top:0;" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="arrT" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
+      </marker>
+      <marker id="arrG" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+      </marker>
+    </defs>
+    <!-- .bubble-inner 라벨 화살표 -->
+    <line x1="255" y1="310" x2="395" y2="310" stroke="#0d9488" stroke-width="5" marker-end="url(#arrT)"/>
+    <!-- 이모지+이름 화살표 -->
+    <line x1="1000" y1="265" x2="700" y2="272" stroke="#6b7280" stroke-width="4" marker-end="url(#arrG)"/>
+    <!-- 별점 화살표 -->
+    <line x1="1000" y1="340" x2="600" y2="345" stroke="#6b7280" stroke-width="4" marker-end="url(#arrG)"/>
+    <!-- x 버튼 화살표 -->
+    <line x1="1000" y1="190" x2="790" y2="230" stroke="#6b7280" stroke-width="4" marker-end="url(#arrG)"/>
+    <!-- .bubble-tail 라벨 화살표 -->
+    <line x1="255" y1="465" x2="550" y2="465" stroke="#0d9488" stroke-width="5" marker-end="url(#arrT)"/>
+    <!-- 세로 배치 강조 (inner와 tail 사이) -->
+    <path d="M 880 420 Q 930 440 880 462" fill="none" stroke="#f97316" stroke-width="4" marker-end="url(#arrT)"/>
+  </svg>
+
+  <!-- 왼쪽 라벨: .bubble-inner -->
+  <div style="position:absolute;left:40px;top:270px;width:215px;background:#0d9488;color:#fff;border-radius:12px;padding:14px 16px;font-size:23px;font-weight:bold;text-align:center;font-family:Consolas,'Malgun Gothic',monospace;">.bubble-inner<br><span style="font-size:19px;font-weight:normal;">말풍선 본체</span></div>
+
+  <!-- 왼쪽 라벨: .bubble-tail -->
+  <div style="position:absolute;left:40px;top:428px;width:215px;background:#0d9488;color:#fff;border-radius:12px;padding:14px 16px;font-size:23px;font-weight:bold;text-align:center;font-family:Consolas,'Malgun Gothic',monospace;">.bubble-tail<br><span style="font-size:19px;font-weight:normal;">꼬리 삼각형</span></div>
+
+  <!-- 오른쪽 라벨들 -->
+  <div style="position:absolute;left:1010px;top:165px;width:170px;background:#f3f4f6;border:3px solid #9ca3af;border-radius:12px;padding:10px 12px;font-size:21px;font-weight:bold;color:#374151;text-align:center;">× 닫기 버튼<br><span style="font-size:18px;font-weight:normal;">position: absolute</span></div>
+  <div style="position:absolute;left:1010px;top:243px;width:170px;background:#f3f4f6;border:3px solid #9ca3af;border-radius:12px;padding:10px 12px;font-size:21px;font-weight:bold;color:#374151;text-align:center;">이모지 + 이름</div>
+  <div style="position:absolute;left:1010px;top:318px;width:170px;background:#f3f4f6;border:3px solid #9ca3af;border-radius:12px;padding:10px 12px;font-size:21px;font-weight:bold;color:#374151;text-align:center;">별점</div>
+
+  <!-- 형제 배치 설명 -->
+  <div style="position:absolute;left:915px;top:425px;width:250px;font-size:21px;color:#c2410c;font-weight:bold;">본체와 꼬리는 형제로<br>세로로 나란히 배치</div>
+
+  <!-- 하단 요약 -->
+  <div style="position:absolute;left:0;top:640px;width:1200px;text-align:center;">
+    <span style="background:#f0fdfa;border:3px solid #0d9488;border-radius:30px;padding:12px 30px;font-size:23px;color:#0f766e;font-weight:bold;">.bubble 껍데기 안에 &nbsp;.bubble-inner(본체) + .bubble-tail(꼬리) &nbsp;— 분리해 두면 CSS로 각각 다듬기 쉽다</span>
+  </div>
+
+</div>
+</body>
+</html>

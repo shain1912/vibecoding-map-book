@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch09-f01</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">SDK를 불러오는 두 가지 방법</div>
+
+  <!-- 왼쪽: HTML에 직접 -->
+  <div style="position:absolute;left:50px;top:90px;width:510px;height:620px;border:3px solid #9ca3af;border-radius:16px;background:#f9fafb;">
+    <div style="text-align:center;font-size:28px;font-weight:bold;color:#374151;margin-top:22px;">방법 1: HTML에 직접</div>
+
+    <!-- index.html 문서 -->
+    <div style="position:absolute;left:105px;top:90px;width:300px;height:260px;background:#fff;border:3px solid #6b7280;border-radius:10px;box-shadow:4px 4px 0 #e5e7eb;">
+      <div style="background:#6b7280;color:#fff;font-size:20px;font-weight:bold;padding:8px 14px;border-radius:6px 6px 0 0;">📄 index.html</div>
+      <div style="padding:16px 18px;font-size:20px;color:#374151;line-height:1.7;">
+        <div style="color:#9ca3af;">&lt;head&gt;</div>
+        <div style="background:#fef3c7;border:2px solid #f97316;border-radius:8px;padding:10px 12px;margin:8px 0;font-size:19px;color:#b45309;">
+          &lt;script src="...<br>appkey=<span style="font-size:24px;">🔑</span><b>키 노출!</b>"&gt;
+        </div>
+        <div style="color:#9ca3af;">&lt;/head&gt;</div>
+      </div>
+    </div>
+
+    <!-- 화살표: 문서 -> GitHub -->
+    <svg width="510" height="120" style="position:absolute;left:0;top:360px;" viewBox="0 0 510 120">
+      <defs>
+        <marker id="arrGray" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+        </marker>
+      </defs>
+      <line x1="255" y1="5" x2="255" y2="100" stroke="#6b7280" stroke-width="5" marker-end="url(#arrGray)"/>
+    </svg>
+    <div style="position:absolute;left:290px;top:392px;font-size:20px;color:#b91c1c;font-weight:bold;">⚠️ 키가 그대로<br>올라감</div>
+
+    <!-- GitHub -->
+    <div style="position:absolute;left:155px;top:480px;width:200px;height:110px;background:#1f2937;border-radius:12px;text-align:center;color:#fff;">
+      <div style="font-size:44px;margin-top:10px;">🐙</div>
+      <div style="font-size:22px;font-weight:bold;">GitHub</div>
+    </div>
+    <div style="position:absolute;left:330px;top:470px;font-size:44px;">⚠️</div>
+  </div>
+
+  <!-- 오른쪽: 동적 로드 -->
+  <div style="position:absolute;left:640px;top:90px;width:510px;height:620px;border:3px solid #0d9488;border-radius:16px;background:#f0fdfa;">
+    <div style="text-align:center;font-size:28px;font-weight:bold;color:#0d9488;margin-top:22px;">방법 2: 동적 로드 <span style="font-size:26px;">(우리의 선택)</span></div>
+    <div style="position:absolute;right:22px;top:16px;font-size:46px;">✅</div>
+
+    <!-- .env 금고 -->
+    <div style="position:absolute;left:40px;top:100px;width:180px;height:130px;background:#374151;border-radius:12px;text-align:center;color:#fff;">
+      <div style="font-size:40px;margin-top:12px;">🧰</div>
+      <div style="font-size:22px;font-weight:bold;">.env 금고</div>
+      <div style="font-size:26px;">🔑</div>
+    </div>
+
+    <!-- JS 파일 -->
+    <div style="position:absolute;left:295px;top:100px;width:180px;height:130px;background:#fff;border:3px solid #0d9488;border-radius:12px;text-align:center;">
+      <div style="font-size:40px;margin-top:12px;">📜</div>
+      <div style="font-size:22px;font-weight:bold;color:#0f766e;">JS 파일</div>
+    </div>
+
+    <!-- 화살표: 금고 -> JS (열쇠 꺼내기) -->
+    <svg width="510" height="620" style="position:absolute;left:0;top:0;" viewBox="0 0 510 620">
+      <defs>
+        <marker id="arrTeal" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
+        </marker>
+      </defs>
+      <line x1="222" y1="165" x2="288" y2="165" stroke="#0d9488" stroke-width="5" marker-end="url(#arrTeal)"/>
+      <line x1="385" y1="232" x2="385" y2="300" stroke="#0d9488" stroke-width="5" marker-end="url(#arrTeal)"/>
+      <line x1="255" y1="415" x2="255" y2="470" stroke="#0d9488" stroke-width="5" marker-end="url(#arrTeal)"/>
+    </svg>
+    <div style="position:absolute;left:200px;top:118px;font-size:19px;color:#0f766e;font-weight:bold;text-align:center;width:110px;">열쇠<br>꺼내기</div>
+
+    <!-- 조립된 script 태그 -->
+    <div style="position:absolute;left:85px;top:305px;width:340px;height:105px;background:#ccfbf1;border:3px dashed #0d9488;border-radius:10px;text-align:center;">
+      <div style="font-size:20px;color:#0f766e;font-weight:bold;margin-top:12px;">🔧 script 태그 조립</div>
+      <div style="font-size:19px;color:#134e4a;margin-top:6px;">&lt;script src="...appkey=🔑"&gt;</div>
+    </div>
+    <div style="position:absolute;left:275px;top:425px;font-size:19px;color:#0f766e;font-weight:bold;">페이지에 꽂기</div>
+
+    <!-- 페이지 -->
+    <div style="position:absolute;left:105px;top:478px;width:300px;height:115px;background:#fff;border:3px solid #0d9488;border-radius:10px;">
+      <div style="background:#0d9488;color:#fff;font-size:20px;font-weight:bold;padding:6px 14px;border-radius:6px 6px 0 0;">🌐 페이지</div>
+      <div style="font-size:20px;color:#374151;padding:12px 16px;">키 없는 코드만 GitHub에 ✅</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

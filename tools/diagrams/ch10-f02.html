@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch10-f02</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">setCenter는 순간이동, panTo는 미끄러지는 이동</div>
+
+  <!-- 왼쪽: setCenter -->
+  <div style="position:absolute;left:50px;top:100px;width:520px;height:560px;border:3px solid #f97316;border-radius:16px;background:#fff;overflow:hidden;">
+    <div style="background:#f97316;color:#fff;text-align:center;font-size:26px;font-weight:bold;padding:12px 0;">setCenter</div>
+    <!-- 지도 배경 -->
+    <div style="position:absolute;left:0;top:58px;width:520px;height:502px;background:#f0fdf4;">
+      <svg width="520" height="502" viewBox="0 0 520 502">
+        <!-- 지도 격자/도로 느낌 -->
+        <line x1="0" y1="140" x2="520" y2="140" stroke="#d1d5db" stroke-width="8"/>
+        <line x1="0" y1="330" x2="520" y2="330" stroke="#d1d5db" stroke-width="8"/>
+        <line x1="150" y1="0" x2="150" y2="502" stroke="#d1d5db" stroke-width="8"/>
+        <line x1="380" y1="0" x2="380" y2="502" stroke="#d1d5db" stroke-width="8"/>
+        <rect x="30" y="30" width="80" height="70" fill="#d9f99d" rx="8"/>
+        <rect x="420" y="380" width="70" height="80" fill="#d9f99d" rx="8"/>
+
+        <!-- 출발 위치: 사라지는 핀 (점선, 흐림) -->
+        <g opacity="0.35">
+          <path d="M 110 250 C 96 226 94 216 94 208 a 16 16 0 1 1 32 0 c 0 8 -2 18 -16 42 z" fill="#6b7280" stroke="#4b5563" stroke-width="2" stroke-dasharray="5 4"/>
+        </g>
+        <!-- 번쩍 효과 -->
+        <g stroke="#f97316" stroke-width="5" stroke-linecap="round">
+          <line x1="390" y1="180" x2="360" y2="210"/>
+          <line x1="450" y1="180" x2="480" y2="210"/>
+          <line x1="390" y1="300" x2="360" y2="270"/>
+          <line x1="450" y1="300" x2="480" y2="270"/>
+          <line x1="420" y1="160" x2="420" y2="195"/>
+          <line x1="420" y1="320" x2="420" y2="285"/>
+        </g>
+        <!-- 도착 핀 -->
+        <path d="M 420 282 C 406 258 404 248 404 240 a 16 16 0 1 1 32 0 c 0 8 -2 18 -16 42 z" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+        <circle cx="420" cy="240" r="7" fill="#fff"/>
+        <text x="112" y="290" font-size="20" fill="#6b7280" font-family="'Malgun Gothic',sans-serif" text-anchor="middle">출발</text>
+        <text x="420" y="345" font-size="20" fill="#b91c1c" font-family="'Malgun Gothic',sans-serif" text-anchor="middle" font-weight="bold">도착</text>
+        <text x="255" y="230" font-size="34" font-family="'Malgun Gothic',sans-serif" text-anchor="middle">⚡</text>
+      </svg>
+    </div>
+    <div style="position:absolute;left:0;bottom:26px;width:520px;text-align:center;">
+      <span style="background:#fff7ed;border:3px solid #f97316;color:#c2410c;font-size:26px;font-weight:bold;padding:10px 28px;border-radius:30px;">순간이동</span>
+    </div>
+  </div>
+
+  <!-- 오른쪽: panTo -->
+  <div style="position:absolute;left:630px;top:100px;width:520px;height:560px;border:3px solid #0d9488;border-radius:16px;background:#fff;overflow:hidden;">
+    <div style="background:#0d9488;color:#fff;text-align:center;font-size:26px;font-weight:bold;padding:12px 0;">panTo</div>
+    <div style="position:absolute;left:0;top:58px;width:520px;height:502px;background:#f0fdfa;">
+      <svg width="520" height="502" viewBox="0 0 520 502">
+        <defs>
+          <marker id="arrTeal" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
+          </marker>
+        </defs>
+        <line x1="0" y1="140" x2="520" y2="140" stroke="#d1d5db" stroke-width="8"/>
+        <line x1="0" y1="330" x2="520" y2="330" stroke="#d1d5db" stroke-width="8"/>
+        <line x1="150" y1="0" x2="150" y2="502" stroke="#d1d5db" stroke-width="8"/>
+        <line x1="380" y1="0" x2="380" y2="502" stroke="#d1d5db" stroke-width="8"/>
+        <rect x="30" y="30" width="80" height="70" fill="#ccfbf1" rx="8"/>
+        <rect x="420" y="380" width="70" height="80" fill="#ccfbf1" rx="8"/>
+
+        <!-- 출발 핀 (흐림) -->
+        <g opacity="0.35">
+          <path d="M 110 250 C 96 226 94 216 94 208 a 16 16 0 1 1 32 0 c 0 8 -2 18 -16 42 z" fill="#6b7280" stroke="#4b5563" stroke-width="2"/>
+        </g>
+        <!-- 곡선 경로 화살표 -->
+        <path d="M 130 240 Q 265 120 400 232" fill="none" stroke="#0d9488" stroke-width="7" stroke-dasharray="16 12" marker-end="url(#arrTeal)"/>
+        <!-- 중간 잔상 핀 -->
+        <g opacity="0.55">
+          <path d="M 265 212 C 254 193 252 185 252 179 a 13 13 0 1 1 26 0 c 0 6 -2 14 -13 33 z" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+        </g>
+        <!-- 도착 핀 -->
+        <path d="M 420 282 C 406 258 404 248 404 240 a 16 16 0 1 1 32 0 c 0 8 -2 18 -16 42 z" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+        <circle cx="420" cy="240" r="7" fill="#fff"/>
+        <text x="112" y="290" font-size="20" fill="#6b7280" font-family="'Malgun Gothic',sans-serif" text-anchor="middle">출발</text>
+        <text x="420" y="345" font-size="20" fill="#b91c1c" font-family="'Malgun Gothic',sans-serif" text-anchor="middle" font-weight="bold">도착</text>
+        <text x="262" y="120" font-size="22" fill="#0f766e" font-family="'Malgun Gothic',sans-serif" text-anchor="middle" font-weight="bold">스르륵~</text>
+      </svg>
+    </div>
+    <div style="position:absolute;left:0;bottom:26px;width:520px;text-align:center;">
+      <span style="background:#f0fdfa;border:3px solid #0d9488;color:#0f766e;font-size:26px;font-weight:bold;padding:10px 28px;border-radius:30px;">부드럽게 이동</span>
+    </div>
+  </div>
+
+  <!-- 가운데 VS -->
+  <div style="position:absolute;left:562px;top:355px;width:76px;text-align:center;font-size:34px;font-weight:bold;color:#6b7280;">VS</div>
+
+</div>
+</body>
+</html>

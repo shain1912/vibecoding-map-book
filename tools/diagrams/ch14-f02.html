@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch14-f02</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 48px; width: 100%; text-align: center; font-size: 32px; font-weight: bold; color: #334155; }
+  .row { position: absolute; top: 250px; left: 0; width: 1200px; display: flex; align-items: center; justify-content: center; }
+  .box { width: 210px; height: 190px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 14px; box-sizing: border-box; }
+  .box .icon { font-size: 44px; margin-bottom: 12px; }
+  .box .label { font-size: 22px; font-weight: bold; line-height: 1.4; }
+  .box .sub { font-size: 18px; margin-top: 8px; color: #475569; }
+  .b1 { background: #ffedd5; border: 3px solid #f97316; color: #9a3412; }
+  .b2 { background: #ccfbf1; border: 3px solid #0d9488; color: #134e4a; }
+  .b3 { background: #ccfbf1; border: 3px solid #0d9488; color: #134e4a; }
+  .b4 { background: #f1f5f9; border: 3px solid #64748b; color: #1e293b; }
+  .arrow { width: 70px; height: 60px; flex: 0 0 auto; }
+  .note { position: absolute; top: 560px; width: 100%; text-align: center; font-size: 24px; color: #0d9488; font-weight: bold; }
+  .note2 { position: absolute; top: 605px; width: 100%; text-align: center; font-size: 20px; color: #64748b; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">단방향 데이터 흐름</div>
+
+  <div class="row">
+    <div class="box b1">
+      <div class="icon">👆</div>
+      <div class="label">필터 버튼 클릭</div>
+    </div>
+    <svg class="arrow" viewBox="0 0 70 60">
+      <line x1="4" y1="30" x2="52" y2="30" stroke="#0d9488" stroke-width="6"/>
+      <polygon points="50,18 68,30 50,42" fill="#0d9488"/>
+    </svg>
+    <div class="box b2">
+      <div class="icon">📋</div>
+      <div class="label">currentFilter<br>상태 변경</div>
+    </div>
+    <svg class="arrow" viewBox="0 0 70 60">
+      <line x1="4" y1="30" x2="52" y2="30" stroke="#0d9488" stroke-width="6"/>
+      <polygon points="50,18 68,30 50,42" fill="#0d9488"/>
+    </svg>
+    <div class="box b3">
+      <div class="icon">🧹</div>
+      <div class="label">filteredPlaces()로<br>배열 거르기</div>
+    </div>
+    <svg class="arrow" viewBox="0 0 70 60">
+      <line x1="4" y1="30" x2="52" y2="30" stroke="#0d9488" stroke-width="6"/>
+      <polygon points="50,18 68,30 50,42" fill="#0d9488"/>
+    </svg>
+    <div class="box b4">
+      <div class="icon">📍</div>
+      <div class="label">renderPlaces()로<br>마커 다시 그리기</div>
+    </div>
+  </div>
+
+  <!-- one-direction emphasis -->
+  <svg style="position:absolute; top:490px; left:150px;" width="900" height="70" viewBox="0 0 900 70">
+    <line x1="10" y1="30" x2="850" y2="30" stroke="#f97316" stroke-width="8"/>
+    <polygon points="845,10 890,30 845,50" fill="#f97316"/>
+  </svg>
+  <div class="note">화살표는 오른쪽 한 방향으로만 흐릅니다</div>
+  <div class="note2">화면이 상태를 거꾸로 바꾸는 일은 없습니다</div>
+</div>
+</body>
+</html>

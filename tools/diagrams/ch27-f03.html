@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그림 A.3 — 프롬프트 발사 전 점검: 4요소 + 3습관</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:22px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">프롬프트 발사 전 점검 — 4요소 + 3습관</div>
+
+  <!-- 로켓 -->
+  <div style="position:absolute;top:120px;left:110px;width:300px;text-align:center;">
+    <div style="font-size:150px;line-height:1;">🚀</div>
+    <div style="margin-top:10px;font-size:24px;font-weight:bold;color:#374151;">프롬프트 발사 준비</div>
+    <!-- 연기 -->
+    <div style="font-size:44px;margin-top:6px;">💨💨</div>
+    <!-- 발사대 -->
+    <div style="width:220px;height:10px;background:#9ca3af;margin:12px auto 0;border-radius:5px;"></div>
+  </div>
+
+  <!-- 점검판 보드 -->
+  <div style="position:absolute;top:100px;left:500px;width:520px;background:#f9fafb;border:4px solid #374151;border-radius:16px;padding:22px 28px;box-shadow:6px 6px 0 #d1d5db;">
+    <div style="font-size:26px;font-weight:bold;color:#374151;border-bottom:3px solid #d1d5db;padding-bottom:10px;">📋 발사 전 체크리스트</div>
+
+    <!-- 4요소: 큰 체크박스 -->
+    <div style="margin-top:16px;font-size:21px;font-weight:bold;color:#0d9488;">좋은 프롬프트 4요소</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+      <div style="display:flex;align-items:center;gap:12px;"><div style="width:40px;height:40px;border:4px solid #0d9488;border-radius:8px;background:#0d9488;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;flex:none;">✓</div><span style="font-size:24px;font-weight:bold;color:#374151;">맥락</span></div>
+      <div style="display:flex;align-items:center;gap:12px;"><div style="width:40px;height:40px;border:4px solid #0d9488;border-radius:8px;background:#0d9488;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;flex:none;">✓</div><span style="font-size:24px;font-weight:bold;color:#374151;">목표</span></div>
+      <div style="display:flex;align-items:center;gap:12px;"><div style="width:40px;height:40px;border:4px solid #0d9488;border-radius:8px;background:#0d9488;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;flex:none;">✓</div><span style="font-size:24px;font-weight:bold;color:#374151;">제약</span></div>
+      <div style="display:flex;align-items:center;gap:12px;"><div style="width:40px;height:40px;border:4px solid #0d9488;border-radius:8px;background:#0d9488;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;flex:none;">✓</div><span style="font-size:24px;font-weight:bold;color:#374151;">출력</span></div>
+    </div>
+
+    <!-- 3습관: 작은 체크박스 -->
+    <div style="margin-top:20px;font-size:21px;font-weight:bold;color:#f97316;">바이브코딩 3습관</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+      <div style="display:flex;align-items:center;gap:12px;"><div style="width:28px;height:28px;border:3px solid #f97316;border-radius:6px;background:#f97316;color:#fff;font-size:19px;display:flex;align-items:center;justify-content:center;flex:none;">✓</div><span style="font-size:21px;color:#374151;"><b>작게</b> — 한 프롬프트 한 걸음</span></div>
+      <div style="display:flex;align-items:center;gap:12px;"><div style="width:28px;height:28px;border:3px solid #f97316;border-radius:6px;background:#f97316;color:#fff;font-size:19px;display:flex;align-items:center;justify-content:center;flex:none;">✓</div><span style="font-size:21px;color:#374151;"><b>확인</b> — 실행·콘솔·설명 듣기</span></div>
+      <div style="display:flex;align-items:center;gap:12px;"><div style="width:28px;height:28px;border:3px solid #f97316;border-radius:6px;background:#fff;flex:none;"></div><span style="font-size:21px;color:#374151;"><b>되돌리기</b> — 큰 수정 전 커밋</span></div>
+    </div>
+  </div>
+
+  <!-- 사람: 마지막 항목 체크 중 -->
+  <div style="position:absolute;top:480px;left:1010px;text-align:center;width:160px;">
+    <div style="font-size:84px;">🧑‍🚀</div>
+    <div style="font-size:20px;color:#6b7280;">마지막 항목<br>체크 중…</div>
+  </div>
+  <svg width="140" height="80" style="position:absolute;top:500px;left:920px;">
+    <defs><marker id="chk" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f97316"/></marker></defs>
+    <line x1="120" y1="60" x2="35" y2="18" stroke="#f97316" stroke-width="6" marker-end="url(#chk)"/>
+  </svg>
+
+  <div style="position:absolute;bottom:28px;left:0;width:1200px;text-align:center;font-size:22px;color:#6b7280;">결과가 마음에 안 들 때 프롬프트를 다시 보면, 십중팔구 이 칸 중 하나가 비어 있다</div>
+</div>
+</body>
+</html>

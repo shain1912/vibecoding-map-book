@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ch01-f04</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <!-- 제목 -->
+  <div style="position:absolute;top:22px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">
+    바이브코딩 3원칙 <span style="color:#0d9488;">—</span> 작게 시키기 · 확인하기 · 되돌리기
+  </div>
+
+  <!-- 순환 화살표 (세 노드를 잇는 원형) -->
+  <svg width="1200" height="750" viewBox="0 0 1200 750" style="position:absolute;top:0;left:0;pointer-events:none;">
+    <defs>
+      <marker id="arwT" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#0d9488"/>
+      </marker>
+    </defs>
+    <!-- ① (위) -> ② (오른쪽 아래) -->
+    <path d="M 740 260 A 250 250 0 0 1 810 540" fill="none" stroke="#0d9488" stroke-width="7" marker-end="url(#arwT)"/>
+    <!-- ② -> ③ (왼쪽 아래) -->
+    <path d="M 730 620 A 250 250 0 0 1 470 620" fill="none" stroke="#0d9488" stroke-width="7" marker-end="url(#arwT)"/>
+    <!-- ③ -> ① -->
+    <path d="M 390 540 A 250 250 0 0 1 460 260" fill="none" stroke="#0d9488" stroke-width="7" marker-end="url(#arwT)"/>
+  </svg>
+
+  <div style="position:absolute;left:520px;top:400px;width:160px;text-align:center;font-size:24px;font-weight:bold;color:#0d9488;">계속<br>반복 🔁</div>
+
+  <!-- ① 작게 시키기 (위 가운데) -->
+  <div style="position:absolute;left:450px;top:100px;width:300px;text-align:center;">
+    <div style="width:150px;height:150px;margin:0 auto;border-radius:50%;background:#e6f5f3;border:5px solid #0d9488;display:flex;align-items:center;justify-content:center;">
+      <!-- 큰 바위 -> 작은 돌 세 개 -->
+      <svg width="110" height="86" viewBox="0 0 110 86">
+        <path d="M8 40 L20 18 L42 14 L50 34 L42 52 L16 52 Z" fill="#6b7280"/>
+        <line x1="56" y1="33" x2="66" y2="33" stroke="#f97316" stroke-width="5" stroke-linecap="round"/>
+        <polygon points="66,26 78,33 66,40" fill="#f97316"/>
+        <path d="M84 14 L94 10 L102 18 L96 26 L84 24 Z" fill="#9ca3af"/>
+        <path d="M82 36 L92 32 L100 40 L94 48 L82 46 Z" fill="#9ca3af"/>
+        <path d="M84 58 L94 54 L102 62 L96 70 L84 68 Z" fill="#9ca3af"/>
+      </svg>
+    </div>
+    <div style="margin-top:10px;font-size:26px;font-weight:bold;color:#0d9488;">① 작게 시키기</div>
+    <div style="font-size:20px;color:#4b5563;">큰 바위를 작은 돌로 쪼갠다</div>
+  </div>
+
+  <!-- ② 확인하기 (오른쪽 아래) -->
+  <div style="position:absolute;left:770px;top:480px;width:300px;text-align:center;">
+    <div style="width:150px;height:150px;margin:0 auto;border-radius:50%;background:#fff3e8;border:5px solid #f97316;display:flex;align-items:center;justify-content:center;">
+      <!-- 돋보기로 화면 보기 -->
+      <svg width="100" height="90" viewBox="0 0 100 90">
+        <rect x="6" y="10" width="66" height="48" rx="6" fill="#fff" stroke="#6b7280" stroke-width="5"/>
+        <line x1="16" y1="24" x2="52" y2="24" stroke="#9ca3af" stroke-width="5" stroke-linecap="round"/>
+        <line x1="16" y1="36" x2="44" y2="36" stroke="#9ca3af" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="62" cy="48" r="20" fill="rgba(249,115,22,0.15)" stroke="#f97316" stroke-width="6"/>
+        <line x1="76" y1="62" x2="92" y2="78" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div style="margin-top:10px;font-size:26px;font-weight:bold;color:#f97316;">② 확인하기</div>
+    <div style="font-size:20px;color:#4b5563;">돋보기로 결과를 살핀다</div>
+  </div>
+
+  <!-- ③ 되돌리기 (왼쪽 아래) -->
+  <div style="position:absolute;left:130px;top:480px;width:300px;text-align:center;">
+    <div style="width:150px;height:150px;margin:0 auto;border-radius:50%;background:#f3f4f6;border:5px solid #6b7280;display:flex;align-items:center;justify-content:center;">
+      <!-- 반시계 화살표 + 안전벨트 -->
+      <svg width="104" height="92" viewBox="0 0 104 92">
+        <path d="M 74 24 A 28 28 0 1 0 80 52" fill="none" stroke="#374151" stroke-width="7" stroke-linecap="round"/>
+        <polygon points="78,8 62,22 82,30" fill="#374151"/>
+        <!-- 안전벨트 버클 -->
+        <rect x="60" y="60" width="38" height="24" rx="6" fill="#f97316"/>
+        <rect x="70" y="66" width="12" height="12" rx="3" fill="#fff"/>
+        <line x1="42" y1="88" x2="62" y2="70" stroke="#f97316" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div style="margin-top:10px;font-size:26px;font-weight:bold;color:#374151;">③ 되돌리기</div>
+    <div style="font-size:20px;color:#4b5563;">안전벨트처럼 언제든 복귀</div>
+  </div>
+
+</div>
+</body>
+</html>

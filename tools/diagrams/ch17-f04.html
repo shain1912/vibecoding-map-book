@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch17-f04</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 36px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .node { position: absolute; border-radius: 16px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; }
+  .node .icon { font-size: 40px; }
+  .node .label { font-size: 22px; font-weight: bold; margin-top: 8px; line-height: 1.35; }
+  .obj { background: #ffedd5; border: 3px solid #f97316; color: #9a3412; }
+  .str { background: #f1f5f9; border: 3px solid #64748b; color: #1e293b; }
+  .drw { background: #ccfbf1; border: 4px solid #0d9488; color: #134e4a; }
+  .steplabel { position: absolute; font-size: 21px; font-weight: bold; color: #334155; text-align: center; font-family: Consolas, 'Malgun Gothic', monospace; }
+  .pathlabel { position: absolute; font-size: 26px; font-weight: bold; padding: 6px 22px; border-radius: 24px; color: #fff; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">직렬화 왕복 파이프라인</div>
+
+  <!-- 포장 (top path) label -->
+  <div class="pathlabel" style="left:80px; top:130px; background:#f97316;">포장</div>
+  <!-- 개봉 (bottom path) label -->
+  <div class="pathlabel" style="left:80px; top:560px; background:#0d9488;">개봉</div>
+
+  <!-- top row: places array -> string -> drawer -->
+  <div class="node obj" style="left:80px; top:200px; width:250px; height:160px;">
+    <div class="icon">🧩</div>
+    <div class="label">places 배열<br>(객체 모형)</div>
+  </div>
+  <div class="node str" style="left:475px; top:200px; width:250px; height:160px;">
+    <div class="icon">📄</div>
+    <div class="label">문자열<br>(설계도 종이)</div>
+  </div>
+  <div class="node drw" style="left:880px; top:280px; width:250px; height:190px;">
+    <div class="icon">🗄️</div>
+    <div class="label">localStorage<br>서랍</div>
+  </div>
+
+  <!-- bottom row: string -> places restored -->
+  <div class="node str" style="left:475px; top:430px; width:250px; height:160px;">
+    <div class="icon">📄</div>
+    <div class="label">문자열</div>
+  </div>
+  <div class="node obj" style="left:80px; top:430px; width:250px; height:160px;">
+    <div class="icon">🧩</div>
+    <div class="label">places 배열 복원</div>
+  </div>
+
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="aO" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#f97316"/>
+      </marker>
+      <marker id="aT" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#0d9488"/>
+      </marker>
+    </defs>
+    <!-- 포장 경로: stringify, setItem -->
+    <line x1="335" y1="280" x2="463" y2="280" stroke="#f97316" stroke-width="6" marker-end="url(#aO)"/>
+    <line x1="730" y1="280" x2="868" y2="320" stroke="#f97316" stroke-width="6" marker-end="url(#aO)"/>
+    <!-- 개봉 경로: getItem, parse -->
+    <line x1="868" y1="435" x2="732" y2="490" stroke="#0d9488" stroke-width="6" marker-end="url(#aT)"/>
+    <line x1="470" y1="510" x2="342" y2="510" stroke="#0d9488" stroke-width="6" marker-end="url(#aT)"/>
+  </svg>
+
+  <div class="steplabel" style="left:315px; top:235px; width:170px;">JSON.stringify</div>
+  <div class="steplabel" style="left:725px; top:245px; width:150px;">setItem</div>
+  <div class="steplabel" style="left:730px; top:475px; width:150px;">getItem</div>
+  <div class="steplabel" style="left:325px; top:525px; width:150px;">JSON.parse</div>
+
+  <div style="position:absolute; top:665px; width:1200px; text-align:center; font-size:22px; color:#64748b;">
+    포장 → 서랍 보관 → 꺼내기 → 개봉 — 이 왕복이 손실 없이 이루어집니다
+  </div>
+</div>
+</body>
+</html>

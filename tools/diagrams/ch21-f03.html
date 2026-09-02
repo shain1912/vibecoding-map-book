@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch21-f03</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 36px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .line { position: absolute; left: 0; width: 1200px; display: flex; justify-content: center; font-family: Consolas, 'Malgun Gothic', monospace; font-weight: bold; }
+  .rx { top: 170px; font-size: 30px; }
+  .st { top: 430px; font-size: 32px; }
+  .tok { padding: 12px 8px; border-radius: 10px; margin: 0 2px; border: 3px solid; }
+  .slash { border-color: transparent; color: #94a3b8; padding-left: 2px; padding-right: 2px; }
+  .anchor { background: #f1f5f9; border-color: #94a3b8; color: #475569; }
+  .hashk { background: #e2e8f0; border-color: #64748b; color: #1e293b; }
+  .g1 { background: #ffedd5; border-color: #f97316; color: #9a3412; }
+  .g2 { background: #ccfbf1; border-color: #0d9488; color: #134e4a; }
+  .g3 { background: #fef3c7; border-color: #f59e0b; color: #92400e; }
+  .comma { background: #f8fafc; border-color: #cbd5e1; color: #64748b; }
+  .mlab { position: absolute; top: 530px; font-size: 25px; font-weight: bold; font-family: Consolas, monospace; text-align: center; }
+  .rowlabel { position: absolute; left: 40px; font-size: 22px; font-weight: bold; color: #64748b; }
+  .legend { position: absolute; top: 640px; width: 1200px; text-align: center; font-size: 21px; color: #64748b; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">정규식 해부도 — 패턴과 해시 문자열의 대응</div>
+
+  <div class="rowlabel" style="top:185px;">정규식</div>
+  <div class="line rx">
+    <span class="tok slash">/</span><span class="tok anchor">^</span><span class="tok hashk">#</span><span class="tok g1">(-?[\d.]+)</span><span class="tok comma">,</span><span class="tok g2">(-?[\d.]+)</span><span class="tok comma">,</span><span class="tok g3">(\d+)</span><span class="tok anchor">$</span><span class="tok slash">/</span>
+  </div>
+
+  <div class="rowlabel" style="top:445px;">문자열</div>
+  <div class="line st">
+    <span class="tok hashk">#</span><span class="tok g1">37.54444</span><span class="tok comma">,</span><span class="tok g2">127.05611</span><span class="tok comma">,</span><span class="tok g3">4</span>
+  </div>
+
+  <!-- connector lines between corresponding parts -->
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <!-- # : regex x~340, string x~372 -->
+    <line x1="345" y1="245" x2="378" y2="420" stroke="#64748b" stroke-width="4" stroke-dasharray="8 6"/>
+    <!-- group1: regex ~445, string ~475 -->
+    <line x1="450" y1="245" x2="480" y2="420" stroke="#f97316" stroke-width="5"/>
+    <!-- comma1 -->
+    <line x1="545" y1="245" x2="575" y2="420" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="8 6"/>
+    <!-- group2 -->
+    <line x1="650" y1="245" x2="680" y2="420" stroke="#0d9488" stroke-width="5"/>
+    <!-- comma2 -->
+    <line x1="745" y1="245" x2="778" y2="420" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="8 6"/>
+    <!-- group3 -->
+    <line x1="800" y1="245" x2="815" y2="420" stroke="#f59e0b" stroke-width="5"/>
+  </svg>
+
+  <!-- capture labels under string -->
+  <div class="mlab" style="left:415px; width:130px; color:#f97316;">m[1]<br><span style="font-size:19px; font-family:'Malgun Gothic';">위도</span></div>
+  <div class="mlab" style="left:615px; width:140px; color:#0d9488;">m[2]<br><span style="font-size:19px; font-family:'Malgun Gothic';">경도</span></div>
+  <div class="mlab" style="left:775px; width:90px; color:#f59e0b;">m[3]<br><span style="font-size:19px; font-family:'Malgun Gothic';">레벨</span></div>
+
+  <div class="legend">^는 맨 앞, $는 맨 끝 — 괄호 세 쌍이 캡처한 조각이 m[1]·m[2]·m[3]에 순서대로 담깁니다</div>
+</div>
+</body>
+</html>

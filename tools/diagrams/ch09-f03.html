@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch09-f03</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:26px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">위도와 경도: 숫자 두 개로 지구 위 한 점 찍기</div>
+
+  <svg width="1200" height="750" style="position:absolute;left:0;top:0;" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="arrTeal" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
+      </marker>
+      <marker id="arrOrange" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#f97316"/>
+      </marker>
+    </defs>
+
+    <!-- 지구본 본체 (중심 520,420 / 반지름 260) -->
+    <circle cx="520" cy="420" r="260" fill="#e0f2fe" stroke="#6b7280" stroke-width="4"/>
+
+    <!-- 위도선 (가로줄) -->
+    <ellipse cx="520" cy="290" rx="216" ry="42" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <ellipse cx="520" cy="550" rx="216" ry="42" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <ellipse cx="520" cy="355" rx="252" ry="30" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <ellipse cx="520" cy="485" rx="252" ry="30" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <!-- 적도 (위도 0°) 강조 -->
+    <ellipse cx="520" cy="420" rx="260" ry="24" fill="none" stroke="#0d9488" stroke-width="5"/>
+
+    <!-- 경도선 (세로줄) -->
+    <ellipse cx="520" cy="420" rx="85" ry="260" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <ellipse cx="520" cy="420" rx="175" ry="260" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <!-- 그리니치 (경도 0°) 강조 : 중앙 세로선 -->
+    <line x1="520" y1="160" x2="520" y2="680" stroke="#f97316" stroke-width="5"/>
+
+    <!-- 한반도 (지구본 오른쪽 위, 대략적 실루엣) -->
+    <path d="M 655 315 q 12 -10 20 2 q 8 12 2 26 q -5 14 -16 20 q -12 5 -14 -8 q -3 -14 0 -24 q 3 -10 8 -16 z" fill="#86efac" stroke="#16a34a" stroke-width="2"/>
+
+    <!-- 위도 = 남북 화살표 (지구본 왼쪽 바깥) -->
+    <line x1="180" y1="420" x2="180" y2="240" stroke="#0d9488" stroke-width="6" marker-end="url(#arrTeal)"/>
+    <line x1="180" y1="420" x2="180" y2="600" stroke="#0d9488" stroke-width="6" marker-end="url(#arrTeal)"/>
+
+    <!-- 경도 = 동서 화살표 (지구본 아래 바깥) -->
+    <line x1="520" y1="712" x2="360" y2="712" stroke="#f97316" stroke-width="6" marker-end="url(#arrOrange)"/>
+    <line x1="520" y1="712" x2="680" y2="712" stroke="#f97316" stroke-width="6" marker-end="url(#arrOrange)"/>
+
+    <!-- 서울 핀 (핀 끝이 한반도 서울 근처 660,330 을 찌름) -->
+    <path d="M 660 330 C 646 306 644 296 644 288 a 16 16 0 1 1 32 0 c 0 8 -2 18 -16 42 z" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+    <circle cx="660" cy="288" r="7" fill="#fff"/>
+
+    <!-- 말풍선 꼬리 -->
+    <path d="M 750 262 L 700 300 L 780 292 z" fill="#fff" stroke="#ef4444" stroke-width="3"/>
+  </svg>
+
+  <!-- 라벨: 적도 / 그리니치 -->
+  <div style="position:absolute;left:800px;top:398px;background:#0d9488;color:#fff;font-size:24px;font-weight:bold;padding:8px 18px;border-radius:10px;">위도 0° (적도)</div>
+  <div style="position:absolute;left:405px;top:118px;background:#f97316;color:#fff;font-size:24px;font-weight:bold;padding:8px 18px;border-radius:10px;">경도 0° (그리니치)</div>
+
+  <!-- 남북/동서 화살표 라벨 -->
+  <div style="position:absolute;left:60px;top:390px;width:240px;text-align:left;font-size:24px;font-weight:bold;color:#0d9488;">위도<br><span style="font-size:21px;font-weight:normal;color:#0f766e;">남북 방향 (북쪽↑ 커짐)</span></div>
+  <div style="position:absolute;left:730px;top:695px;font-size:24px;font-weight:bold;color:#f97316;">경도 <span style="font-size:21px;font-weight:normal;color:#c2410c;">— 동서 방향</span></div>
+
+  <!-- 서울시청 말풍선 -->
+  <div style="position:absolute;left:740px;top:190px;background:#fff;border:3px solid #ef4444;border-radius:14px;padding:14px 22px;font-size:25px;font-weight:bold;color:#1f2937;box-shadow:3px 3px 0 #fecaca;">📍 서울시청<br><span style="color:#b91c1c;">(37.5665, 126.978)</span></div>
+
+</div>
+</body>
+</html>

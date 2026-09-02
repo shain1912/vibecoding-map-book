@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch21-f01</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 36px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .url { position: absolute; top: 150px; left: 0; width: 1200px; display: flex; justify-content: center; font-family: Consolas, 'Malgun Gothic', monospace; font-size: 27px; font-weight: bold; }
+  .part { padding: 14px 10px; border-radius: 10px; margin: 0 3px; border: 3px solid; }
+  .proto { background: #f1f5f9; border-color: #64748b; color: #334155; }
+  .host { background: #ccfbf1; border-color: #0d9488; color: #134e4a; }
+  .path { background: #e2e8f0; border-color: #94a3b8; color: #334155; }
+  .hash { background: #ffedd5; border-color: #f97316; color: #9a3412; }
+  .plabel { position: absolute; top: 235px; font-size: 21px; font-weight: bold; text-align: center; }
+  .server { position: absolute; left: 240px; top: 430px; width: 240px; text-align: center; }
+  .server .icon { font-size: 80px; }
+  .server .label { font-size: 24px; font-weight: bold; color: #334155; }
+  .bubble { position: absolute; left: 640px; top: 420px; width: 400px; background: #fff7ed; border: 3px solid #f97316; border-radius: 16px; padding: 20px; font-size: 23px; font-weight: bold; color: #9a3412; line-height: 1.5; box-sizing: border-box; }
+  .bubble::before { content: ""; position: absolute; top: -24px; left: 170px; border: 12px solid transparent; border-bottom-color: #f97316; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">URL 해부도와 해시의 특별한 성질</div>
+
+  <div class="url">
+    <span class="part proto">http://</span><span class="part host">localhost:5173</span><span class="part path">/</span><span class="part hash">#37.54444,127.05611,4</span>
+  </div>
+
+  <div class="plabel" style="left:245px; width:120px; color:#64748b;">프로토콜</div>
+  <div class="plabel" style="left:390px; width:240px; color:#0d9488;">호스트</div>
+  <div class="plabel" style="left:637px; width:40px; color:#94a3b8;">경로</div>
+  <div class="plabel" style="left:690px; width:330px; color:#f97316;">해시</div>
+
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="aG" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#64748b"/>
+      </marker>
+      <marker id="aT" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#0d9488"/>
+      </marker>
+    </defs>
+    <!-- 프로토콜/호스트/경로 -> 서버 -->
+    <line x1="300" y1="280" x2="340" y2="425" stroke="#64748b" stroke-width="6" marker-end="url(#aG)"/>
+    <line x1="500" y1="280" x2="375" y2="425" stroke="#0d9488" stroke-width="6" marker-end="url(#aT)"/>
+    <line x1="655" y1="280" x2="405" y2="425" stroke="#94a3b8" stroke-width="6" marker-end="url(#aG)"/>
+    <!-- 해시 -> 서버 (끊긴 화살표 + X) -->
+    <line x1="850" y1="280" x2="640" y2="400" stroke="#f97316" stroke-width="6" stroke-dasharray="14 10"/>
+    <line x1="715" y1="320" x2="775" y2="380" stroke="#dc2626" stroke-width="10"/>
+    <line x1="775" y1="320" x2="715" y2="380" stroke="#dc2626" stroke-width="10"/>
+  </svg>
+
+  <div class="server">
+    <div class="icon">🖥️</div>
+    <div class="label">서버<br><span style="font-size:20px; color:#64748b;">여기까지만 전송됩니다</span></div>
+  </div>
+
+  <div class="bubble">💬 해시(# 뒤)는 서버로 전송 안 됨<br>— 브라우저 전용 메모 칸</div>
+</div>
+</body>
+</html>

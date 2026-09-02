@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그림 26.5 — 다음 단계 로드맵 네 갈래 길</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:22px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#374151;">다음 단계 로드맵 — 네 갈래 길</div>
+
+  <!-- 갈래 길 (SVG) -->
+  <svg width="1200" height="750" style="position:absolute;top:0;left:0;">
+    <g stroke="#d1d5db" stroke-width="26" fill="none" stroke-linecap="round">
+      <path d="M600,430 C520,340 380,300 250,240"/>
+      <path d="M600,430 C560,330 500,230 480,170"/>
+      <path d="M600,430 C650,330 700,230 730,170"/>
+      <path d="M600,430 C680,340 830,300 960,240"/>
+    </g>
+    <g stroke="#ffffff" stroke-width="5" fill="none" stroke-dasharray="14 14" stroke-linecap="round">
+      <path d="M600,430 C520,340 380,300 250,240"/>
+      <path d="M600,430 C560,330 500,230 480,170"/>
+      <path d="M600,430 C650,330 700,230 730,170"/>
+      <path d="M600,430 C680,340 830,300 960,240"/>
+    </g>
+  </svg>
+
+  <!-- 가운데 현재 깃발 -->
+  <div style="position:absolute;top:430px;left:440px;width:320px;text-align:center;">
+    <div style="font-size:60px;">🚩</div>
+    <div style="background:#0d9488;color:#fff;border-radius:14px;padding:14px 18px;font-size:26px;font-weight:bold;">나만의 지도 (현재)</div>
+    <div style="font-size:20px;color:#6b7280;margin-top:8px;">여기서 어느 길로든 갈 수 있다</div>
+  </div>
+
+  <!-- ① 백엔드 저장 -->
+  <div style="position:absolute;top:80px;left:60px;width:280px;text-align:center;">
+    <div style="font-size:52px;">☁️🗄️</div>
+    <div style="background:#fff;border:3px solid #0d9488;border-radius:14px;padding:12px 14px;">
+      <div style="font-size:24px;font-weight:bold;color:#0d9488;">① 백엔드 저장</div>
+      <div style="font-size:20px;color:#374151;margin-top:4px;">"어디서나 같은 지도"</div>
+      <div style="font-size:22px;color:#f97316;margin-top:6px;">난이도 ★★☆</div>
+    </div>
+  </div>
+
+  <!-- ② 로그인 -->
+  <div style="position:absolute;top:36px;left:350px;width:260px;text-align:center;">
+    <div style="font-size:52px;">🧑🔑</div>
+    <div style="background:#fff;border:3px solid #0d9488;border-radius:14px;padding:12px 14px;">
+      <div style="font-size:24px;font-weight:bold;color:#0d9488;">② 로그인</div>
+      <div style="font-size:20px;color:#374151;margin-top:4px;">"각자의 지도"</div>
+      <div style="font-size:22px;color:#f97316;margin-top:6px;">난이도 ★★★</div>
+    </div>
+  </div>
+
+  <!-- ③ 사진 업로드 -->
+  <div style="position:absolute;top:36px;left:610px;width:260px;text-align:center;">
+    <div style="font-size:52px;">📷</div>
+    <div style="background:#fff;border:3px solid #f97316;border-radius:14px;padding:12px 14px;">
+      <div style="font-size:24px;font-weight:bold;color:#f97316;">③ 사진 업로드</div>
+      <div style="font-size:20px;color:#374151;margin-top:4px;">"장소에 추억을"</div>
+      <div style="font-size:22px;color:#f97316;margin-top:6px;">난이도 ★★☆</div>
+    </div>
+  </div>
+
+  <!-- ④ 다른 API -->
+  <div style="position:absolute;top:80px;left:880px;width:280px;text-align:center;">
+    <div style="font-size:52px;">🧩</div>
+    <div style="background:#fff;border:3px solid #f97316;border-radius:14px;padding:12px 14px;">
+      <div style="font-size:24px;font-weight:bold;color:#f97316;">④ 다른 API</div>
+      <div style="font-size:20px;color:#374151;margin-top:4px;">"길찾기 · 공공데이터"</div>
+      <div style="font-size:22px;color:#f97316;margin-top:6px;">난이도 ★☆☆</div>
+    </div>
+  </div>
+
+  <!-- 하단 기준 -->
+  <div style="position:absolute;bottom:36px;left:0;width:1200px;text-align:center;">
+    <div style="display:inline-block;background:#f9fafb;border:2px solid #d1d5db;border-radius:12px;padding:14px 30px;font-size:23px;color:#374151;">
+      고르는 기준은 하나 — <b style="color:#0d9488;">여러분이 실제로 아쉬웠던 것부터!</b>
+    </div>
+  </div>
+</div>
+</body>
+</html>

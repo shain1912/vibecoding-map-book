@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ch00-f07</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <!-- 제목 -->
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">
+    이 책의 로드맵 <span style="color:#0d9488;">—</span> 준비운동부터 세상에 공개하기까지
+  </div>
+
+  <!-- 등산로 배경 SVG -->
+  <svg width="1200" height="750" viewBox="0 0 1200 750" style="position:absolute;top:0;left:0;">
+    <!-- 산 실루엣 (정상 부근) -->
+    <polygon points="880,300 1040,110 1180,300" fill="#e6f5f3"/>
+    <polygon points="960,300 1040,110 1120,300" fill="#ccebe7"/>
+    <!-- 눈 덮인 정상 -->
+    <polygon points="1012,145 1040,110 1068,145 1054,150 1040,140 1026,150" fill="#ffffff" stroke="#99d6cf" stroke-width="2"/>
+
+    <!-- 등산로 (구불구불한 길) -->
+    <path d="M 120,640 C 260,660 340,620 420,560 C 500,500 480,460 580,440 C 690,418 740,450 800,390 C 860,330 880,300 940,260 C 985,230 1010,205 1040,175"
+          fill="none" stroke="#0d9488" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 22"/>
+    <path d="M 120,640 C 260,660 340,620 420,560 C 500,500 480,460 580,440 C 690,418 740,450 800,390 C 860,330 880,300 940,260 C 985,230 1010,205 1040,175"
+          fill="none" stroke="#0d9488" stroke-width="3" opacity="0.25"/>
+
+    <!-- 출발점 깃발 -->
+    <line x1="120" y1="640" x2="120" y2="590" stroke="#6b7280" stroke-width="4"/>
+    <polygon points="120,590 160,600 120,612" fill="#f97316"/>
+    <!-- 정상 깃발 -->
+    <line x1="1040" y1="175" x2="1040" y2="120" stroke="#6b7280" stroke-width="4"/>
+    <polygon points="1040,120 1084,131 1040,144" fill="#f97316"/>
+  </svg>
+
+  <!-- 역 1: 1부 준비운동 (출발점) -->
+  <div style="position:absolute;left:40px;top:648px;width:230px;text-align:center;">
+    <div style="width:74px;height:74px;margin:0 auto;border-radius:50%;background:#0d9488;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 3px 0 #0b7a70;">🔧</div>
+    <div style="margin-top:8px;font-size:22px;font-weight:bold;color:#0d9488;">1부 준비운동</div>
+    <div style="font-size:20px;color:#4b5563;">도구 설치</div>
+  </div>
+  <div style="position:absolute;left:60px;top:600px;font-size:20px;font-weight:bold;color:#f97316;">출발점</div>
+
+  <!-- 역 2: 2부 첫 지도 -->
+  <div style="position:absolute;left:310px;top:445px;width:220px;text-align:center;">
+    <div style="width:74px;height:74px;margin:0 auto;border-radius:50%;background:#0d9488;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 3px 0 #0b7a70;">🗺️</div>
+    <div style="margin-top:8px;font-size:22px;font-weight:bold;color:#0d9488;">2부 첫 지도</div>
+  </div>
+
+  <!-- 역 3: 3부 나만의 장소 지도 -->
+  <div style="position:absolute;left:470px;top:462px;width:240px;text-align:center;">
+    <div style="width:74px;height:74px;margin:0 auto;border-radius:50%;background:#0d9488;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 3px 0 #0b7a70;">📍</div>
+    <div style="margin-top:8px;font-size:22px;font-weight:bold;color:#0d9488;">3부 나만의 장소 지도</div>
+  </div>
+
+  <!-- 역 4: 4부 한 단계 더 -->
+  <div style="position:absolute;left:690px;top:280px;width:220px;text-align:center;">
+    <div style="width:74px;height:74px;margin:0 auto;border-radius:50%;background:#0d9488;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 3px 0 #0b7a70;">✨</div>
+    <div style="margin-top:8px;font-size:22px;font-weight:bold;color:#0d9488;">4부 한 단계 더</div>
+  </div>
+
+  <!-- 역 5: 정상, 5부 세상에 공개 -->
+  <div style="position:absolute;left:930px;top:190px;width:230px;text-align:center;">
+    <div style="width:84px;height:84px;margin:0 auto;border-radius:50%;background:#f97316;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 3px 0 #c2590f;">🚀</div>
+    <div style="margin-top:8px;font-size:24px;font-weight:bold;color:#f97316;">5부 세상에 공개</div>
+    <div style="font-size:20px;font-weight:bold;color:#6b7280;">정상 🏔️</div>
+  </div>
+
+  <!-- 위치 점 (길 위) -->
+  <svg width="1200" height="750" viewBox="0 0 1200 750" style="position:absolute;top:0;left:0;pointer-events:none;">
+    <circle cx="120" cy="640" r="11" fill="#fff" stroke="#0d9488" stroke-width="5"/>
+    <circle cx="420" cy="560" r="11" fill="#fff" stroke="#0d9488" stroke-width="5"/>
+    <circle cx="580" cy="440" r="11" fill="#fff" stroke="#0d9488" stroke-width="5"/>
+    <circle cx="800" cy="390" r="11" fill="#fff" stroke="#0d9488" stroke-width="5"/>
+    <circle cx="1040" cy="175" r="12" fill="#fff" stroke="#f97316" stroke-width="6"/>
+    <!-- 진행 방향 화살표 -->
+    <polygon points="330,608 356,588 350,616" fill="#0d9488"/>
+    <polygon points="498,484 526,472 514,498" fill="#0d9488"/>
+    <polygon points="704,440 732,432 718,456" fill="#0d9488"/>
+    <polygon points="880,326 906,310 898,338" fill="#0d9488"/>
+  </svg>
+
+</div>
+</body>
+</html>

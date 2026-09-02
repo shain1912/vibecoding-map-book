@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ch01-f01</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+  .step{width:280px;padding:14px 10px;border-radius:12px;text-align:center;font-size:21px;font-weight:bold;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <!-- 제목 -->
+  <div style="position:absolute;top:22px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">
+    전통적 코딩과 바이브코딩의 순서 비교
+  </div>
+
+  <!-- 왼쪽: 전통 방식 (긴 직선 경로) -->
+  <div style="position:absolute;left:100px;top:80px;width:340px;text-align:center;">
+    <div style="display:inline-block;padding:8px 30px;border-radius:999px;background:#6b7280;color:#fff;font-size:26px;font-weight:bold;">전통 방식</div>
+  </div>
+
+  <div class="step" style="position:absolute;left:130px;top:142px;background:#f3f4f6;border:3px solid #9ca3af;color:#374151;">📖 문법 공부</div>
+  <div class="step" style="position:absolute;left:130px;top:248px;background:#f3f4f6;border:3px solid #9ca3af;color:#374151;">📄 문서 읽기</div>
+  <div class="step" style="position:absolute;left:130px;top:354px;background:#f3f4f6;border:3px solid #9ca3af;color:#374151;">⌨️ 코드 타이핑</div>
+  <div class="step" style="position:absolute;left:130px;top:460px;background:#f3f4f6;border:3px solid #9ca3af;color:#374151;">🐛 에러와 씨름</div>
+  <div class="step" style="position:absolute;left:130px;top:610px;background:#e5e7eb;border:3px solid #6b7280;color:#111827;">🏁 (한참 뒤) 결과물</div>
+
+  <!-- 왼쪽 화살표들 (긴 경로) -->
+  <svg width="1200" height="750" viewBox="0 0 1200 750" style="position:absolute;top:0;left:0;pointer-events:none;">
+    <defs>
+      <marker id="arwG" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#6b7280"/>
+      </marker>
+      <marker id="arwT" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#0d9488"/>
+      </marker>
+      <marker id="arwO" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#f97316"/>
+      </marker>
+    </defs>
+    <!-- 전통 방식: 아래로 길게 -->
+    <line x1="270" y1="204" x2="270" y2="240" stroke="#6b7280" stroke-width="5" marker-end="url(#arwG)"/>
+    <line x1="270" y1="310" x2="270" y2="346" stroke="#6b7280" stroke-width="5" marker-end="url(#arwG)"/>
+    <line x1="270" y1="416" x2="270" y2="452" stroke="#6b7280" stroke-width="5" marker-end="url(#arwG)"/>
+    <line x1="270" y1="522" x2="270" y2="602" stroke="#6b7280" stroke-width="5" stroke-dasharray="10 8" marker-end="url(#arwG)"/>
+
+    <!-- 경로 길이 표시: 전통 -->
+    <line x1="470" y1="150" x2="470" y2="668" stroke="#9ca3af" stroke-width="3"/>
+    <line x1="458" y1="150" x2="482" y2="150" stroke="#9ca3af" stroke-width="3"/>
+    <line x1="458" y1="668" x2="482" y2="668" stroke="#9ca3af" stroke-width="3"/>
+
+    <!-- 바이브코딩 순환 화살표 (원형) -->
+    <path d="M 870 285 A 130 130 0 0 1 870 505" fill="none" stroke="#0d9488" stroke-width="6" marker-end="url(#arwT)"/>
+    <path d="M 830 505 A 130 130 0 0 1 830 285" fill="none" stroke="#f97316" stroke-width="6" marker-end="url(#arwO)"/>
+
+    <!-- 경로 길이 표시: 바이브 -->
+    <line x1="1130" y1="240" x2="1130" y2="550" stroke="#99d6cf" stroke-width="3"/>
+    <line x1="1118" y1="240" x2="1142" y2="240" stroke="#99d6cf" stroke-width="3"/>
+    <line x1="1118" y1="550" x2="1142" y2="550" stroke="#99d6cf" stroke-width="3"/>
+  </svg>
+
+  <div style="position:absolute;left:492px;top:390px;font-size:20px;color:#6b7280;font-weight:bold;">길고<br>먼 길</div>
+
+  <!-- 오른쪽: 바이브코딩 (짧은 순환) -->
+  <div style="position:absolute;left:680px;top:80px;width:340px;text-align:center;">
+    <div style="display:inline-block;padding:8px 30px;border-radius:999px;background:#0d9488;color:#fff;font-size:26px;font-weight:bold;">바이브코딩</div>
+  </div>
+
+  <!-- 순환의 4단계 (상·하·좌·우) -->
+  <div class="step" style="position:absolute;left:710px;top:200px;background:#e6f5f3;border:3px solid #0d9488;color:#0f766e;">🗣️ 말로 요청</div>
+  <div class="step" style="position:absolute;left:930px;top:340px;width:220px;background:#e6f5f3;border:3px solid #0d9488;color:#0f766e;">🤖 AI가 코드 작성</div>
+  <div class="step" style="position:absolute;left:710px;top:520px;background:#e6f5f3;border:3px solid #0d9488;color:#0f766e;">👀 결과 확인</div>
+  <div class="step" style="position:absolute;left:545px;top:340px;width:220px;background:#fff3e8;border:3px solid #f97316;color:#c2590f;">💬 말로 수정 요청</div>
+
+  <div style="position:absolute;left:800px;top:378px;width:100px;text-align:center;font-size:22px;font-weight:bold;color:#0d9488;">짧은<br>순환</div>
+
+  <div style="position:absolute;left:1075px;top:360px;font-size:20px;color:#0d9488;font-weight:bold;text-align:center;">짧다!</div>
+
+  <!-- 하단 요약 -->
+  <div style="position:absolute;left:0;bottom:22px;width:1200px;text-align:center;font-size:22px;color:#4b5563;">
+    한 줄 한 줄 배워서 가는 <b style="color:#6b7280;">긴 직선</b> vs 말하고 확인하며 도는 <b style="color:#0d9488;">짧은 순환</b>
+  </div>
+
+</div>
+</body>
+</html>

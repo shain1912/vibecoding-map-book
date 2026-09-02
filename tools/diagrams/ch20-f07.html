@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch20-f07</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 36px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .door { position: absolute; left: 850px; top: 140px; width: 290px; height: 470px; background: #ccfbf1; border: 4px solid #0d9488; border-radius: 18px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; padding-top: 24px; color: #134e4a; }
+  .door .icon { font-size: 60px; }
+  .door .label { font-size: 26px; font-weight: bold; margin-top: 10px; font-family: Consolas, 'Malgun Gothic', monospace; text-align: center; }
+  .guard { font-size: 76px; margin-top: 24px; }
+  .guardlabel { font-size: 22px; font-weight: bold; margin-top: 4px; }
+  .visitor { position: absolute; left: 60px; width: 420px; border-radius: 14px; box-sizing: border-box; padding: 16px 20px; display: flex; align-items: center; gap: 18px; }
+  .ok { background: #dcfce7; border: 3px solid #16a34a; color: #14532d; }
+  .no { background: #fee2e2; border: 3px solid #dc2626; color: #7f1d1d; }
+  .visitor .vicon { font-size: 46px; }
+  .visitor .vtext { font-size: 23px; font-weight: bold; line-height: 1.4; }
+  .visitor .vsub { font-size: 20px; font-weight: normal; }
+  .verdict { position: absolute; font-size: 40px; font-weight: bold; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">보안 컨텍스트 — 위치 API의 문지방</div>
+
+  <!-- 문 + 문지기 -->
+  <div class="door">
+    <div class="icon">🚪</div>
+    <div class="label">navigator.<br>geolocation</div>
+    <div class="guard">💂</div>
+    <div class="guardlabel">문지기</div>
+  </div>
+
+  <!-- 통과 1: https -->
+  <div class="visitor ok" style="top:150px;">
+    <div class="vicon">🔒</div>
+    <div class="vtext">https://<br><span class="vsub">암호화 통신</span></div>
+  </div>
+  <!-- 통과 2: localhost -->
+  <div class="visitor ok" style="top:330px;">
+    <div class="vicon">🏠</div>
+    <div class="vtext">localhost<br><span class="vsub">내 컴퓨터 안</span></div>
+  </div>
+  <!-- 차단: http -->
+  <div class="visitor no" style="top:510px;">
+    <div class="vicon">🔓</div>
+    <div class="vtext">http://<br><span class="vsub">암호화 없음</span></div>
+  </div>
+
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="aGr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#16a34a"/>
+      </marker>
+      <marker id="aR" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#dc2626"/>
+      </marker>
+    </defs>
+    <line x1="490" y1="200" x2="830" y2="290" stroke="#16a34a" stroke-width="7" marker-end="url(#aGr)"/>
+    <line x1="490" y1="380" x2="830" y2="380" stroke="#16a34a" stroke-width="7" marker-end="url(#aGr)"/>
+    <line x1="490" y1="560" x2="700" y2="490" stroke="#dc2626" stroke-width="7" stroke-dasharray="16 10" marker-end="url(#aR)"/>
+    <!-- 차단 X -->
+    <line x1="672" y1="470" x2="732" y2="530" stroke="#dc2626" stroke-width="10"/>
+    <line x1="732" y1="470" x2="672" y2="530" stroke="#dc2626" stroke-width="10"/>
+  </svg>
+
+  <div class="verdict" style="left:620px; top:205px; color:#16a34a;">통과 ✅</div>
+  <div class="verdict" style="left:620px; top:330px; color:#16a34a;">통과 ✅</div>
+  <div class="verdict" style="left:540px; top:585px; color:#dc2626;">차단 ❌</div>
+
+  <div style="position:absolute; top:680px; width:1200px; text-align:center; font-size:21px; color:#64748b;">
+    http:// 페이지에서는 권한 프롬프트조차 뜨지 않고 곧장 실패 콜백이 불립니다
+  </div>
+</div>
+</body>
+</html>

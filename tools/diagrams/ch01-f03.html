@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ch01-f03</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <!-- 제목 -->
+  <div style="position:absolute;top:22px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">
+    외울 것과 이해할 것
+  </div>
+
+  <!-- 저울 SVG (오른쪽으로 기울어짐) -->
+  <svg width="1200" height="750" viewBox="0 0 1200 750" style="position:absolute;top:0;left:0;">
+    <!-- 받침대 -->
+    <rect x="520" y="640" width="160" height="26" rx="8" fill="#6b7280"/>
+    <polygon points="600,330 560,640 640,640" fill="#9ca3af"/>
+    <!-- 기울어진 가로대: 왼쪽 위, 오른쪽 아래 -->
+    <line x1="280" y1="270" x2="920" y2="390" stroke="#374151" stroke-width="14" stroke-linecap="round"/>
+    <!-- 중심축 -->
+    <circle cx="600" cy="330" r="18" fill="#374151"/>
+    <!-- 왼쪽 줄 -->
+    <line x1="280" y1="270" x2="230" y2="340" stroke="#6b7280" stroke-width="5"/>
+    <line x1="280" y1="270" x2="330" y2="340" stroke="#6b7280" stroke-width="5"/>
+    <!-- 왼쪽 접시 (높이 올라감) -->
+    <path d="M 170 340 L 390 340 L 366 380 L 194 380 Z" fill="#ccebe7" stroke="#0d9488" stroke-width="5"/>
+    <!-- 오른쪽 줄 -->
+    <line x1="920" y1="390" x2="870" y2="460" stroke="#6b7280" stroke-width="5"/>
+    <line x1="920" y1="390" x2="970" y2="460" stroke="#6b7280" stroke-width="5"/>
+    <!-- 오른쪽 접시 (내려감 = 더 무거움) -->
+    <path d="M 800 460 L 1040 460 L 1014 502 L 826 502 Z" fill="#fed7aa" stroke="#f97316" stroke-width="6"/>
+  </svg>
+
+  <!-- 왼쪽: AI 로봇이 대신 들고 있음 -->
+  <div style="position:absolute;left:120px;top:110px;width:330px;text-align:center;">
+    <div style="font-size:56px;">🤖</div>
+    <div style="font-size:21px;font-weight:bold;color:#0d9488;">AI가 대신 들어준다</div>
+  </div>
+  <div style="position:absolute;left:120px;top:206px;width:330px;background:#e6f5f3;border:3px solid #0d9488;border-radius:14px;padding:12px 10px;text-align:center;">
+    <div style="font-size:22px;font-weight:bold;color:#0f766e;">외우지 않아도 되는 것</div>
+    <div style="font-size:20px;color:#374151;margin-top:6px;">문법 · 철자 · 옵션 순서</div>
+  </div>
+
+  <!-- 왼쪽 라벨: 가볍다 -->
+  <div style="position:absolute;left:150px;top:400px;width:270px;text-align:center;font-size:20px;font-weight:bold;color:#0d9488;">가볍다 ↑</div>
+
+  <!-- 오른쪽: 사람이 도면을 봄 -->
+  <div style="position:absolute;left:770px;top:230px;width:300px;text-align:center;">
+    <div style="font-size:56px;">🧑‍🔧📐</div>
+    <div style="font-size:21px;font-weight:bold;color:#c2590f;">사람이 도면을 본다</div>
+  </div>
+  <div style="position:absolute;left:755px;top:326px;width:330px;background:#fff3e8;border:3px solid #f97316;border-radius:14px;padding:12px 10px;text-align:center;">
+    <div style="font-size:22px;font-weight:bold;color:#c2590f;">이해해야 하는 것</div>
+    <div style="font-size:20px;color:#374151;margin-top:6px;">데이터 흐름 · 파일 구조 · 키 보안</div>
+  </div>
+
+  <!-- 오른쪽 라벨: 무겁다 -->
+  <div style="position:absolute;left:790px;top:520px;width:270px;text-align:center;font-size:20px;font-weight:bold;color:#f97316;">무겁다 ↓ (더 중요)</div>
+
+  <!-- 하단 요약 -->
+  <div style="position:absolute;left:0;bottom:22px;width:1200px;text-align:center;font-size:22px;color:#4b5563;">
+    문법은 <b style="color:#0d9488;">AI에게 맡기고</b>, 구조와 보안은 <b style="color:#f97316;">내가 이해한다</b>
+  </div>
+
+</div>
+</body>
+</html>

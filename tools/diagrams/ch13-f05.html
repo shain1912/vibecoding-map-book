@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch13-f05</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">"하나만 열기" 상태 흐름도</div>
+
+  <!-- 상태 1: null -->
+  <div style="position:absolute;left:60px;top:280px;width:280px;height:170px;background:#f3f4f6;border:4px solid #6b7280;border-radius:24px;text-align:center;">
+    <div style="font-size:26px;font-weight:bold;color:#374151;margin-top:32px;">말풍선 없음</div>
+    <div style="font-size:24px;color:#4b5563;margin-top:14px;font-family:Consolas,'Malgun Gothic',monospace;">openOverlay = <b>null</b></div>
+  </div>
+  <div style="position:absolute;left:60px;top:240px;width:280px;text-align:center;font-size:21px;color:#6b7280;">▶ 시작 상태</div>
+
+  <!-- 상태 2: A 열림 -->
+  <div style="position:absolute;left:460px;top:280px;width:280px;height:170px;background:#f0fdfa;border:4px solid #0d9488;border-radius:24px;text-align:center;">
+    <div style="font-size:26px;font-weight:bold;color:#0f766e;margin-top:32px;">💬 A 말풍선 열림</div>
+    <div style="font-size:24px;color:#134e4a;margin-top:14px;font-family:Consolas,'Malgun Gothic',monospace;">openOverlay = <b>A</b></div>
+  </div>
+
+  <!-- 상태 3: B 열림 -->
+  <div style="position:absolute;left:860px;top:280px;width:280px;height:170px;background:#f0fdfa;border:4px solid #0d9488;border-radius:24px;text-align:center;">
+    <div style="font-size:26px;font-weight:bold;color:#0f766e;margin-top:32px;">💬 B 말풍선 열림</div>
+    <div style="font-size:24px;color:#134e4a;margin-top:14px;font-family:Consolas,'Malgun Gothic',monospace;">openOverlay = <b>B</b></div>
+  </div>
+
+  <!-- 화살표들 -->
+  <svg width="1200" height="750" style="position:absolute;left:0;top:0;" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="arrT" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
+      </marker>
+      <marker id="arrG" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+      </marker>
+    </defs>
+    <!-- null -> A -->
+    <line x1="345" y1="365" x2="450" y2="365" stroke="#0d9488" stroke-width="6" marker-end="url(#arrT)"/>
+    <!-- A -> B -->
+    <line x1="745" y1="365" x2="850" y2="365" stroke="#0d9488" stroke-width="6" marker-end="url(#arrT)"/>
+    <!-- B -> null (아래로 크게 돌아가는 곡선) -->
+    <path d="M 1000 455 C 1000 640 200 640 200 462" fill="none" stroke="#6b7280" stroke-width="6" marker-end="url(#arrG)"/>
+  </svg>
+
+  <!-- 전이 라벨: null -> A -->
+  <div style="position:absolute;left:315px;top:300px;width:170px;text-align:center;font-size:22px;font-weight:bold;color:#0f766e;">🖱️ 마커 A 클릭</div>
+
+  <!-- 전이 라벨: A -> B (closeOverlay 표시) -->
+  <div style="position:absolute;left:713px;top:265px;width:172px;text-align:center;font-size:22px;font-weight:bold;color:#0f766e;">🖱️ 마커 B 클릭</div>
+  <div style="position:absolute;left:697px;top:390px;width:205px;text-align:center;background:#f97316;color:#fff;font-size:21px;font-weight:bold;padding:9px 4px;border-radius:12px;">closeOverlay()<br><span style="font-size:18px;font-weight:normal;">A를 먼저 닫는다!</span></div>
+
+  <!-- 전이 라벨: B -> null -->
+  <div style="position:absolute;left:510px;top:598px;width:180px;text-align:center;font-size:22px;font-weight:bold;color:#374151;background:#fff;">✖️ × 클릭</div>
+  <div style="position:absolute;left:452px;top:640px;width:300px;text-align:center;font-size:20px;color:#6b7280;">다시 null로 (말풍선 없음)</div>
+
+  <!-- 요약 -->
+  <div style="position:absolute;left:0;top:120px;width:1200px;text-align:center;">
+    <span style="background:#f0fdfa;border:3px solid #0d9488;border-radius:30px;padding:12px 32px;font-size:23px;color:#0f766e;font-weight:bold;">열려 있는 말풍선은 언제나 최대 1개 — 새로 열기 전에 반드시 먼저 닫는다</span>
+  </div>
+
+</div>
+</body>
+</html>

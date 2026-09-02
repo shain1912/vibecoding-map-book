@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ch01-f05</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <!-- 제목 -->
+  <div style="position:absolute;top:20px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">
+    도구 5종의 역할 지도 <span style="color:#6b7280;font-size:24px;">(공사 현장 비유)</span>
+  </div>
+
+  <!-- 기초: Node.js -->
+  <div style="position:absolute;left:60px;top:600px;width:1080px;height:90px;background:#374151;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:18px;">
+    <span style="font-size:40px;">⚡🚰</span>
+    <span style="font-size:26px;font-weight:bold;color:#fff;">Node.js</span>
+    <span style="font-size:22px;color:#d1d5db;">— 전기·수도 같은 기반</span>
+  </div>
+  <!-- 기초 빗금 느낌 -->
+  <div style="position:absolute;left:60px;top:694px;width:1080px;height:10px;background:repeating-linear-gradient(45deg,#9ca3af 0 12px,#e5e7eb 12px 24px);border-radius:4px;"></div>
+
+  <!-- 지휘소: Orca (현장 사무소) -->
+  <div style="position:absolute;left:100px;top:130px;width:300px;height:190px;background:#e6f5f3;border:4px solid #0d9488;border-radius:14px;text-align:center;padding-top:14px;">
+    <div style="font-size:46px;">🏢</div>
+    <div style="font-size:25px;font-weight:bold;color:#0d9488;margin-top:4px;">Orca</div>
+    <div style="font-size:21px;color:#374151;">현장 사무소 (지휘소)</div>
+    <div style="font-size:19px;color:#6b7280;margin-top:4px;">작업자들에게 일을 배분</div>
+  </div>
+
+  <!-- 작업자: Claude Code -->
+  <div style="position:absolute;left:450px;top:360px;width:300px;height:210px;background:#fff;border:4px solid #0d9488;border-radius:14px;text-align:center;padding-top:14px;">
+    <div style="font-size:50px;">👷🤖</div>
+    <div style="font-size:25px;font-weight:bold;color:#0d9488;margin-top:4px;">Claude Code</div>
+    <div style="font-size:21px;color:#374151;">일하는 에이전트 (작업자)</div>
+    <div style="font-size:19px;color:#6b7280;margin-top:4px;">기반 위에서 직접 짓는다</div>
+  </div>
+
+  <!-- 타임머신: Git -->
+  <div style="position:absolute;left:100px;top:380px;width:280px;height:180px;background:#f3f4f6;border:4px solid #6b7280;border-radius:14px;text-align:center;padding-top:14px;">
+    <div style="font-size:46px;">⏰🔙</div>
+    <div style="font-size:25px;font-weight:bold;color:#374151;margin-top:4px;">Git</div>
+    <div style="font-size:21px;color:#374151;">타임머신 (되돌리기)</div>
+    <div style="font-size:19px;color:#6b7280;margin-top:4px;">언제든 어제로 복귀</div>
+  </div>
+
+  <!-- 물류 트럭: GitHub CLI -->
+  <div style="position:absolute;left:820px;top:360px;width:300px;height:210px;background:#fff3e8;border:4px solid #f97316;border-radius:14px;text-align:center;padding-top:12px;">
+    <div style="font-size:50px;">🚚</div>
+    <div style="font-size:25px;font-weight:bold;color:#c2590f;margin-top:4px;">GitHub CLI</div>
+    <div style="font-size:21px;color:#374151;">물류 트럭</div>
+    <div style="font-size:19px;color:#6b7280;margin-top:4px;">세상에 내보내기</div>
+  </div>
+
+  <!-- 화살표 -->
+  <svg width="1200" height="750" viewBox="0 0 1200 750" style="position:absolute;top:0;left:0;pointer-events:none;">
+    <defs>
+      <marker id="arwT" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#0d9488"/>
+      </marker>
+      <marker id="arwG" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#6b7280"/>
+      </marker>
+      <marker id="arwO" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#f97316"/>
+      </marker>
+      <marker id="arwD" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#374151"/>
+      </marker>
+    </defs>
+    <!-- Orca -> Claude Code : 지시 -->
+    <path d="M 400 230 C 520 240 560 290 590 350" fill="none" stroke="#0d9488" stroke-width="6" marker-end="url(#arwT)"/>
+    <!-- Claude Code <-> Git : 저장/되돌리기 -->
+    <line x1="442" y1="470" x2="390" y2="470" stroke="#6b7280" stroke-width="6" marker-end="url(#arwG)"/>
+    <!-- Claude Code -> GitHub CLI : 완성물 -->
+    <line x1="758" y1="470" x2="810" y2="470" stroke="#f97316" stroke-width="6" marker-end="url(#arwO)"/>
+    <!-- Node.js 기반 -> 작업자 (지탱) -->
+    <line x1="600" y1="592" x2="600" y2="578" stroke="#374151" stroke-width="6" marker-end="url(#arwD)"/>
+  </svg>
+
+  <!-- 화살표 라벨 -->
+  <div style="position:absolute;left:520px;top:262px;font-size:20px;font-weight:bold;color:#0d9488;">지시한다</div>
+  <div style="position:absolute;left:352px;top:428px;font-size:20px;font-weight:bold;color:#6b7280;">저장·복구</div>
+  <div style="position:absolute;left:726px;top:428px;font-size:20px;font-weight:bold;color:#f97316;">내보내기</div>
+  <div style="position:absolute;left:620px;top:576px;font-size:20px;font-weight:bold;color:#374151;">기반이 지탱</div>
+
+</div>
+</body>
+</html>

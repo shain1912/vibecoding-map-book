@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ch06-f06</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <!-- 제목 -->
+  <div style="position:absolute;top:20px;left:0;width:1200px;text-align:center;font-size:30px;font-weight:bold;color:#374151;">
+    저자의 작업 화면 배치도 <span style="color:#6b7280;font-size:24px;">— 와이드 모니터 하나로 끝</span>
+  </div>
+
+  <!-- 모니터 프레임 -->
+  <div style="position:absolute;left:90px;top:85px;width:1020px;height:520px;background:#374151;border-radius:18px;padding:16px;">
+    <div style="width:988px;height:488px;background:#f9fafb;border-radius:8px;position:relative;overflow:hidden;display:flex;">
+
+      <!-- 왼쪽 절반: Orca -->
+      <div style="width:494px;height:488px;background:#e6f5f3;border-right:5px solid #374151;padding:12px 14px;">
+        <div style="font-size:24px;font-weight:bold;color:#0d9488;">🐋 Orca</div>
+        <!-- 카드 목록 -->
+        <div style="margin-top:10px;font-size:19px;font-weight:bold;color:#4b5563;">카드 목록</div>
+        <div style="margin-top:6px;background:#fff;border:2px solid #99d6cf;border-radius:8px;padding:7px 12px;font-size:19px;color:#374151;">📌 지도에 마커 추가 <span style="float:right;color:#0d9488;font-weight:bold;">진행 중</span></div>
+        <div style="margin-top:6px;background:#fff;border:2px solid #99d6cf;border-radius:8px;padding:7px 12px;font-size:19px;color:#374151;">📌 팝업 디자인 수정 <span style="float:right;color:#f97316;font-weight:bold;">대기</span></div>
+        <div style="margin-top:6px;background:#fff;border:2px solid #99d6cf;border-radius:8px;padding:7px 12px;font-size:19px;color:#374151;">📌 버그 고치기 <span style="float:right;color:#6b7280;font-weight:bold;">완료</span></div>
+        <!-- 터미널 -->
+        <div style="margin-top:12px;font-size:19px;font-weight:bold;color:#4b5563;">터미널</div>
+        <div style="margin-top:6px;height:150px;background:#1f2937;border-radius:8px;padding:10px 14px;font-family:Consolas,'Malgun Gothic',monospace;">
+          <div style="font-size:18px;color:#34d399;">&gt; 마커 3개를 추가해 줘</div>
+          <div style="font-size:18px;color:#e5e7eb;">🤖 index.html 수정 중...</div>
+          <div style="font-size:18px;color:#e5e7eb;">🤖 완료! 확인해 보세요.</div>
+          <div style="font-size:18px;color:#34d399;">&gt; _</div>
+        </div>
+      </div>
+
+      <!-- 오른쪽 절반: 브라우저(지도 앱) -->
+      <div style="width:489px;height:488px;background:#fff;padding:12px 14px;">
+        <div style="font-size:24px;font-weight:bold;color:#c2590f;">🌐 브라우저 — 지도 앱</div>
+        <!-- 주소창 -->
+        <div style="margin-top:10px;background:#f3f4f6;border:2px solid #d1d5db;border-radius:999px;padding:5px 16px;font-size:18px;color:#6b7280;">localhost:3000/my-map</div>
+        <!-- 지도 영역 -->
+        <div style="margin-top:10px;height:330px;background:#d7efe9;border:3px solid #99d6cf;border-radius:10px;position:relative;overflow:hidden;">
+          <svg width="455" height="324" viewBox="0 0 455 324" style="position:absolute;top:0;left:0;">
+            <path d="M0 90 C 110 60 210 130 455 100" stroke="#fff" stroke-width="14" fill="none"/>
+            <path d="M150 0 C 170 110 130 220 190 324" stroke="#fff" stroke-width="10" fill="none"/>
+            <path d="M0 220 C 150 200 300 260 455 230" stroke="#fff" stroke-width="10" fill="none"/>
+            <circle cx="330" cy="70" r="30" fill="#a7dccd" opacity="0.8"/>
+          </svg>
+          <div style="position:absolute;left:80px;top:50px;font-size:36px;">📍</div>
+          <div style="position:absolute;left:230px;top:150px;font-size:36px;">📍</div>
+          <div style="position:absolute;left:340px;top:230px;font-size:36px;">📍</div>
+        </div>
+        <div style="margin-top:8px;font-size:19px;color:#6b7280;text-align:center;">결과를 눈으로 바로 확인</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 모니터 받침 -->
+  <div style="position:absolute;left:540px;top:605px;width:120px;height:26px;background:#6b7280;"></div>
+  <div style="position:absolute;left:470px;top:631px;width:260px;height:16px;background:#374151;border-radius:8px;"></div>
+
+  <!-- 순환 루프 화살표 -->
+  <svg width="1200" height="750" viewBox="0 0 1200 750" style="position:absolute;top:0;left:0;pointer-events:none;">
+    <defs>
+      <marker id="arwT" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#0d9488"/>
+      </marker>
+      <marker id="arwO" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#f97316"/>
+      </marker>
+      <marker id="arwG" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" fill="#6b7280"/>
+      </marker>
+    </defs>
+    <!-- ① -> ② -->
+    <line x1="335" y1="688" x2="425" y2="688" stroke="#0d9488" stroke-width="7" marker-end="url(#arwT)"/>
+    <!-- ② -> ③ -->
+    <line x1="688" y1="688" x2="778" y2="688" stroke="#f97316" stroke-width="7" marker-end="url(#arwO)"/>
+    <!-- ③ -> ① (되돌아가는 곡선) -->
+    <path d="M 1010 672 C 1080 630 1140 668 1140 700 C 1140 736 220 740 165 712" fill="none" stroke="#6b7280" stroke-width="6" stroke-dasharray="12 9" marker-end="url(#arwG)"/>
+  </svg>
+
+  <!-- 루프 단계 라벨 (하단) -->
+  <div style="position:absolute;left:110px;top:664px;width:220px;text-align:center;">
+    <div style="display:inline-block;padding:6px 22px;border-radius:999px;background:#0d9488;color:#fff;font-size:22px;font-weight:bold;">① 시킨다</div>
+    <div style="font-size:18px;color:#6b7280;margin-top:2px;">Orca 터미널에 지시</div>
+  </div>
+  <div style="position:absolute;left:440px;top:664px;width:240px;text-align:center;">
+    <div style="display:inline-block;padding:6px 22px;border-radius:999px;background:#f97316;color:#fff;font-size:22px;font-weight:bold;">② 확인한다</div>
+    <div style="font-size:18px;color:#6b7280;margin-top:2px;">브라우저에서 결과 보기</div>
+  </div>
+  <div style="position:absolute;left:790px;top:664px;width:220px;text-align:center;">
+    <div style="display:inline-block;padding:6px 22px;border-radius:999px;background:#6b7280;color:#fff;font-size:22px;font-weight:bold;">③ 합친다</div>
+    <div style="font-size:18px;color:#6b7280;margin-top:2px;">좋으면 main에 합치고 다시 ①로 🔁</div>
+  </div>
+
+</div>
+</body>
+</html>

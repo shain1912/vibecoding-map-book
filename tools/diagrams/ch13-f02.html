@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch13-f02</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+  .panel{position:absolute;top:110px;width:262px;height:560px;border:3px solid #d1d5db;border-radius:14px;background:#f9fafb;}
+  .panel h3{margin:0;text-align:center;font-size:25px;color:#374151;padding:10px 0;border-bottom:3px solid #d1d5db;background:#f3f4f6;border-radius:10px 10px 0 0;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">yAnchor 값에 따라 달라지는 말풍선 위치</div>
+
+  <!-- 패널 틀 -->
+  <div class="panel" style="left:35px;"><h3>yAnchor: 0</h3></div>
+  <div class="panel" style="left:322px;"><h3>yAnchor: 0.5 <span style="font-size:19px;color:#6b7280;">(기본값)</span></h3></div>
+  <div class="panel" style="left:609px;"><h3>yAnchor: 1</h3></div>
+  <div class="panel" style="left:896px;border:4px solid #f97316;background:#fff7ed;"><h3 style="background:#f97316;color:#fff;border-bottom:none;">yAnchor: 1.35 ⭐</h3></div>
+
+  <svg width="1200" height="750" style="position:absolute;left:0;top:0;" viewBox="0 0 1200 750">
+    <!-- 공통: 말풍선 그리기 함수 대신 각 케이스 직접 배치. 좌표점 y=430, 말풍선 크기 190x64, 꼬리 18 -->
+
+    <!-- ===== 케이스 1: yAnchor 0 — 맨 위가 좌표에 닿음 (말풍선이 점 아래로) ===== -->
+    <g>
+      <rect x="71" y="430" width="190" height="64" rx="12" fill="#fff" stroke="#0d9488" stroke-width="3"/>
+      <text x="166" y="470" font-size="22" text-anchor="middle" fill="#0f766e" font-family="'Malgun Gothic',sans-serif" font-weight="bold">☕ 카페 어반</text>
+      <circle cx="166" cy="430" r="9" fill="#ef4444"/>
+      <text x="166" y="540" font-size="20" text-anchor="middle" fill="#6b7280" font-family="'Malgun Gothic',sans-serif">맨 위가 좌표에 닿음</text>
+      <text x="166" y="568" font-size="20" text-anchor="middle" fill="#6b7280" font-family="'Malgun Gothic',sans-serif">(아래로 늘어짐)</text>
+    </g>
+
+    <!-- ===== 케이스 2: yAnchor 0.5 — 세로 중앙이 좌표에 ===== -->
+    <g>
+      <rect x="358" y="398" width="190" height="64" rx="12" fill="#fff" stroke="#0d9488" stroke-width="3"/>
+      <text x="453" y="438" font-size="22" text-anchor="middle" fill="#0f766e" font-family="'Malgun Gothic',sans-serif" font-weight="bold">☕ 카페 어반</text>
+      <circle cx="453" cy="430" r="9" fill="#ef4444"/>
+      <text x="453" y="540" font-size="20" text-anchor="middle" fill="#6b7280" font-family="'Malgun Gothic',sans-serif">세로 중앙이 좌표에</text>
+      <text x="453" y="568" font-size="20" text-anchor="middle" fill="#6b7280" font-family="'Malgun Gothic',sans-serif">겹쳐 보임</text>
+    </g>
+
+    <!-- ===== 케이스 3: yAnchor 1 — 맨 아래가 좌표에 닿음 (말풍선이 점 위로) ===== -->
+    <g>
+      <rect x="645" y="352" width="190" height="64" rx="12" fill="#fff" stroke="#0d9488" stroke-width="3"/>
+      <text x="740" y="392" font-size="22" text-anchor="middle" fill="#0f766e" font-family="'Malgun Gothic',sans-serif" font-weight="bold">☕ 카페 어반</text>
+      <path d="M 726 416 L 754 416 L 740 430 z" fill="#fff" stroke="#0d9488" stroke-width="3"/>
+      <rect x="728" y="413" width="24" height="5" fill="#fff"/>
+      <circle cx="740" cy="430" r="9" fill="#ef4444"/>
+      <text x="740" y="540" font-size="20" text-anchor="middle" fill="#6b7280" font-family="'Malgun Gothic',sans-serif">맨 아래가 좌표에 닿음</text>
+      <text x="740" y="568" font-size="20" text-anchor="middle" fill="#6b7280" font-family="'Malgun Gothic',sans-serif">(위로 올라감)</text>
+    </g>
+
+    <!-- ===== 케이스 4: yAnchor 1.35 — 핀 위로 말풍선이 뜸 ===== -->
+    <g>
+      <!-- 마커 핀: 끝이 좌표점 (1027,430) -->
+      <path d="M 1027 426 C 1011 399 1008 388 1008 378 a 19 19 0 1 1 38 0 c 0 10 -3 21 -19 48 z" fill="#0d9488" stroke="#0f766e" stroke-width="2.5"/>
+      <circle cx="1027" cy="378" r="8" fill="#fff"/>
+      <!-- 말풍선: 높이의 35%(약 22px) + 꼬리만큼 핀 머리 위로 -->
+      <rect x="932" y="266" width="190" height="64" rx="12" fill="#fff" stroke="#f97316" stroke-width="4"/>
+      <text x="1027" y="306" font-size="22" text-anchor="middle" fill="#c2410c" font-family="'Malgun Gothic',sans-serif" font-weight="bold">☕ 카페 어반</text>
+      <path d="M 1013 330 L 1041 330 L 1027 344 z" fill="#fff" stroke="#f97316" stroke-width="4"/>
+      <rect x="1015" y="326" width="24" height="6" fill="#fff"/>
+      <!-- 좌표점 -->
+      <circle cx="1027" cy="430" r="9" fill="#ef4444"/>
+      <!-- 간격 표시 -->
+      <line x1="1140" y1="344" x2="1140" y2="430" stroke="#f97316" stroke-width="3" stroke-dasharray="6 5"/>
+      <text x="1027" y="540" font-size="20" text-anchor="middle" fill="#c2410c" font-family="'Malgun Gothic',sans-serif" font-weight="bold">핀 머리 위로 말풍선이</text>
+      <text x="1027" y="568" font-size="20" text-anchor="middle" fill="#c2410c" font-family="'Malgun Gothic',sans-serif" font-weight="bold">떠 있음 (우리 앱)</text>
+    </g>
+
+    <!-- 공통 좌표점 기준선 -->
+    <line x1="35" y1="430" x2="1165" y2="430" stroke="#ef4444" stroke-width="2" stroke-dasharray="4 8" opacity="0.5"/>
+  </svg>
+
+  <!-- 범례 -->
+  <div style="position:absolute;left:0;top:696px;width:1200px;text-align:center;font-size:22px;color:#374151;">
+    <span style="color:#ef4444;font-size:26px;">●</span> 같은 좌표점(position) &nbsp;—&nbsp; yAnchor 값만 다르게 준 결과
+  </div>
+
+</div>
+</body>
+</html>

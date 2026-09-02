@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch18-f01</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 40px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .storelabel { position: absolute; left: 470px; top: 195px; width: 260px; text-align: center; font-size: 27px; font-weight: bold; color: #134e4a; }
+  .fn { position: absolute; font-size: 24px; font-weight: bold; color: #334155; font-family: Consolas, 'Malgun Gothic', monospace; }
+  .screenbox { position: absolute; top: 480px; width: 330px; height: 190px; border-radius: 16px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; }
+  .listbox { left: 130px; background: #ffedd5; border: 3px solid #f97316; color: #9a3412; }
+  .mapbox { left: 740px; background: #f1f5f9; border: 3px solid #64748b; color: #1e293b; }
+  .screenbox .icon { font-size: 42px; }
+  .screenbox .label { font-size: 24px; font-weight: bold; margin-top: 8px; }
+  .caption { position: absolute; top: 695px; width: 100%; text-align: center; font-size: 21px; color: #64748b; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">하나의 데이터, 두 개의 화면</div>
+
+  <!-- store cylinder -->
+  <svg style="position:absolute; left:490px; top:120px;" width="220" height="200" viewBox="0 0 220 200">
+    <path d="M10 40 L10 160 A100 30 0 0 0 210 160 L210 40" fill="#ccfbf1" stroke="#0d9488" stroke-width="5"/>
+    <ellipse cx="110" cy="40" rx="100" ry="30" fill="#99f6e4" stroke="#0d9488" stroke-width="5"/>
+  </svg>
+  <div class="storelabel">store<br><span style="font-size:22px;">(장소 배열)</span></div>
+
+  <!-- arrows down to two screens -->
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="aT" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#0d9488"/>
+      </marker>
+    </defs>
+    <line x1="540" y1="315" x2="330" y2="465" stroke="#0d9488" stroke-width="7" marker-end="url(#aT)"/>
+    <line x1="660" y1="315" x2="870" y2="465" stroke="#0d9488" stroke-width="7" marker-end="url(#aT)"/>
+  </svg>
+  <div class="fn" style="left:255px; top:355px;">renderList()</div>
+  <div class="fn" style="left:790px; top:355px;">renderPlaces()</div>
+
+  <div class="screenbox listbox">
+    <div class="icon">📋</div>
+    <div class="label">사이드바 목록</div>
+  </div>
+  <div class="screenbox mapbox">
+    <div class="icon">🗺️📍</div>
+    <div class="label">지도 마커</div>
+  </div>
+
+  <div class="caption">두 화살표 모두 데이터에서 화면으로 한 방향 — 지도와 목록은 서로를 전혀 모릅니다</div>
+</div>
+</body>
+</html>

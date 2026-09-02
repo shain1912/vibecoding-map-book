@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch20-f04</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 32px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .node { position: absolute; border-radius: 14px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; }
+  .start { left: 80px; top: 300px; width: 180px; height: 110px; background: #f1f5f9; border: 3px solid #64748b; color: #1e293b; }
+  .req { left: 330px; top: 295px; width: 240px; height: 120px; background: #ccfbf1; border: 3px solid #0d9488; color: #134e4a; }
+  .node .label { font-size: 23px; font-weight: bold; line-height: 1.4; }
+  .node .icon { font-size: 34px; margin-bottom: 4px; }
+  .diamond-label { position: absolute; left: 645px; top: 322px; width: 170px; text-align: center; font-size: 22px; font-weight: bold; color: #92400e; }
+  .succ { left: 940px; top: 120px; width: 230px; height: 170px; background: #dcfce7; border: 4px solid #16a34a; color: #14532d; }
+  .fail { left: 940px; top: 460px; width: 230px; height: 170px; background: #fee2e2; border: 4px solid #dc2626; color: #7f1d1d; }
+  .node .sub { font-size: 20px; margin-top: 8px; line-height: 1.45; }
+  .edge { position: absolute; font-size: 22px; font-weight: bold; }
+  .caption { position: absolute; top: 690px; width: 100%; text-align: center; font-size: 22px; color: #0d9488; font-weight: bold; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">getCurrentPosition의 두 갈래 흐름</div>
+
+  <div class="node start">
+    <div class="icon">🧭</div>
+    <div class="label">클릭</div>
+  </div>
+
+  <div class="node req">
+    <div class="label">getCurrentPosition<br>요청</div>
+  </div>
+
+  <!-- diamond: 권한 프롬프트 사용자 선택 -->
+  <svg style="position:absolute;left:620px;top:265px;" width="220" height="180" viewBox="0 0 220 180">
+    <polygon points="110,5 215,90 110,175 5,90" fill="#fef3c7" stroke="#f59e0b" stroke-width="4"/>
+  </svg>
+  <div class="diamond-label">권한 프롬프트<br>사용자 선택</div>
+
+  <div class="node succ">
+    <div class="label">성공 콜백</div>
+    <div class="sub">pos.coords →<br>showMyLocation<br><span style="color:#2563eb; font-weight:bold;">● 파란 점</span></div>
+  </div>
+
+  <div class="node fail">
+    <div class="label">실패 콜백</div>
+    <div class="sub">toast(<br>'위치 권한이<br>거부되었습니다')</div>
+  </div>
+
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="aG" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#64748b"/>
+      </marker>
+      <marker id="aGr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#16a34a"/>
+      </marker>
+      <marker id="aR" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <polygon points="0,0 10,5 0,10" fill="#dc2626"/>
+      </marker>
+    </defs>
+    <line x1="265" y1="355" x2="318" y2="355" stroke="#64748b" stroke-width="6" marker-end="url(#aG)"/>
+    <line x1="575" y1="355" x2="618" y2="355" stroke="#64748b" stroke-width="6" marker-end="url(#aG)"/>
+    <!-- 허용 -->
+    <line x1="790" y1="300" x2="928" y2="215" stroke="#16a34a" stroke-width="6" marker-end="url(#aGr)"/>
+    <!-- 차단·실패 -->
+    <line x1="790" y1="410" x2="928" y2="535" stroke="#dc2626" stroke-width="6" marker-end="url(#aR)"/>
+  </svg>
+
+  <div class="edge" style="left:810px; top:215px; color:#16a34a;">허용 ✅</div>
+  <div class="edge" style="left:790px; top:480px; color:#dc2626;">차단·실패 ❌</div>
+
+  <div class="caption">허용이든 차단이든 — 두 길 모두 콜백이 받아 주므로 앱은 멈추지 않습니다</div>
+</div>
+</body>
+</html>

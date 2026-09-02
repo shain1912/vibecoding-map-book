@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch13-f04</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+  .step{position:absolute;top:120px;width:350px;height:520px;border:3px solid #d1d5db;border-radius:16px;background:#f9fafb;}
+  .step h3{margin:0;font-size:24px;color:#fff;background:#0d9488;text-align:center;padding:12px 6px;border-radius:12px 12px 0 0;}
+  .cap{position:absolute;bottom:20px;left:0;width:100%;text-align:center;font-size:21px;color:#374151;line-height:1.5;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">border 트릭으로 삼각형이 만들어지는 과정</div>
+
+  <!-- 단계 ① -->
+  <div class="step" style="left:40px;">
+    <h3>① 두꺼운 4색 테두리 상자</h3>
+    <svg width="350" height="330" viewBox="0 0 350 330" style="position:absolute;left:0;top:70px;">
+      <!-- 240x240 상자, 테두리 60, 중앙 본체 120x120. 원점 (55,25) -->
+      <!-- top (teal) -->
+      <polygon points="55,25 295,25 235,85 115,85" fill="#0d9488"/>
+      <!-- right (orange) -->
+      <polygon points="295,25 295,265 235,205 235,85" fill="#f97316"/>
+      <!-- bottom (gray) -->
+      <polygon points="295,265 55,265 115,205 235,205" fill="#6b7280"/>
+      <!-- left (light gray) -->
+      <polygon points="55,265 55,25 115,85 115,205" fill="#d1d5db"/>
+      <!-- 본체 -->
+      <rect x="115" y="85" width="120" height="120" fill="#fff"/>
+      <text x="175" y="152" font-size="20" text-anchor="middle" fill="#6b7280" font-family="'Malgun Gothic',sans-serif">본체</text>
+      <!-- 45도 모서리 표시 -->
+      <line x1="55" y1="25" x2="115" y2="85" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>
+      <line x1="295" y1="25" x2="235" y2="85" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>
+      <circle cx="85" cy="55" r="26" fill="none" stroke="#ef4444" stroke-width="4"/>
+    </svg>
+    <div class="cap">모서리는 45도로<br>비스듬히 잘린다 (액자 틀처럼)</div>
+  </div>
+
+  <!-- 화살표 1 -->
+  <svg width="60" height="40" viewBox="0 0 60 40" style="position:absolute;left:398px;top:360px;">
+    <defs><marker id="a1" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f97316"/></marker></defs>
+    <line x1="4" y1="20" x2="48" y2="20" stroke="#f97316" stroke-width="6" marker-end="url(#a1)"/>
+  </svg>
+
+  <!-- 단계 ② -->
+  <div class="step" style="left:425px;">
+    <h3>② 본체 크기를 0으로</h3>
+    <svg width="350" height="330" viewBox="0 0 350 330" style="position:absolute;left:0;top:70px;">
+      <!-- 240x240, 본체 0 → 네 삼각형이 중앙 (175,145)에서 만남. 원점 (55,25) -->
+      <polygon points="55,25 295,25 175,145" fill="#0d9488"/>
+      <polygon points="295,25 295,265 175,145" fill="#f97316"/>
+      <polygon points="295,265 55,265 175,145" fill="#6b7280"/>
+      <polygon points="55,265 55,25 175,145" fill="#d1d5db"/>
+      <line x1="55" y1="25" x2="295" y2="265" stroke="#fff" stroke-width="2"/>
+      <line x1="295" y1="25" x2="55" y2="265" stroke="#fff" stroke-width="2"/>
+      <text x="175" y="70" font-size="19" text-anchor="middle" fill="#fff" font-family="'Malgun Gothic',sans-serif" font-weight="bold">위</text>
+      <text x="262" y="152" font-size="19" text-anchor="middle" fill="#fff" font-family="'Malgun Gothic',sans-serif" font-weight="bold">오른쪽</text>
+      <text x="175" y="238" font-size="19" text-anchor="middle" fill="#fff" font-family="'Malgun Gothic',sans-serif" font-weight="bold">아래</text>
+      <text x="88" y="152" font-size="19" text-anchor="middle" fill="#374151" font-family="'Malgun Gothic',sans-serif" font-weight="bold">왼쪽</text>
+    </svg>
+    <div class="cap">width: 0; height: 0;<br>테두리 = 삼각형 4개만 남는다</div>
+  </div>
+
+  <!-- 화살표 2 -->
+  <svg width="60" height="40" viewBox="0 0 60 40" style="position:absolute;left:783px;top:360px;">
+    <line x1="4" y1="20" x2="48" y2="20" stroke="#f97316" stroke-width="6" marker-end="url(#a1)"/>
+    <defs><marker id="a2" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f97316"/></marker></defs>
+    <line x1="4" y1="20" x2="48" y2="20" stroke="#f97316" stroke-width="6" marker-end="url(#a2)"/>
+  </svg>
+
+  <!-- 단계 ③ -->
+  <div class="step" style="left:810px;border:4px solid #f97316;background:#fff7ed;">
+    <h3 style="background:#f97316;">③ 위쪽만 흰색, 나머지 투명</h3>
+    <svg width="350" height="330" viewBox="0 0 350 330" style="position:absolute;left:0;top:70px;">
+      <!-- 회색 배경판 (흰 삼각형이 보이도록) -->
+      <rect x="30" y="10" width="290" height="290" rx="10" fill="#94a3b8"/>
+      <!-- 투명이 된 좌/우 삼각형 자리 (점선 안내) -->
+      <polygon points="295,25 295,265 175,145" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+      <polygon points="55,265 55,25 175,145" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+      <!-- 위쪽 흰 삼각형만 (border-top-color: #fff), 아래는 border-bottom: none -->
+      <polygon points="55,25 295,25 175,145" fill="#ffffff"/>
+      <text x="175" y="80" font-size="20" text-anchor="middle" fill="#0d9488" font-family="'Malgun Gothic',sans-serif" font-weight="bold">#fff</text>
+      <text x="258" y="150" font-size="18" text-anchor="middle" fill="#e2e8f0" font-family="'Malgun Gothic',sans-serif">투명</text>
+      <text x="92" y="150" font-size="18" text-anchor="middle" fill="#e2e8f0" font-family="'Malgun Gothic',sans-serif">투명</text>
+      <text x="175" y="235" font-size="18" text-anchor="middle" fill="#e2e8f0" font-family="'Malgun Gothic',sans-serif">아래 테두리는 없앰 (none)</text>
+    </svg>
+    <div class="cap" style="color:#c2410c;font-weight:bold;">아래를 향한 흰 삼각형만 남는다<br>= 말풍선 꼬리 완성!</div>
+  </div>
+
+  <!-- 하단 코드 요약 -->
+  <div style="position:absolute;left:0;top:672px;width:1200px;text-align:center;font-size:22px;color:#374151;font-family:Consolas,'Malgun Gothic',monospace;">
+    width: 0; height: 0; border: 12px solid transparent; <b style="color:#0d9488;">border-top-color: #fff;</b> border-bottom: none;
+  </div>
+
+</div>
+</body>
+</html>

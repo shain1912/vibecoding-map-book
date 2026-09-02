@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그림 26.6 — 이 책의 여정 지도 (0장→26장)</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;font-family:'Malgun Gothic',sans-serif;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:20px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#374151;">이 책의 여정 지도 (0장 → 26장)</div>
+
+  <!-- 등산로 배경 산 능선 -->
+  <svg width="1200" height="750" style="position:absolute;top:0;left:0;">
+    <!-- 은은한 산 실루엣 -->
+    <path d="M0,700 L250,560 L420,640 L650,460 L850,560 L1080,300 L1200,380 L1200,750 L0,750 Z" fill="#f3f4f6"/>
+    <!-- 굽이치는 등산로 -->
+    <path id="trail" d="M110,640 C260,660 320,560 430,570 C560,585 570,470 660,455 C760,440 760,360 850,340 C950,318 950,240 1035,205"
+      stroke="#d6c9b5" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <path d="M110,640 C260,660 320,560 430,570 C560,585 570,470 660,455 C760,440 760,360 850,340 C950,318 950,240 1035,205"
+      stroke="#ffffff" stroke-width="4" fill="none" stroke-dasharray="12 14" stroke-linecap="round"/>
+  </svg>
+
+  <!-- 출발점: 0장 준비물 -->
+  <div style="position:absolute;top:600px;left:40px;width:200px;text-align:center;">
+    <div style="font-size:44px;">🎒</div>
+    <div style="background:#374151;color:#fff;border-radius:10px;padding:8px 10px;font-size:21px;font-weight:bold;">출발 · 0장 준비물</div>
+  </div>
+
+  <!-- 1부 작업대 -->
+  <div style="position:absolute;top:440px;left:250px;width:190px;text-align:center;">
+    <div style="font-size:42px;">🛠️</div>
+    <div style="background:#0d9488;color:#fff;border-radius:10px;padding:8px 10px;font-size:21px;font-weight:bold;">1부 작업대</div>
+    <div style="font-size:18px;color:#6b7280;margin-top:4px;">1~6장</div>
+  </div>
+
+  <!-- 2부 첫 지도 -->
+  <div style="position:absolute;top:590px;left:470px;width:190px;text-align:center;">
+    <div style="font-size:42px;">📍</div>
+    <div style="background:#0d9488;color:#fff;border-radius:10px;padding:8px 10px;font-size:21px;font-weight:bold;">2부 첫 지도</div>
+    <div style="font-size:18px;color:#6b7280;margin-top:4px;">7~10장</div>
+  </div>
+
+  <!-- 3부 앱의 심장 -->
+  <div style="position:absolute;top:330px;left:560px;width:200px;text-align:center;">
+    <div style="font-size:42px;">💚📍</div>
+    <div style="background:#0d9488;color:#fff;border-radius:10px;padding:8px 10px;font-size:21px;font-weight:bold;">3부 앱의 심장</div>
+    <div style="font-size:18px;color:#6b7280;margin-top:4px;">11~19장</div>
+  </div>
+
+  <!-- 4부 완성도 -->
+  <div style="position:absolute;top:210px;left:790px;width:190px;text-align:center;">
+    <div style="font-size:42px;">⭐</div>
+    <div style="background:#0d9488;color:#fff;border-radius:10px;padding:8px 10px;font-size:21px;font-weight:bold;">4부 완성도</div>
+    <div style="font-size:18px;color:#6b7280;margin-top:4px;">20~23장</div>
+  </div>
+
+  <!-- 정상: 5부 배포 -->
+  <div style="position:absolute;top:70px;left:960px;width:220px;text-align:center;">
+    <div style="font-size:56px;">🚩</div>
+    <div style="background:#f97316;color:#fff;border-radius:12px;padding:10px 12px;font-size:24px;font-weight:bold;">정상 · 5부 배포</div>
+    <div style="font-size:18px;color:#6b7280;margin-top:4px;">24~26장</div>
+  </div>
+
+  <!-- 위기 푯말들 -->
+  <div style="position:absolute;top:530px;left:355px;text-align:center;">
+    <div style="background:#fff;border:2px solid #f97316;border-radius:8px;padding:4px 10px;font-size:18px;color:#f97316;font-weight:bold;">⚠ 회색 화면</div>
+    <div style="width:4px;height:22px;background:#9ca3af;margin:0 auto;"></div>
+  </div>
+  <div style="position:absolute;top:470px;left:650px;text-align:center;">
+    <div style="background:#fff;border:2px solid #f97316;border-radius:8px;padding:4px 10px;font-size:18px;color:#f97316;font-weight:bold;">⚠ 403</div>
+    <div style="width:4px;height:22px;background:#9ca3af;margin:0 auto;"></div>
+  </div>
+  <div style="position:absolute;top:290px;left:855px;text-align:center;">
+    <div style="background:#fff;border:2px solid #f97316;border-radius:8px;padding:4px 10px;font-size:18px;color:#f97316;font-weight:bold;">⚠ 핀 지옥</div>
+    <div style="width:4px;height:22px;background:#9ca3af;margin:0 auto;"></div>
+  </div>
+
+  <div style="position:absolute;top:80px;left:60px;width:340px;font-size:21px;color:#6b7280;line-height:1.5;">작업대를 차리고, 첫 지도를 띄우고,<br>심장을 달고, 완성도를 올려,<br>마침내 세상에 내보내기까지</div>
+</div>
+</body>
+</html>

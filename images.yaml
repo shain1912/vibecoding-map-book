@@ -104,7 +104,8 @@
     steps:
       - "일러스트: 등산로 지도 스타일의 로드맵. 출발점(1부 준비운동: 도구 설치)부터 → 2부 첫 지도 → 3부 나만의 장소 지도 → 4부 한 단계 더 → 정상(5부 세상에 공개)까지 이어지는 길에 각 부의 아이콘(🔧🗺️📍✨🚀)이 찍힌 그림"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch00-f07.png
 
 - id: ch01-f01
   chapter: 1
@@ -119,7 +120,8 @@
     steps:
       - "일러스트: 왼쪽 \"전통 방식\" — 문법 공부 → 문서 읽기 → 코드 타이핑 → 에러와 씨름 → (한참 뒤) 결과물. 오른쪽 \"바이브코딩\" — 말로 요청 → AI가 코드 작성 → 결과 확인 → 말로 수정 요청, 짧은 순환 화살표. 두 경로의 길이 차이가 한눈에 보이게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch01-f01.png
 
 - id: ch01-f02
   chapter: 1
@@ -134,7 +136,8 @@
     steps:
       - "일러스트: 가운데 \"나(지휘자)\" 아이콘. 그 아래 Orca 창 안에 Claude Code 에이전트 2~3개가 나란히 일하는 모습. 오른쪽으로 Git(되돌리기 화살표)과 GitHub CLI(클라우드 업로드) 아이콘으로 흐름이 이어짐. 각 도구에 짧은 역할 라벨"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch01-f02.png
 
 - id: ch01-f03
   chapter: 1
@@ -149,7 +152,8 @@
     steps:
       - "일러스트: 저울 그림. 왼쪽 접시 \"외우지 않아도 되는 것: 문법·철자·옵션 순서\" 위에 AI 로봇이 대신 들고 있는 모습. 오른쪽 접시 \"이해해야 하는 것: 데이터 흐름·파일 구조·키 보안\" 위에 사람이 도면을 보는 모습. 오른쪽이 더 무겁게 기울어짐"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch01-f03.png
 
 - id: ch01-f04
   chapter: 1
@@ -164,7 +168,8 @@
     steps:
       - "일러스트: 세 개의 순환 아이콘. ① 큰 바위를 작은 돌 세 개로 쪼개는 그림(작게), ② 돋보기로 화면을 보는 그림(확인), ③ 시계 반대 방향 화살표와 안전벨트 그림(되돌리기). 셋이 원형 순환 구조로 연결"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch01-f04.png
 
 - id: ch01-f05
   chapter: 1
@@ -179,7 +184,8 @@
     steps:
       - "일러스트: 공사 현장 비유. 바닥 기초에 \"Node.js(전기·수도 같은 기반)\", 그 위에 작업자 \"Claude Code(일하는 에이전트)\", 지휘소 \"Orca(현장 사무소)\", 타임머신 \"Git(되돌리기)\", 물류 트럭 \"GitHub CLI(세상에 내보내기)\". 각 요소를 화살표로 연결"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch01-f05.png
 
 - id: ch02-f01
   chapter: 2
@@ -495,7 +501,8 @@
     steps:
       - "일러스트: 말풍선 하나를 네 조각 퍼즐로 나눈 개념도. 각 조각에 ①맥락(어떤 상황에서) ②목표(무엇을) ③제약(단, 이 조건으로) ④출력 형식(결과는 이렇게) 라벨. 지도 핀 아이콘 곁들임"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch04-f06.png
 
 - id: ch04-f07
   chapter: 4
@@ -660,7 +667,8 @@
     steps:
       - "일러스트: 가운데에 \"저장소(.git)\" 원통 하나. 거기서 가지 세 개가 뻗어 나와 각각 폴더 아이콘 \"my-map (main)\", \"my-map-feature\", \"my-map-review\"로 연결. 각 폴더 앞에 로봇 에이전트가 한 명씩 앉아 작업 중. 폴더끼리는 점선으로 구분되어 \"서로 침범 금지\" 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch06-f02.png
 
 - id: ch06-f03
   chapter: 6
@@ -720,7 +728,8 @@
     steps:
       - "일러스트: 와이드 모니터 그림. 왼쪽 절반에 Orca(카드 목록+터미널) 영역, 오른쪽 절반에 브라우저(지도 앱) 영역을 블록으로 나눠 표시. 화살표로 \"시킨다 → 확인한다 → 합친다\" 순환 루프를 그려 넣기"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch06-f06.png
 
 - id: ch07-f01
   chapter: 7
@@ -915,7 +924,8 @@
     steps:
       - "일러스트: 좌우 2단 비교. 왼쪽 \"HTML에 직접\" — index.html 문서 안에 script 태그와 열쇠 아이콘이 박혀 있고 GitHub 아이콘으로 화살표(경고 표시). 오른쪽 \"동적 로드\" — JS 파일이 .env 금고에서 열쇠를 꺼내 script 태그를 조립해 페이지에 꽂는 흐름. 오른쪽에 체크 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch09-f01.png
 
 - id: ch09-f02
   chapter: 9
@@ -930,7 +940,8 @@
     steps:
       - "일러스트: 왼쪽→오른쪽 타임라인 4단계. ① script 태그 삽입(코드 아이콘) → ② SDK 파일 다운로드 완료 = 택배 도착(상자 아이콘, \"아직 지도 못 만듦\" 말풍선) → ③ kakao.maps.load() 호출 = 조립 시작(공구 아이콘) → ④ 콜백 실행 = 조립 완료(완성된 지도 아이콘, \"이제 지도 만들기 OK\"). 단계 ②와 ③ 사이에 \"우리가 시점을 정한다\" 강조 화살표"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch09-f02.png
 
 - id: ch09-f03
   chapter: 9
@@ -945,7 +956,8 @@
     steps:
       - "일러스트: 지구본 그림. 가로줄(위도선)과 세로줄(경도선) 격자, 적도에 \"위도 0°\", 그리니치에 \"경도 0°\" 라벨. 한반도 위 서울 위치에 핀을 꽂고 \"서울시청 (37.5665, 126.978)\" 말풍선. 위도는 남북 화살표, 경도는 동서 화살표로 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch09-f03.png
 
 - id: ch09-f04
   chapter: 9
@@ -1020,7 +1032,8 @@
     steps:
       - "일러스트: 왼쪽에는 지도 위에서 번쩍 하고 순간이동하는 핀(setCenter), 오른쪽에는 곡선 화살표를 따라 스르륵 이동하는 핀(panTo)을 대비시킨 개념도. 각각 \"순간이동\", \"부드럽게 이동\" 라벨"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch10-f02.png
 
 - id: ch10-f03
   chapter: 10
@@ -1125,7 +1138,8 @@
     steps:
       - "일러스트: 핀 모양 마커 이미지의 확대도 2개 비교. 왼쪽은 offset이 없어 이미지 좌상단 모서리가 좌표점(X 표시)에 붙어 핀이 엉뚱한 곳을 가리키는 그림, 오른쪽은 offset(27,69)으로 핀 끝이 좌표점에 정확히 닿은 그림. 좌상단에서 핀 끝까지 가로·세로 화살표로 27px, 69px 표기"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch11-f03.png
 
 - id: ch11-f04
   chapter: 11
@@ -1215,7 +1229,8 @@
     steps:
       - "일러스트: 가운데에 categories.js 파일 아이콘(🍜맛집·☕카페·🏝여행·💕데이트 4행 표). 그로부터 화살표 3개가 뻗어 나가 각각 \"마커 핀(11장)\", \"필터 버튼(14장)\", \"사이드바 목록(18장)\"을 가리키는 방사형 다이어그램. \"한 곳만 고치면 전부 바뀐다\" 문구"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch12-f03.png
 
 - id: ch12-f04
   chapter: 12
@@ -1290,7 +1305,8 @@
     steps:
       - "일러스트: 같은 좌표점(빨간 점) 위에 yAnchor 0 / 0.5 / 1 / 1.35 네 가지 경우의 말풍선 위치를 나란히 비교. 1.35에서 마커 핀 그림 위로 말풍선이 떠 있는 모습 강조"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch13-f02.png
 
 - id: ch13-f03
   chapter: 13
@@ -1305,7 +1321,8 @@
     steps:
       - "일러스트: 말풍선을 분해한 다이어그램. .bubble 껍데기 안에 .bubble-inner(이모지+이름, 별점, × 버튼 위치 표시)와 .bubble-tail(꼬리 삼각형)이 세로로 배치된 구조를 화살표와 라벨로 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch13-f03.png
 
 - id: ch13-f04
   chapter: 13
@@ -1320,7 +1337,8 @@
     steps:
       - "일러스트: 3단계 과정도. ① 두꺼운 4색 테두리 상자(모서리가 45도로 잘린 모습) ② 본체 크기를 0으로 줄여 테두리 삼각형 4개만 남은 모습 ③ 위쪽만 흰색, 나머지 투명 처리해 아래 방향 흰 삼각형만 남은 모습"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch13-f04.png
 
 - id: ch13-f05
   chapter: 13
@@ -1335,7 +1353,8 @@
     steps:
       - "일러스트: 상태 흐름 다이어그램. openOverlay=null 상태에서 \"마커 A 클릭\" → A 말풍선 열림(openOverlay=A) → \"마커 B 클릭\" 화살표에 closeOverlay() 표시 → B 말풍선 열림(openOverlay=B) → \"× 클릭\" → 다시 null. 각 상태를 둥근 상자로, 전이를 화살표로"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch13-f05.png
 
 - id: ch13-f06
   chapter: 13
@@ -1380,7 +1399,8 @@
     steps:
       - "일러스트: 왼쪽부터 \"필터 버튼 클릭\" → \"currentFilter 상태 변경\" → \"filteredPlaces()로 배열 거르기\" → \"renderPlaces()로 마커 다시 그리기\" 네 개의 박스가 오른쪽 화살표로만 연결된 개념도. 화살표가 한 방향으로만 흐른다는 점을 강조"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch14-f02.png
 
 - id: ch14-f03
   chapter: 14
@@ -1440,7 +1460,8 @@
     steps:
       - "일러스트: 왼쪽에 \"필터 변경\", \"장소 추가(16장)\", \"장소 삭제(19장)\" 세 개의 입구가 모두 가운데 \"상태\" 박스로 화살표를 보내고, 상태에서 \"rerender()\" 하나를 거쳐 오른쪽 \"지도 화면\"으로 이어지는 깔때기 모양 개념도"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch14-f06.png
 
 - id: ch15-f01
   chapter: 15
@@ -1455,7 +1476,8 @@
     steps:
       - "일러스트: 큰 상자 \"카카오지도 SDK(지도 그리기·마커·오버레이)\" 옆에 플러그처럼 꽂히는 작은 상자 \"libraries=services(장소 검색·주소 변환)\". \"&libraries=services\" 꼬리표가 연결선 위에 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch15-f01.png
 
 - id: ch15-f02
   chapter: 15
@@ -1545,7 +1567,8 @@
     steps:
       - "일러스트: 왼쪽에 입구 두 개 — \"🔍 검색 결과 ＋ 버튼(이름+좌표)\"과 \"🗺 지도 클릭(좌표만)\". 두 화살표가 가운데 하나의 문 \"openAddDialog(장소 추가 폼)\"으로 모이고, 문에서 나온 화살표가 \"store.add() → 마커가 찍힌 지도\"로 이어지는 구조"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch16-f01.png
 
 - id: ch16-f02
   chapter: 16
@@ -1650,7 +1673,8 @@
     steps:
       - "일러스트: 왼쪽에 책상 위 서류 더미(\"places 변수 · 빠름 · 새로고침하면 증발\"), 오른쪽에 잠긴 서랍(\"localStorage · 새로고침에도 유지\"). 가운데에 save()/load() 화살표가 양방향으로 오가는 개념도"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch17-f02.png
 
 - id: ch17-f03
   chapter: 17
@@ -1680,7 +1704,8 @@
     steps:
       - "일러스트: 왼쪽 \"places 배열(객체 모형)\" → JSON.stringify → 가운데 \"문자열(설계도 종이)\" → setItem → \"localStorage 서랍\" 아이콘. 아래쪽 복귀 경로: getItem → 문자열 → JSON.parse → 오른쪽 \"places 배열 복원\". 위 경로에 '포장', 아래 경로에 '개봉' 라벨"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch17-f04.png
 
 - id: ch17-f05
   chapter: 17
@@ -1740,7 +1765,8 @@
     steps:
       - "일러스트: 가운데에 \"store (장소 배열)\" 원통 모양 박스. 거기서 화살표 두 개가 갈라져 나와 왼쪽 아래 \"renderList() → 사이드바 목록\", 오른쪽 아래 \"renderPlaces() → 지도 마커\"로 이어지는 개념도. 두 화살표 모두 데이터에서 화면으로 한 방향"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch18-f01.png
 
 - id: ch18-f02
   chapter: 18
@@ -1815,7 +1841,8 @@
     steps:
       - "일러스트: 왼쪽에 \"지도 클릭 추가\", \"검색 추가\", \"가져오기\", \"수정·삭제(19장)\" 네 입구가 가운데 \"store.save()\" 박스로 모이고, save()에서 확성기 아이콘과 함께 화살표 두 개가 \"rerender() → 지도\", \"renderList() → 목록\" 구독자 박스로 퍼져 나가는 방송 개념도"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch18-f06.png
 
 - id: ch19-f01
   chapter: 19
@@ -1830,7 +1857,8 @@
     steps:
       - "일러스트: 카드 와이어프레임. 위에서부터 ①\"🍜 성수동 국밥집  ×\" 머리글, ②★★★☆☆ 별점 줄, ③\"메모를 남겨 보세요\" textarea, ④[저장][삭제] 버튼 두 개. 각 덩어리에 번호 말풍선"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch19-f01.png
 
 - id: ch19-f02
   chapter: 19
@@ -1890,7 +1918,8 @@
     steps:
       - "일러스트: 왼쪽에 입력 폼(\"이름: <img src=x onerror=...>\")→ 가운데 innerHTML 관문 → 오른쪽 두 갈래. 위쪽 갈래(빨강, escapeHtml 없음): 브라우저에서 alert 창이 터지는 그림. 아래쪽 갈래(초록, escapeHtml 통과): 패널에 태그가 글자 그대로 표시되는 그림"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch19-f05.png
 
 - id: ch19-f06
   chapter: 19
@@ -1966,7 +1995,8 @@
     steps:
       - "일러스트: 순서도. \"🧭 클릭\" → \"getCurrentPosition 요청\" → 권한 프롬프트 분기점(마름모 \"사용자 선택\"). \"허용\" 화살표 → \"성공 콜백: pos.coords → showMyLocation(파란 점)\" / \"차단·실패\" 화살표 → \"실패 콜백: toast('위치 권한이 거부되었습니다')\". 두 길 모두 앱이 멈추지 않음을 강조"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch20-f04.png
 
 - id: ch20-f05
   chapter: 20
@@ -2011,7 +2041,8 @@
     steps:
       - "일러스트: \"navigator.geolocation\" 문 앞에 문지기. 통과하는 두 명: \"https:// (암호화 통신)\" 자물쇠 아이콘, \"localhost (내 컴퓨터 안)\" 집 아이콘. 막히는 한 명: \"http:// (암호화 없음)\" 열린 자물쇠 아이콘에 ❌ 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch20-f07.png
 
 - id: ch21-f01
   chapter: 21
@@ -2026,7 +2057,8 @@
     steps:
       - "일러스트: URL \"http://localhost:5173/#37.54444,127.05611,4\"를 부위별 색깔로 나눈 해부도. 프로토콜·호스트·경로 구간에서 서버 아이콘으로 화살표가 가고, 해시 구간에서는 서버로 가는 화살표에 ✕ 표시 + \"서버로 전송 안 됨, 브라우저 전용 메모 칸\" 말풍선"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch21-f01.png
 
 - id: ch21-f02
   chapter: 21
@@ -2056,7 +2088,8 @@
     steps:
       - "일러스트: 위에 정규식 /^#(-?[\\d.]+),(-?[\\d.]+),(\\d+)$/, 아래에 문자열 \"#37.54444,127.05611,4\"를 놓고 부품별로 같은 색 상자·연결선으로 대응시킨 그림. 괄호 세 쌍에는 m[1], m[2], m[3] 라벨"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch21-f03.png
 
 - id: ch21-f04
   chapter: 21
@@ -2071,7 +2104,8 @@
     steps:
       - "일러스트: 왼쪽 브라우저 A에서 \"getCenter/getLevel → #37.5,127.0,4 → 클립보드 복사\", 가운데 메신저 아이콘을 거쳐, 오른쪽 브라우저 B에서 \"접속 → parseHash → createMap(같은 위치)\"로 이어지는 순환 화살표 다이어그램"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch21-f04.png
 
 - id: ch21-f05
   chapter: 21
@@ -2101,7 +2135,8 @@
     steps:
       - "일러스트: 가운데 URL 화살표가 브라우저 A→B로 건너가는 그림. 화살표 위에는 \"카메라 상태(중심·레벨) ✅ 함께 감\", 브라우저 A 아래 localStorage 창고 아이콘에는 \"장소 데이터 ❌ 내 브라우저에 남음\" 라벨. 오른쪽 구석에 확장 아이디어 두 갈래(해시에 JSON / 서버+짧은 코드) 미니 분기도"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch21-f06.png
 
 - id: ch22-f01
   chapter: 22
@@ -2131,7 +2166,8 @@
     steps:
       - "일러스트: 좌우 비교. 왼쪽 \"클러스터링 전\"은 지도 위에 핀 10여 개가 겹쳐 지저분한 모습. 오른쪽 \"클러스터링 후\"는 같은 지도에 \"7\", \"4\" 숫자 원 두 개와 낱개 핀 1개만 깔끔하게 표시. 아래에 돋보기 아이콘과 함께 \"확대하면 다시 낱개 핀으로\" 화살표"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch22-f02.png
 
 - id: ch22-f03
   chapter: 22
@@ -2176,7 +2212,8 @@
     steps:
       - "일러스트: 3분할 다이어그램. ① averageCenter: 마커 4개와 그 무게중심에 놓인 클러스터 원(화살표로 \"평균 좌표\"), ② minLevel: 지도 레벨 눈금자(1~14)에서 6 이상 구간에 \"묶음\", 5 이하 구간에 \"낱개\" 표시, ③ minClusterSize: 마커 2개는 그대로, 마커 3개부터 숫자 원 \"3\"으로 바뀌는 비교 그림"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch22-f05.png
 
 - id: ch22-f06
   chapter: 22
@@ -2236,7 +2273,8 @@
     steps:
       - "일러스트: 가운데에 HTML 문서 아이콘 하나. 왼쪽 화살표는 넓은 모니터로 이어지며 \"기본 CSS: 사이드바+지도 나란히\", 오른쪽 화살표는 스마트폰으로 이어지며 \"@media ≤640px: 사이드바가 지도 위에 겹침\". 640px 지점에 점선으로 '브레이크포인트' 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch23-f03.png
 
 - id: ch23-f04
   chapter: 23
@@ -2431,7 +2469,8 @@
     steps:
       - "일러스트: 좌우 비교. 왼쪽 \"base 없음\": 브라우저가 `/assets/index.js`를 찾아 `github.io/assets/` 쪽으로 화살표를 보내지만 X표(404), 화면은 하얗게 빈 모습. 오른쪽 \"base: '/my-map/'\": 화살표가 `github.io/my-map/assets/`로 정확히 향하고 지도가 뜬 모습. 아래에 주소 구조 `https://아이디.github.io / my-map / assets/...`를 블록으로 나눠 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch25-f02.png
 
 - id: ch25-f03
   chapter: 25
@@ -2521,7 +2560,8 @@
     steps:
       - "일러스트: 문서 모양 카드가 위에서 아래로 4개 구역으로 나뉜 구성도. ① 스크린샷(사진 아이콘, \"이게 뭐지?\"), ② 기능(체크리스트 아이콘, \"뭘 할 수 있지?\"), ③ 기술(부품 아이콘, \"뭘로 만들었지?\"), ④ 실행법(터미널 아이콘, \"나도 돌려 볼 수 있나?\"). 각 구역 옆에 방문자의 말풍선으로 궁금증 표기"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch26-f01.png
 
 - id: ch26-f02
   chapter: 26
@@ -2566,7 +2606,8 @@
     steps:
       - "일러스트: 계단 3칸 그림. 1칸 \"친구에게 링크\"(메신저 말풍선 아이콘, #해시 링크 표시), 2칸 \"SNS에 스크린샷+링크\"(카메라·하트 아이콘), 3칸 \"커뮤니티에 리포 공유\"(GitHub 고양이·말풍선 아이콘). 계단 위로 올라갈수록 \"피드백\"이 커지는 화살표"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch26-f04.png
 
 - id: ch26-f05
   chapter: 26
@@ -2581,7 +2622,8 @@
     steps:
       - "일러스트: 가운데 \"나만의 지도(현재)\" 깃발에서 네 갈래로 뻗는 길 지도. ① 백엔드 저장(구름+데이터베이스 아이콘, \"어디서나 같은 지도\"), ② 로그인(사람+열쇠 아이콘, \"각자의 지도\"), ③ 사진 업로드(카메라 아이콘, \"장소에 추억을\"), ④ 다른 API(퍼즐 조각 아이콘, \"길찾기·공공데이터\"). 길마다 난이도 별 1~3개 표기"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch26-f05.png
 
 - id: ch26-f06
   chapter: 26
@@ -2596,7 +2638,8 @@
     steps:
       - "일러스트: 등산로 지도 스타일의 회고 일러스트. 출발점 \"0장 준비물\"에서 시작해 \"1부 작업대\"(공구 아이콘)→\"2부 첫 지도\"(지도 핀)→\"3부 앱의 심장\"(하트+마커)→\"4부 완성도\"(별)→정상 \"5부 배포 🚩\"까지 굽이치는 길. 길 중간중간 \"회색 화면\", \"403\", \"핀 지옥\" 같은 위기 푯말이 작게 꽂혀 있는 모습"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch26-f06.png
 
 - id: ch27-f01
   chapter: 27
@@ -2611,7 +2654,8 @@
     steps:
       - "일러스트: 왼쪽에 뼈대만 있는 문장 템플릿 카드(맥락/목표/제약/출력 4칸), 오른쪽에 그 칸을 자기 프로젝트 내용으로 채워 완성한 말풍선. 가운데 화살표에 \"베껴 쓰되 바꿔 쓴다\" 라벨. 친근한 플랫 스타일"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch27-f01.png
 
 - id: ch27-f02
   chapter: 27
@@ -2626,7 +2670,8 @@
     steps:
       - "일러스트: 벌레(버그) 캐릭터를 가운데 두고 세 개의 돋보기가 비추는 그림. 각 돋보기에 \"증상: 무엇이 잘못됐나\", \"재현: 어떻게 하면 또 그러나\", \"기대: 원래는 어때야 하나\" 라벨. 아래에 에러 메시지 쪽지를 통째로 들고 있는 사람. 친근한 플랫 스타일"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch27-f02.png
 
 - id: ch27-f03
   chapter: 27
@@ -2641,7 +2686,8 @@
     steps:
       - "일러스트: 로켓 발사 전 점검판 콘셉트. 체크리스트 보드에 맥락·목표·제약·출력 4개의 큰 체크박스, 그 아래 작게·확인·되돌리기 3개의 작은 체크박스. 옆에서 사람이 마지막 항목에 체크하는 모습. 친근한 플랫 스타일"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch27-f03.png
 
 - id: ch28-f01
   chapter: 28
@@ -2656,7 +2702,8 @@
     steps:
       - "일러스트: 왼쪽→오른쪽 3단계 흐름도. ① F12 콘솔 확인(브라우저 창에 빨간 에러 줄, 돋보기 아이콘) → ② 증상 표 대조(이 부록의 표를 펼친 책 아이콘) → ③ Claude Code에 에러 전문 붙여넣기(터미널 아이콘 + 말풍선 \"에러를 통째로 붙여넣기!\"). 각 단계 아래 짧은 라벨"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch28-f01.png
 
 - id: ch28-f02
   chapter: 28

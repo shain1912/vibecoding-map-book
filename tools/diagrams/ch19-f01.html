@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch19-f01</title>
+<style>
+  body { margin: 0; background: #fff; font-family: 'Malgun Gothic', sans-serif; }
+  #canvas { width: 1200px; height: 750px; position: relative; background: #fff; overflow: hidden; box-sizing: border-box; }
+  .title { position: absolute; top: 40px; width: 100%; text-align: center; font-size: 30px; font-weight: bold; color: #334155; }
+  .card { position: absolute; left: 330px; top: 120px; width: 540px; height: 540px; background: #fff; border: 4px solid #64748b; border-radius: 18px; box-sizing: border-box; padding: 24px; box-shadow: 8px 8px 0 #e2e8f0; }
+  .head { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #e2e8f0; padding-bottom: 18px; }
+  .head .name { font-size: 28px; font-weight: bold; color: #1e293b; }
+  .head .close { font-size: 30px; color: #64748b; font-weight: bold; }
+  .stars { font-size: 46px; margin: 26px 0 10px; letter-spacing: 8px; }
+  .star-on { color: #f59e0b; }
+  .star-off { color: #cbd5e1; }
+  .memo { margin-top: 18px; height: 170px; border: 3px dashed #94a3b8; border-radius: 12px; background: #f8fafc; color: #94a3b8; font-size: 24px; padding: 16px; box-sizing: border-box; }
+  .btns { margin-top: 30px; display: flex; gap: 18px; }
+  .btn { font-size: 25px; font-weight: bold; padding: 14px 40px; border-radius: 12px; }
+  .save { background: #0d9488; color: #fff; }
+  .del { background: #fff; color: #dc2626; border: 3px solid #dc2626; }
+  .bubble { position: absolute; width: 58px; height: 58px; border-radius: 50%; background: #f97316; color: #fff; font-size: 28px; font-weight: bold; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 0 #c2410c; }
+  .blabel { position: absolute; font-size: 24px; font-weight: bold; color: #9a3412; width: 240px; }
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;">
+  <div class="title">상세 패널의 네 덩어리 구조</div>
+
+  <div class="card">
+    <div class="head">
+      <span class="name">🍜 성수동 국밥집</span>
+      <span class="close">×</span>
+    </div>
+    <div class="stars">
+      <span class="star-on">★★★</span><span class="star-off">☆☆</span>
+    </div>
+    <div class="memo">메모를 남겨 보세요</div>
+    <div class="btns">
+      <div class="btn save">저장</div>
+      <div class="btn del">삭제</div>
+    </div>
+  </div>
+
+  <!-- numbered speech bubbles -->
+  <div class="bubble" style="left:250px; top:150px;">①</div>
+  <div class="blabel" style="left:30px; top:163px;">머리글 — 이름 + 닫기</div>
+
+  <div class="bubble" style="left:250px; top:290px;">②</div>
+  <div class="blabel" style="left:55px; top:303px;">별점 줄 (★ 5개)</div>
+
+  <div class="bubble" style="left:895px; top:430px;">③</div>
+  <div class="blabel" style="left:965px; top:443px;">메모 칸 (textarea)</div>
+
+  <div class="bubble" style="left:895px; top:580px;">④</div>
+  <div class="blabel" style="left:965px; top:593px;">동작 버튼 — 저장·삭제</div>
+
+  <!-- connector lines -->
+  <svg style="position:absolute;left:0;top:0;" width="1200" height="750" viewBox="0 0 1200 750">
+    <line x1="310" y1="179" x2="345" y2="179" stroke="#f97316" stroke-width="4"/>
+    <line x1="310" y1="319" x2="345" y2="319" stroke="#f97316" stroke-width="4"/>
+    <line x1="893" y1="459" x2="855" y2="459" stroke="#f97316" stroke-width="4"/>
+    <line x1="893" y1="609" x2="855" y2="609" stroke="#f97316" stroke-width="4"/>
+  </svg>
+</div>
+</body>
+</html>

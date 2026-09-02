@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch11-f03</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">offset 기준점의 의미</div>
+
+  <!-- 왼쪽: offset 없음 -->
+  <div style="position:absolute;left:50px;top:100px;width:520px;height:600px;border:3px solid #9ca3af;border-radius:16px;background:#f9fafb;overflow:hidden;">
+    <div style="background:#6b7280;color:#fff;text-align:center;font-size:25px;font-weight:bold;padding:12px 0;">❌ offset 없음 — 좌상단이 좌표에 붙음</div>
+    <svg width="520" height="548" viewBox="0 0 520 548" style="position:absolute;left:0;top:52px;">
+      <!-- 좌표점 X 표시 (200, 200) -->
+      <g stroke="#ef4444" stroke-width="7" stroke-linecap="round">
+        <line x1="182" y1="182" x2="218" y2="218"/>
+        <line x1="218" y1="182" x2="182" y2="218"/>
+      </g>
+      <text x="130" y="165" font-size="22" fill="#b91c1c" font-family="'Malgun Gothic',sans-serif" font-weight="bold">실제 좌표점</text>
+
+      <!-- 마커 이미지 영역 (좌상단이 좌표점 200,200 에 붙음) : 108x138 (2배 확대) -->
+      <rect x="200" y="200" width="108" height="138" fill="#fef3c7" fill-opacity="0.5" stroke="#f97316" stroke-width="3" stroke-dasharray="8 6"/>
+      <text x="316" y="218" font-size="20" fill="#c2410c" font-family="'Malgun Gothic',sans-serif" font-weight="bold">이미지 영역</text>
+
+      <!-- 핀 (이미지 안, 끝이 254, 338) -->
+      <path d="M 254 332 C 231 293 227 277 227 264 a 27 27 0 1 1 54 0 c 0 13 -4 29 -27 68 z" fill="#0d9488" stroke="#0f766e" stroke-width="3"/>
+      <circle cx="254" cy="264" r="11" fill="#fff"/>
+
+      <!-- 핀 끝이 가리키는 엉뚱한 곳 -->
+      <circle cx="254" cy="338" r="6" fill="#f97316"/>
+      <text x="150" y="420" font-size="23" fill="#374151" font-family="'Malgun Gothic',sans-serif" font-weight="bold">핀 끝이 엉뚱한 곳을</text>
+      <text x="150" y="452" font-size="23" fill="#374151" font-family="'Malgun Gothic',sans-serif" font-weight="bold">가리킴 → 오른쪽 아래로 어긋남</text>
+      <text x="290" y="370" font-size="30" font-family="'Malgun Gothic',sans-serif">😵</text>
+    </svg>
+  </div>
+
+  <!-- 오른쪽: offset(27, 69) -->
+  <div style="position:absolute;left:630px;top:100px;width:520px;height:600px;border:3px solid #0d9488;border-radius:16px;background:#f0fdfa;overflow:hidden;">
+    <div style="background:#0d9488;color:#fff;text-align:center;font-size:25px;font-weight:bold;padding:12px 0;">✅ offset(27, 69) — 핀 끝이 좌표에 닿음</div>
+    <svg width="520" height="548" viewBox="0 0 520 548" style="position:absolute;left:0;top:52px;">
+      <defs>
+        <marker id="arrO" markerWidth="11" markerHeight="11" refX="8" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#f97316"/>
+        </marker>
+      </defs>
+      <!-- 좌표점 X 표시 (260, 380) -->
+      <g stroke="#ef4444" stroke-width="7" stroke-linecap="round">
+        <line x1="242" y1="362" x2="278" y2="398"/>
+        <line x1="278" y1="362" x2="242" y2="398"/>
+      </g>
+      <text x="300" y="400" font-size="22" fill="#b91c1c" font-family="'Malgun Gothic',sans-serif" font-weight="bold">실제 좌표점</text>
+
+      <!-- 이미지 영역: 핀 끝(260,380)이 좌상단에서 (54,138) 지점 → 좌상단 (206, 242), 108x138 (2배 확대) -->
+      <rect x="206" y="242" width="108" height="138" fill="#ccfbf1" fill-opacity="0.5" stroke="#0d9488" stroke-width="3" stroke-dasharray="8 6"/>
+      <text x="326" y="258" font-size="20" fill="#0f766e" font-family="'Malgun Gothic',sans-serif" font-weight="bold">이미지 영역</text>
+
+      <!-- 핀 (끝이 정확히 260, 380) -->
+      <path d="M 260 374 C 237 335 233 319 233 306 a 27 27 0 1 1 54 0 c 0 13 -4 29 -27 68 z" fill="#0d9488" stroke="#0f766e" stroke-width="3"/>
+      <circle cx="260" cy="306" r="11" fill="#fff"/>
+
+      <!-- 좌상단 -> 가로 27px 화살표 -->
+      <line x1="206" y1="222" x2="260" y2="222" stroke="#f97316" stroke-width="5" marker-end="url(#arrO)"/>
+      <line x1="206" y1="212" x2="206" y2="248" stroke="#f97316" stroke-width="3"/>
+      <line x1="260" y1="212" x2="260" y2="232" stroke="#f97316" stroke-width="3"/>
+      <text x="212" y="205" font-size="22" fill="#c2410c" font-family="'Malgun Gothic',sans-serif" font-weight="bold">27px →</text>
+
+      <!-- 세로 69px 화살표 (이미지 왼쪽 밖) -->
+      <line x1="180" y1="242" x2="180" y2="380" stroke="#f97316" stroke-width="5" marker-end="url(#arrO)"/>
+      <line x1="170" y1="242" x2="212" y2="242" stroke="#f97316" stroke-width="3"/>
+      <line x1="170" y1="380" x2="190" y2="380" stroke="#f97316" stroke-width="3"/>
+      <text x="88" y="318" font-size="22" fill="#c2410c" font-family="'Malgun Gothic',sans-serif" font-weight="bold">69px ↓</text>
+
+      <!-- 좌상단 표시 -->
+      <circle cx="206" cy="242" r="6" fill="#f97316"/>
+      <text x="60" y="235" font-size="20" fill="#6b7280" font-family="'Malgun Gothic',sans-serif">좌상단</text>
+
+      <text x="140" y="470" font-size="23" fill="#0f766e" font-family="'Malgun Gothic',sans-serif" font-weight="bold">핀 끝이 좌표점에 정확히 닿음 👍</text>
+    </svg>
+  </div>
+
+</div>
+</body>
+</html>

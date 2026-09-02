@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch12-f03</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;font-family:'Malgun Gothic',sans-serif;}
+  *{box-sizing:border-box;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:750px;position:relative;background:#fff;overflow:hidden;">
+
+  <div style="position:absolute;top:24px;left:0;width:1200px;text-align:center;font-size:32px;font-weight:bold;color:#1f2937;">categories.js 한 곳을 여러 화면이 참조하는 구조</div>
+
+  <!-- 방사 화살표 (중앙 600,390 에서 세 방향으로) -->
+  <svg width="1200" height="750" style="position:absolute;left:0;top:0;" viewBox="0 0 1200 750">
+    <defs>
+      <marker id="arrTeal" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
+      </marker>
+    </defs>
+    <!-- 왼쪽 위: 마커 핀 -->
+    <line x1="440" y1="330" x2="300" y2="245" stroke="#0d9488" stroke-width="6" marker-end="url(#arrTeal)"/>
+    <!-- 오른쪽 위: 필터 버튼 -->
+    <line x1="760" y1="330" x2="900" y2="245" stroke="#0d9488" stroke-width="6" marker-end="url(#arrTeal)"/>
+    <!-- 아래: 사이드바 목록 -->
+    <line x1="600" y1="530" x2="600" y2="600" stroke="#0d9488" stroke-width="6" marker-end="url(#arrTeal)"/>
+  </svg>
+
+  <!-- 중앙: categories.js -->
+  <div style="position:absolute;left:410px;top:250px;width:380px;height:280px;background:#fff;border:4px solid #0d9488;border-radius:16px;box-shadow:6px 6px 0 #ccfbf1;">
+    <div style="background:#0d9488;color:#fff;font-size:26px;font-weight:bold;padding:10px 0;text-align:center;border-radius:10px 10px 0 0;">📄 categories.js</div>
+    <table style="width:100%;border-collapse:collapse;font-size:24px;color:#374151;">
+      <tr style="border-bottom:2px solid #e5e7eb;"><td style="padding:9px 26px;">🍜</td><td style="font-weight:bold;">맛집</td><td style="color:#e74c3c;font-weight:bold;">■ 빨강</td></tr>
+      <tr style="border-bottom:2px solid #e5e7eb;"><td style="padding:9px 26px;">☕</td><td style="font-weight:bold;">카페</td><td style="color:#a0715e;font-weight:bold;">■ 갈색</td></tr>
+      <tr style="border-bottom:2px solid #e5e7eb;"><td style="padding:9px 26px;">🏝</td><td style="font-weight:bold;">여행</td><td style="color:#0d9488;font-weight:bold;">■ 청록</td></tr>
+      <tr><td style="padding:9px 26px;">💕</td><td style="font-weight:bold;">데이트</td><td style="color:#ec4899;font-weight:bold;">■ 분홍</td></tr>
+    </table>
+  </div>
+
+  <!-- 참조 1: 마커 핀 -->
+  <div style="position:absolute;left:90px;top:130px;width:250px;height:120px;background:#f0fdfa;border:3px solid #0d9488;border-radius:14px;text-align:center;">
+    <div style="font-size:40px;margin-top:10px;">📍</div>
+    <div style="font-size:24px;font-weight:bold;color:#0f766e;">마커 핀 (11장)</div>
+  </div>
+
+  <!-- 참조 2: 필터 버튼 -->
+  <div style="position:absolute;left:860px;top:130px;width:250px;height:120px;background:#f0fdfa;border:3px solid #0d9488;border-radius:14px;text-align:center;">
+    <div style="font-size:40px;margin-top:10px;">🔘</div>
+    <div style="font-size:24px;font-weight:bold;color:#0f766e;">필터 버튼 (14장)</div>
+  </div>
+
+  <!-- 참조 3: 사이드바 목록 -->
+  <div style="position:absolute;left:475px;top:600px;width:250px;height:120px;background:#f0fdfa;border:3px solid #0d9488;border-radius:14px;text-align:center;">
+    <div style="font-size:40px;margin-top:10px;">📋</div>
+    <div style="font-size:24px;font-weight:bold;color:#0f766e;">사이드바 목록 (18장)</div>
+  </div>
+
+  <!-- 강조 문구 -->
+  <div style="position:absolute;left:840px;top:430px;width:310px;background:#f97316;color:#fff;font-size:26px;font-weight:bold;text-align:center;padding:18px 10px;border-radius:14px;">✨ 한 곳만 고치면<br>전부 바뀐다</div>
+
+</div>
+</body>
+</html>
