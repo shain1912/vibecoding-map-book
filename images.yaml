@@ -965,7 +965,8 @@
   chapter: 9
   type: 스크린샷
   caption: "첫 지도! 서울시청을 중심으로 화면 가득 뜬 카카오지도"
-  file: images/ch09/ch09-f04.png
+  file: images/ch09/ch09-f04.jpg
+  source: images/raw/app-first-map.jpg
   capture:
     kind: web
     command: null
@@ -974,7 +975,7 @@
     steps:
       - "스크린샷: localhost:5173을 연 Chrome 창 전체. 서울시청 일대가 중심에 오고 지도가 브라우저 화면을 꽉 채운 상태. 주소창의 localhost:5173이 보이게 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch09-f05
   chapter: 9
@@ -1056,7 +1057,8 @@
   chapter: 10
   type: 스크린샷
   caption: "컨트롤이 달린 지도: 오른쪽 위 지도 타입 버튼, 오른쪽 줌 버튼"
-  file: images/ch10/ch10-f04.png
+  file: images/ch10/ch10-f04.jpg
+  source: images/raw/app-map-controls.jpg
   capture:
     kind: web
     command: null
@@ -1065,13 +1067,14 @@
     steps:
       - "스크린샷: 지도 오른쪽 위에 \"지도/스카이뷰\" 전환 버튼, 오른쪽 가장자리에 +/− 줌 컨트롤이 표시된 전체 화면. 두 컨트롤에 강조 표시"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch10-f05
   chapter: 10
   type: 스크린샷
   caption: "스카이뷰로 전환한 지도"
-  file: images/ch10/ch10-f05.png
+  file: images/ch10/ch10-f05.jpg
+  source: images/raw/app-skyview.jpg
   capture:
     kind: web
     command: null
@@ -1080,7 +1083,7 @@
     steps:
       - "스크린샷: 스카이뷰(위성 사진) 모드로 전환된 서울시청 일대. 오른쪽 위 컨트롤에서 스카이뷰가 선택된 상태가 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch10-f06
   chapter: 10
@@ -1643,7 +1646,8 @@
   chapter: 16
   type: 스크린샷
   caption: "지도 클릭으로 추가한 장소에 마커가 찍힌 모습"
-  file: images/ch16/ch16-f06.png
+  file: images/ch16/ch16-f06.jpg
+  source: docs/images/raw/app-map-click-add.jpg
   capture:
     kind: web
     command: null
@@ -1652,7 +1656,7 @@
     steps:
       - "스크린샷: 지도 클릭 → 빈 다이얼로그에 \"단골 산책길\" 입력 → 추가를 마친 직후. 클릭했던 위치에 🏝 여행 카테고리 마커가 새로 찍혀 있고 하단에 \"내 지도에 추가했습니다!\" 토스트가 남아 있는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch17-f01
   chapter: 17
@@ -1827,7 +1831,8 @@
   chapter: 18
   type: 스크린샷
   caption: "목록 클릭 → focusPlace: 지도가 해당 장소로 이동·확대되고 말풍선이 열린 모습"
-  file: images/ch18/ch18-f05.png
+  file: images/ch18/ch18-f05.jpg
+  source: docs/images/raw/app-list-focus.jpg
   capture:
     kind: web
     command: null
@@ -1836,7 +1841,7 @@
     steps:
       - "스크린샷: 사이드바 목록에서 한 항목에 마우스 호버(배경색 표시)된 상태, 오른쪽 지도는 그 장소가 중앙에 레벨 4로 확대되어 말풍선이 열려 있는 화면 전체"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch18-f06
   chapter: 18
@@ -2232,7 +2237,8 @@
   chapter: 22
   type: 스크린샷
   caption: "확대하면 클러스터가 낱개 마커로 풀린다"
-  file: images/ch22/ch22-f06.png
+  file: images/ch22/ch22-f06.jpg
+  source: docs/images/raw/app-clusterer-zoomed.jpg
   capture:
     kind: web
     command: null
@@ -2241,7 +2247,7 @@
     steps:
       - "스크린샷: 그림 22.4에서 클러스터 하나를 확대해 들어간 레벨 4~5 화면. 숫자 원이 사라지고 카테고리별 커스텀 핀들이 낱개로 보이는 상태. 확대 전후를 좌우로 나란히 배치하면 더 좋음"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch23-f01
   chapter: 23
