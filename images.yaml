@@ -1,5 +1,5 @@
 # images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
-# Layout 에이전트가 chapters/ch00~ch28의 FIG 마커를 스캔해 생성 (2026-09-02, 2차 패스 갱신)
+# Layout 에이전트가 chapters/ch00~ch28의 FIG 마커를 스캔해 생성 (2026-09-02, 3차 패스 갱신: ch14~ch18 재동기화)
 
 - id: ch00-f01
   chapter: 0
@@ -1400,16 +1400,16 @@
   chapter: 14
   type: 스크린샷
   caption: "☕ 카페 필터 적용: 카페 마커만 남은 지도"
-  file: images/ch14/ch14-f04.png
+  file: images/ch14/ch14-f04.jpg
+  source: images/raw/app-cafe-filter-bubble-detail.jpg
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: null
     window_title: null
-    steps:
-      - "스크린샷: 필터 바에서 \"☕ 카페\"가 active 상태이고, 지도에는 성수동 카페거리 마커 하나만 표시된 화면 전체"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch14-f05
   chapter: 14
@@ -1602,7 +1602,7 @@
     url: "http://localhost:5173"
     window_title: null
     steps:
-      - "스크린샷: 검색 결과에서 ＋를 누른 직후. 다이얼로그의 이름 칸에 검색한 장소 이름이 채워져 있고, 카테고리 select가 ☕ 카페로 선택된 상태"
+      - "스크린샷: 검색 결과에서 ＋를 누른 직후. 다이얼로그의 이름 칸에 검색한 장소 이름이 채워져 있고, 카테고리 select를 펼쳐 기본값 🍜 맛집에서 ☕ 카페로 바꾸는 중인 상태"
     crop: window
   status: pending
 
@@ -1722,7 +1722,7 @@
     url: "http://localhost:5173"
     window_title: null
     steps:
-      - "스크린샷: 가져오기 버튼으로 JSON 파일 선택 직후, 화면 하단에 \"가져오기 완료!\" 토스트가 떠 있고 장소 목록·마커가 복원된 상태"
+      - "스크린샷: 가져오기 버튼으로 JSON 파일 선택 직후, 화면 하단에 \"가져오기 완료!\" 토스트가 떠 있는 상태. 새로고침 후 마커가 파일 시점대로 복원된 지도가 보이면 더 좋음"
     crop: window
   status: pending
 
@@ -1760,16 +1760,16 @@
   chapter: 18
   type: 스크린샷
   caption: "필터와 목록의 동기화: ☕ 카페 필터를 누르면 마커와 목록이 함께 걸러진다"
-  file: images/ch18/ch18-f03.png
+  file: images/ch18/ch18-f03.jpg
+  source: images/raw/app-cafe-filter-bubble-detail.jpg
   capture:
     kind: web
     command: null
-    url: "http://localhost:5173"
+    url: null
     window_title: null
-    steps:
-      - "스크린샷: 필터 바에서 \"☕ 카페\"가 active인 상태. 사이드바 목록에는 카페 항목만 남아 있고 지도에도 카페 마커만 표시된 화면"
+    steps: []
     crop: window
-  status: pending
+  status: captured
 
 - id: ch18-f04
   chapter: 18
