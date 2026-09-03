@@ -836,7 +836,7 @@
     steps:
       - "스크린샷: Claude Code 세션에서 npm create vite@latest my-map -- --template vanilla 실행 승인 후 \"Scaffolding project...\" 출력이 보이는 터미널"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch08-f02
   chapter: 8
@@ -2473,7 +2473,7 @@
     steps:
       - "스크린샷: 터미널에 `npm run build` 실행 후 dist/index.html, dist/assets/*.css, *.js 목록과 \"✓ built in ...\" 출력. 옆에 탐색기나 `ls dist` 결과로 dist 폴더 구조가 함께 보이면 더 좋음"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch25-f02
   chapter: 25
@@ -2738,6 +2738,7 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
 
 
