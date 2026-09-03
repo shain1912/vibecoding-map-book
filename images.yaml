@@ -2458,7 +2458,7 @@
     steps:
       - "스크린샷: 터미널에서 git log --oneline 실행. 해시와 한국어 커밋 메시지 몇 줄이 보이게. 글자 크게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch25-f01
   chapter: 25
@@ -2738,6 +2738,7 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
 
 
