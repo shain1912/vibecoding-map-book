@@ -1,4 +1,4 @@
-﻿# images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
+# images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
 # Layout 에이전트가 chapters/ch00~ch28의 FIG 마커를 스캔해 생성 (2026-09-02, 3차 패스 갱신: ch14~ch18 재동기화)
 
 - id: ch00-f01
@@ -202,7 +202,8 @@
     steps:
       - "스크린샷: Windows Terminal(PowerShell)에서 `node -v` 입력 후 \"용어가 인식되지 않습니다\" 오류가 출력된 화면. 오류 메시지 전체가 보이도록 캡처, 글자 크게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch02-f01.png
 
 - id: ch02-f02
   chapter: 2
@@ -322,7 +323,8 @@
     steps:
       - "스크린샷: PowerShell에서 `git -v` 입력 후 \"'git' 용어가 cmdlet, 함수... 이름으로 인식되지 않습니다\" 오류 출력. 오류 문구가 잘 보이게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch03-f01.png
 
 - id: ch03-f02
   chapter: 3
@@ -397,7 +399,8 @@
     steps:
       - "스크린샷: `git config --global --list` 실행 결과에 user.name=..., user.email=... 두 줄이 보이는 터미널"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch03-f06.png
 
 - id: ch03-f07
   chapter: 3
@@ -488,7 +491,8 @@
     steps:
       - "스크린샷: 터미널에서 `claude` 실행 직후 나타나는 환영 화면(로고와 초기 설정 안내). 글자 크게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch04-f05.png
 
 - id: ch04-f06
   chapter: 4
@@ -519,7 +523,8 @@
     steps:
       - "스크린샷: Claude Code가 파일 수정 전 변경 내용을 보여주며 Yes/No 선택지를 제시하는 승인 화면. 선택지 부분이 잘 보이게 캡처"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch04-f07.png
 
 - id: ch05-f01
   chapter: 5
@@ -549,7 +554,8 @@
     steps:
       - "스크린샷: PowerShell에서 `winget install GitHub.cli` 실행 후 다운로드 진행 막대와 \"설치가 완료되었습니다\" 메시지까지 보이게 캡처"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch05-f02.png
 
 - id: ch05-f03
   chapter: 5
@@ -579,7 +585,8 @@
     steps:
       - "스크린샷: 터미널에 네 가지 질문과 선택 결과(GitHub.com / HTTPS / Yes / Login with a web browser)가 모두 표시된 상태"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch05-f04.png
 
 - id: ch05-f05
   chapter: 5
@@ -594,7 +601,8 @@
     steps:
       - "스크린샷: one-time code가 표시된 터미널. 코드 부분이 잘 보이게. 실제 코드는 더미(A1B2-C3D4 형태)여도 무방"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch05-f05.png
 
 - id: ch05-f06
   chapter: 5
@@ -1219,7 +1227,8 @@
     steps:
       - "스크린샷: Claude Code 터미널 세션. 위 프롬프트를 입력하고 defaultPlaces.js 생성 diff(초록색 추가 줄)가 표시된 화면. 파일 경로 src/defaultPlaces.js가 보이게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch12-f02.png
 
 - id: ch12-f03
   chapter: 12
@@ -2383,7 +2392,8 @@
     steps:
       - "스크린샷: git status 출력. Untracked files에 index.html, package.json, src/ 등이 보이고 .env와 node_modules는 없는 상태. 목록 부분이 잘 보이게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch24-f02.png
 
 - id: ch24-f03
   chapter: 24
@@ -2398,7 +2408,8 @@
     steps:
       - "스크린샷: git commit 실행 후 root-commit 해시와 files changed 요약이 표시된 터미널. create mode 목록에 .env가 없는 것이 보이게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch24-f03.png
 
 - id: ch24-f04
   chapter: 24
@@ -2413,7 +2424,8 @@
     steps:
       - "스크린샷: 터미널에서 gh repo create my-map --public --source=. --push 실행 후 체크 표시 세 줄(Created/Added/Pushed)이 표시된 화면"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch24-f04.png
 
 - id: ch24-f05
   chapter: 24

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch12-f02</title>
+<style>
+  html,body{margin:0;padding:0;background:#0c0c0c;}
+  *{box-sizing:border-box;}
+  #canvas{font-family:'Cascadia Mono','Consolas','D2Coding','Malgun Gothic',monospace;}
+  .w{color:#f2f2f2;}
+  .dim{color:#8a8a8a;}
+  .gray{color:#9d9d9d;}
+  .green{color:#3fdd97;}
+  .orange{color:#d97757;}
+  .ln{white-space:pre;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:680px;position:relative;background:#0c0c0c;overflow:hidden;">
+  <div style="height:46px;background:#0c0c0c;display:flex;align-items:center;position:relative;">
+    <div style="display:flex;align-items:center;height:34px;margin-top:12px;background:#1c1c1c;border-radius:8px 8px 0 0;padding:0 14px;">
+      <div style="width:20px;height:20px;background:#0e5a8a;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-right:9px;font-size:11px;color:#fff;font-weight:bold;">&gt;_</div>
+      <span style="color:#f2f2f2;font-size:16px;">Windows PowerShell</span>
+      <span style="color:#a9a9a9;font-size:15px;margin-left:24px;">✕</span>
+    </div>
+    <span style="color:#cfcfcf;font-size:22px;margin-left:14px;line-height:1;">＋</span>
+    <span style="color:#cfcfcf;font-size:12px;margin-left:14px;">⌄</span>
+    <div style="position:absolute;right:0;top:0;height:46px;display:flex;align-items:center;color:#cfcfcf;font-size:16px;">
+      <span style="padding:0 18px;">—</span>
+      <span style="padding:0 18px;font-size:14px;">▢</span>
+      <span style="padding:0 20px;color:#fff;">✕</span>
+    </div>
+  </div>
+  <div style="padding:20px 30px;font-size:21px;line-height:1.42;color:#cccccc;">
+    <div><span class="orange" style="font-size:23px;">&gt;</span> <span class="dim">src/defaultPlaces.js 파일을 만들어줘</span></div>
+    <div style="height:14px;"></div>
+    <div><span class="orange">●</span> <span class="w">Write</span>(<span class="w">src/defaultPlaces.js</span>)</div>
+    <div style="height:12px;"></div>
+
+    <div style="border:1px solid #2f2f2f;border-radius:10px;max-width:1050px;overflow:hidden;">
+      <div style="padding:10px 16px;background:#0e1a12;">
+        <div class="ln"><span class="dim"> 1</span>  <span class="green">+ export const DEFAULT_PLACES = [</span></div>
+        <div class="ln"><span class="dim"> 2</span>  <span class="green">+   {</span></div>
+        <div class="ln"><span class="dim"> 3</span>  <span class="green">+     id: 'seed01',</span></div>
+        <div class="ln"><span class="dim"> 4</span>  <span class="green">+     name: '남산서울타워',</span></div>
+        <div class="ln"><span class="dim"> 5</span>  <span class="green">+     category: 'travel',</span></div>
+        <div class="ln"><span class="dim"> 6</span>  <span class="green">+     lat: 37.5512, lng: 126.9882,</span></div>
+        <div class="ln"><span class="dim">  </span>  <span class="green">+   },</span></div>
+        <div class="ln"><span class="dim"> ⋮</span>  <span class="dim">    (장소 4곳 더)</span></div>
+        <div class="ln"><span class="dim">48</span>  <span class="green">+ ];</span></div>
+      </div>
+    </div>
+
+    <div style="height:16px;"></div>
+    <div><span class="orange">●</span> <span class="green">Created</span> <span class="w">src/defaultPlaces.js</span> <span class="dim">(48 lines)</span></div>
+  </div>
+</div>
+</body>
+</html>

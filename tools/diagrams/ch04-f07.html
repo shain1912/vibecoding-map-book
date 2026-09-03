@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch04-f07</title>
+<style>
+  html,body{margin:0;padding:0;background:#0c0c0c;}
+  *{box-sizing:border-box;}
+  #canvas{font-family:'Cascadia Mono','Consolas','D2Coding','Malgun Gothic',monospace;}
+  .w{color:#f2f2f2;}
+  .dim{color:#8a8a8a;}
+  .gray{color:#9d9d9d;}
+  .green{color:#23d18b;}
+  .orange{color:#d97757;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:680px;position:relative;background:#0c0c0c;overflow:hidden;">
+  <div style="height:46px;background:#0c0c0c;display:flex;align-items:center;position:relative;">
+    <div style="display:flex;align-items:center;height:34px;margin-top:12px;background:#1c1c1c;border-radius:8px 8px 0 0;padding:0 14px;">
+      <div style="width:20px;height:20px;background:#0e5a8a;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-right:9px;font-size:11px;color:#fff;font-weight:bold;">&gt;_</div>
+      <span style="color:#f2f2f2;font-size:16px;">Windows PowerShell</span>
+      <span style="color:#a9a9a9;font-size:15px;margin-left:24px;">✕</span>
+    </div>
+    <span style="color:#cfcfcf;font-size:22px;margin-left:14px;line-height:1;">＋</span>
+    <span style="color:#cfcfcf;font-size:12px;margin-left:14px;">⌄</span>
+    <div style="position:absolute;right:0;top:0;height:46px;display:flex;align-items:center;color:#cfcfcf;font-size:16px;">
+      <span style="padding:0 18px;">—</span>
+      <span style="padding:0 18px;font-size:14px;">▢</span>
+      <span style="padding:0 20px;color:#fff;">✕</span>
+    </div>
+  </div>
+  <div style="padding:24px 30px;font-size:22px;line-height:1.5;color:#cccccc;">
+    <div><span class="orange" style="font-size:24px;">●</span> <span class="w">test.txt 파일을 만들겠습니다.</span></div>
+    <div style="height:16px;"></div>
+
+    <!-- file preview -->
+    <div style="border:1px solid #3a3a3a;border-radius:10px;max-width:900px;overflow:hidden;">
+      <div style="background:#171717;padding:8px 18px;color:#bdbdbd;">test.txt</div>
+      <div style="padding:10px 18px;background:#0e1a12;">
+        <div><span class="dim">1</span>  <span class="green">+ 바이브코딩 시작!</span></div>
+      </div>
+    </div>
+
+    <div style="height:22px;"></div>
+
+    <!-- permission prompt -->
+    <div style="border:1px solid #d97757;border-radius:12px;padding:18px 24px;max-width:900px;">
+      <div class="w" style="font-weight:600;">Claude wants to create test.txt</div>
+      <div style="height:14px;"></div>
+      <div>Do you want to proceed?</div>
+      <div style="height:12px;"></div>
+      <div style="background:#3a2b23;border-radius:6px;padding:4px 8px;margin:2px 0;"><span class="orange" style="font-weight:700;">❯ 1. Yes</span></div>
+      <div style="padding:4px 8px;margin:2px 0;">&nbsp;&nbsp;2. Yes, and don't ask again this session</div>
+      <div style="padding:4px 8px;margin:2px 0;">&nbsp;&nbsp;3. No, and tell Claude what to do differently&nbsp;&nbsp;<span class="dim">(esc)</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
