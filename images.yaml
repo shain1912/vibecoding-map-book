@@ -1376,7 +1376,7 @@
     steps:
       - "스크린샷: 지도 위 여러 카테고리 마커 중 하나를 클릭해 흰색 둥근 말풍선(이모지+이름, 노란 별점, × 버튼, 아래 꼬리)이 마커 위에 열린 모습. 말풍선이 잘 보이게 확대"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch14-f01
   chapter: 14
@@ -1919,7 +1919,7 @@
     steps:
       - "스크린샷: 삭제 버튼 클릭 직후. 브라우저 기본 확인 창에 \"'장소이름'을(를) 삭제할까요?\" 메시지와 확인/취소 버튼이 떠 있는 상태. 뒤로 상세 패널이 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch19-f05
   chapter: 19
@@ -2738,6 +2738,7 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
 
 

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch02-f01</title>
+<style>
+  html,body{margin:0;padding:0;background:#0c0c0c;}
+  *{box-sizing:border-box;}
+  #canvas{font-family:'Cascadia Mono','Consolas','D2Coding','Malgun Gothic',monospace;}
+  .body{padding:16px 24px;font-size:22px;line-height:34px;color:#cccccc;}
+  .ln{white-space:pre-wrap;}
+  .cmd{color:#ffffff;font-weight:600;}
+  .w{color:#f2f2f2;}
+  .dim{color:#7d7d7d;}
+  .gray{color:#9d9d9d;}
+  .cyan{color:#4fc9d6;}
+  .green{color:#23d18b;}
+  .yellow{color:#f5f543;}
+  .warn{color:#f9f1a5;}
+  .red{color:#ef5350;}
+  .mag{color:#d670d6;}
+  .blue{color:#4aa5f0;}
+  .orange{color:#d97757;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1200px;height:680px;position:relative;background:#0c0c0c;overflow:hidden;">
+  <div style="height:46px;background:#0c0c0c;display:flex;align-items:center;position:relative;">
+    <div style="display:flex;align-items:center;height:34px;margin-top:12px;background:#1c1c1c;border-radius:8px 8px 0 0;padding:0 14px;">
+      <div style="width:20px;height:20px;background:#0e5a8a;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-right:9px;font-size:11px;color:#fff;font-weight:bold;">&gt;_</div>
+      <span style="color:#f2f2f2;font-size:16px;">Windows PowerShell</span>
+      <span style="color:#a9a9a9;font-size:15px;margin-left:24px;">✕</span>
+    </div>
+    <span style="color:#cfcfcf;font-size:22px;margin-left:14px;line-height:1;">＋</span>
+    <span style="color:#cfcfcf;font-size:12px;margin-left:14px;">⌄</span>
+    <div style="position:absolute;right:0;top:0;height:46px;display:flex;align-items:center;color:#cfcfcf;font-size:16px;">
+      <span style="padding:0 18px;">—</span>
+      <span style="padding:0 18px;font-size:14px;">▢</span>
+      <span style="padding:0 20px;color:#fff;">✕</span>
+    </div>
+  </div>
+  <div class="body">
+    <div class="ln"><span class="w">PS C:\Users\gildong&gt;</span> <span class="cmd">node</span> <span class="gray">-v</span></div>
+    <div class="ln"><span class="red">node : 'node' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램</span></div>
+    <div class="ln"><span class="red">이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우</span></div>
+    <div class="ln"><span class="red">경로가 올바른지 검증한 다음 다시 시도하십시오.</span></div>
+    <div class="ln"><span class="red">위치 줄:1 문자:1</span></div>
+    <div class="ln"><span class="red">+ node -v</span></div>
+    <div class="ln"><span class="red">+ ~~~~</span></div>
+    <div class="ln"><span class="red">    + CategoryInfo          : ObjectNotFound: (node:String) [], CommandNotFoundException</span></div>
+    <div class="ln"><span class="red">    + FullyQualifiedErrorId : CommandNotFoundException</span></div>
+    <div class="ln"> </div>
+    <div class="ln"><span class="w">PS C:\Users\gildong&gt;</span> <span style="background:#cccccc;color:#0c0c0c;">&nbsp;</span></div>
+  </div>
+</div>
+</body>
+</html>
