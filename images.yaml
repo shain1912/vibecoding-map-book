@@ -458,7 +458,7 @@
     steps:
       - "스크린샷: 터미널에서 `npm install -g @anthropic-ai/claude-code` 실행 후 added ... packages 완료 메시지가 보이는 화면. 글자 크게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch04-f04
   chapter: 4
@@ -2738,6 +2738,7 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
 
 
