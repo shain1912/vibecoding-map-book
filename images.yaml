@@ -339,7 +339,7 @@
     steps:
       - "스크린샷: gitforwindows.org 첫 화면. Download 버튼이 화면에 보이도록 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch03-f03
   chapter: 3
@@ -354,7 +354,7 @@
     steps:
       - "스크린샷: 설치 마법사의 \"Choosing the default editor used by Git\" 화면. 드롭다운에서 \"Use the Notepad as Git's default editor\"가 선택된 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch03-f04
   chapter: 3
@@ -369,7 +369,7 @@
     steps:
       - "스크린샷: \"Adjusting your PATH environment\" 화면. 두 번째 옵션 \"Git from the command line and also from 3rd-party software\"가 선택된 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch03-f05
   chapter: 3
@@ -2579,7 +2579,7 @@
   chapter: 25
   type: 스크린샷
   caption: "카카오 개발자 콘솔 JavaScript SDK 도메인에 github.io 도메인 추가"
-  file: images/ch25/ch25-f06.png
+  file: images/ch25/ch25-f06.jpg
   capture:
     kind: web
     command: null
@@ -2588,7 +2588,7 @@
     steps:
       - "스크린샷: developers.kakao.com 앱 > 플랫폼 키 > JavaScript 키 수정 화면의 JavaScript SDK 도메인 편집 영역. http://localhost:5173과 https://아이디.github.io 두 줄이 등록된 상태, 키 값은 모자이크 처리"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch25-f07
   chapter: 25
@@ -2779,6 +2779,10 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
+
+
+
 
 
 
