@@ -2308,7 +2308,7 @@
     steps:
       - "스크린샷: 디바이스 모드 iPhone SE(375px)에서 현재 앱을 연 화면. 320px 사이드바가 화면 대부분을 차지하고 지도가 오른쪽에 아주 가늘게 보이는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch23-f03
   chapter: 23
@@ -2339,7 +2339,7 @@
     steps:
       - "스크린샷: 디바이스 모드 iPhone SE. 지도가 화면 전체에 깔리고, 왼쪽에서 84vw 폭 사이드바가 오른쪽 그림자와 함께 지도 위에 겹쳐 있으며 오른쪽 가장자리로 지도가 살짝 보이는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch23-f05
   chapter: 23
@@ -2354,7 +2354,7 @@
     steps:
       - "스크린샷: 디바이스 모드 iPhone SE. 사이드바가 완전히 사라져 지도가 화면 전체에 보이고, 왼쪽 위에 ▶ 버튼이 떠 있는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch23-f06
   chapter: 23
@@ -2779,6 +2779,9 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
+
+
 
 
 

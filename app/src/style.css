@@ -1,4 +1,4 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+﻿* { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --brand: #0d9488;
@@ -192,3 +192,4 @@ button.danger:hover { background: #fef2f2; }
   #sidebar.collapsed { margin-left: -100vw; }
   #detail-panel { left: 12px; width: auto; top: auto; bottom: 12px; }
 }
+
