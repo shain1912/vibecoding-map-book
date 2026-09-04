@@ -1,4 +1,4 @@
-# images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
+﻿# images.yaml — 그림 매니페스트 (FORMAT_SPEC.md 2.2 계약)
 # Layout 에이전트가 chapters/ch00~ch28의 FIG 마커를 스캔해 생성 (2026-09-02, 3차 패스 갱신: ch14~ch18 재동기화)
 
 - id: ch00-f01
@@ -1991,7 +1991,7 @@
     steps:
       - "스크린샷: localhost:5173 앱에서 🧭 버튼을 누른 직후. 주소창 왼쪽 아래로 \"localhost:5173에서 다음 권한을 요청합니다: 위치 액세스\" 프롬프트가 열리고 \"허용\" / \"차단\" 버튼이 보이는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch20-f03
   chapter: 20
@@ -2750,6 +2750,7 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
 
 
