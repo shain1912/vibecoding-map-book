@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch15-f03</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;}
+  #canvas{width:1100px;height:620px;position:relative;background:#fff;overflow:hidden;
+    font-family:'Consolas','D2Coding','Menlo',monospace;}
+  .tabbar{height:42px;background:#f3f3f3;border-bottom:1px solid #cfcfcf;display:flex;align-items:stretch;
+    font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:14.5px;}
+  .tab{padding:0 18px;display:flex;align-items:center;color:#5f6368;}
+  .tab.active{color:#1a73e8;box-shadow:inset 0 -2px 0 #1a73e8;font-weight:600;}
+  .tabbar .sp{flex:1;}
+  .tabbar .icons{display:flex;align-items:center;gap:14px;padding:0 16px;color:#9aa0a6;font-size:16px;}
+  .filterbar{height:36px;background:#f3f3f3;border-bottom:1px solid #cfcfcf;display:flex;align-items:center;
+    gap:12px;padding:0 12px;font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:13px;color:#5f6368;}
+  .ico{color:#7a7a7a;font-size:15px;}
+  .filterbox{flex:0 0 260px;height:23px;border:1px solid #c9c9c9;border-radius:4px;background:#fff;
+    display:flex;align-items:center;padding:0 8px;color:#9aa0a6;font-size:13px;}
+  .levels{display:flex;align-items:center;gap:6px;color:#3c4043;}
+  .caret{font-size:10px;color:#7a7a7a;}
+  .console{position:absolute;top:78px;left:0;right:0;bottom:0;background:#fff;padding:2px 0;
+    font-size:16px;line-height:1.6;color:#080808;}
+  .row{padding:4px 12px 4px 32px;position:relative;border-bottom:1px solid #f0f0f0;white-space:pre-wrap;word-break:break-all;}
+  .row.input::before{content:">";position:absolute;left:13px;color:#1a73e8;font-weight:bold;}
+  .row.result::before{content:"<";position:absolute;left:13px;color:#9aa0a6;font-weight:bold;}
+  .row.result{color:#5f6368;}
+  .row.tree{border-bottom:1px solid #f0f0f0;padding-top:2px;padding-bottom:2px;}
+  .muted{color:#9aa0a6;}
+  .str{color:#c41a16;}
+  .num{color:#1c00cf;}
+  .tri{color:#727272;font-size:12px;}
+  .arrbadge{color:#7a7a7a;}
+  .propkey{color:#5f6368;}
+  .indent{padding-left:26px;}
+  .indent2{padding-left:52px;}
+  .kw{color:#0842a0;}
+</style>
+</head>
+<body>
+<div id="canvas">
+  <div class="tabbar">
+    <div class="tab">Elements</div>
+    <div class="tab active">Console</div>
+    <div class="tab">Sources</div>
+    <div class="tab">Network</div>
+    <div class="tab">Application</div>
+    <div class="sp"></div>
+    <div class="icons"><span>&#9881;</span><span>&#10005;</span></div>
+  </div>
+  <div class="filterbar">
+    <span class="ico">&#8856;</span>
+    <span class="ico">&#128269;</span>
+    <span class="filterbox">Filter</span>
+    <span class="levels">Default levels <span class="caret">&#9660;</span></span>
+  </div>
+  <div class="console">
+    <div class="row input"><span class="kw">new</span> kakao.maps.services.Places().keywordSearch(<span class="str">'성수동 카페'</span>, (d,s)=&gt;console.log(s, d))</div>
+    <div class="row result"><span class="muted">undefined</span></div>
+    <div class="row tree">OK&nbsp;&nbsp;<span class="tri">&#9654;</span> <span class="arrbadge">(7)</span>&nbsp;[{&hellip;}, {&hellip;}, {&hellip;}, {&hellip;}, {&hellip;}, {&hellip;}, {&hellip;}]</div>
+    <div class="row tree indent"><span class="tri">&#9660;</span> <span class="propkey">0</span>: {<span class="propkey">place_name</span>: <span class="str">'로우커피스탠드'</span>, <span class="propkey">x</span>: <span class="str">'127.0561...'</span>, <span class="propkey">y</span>: <span class="str">'37.5445...'</span>, <span class="propkey">road_address_name</span>: <span class="str">'서울 성동구 왕십리로4길 28-2'</span>, <span class="muted">&hellip;</span>}</div>
+    <div class="row tree indent2"><span class="propkey">place_name</span>: <span class="str">"로우커피스탠드"</span></div>
+    <div class="row tree indent2"><span class="propkey">road_address_name</span>: <span class="str">"서울 성동구 왕십리로4길 28-2"</span></div>
+    <div class="row tree indent2"><span class="propkey">x</span>: <span class="str">"127.05617980593"</span></div>
+    <div class="row tree indent2"><span class="propkey">y</span>: <span class="str">"37.54458412319"</span></div>
+    <div class="row tree indent2"><span class="propkey">phone</span>: <span class="str">"02-123-4567"</span></div>
+  </div>
+</div>
+</body>
+</html>

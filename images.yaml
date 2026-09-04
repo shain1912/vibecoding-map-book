@@ -919,7 +919,8 @@
     steps:
       - "스크린샷: 크롬 개발자도구 Console 탭에 \"카카오 키 로드: 0123... (OK)\" 메시지가 찍힌 화면. 더미 키 앞 4글자만 보이게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch08-f06.png
 
 - id: ch09-f01
   chapter: 9
@@ -998,7 +999,8 @@
     steps:
       - "스크린샷: Chrome 개발자 도구 Console 탭. 카카오 SDK 요청이 403으로 실패한 빨간 에러 메시지가 보이는 화면. 주소창의 localhost:5173과 에러 줄에 강조 박스"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch09-f05.png
 
 - id: ch09-f06
   chapter: 9
@@ -1530,7 +1532,8 @@
     steps:
       - "스크린샷: 개발자도구 콘솔. 위 코드를 실행해 \"OK\"와 배열(15개 안팎)이 출력되고, 첫 항목을 펼쳐 place_name, road_address_name, x, y, phone 등의 필드가 보이는 상태"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch15-f03.png
 
 - id: ch15-f04
   chapter: 15
@@ -2219,7 +2222,8 @@
     steps:
       - "스크린샷: 개발자도구 콘솔에 `kakao.maps.MarkerClusterer` 입력 후 함수(클래스)가 출력된 상태. 비교를 위해 위쪽에 확장팩 추가 전 `undefined`가 찍힌 기록이 함께 보이면 더 좋음"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch22-f03.png
 
 - id: ch22-f04
   chapter: 22
@@ -2759,7 +2763,8 @@
     steps:
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch28-f02.png
 
 
 
