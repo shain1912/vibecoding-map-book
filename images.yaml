@@ -1035,7 +1035,7 @@
     steps:
       - "스크린샷: 개발자도구 Console 탭에 `__map.setLevel(3)` 입력·실행된 상태, 왼쪽 지도는 서울시청 일대가 골목 수준으로 확대된 화면. 콘솔과 지도가 한 화면에 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch10-f02
   chapter: 10
@@ -1114,7 +1114,7 @@
     steps:
       - "스크린샷: 지도와 개발자도구 콘솔이 함께 보이는 화면. 콘솔에 \"클릭한 곳: 37.56... 126.97...\" 형식의 로그가 서너 줄 찍혀 있는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch11-f01
   chapter: 11
@@ -1302,7 +1302,7 @@
     steps:
       - "스크린샷: 우리 앱 실행 화면 + F12 개발자 도구 콘솔. 지도 위 클릭 지점과 콘솔에 출력된 \"lat: 37.xxxx, lng: 126.xxxx\" 텍스트가 함께 보이게 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch13-f01
   chapter: 13
@@ -1695,7 +1695,7 @@
     steps:
       - "스크린샷: 좌우 2분할 비교. 왼쪽은 장소를 2~3개 추가해 마커가 늘어난 지도, 오른쪽은 F5 새로고침 직후 추가한 마커가 사라지고 기본 장소만 남은 같은 지도. 사라진 마커 자리에 빨간 원 표시"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch17-f02
   chapter: 17
@@ -2167,7 +2167,7 @@
     steps:
       - "스크린샷: 두 개의 브라우저 창(또는 탭)을 나란히 배치. 왼쪽은 공유 버튼을 누른 원래 탭, 오른쪽은 링크를 붙여 넣어 연 새 탭. 두 지도가 같은 위치·같은 레벨을 보여 주고, 두 주소창에 동일한 해시가 보이는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch21-f06
   chapter: 21
@@ -2293,7 +2293,7 @@
     steps:
       - "스크린샷: 개발자도구가 열린 크롬 창. 좌상단 기기 툴바 아이콘에 강조 표시, 상단에 \"iPhone SE / 375 x 667\" 기기 선택 드롭다운이 보이는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch23-f02
   chapter: 23
@@ -2779,6 +2779,12 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
+
+
+
+
+
 
 
 
