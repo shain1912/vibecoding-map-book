@@ -883,7 +883,7 @@
   chapter: 8
   type: 스크린샷
   caption: "브라우저에서 확인한 Vite 환영 페이지"
-  file: images/ch08/ch08-f04.png
+  file: images/ch08/ch08-f04.jpg
   capture:
     kind: web
     command: null
@@ -892,7 +892,7 @@
     steps:
       - "스크린샷: 크롬에서 http://localhost:5173 접속. Vite 로고와 \"Hello Vite!\" 카운터 데모 페이지, 주소창의 localhost:5173이 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch08-f05
   chapter: 8
@@ -2773,6 +2773,7 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
 
 
 

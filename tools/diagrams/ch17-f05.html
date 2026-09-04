@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch17-f05</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  *{box-sizing:border-box;}
+  #canvas{width:1100px;height:620px;position:relative;background:#fff;overflow:hidden;
+    font-family:'Consolas','D2Coding','Menlo',monospace;}
+  .tabbar{height:42px;background:#f3f3f3;border-bottom:1px solid #cfcfcf;display:flex;align-items:stretch;
+    font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:14.5px;}
+  .tab{padding:0 18px;display:flex;align-items:center;color:#5f6368;}
+  .tab.active{color:#1a73e8;box-shadow:inset 0 -2px 0 #1a73e8;font-weight:600;}
+  .tabbar .sp{flex:1;}
+  .tabbar .icons{display:flex;align-items:center;gap:14px;padding:0 16px;color:#9aa0a6;font-size:16px;}
+  .apptoolbar{height:34px;background:#f3f3f3;border-bottom:1px solid #cfcfcf;display:flex;align-items:center;
+    gap:12px;padding:0 12px;font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:13px;color:#5f6368;}
+  .ico{color:#7a7a7a;font-size:15px;}
+  .filterbox{flex:0 0 220px;height:22px;border:1px solid #c9c9c9;border-radius:4px;background:#fff;
+    display:flex;align-items:center;padding:0 8px;color:#9aa0a6;font-size:12.5px;}
+  .body{position:absolute;top:76px;left:0;right:0;bottom:0;display:flex;}
+  .tree{flex:0 0 262px;background:#fff;border-right:1px solid #d7d7d7;overflow:hidden;
+    font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:13px;color:#3c4043;padding-top:6px;}
+  .tnode{display:flex;align-items:center;height:24px;white-space:nowrap;}
+  .tnode .tw{width:14px;text-align:center;color:#7a7a7a;font-size:10px;flex:0 0 14px;}
+  .tnode .ti{margin-right:6px;font-size:14px;}
+  .tnode.sel{background:#e8f0fe;color:#1a73e8;}
+  .ind0{padding-left:8px;} .ind1{padding-left:24px;} .ind2{padding-left:40px;}
+  .sect{font-weight:600;}
+  .table{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;}
+  .thead{display:flex;height:26px;background:#f6f6f6;border-bottom:1px solid #d7d7d7;
+    font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:12.5px;color:#5f6368;}
+  .thead .c{display:flex;align-items:center;padding:0 10px;}
+  .col-key{flex:0 0 220px;border-right:1px solid #e2e2e2;}
+  .col-val{flex:1;overflow:hidden;}
+  .trow{display:flex;height:26px;border-bottom:1px solid #f0f0f0;font-size:13.5px;color:#202124;}
+  .trow.sel{background:#e8f0fe;}
+  .trow .c{display:flex;align-items:center;padding:0 10px;overflow:hidden;white-space:nowrap;}
+  .trow .col-key{border-right:1px solid #eee;color:#1a1aa6;}
+  .trow .col-val{color:#c41a16;text-overflow:ellipsis;}
+  .preview{flex:0 0 210px;border-top:1px solid #d7d7d7;background:#fafafa;display:flex;flex-direction:column;}
+  .pvbar{height:22px;background:#f0f0f0;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;
+    padding:0 10px;font-family:'Segoe UI','Malgun Gothic',sans-serif;font-size:11.5px;color:#7a7a7a;}
+  .pvbody{padding:8px 12px;font-size:12.5px;color:#202124;line-height:1.55;white-space:pre;overflow:hidden;}
+  .pvbody .key{color:#1a1aa6;} .pvbody .str{color:#c41a16;} .pvbody .num{color:#1c6b1c;} .pvbody .pun{color:#5f6368;}
+</style>
+</head>
+<body>
+<div id="canvas">
+  <div class="tabbar">
+    <div class="tab">Elements</div>
+    <div class="tab">Console</div>
+    <div class="tab">Sources</div>
+    <div class="tab">Network</div>
+    <div class="tab active">Application</div>
+    <div class="sp"></div>
+    <div class="icons"><span>&#9881;</span><span>&#10005;</span></div>
+  </div>
+  <div class="apptoolbar">
+    <span class="ico">&#8709;</span>
+    <span class="filterbox">&#128269;&nbsp;&nbsp;Filter</span>
+    <span>&#10005;</span>
+  </div>
+
+  <div class="body">
+    <div class="tree">
+      <div class="tnode ind0 sect"><span class="tw">&#9662;</span><span class="ti">&#128190;</span>Application</div>
+      <div class="tnode ind1"><span class="tw"></span><span class="ti">&#128220;</span>Manifest</div>
+      <div class="tnode ind1"><span class="tw"></span><span class="ti">&#9881;&#65039;</span>Service Workers</div>
+      <div class="tnode ind0 sect"><span class="tw">&#9662;</span><span class="ti">&#128451;&#65039;</span>Storage</div>
+      <div class="tnode ind1"><span class="tw">&#9662;</span><span class="ti">&#128193;</span>Local Storage</div>
+      <div class="tnode ind2 sel"><span class="tw"></span><span class="ti">&#127760;</span>http://localhost:5173</div>
+      <div class="tnode ind1"><span class="tw">&#9656;</span><span class="ti">&#128193;</span>Session Storage</div>
+      <div class="tnode ind1"><span class="tw">&#9656;</span><span class="ti">&#128451;&#65039;</span>IndexedDB</div>
+      <div class="tnode ind1"><span class="tw"></span><span class="ti">&#127850;</span>Cookies</div>
+    </div>
+
+    <div class="table">
+      <div class="thead">
+        <div class="c col-key">Key</div>
+        <div class="c col-val">Value</div>
+      </div>
+      <div class="trow sel">
+        <div class="c col-key">my-map-places-v1</div>
+        <div class="c col-val">[{"id":"seed01","name":"광장시장","category":"food","lat":37.5701,"lng":126.9996,"rating":5},{"id":"seed02","name":"성수동 카페거리","category":"cafe","lat":37.5445,"lng":127.0559,"rating":4},{"id":"a7f3c9","name":"연남동 소금빵집","category":"cafe","lat":37.5606,…</div>
+      </div>
+      <div style="flex:1;background:#fff;"></div>
+      <div class="preview">
+        <div class="pvbar">my-map-places-v1 &nbsp;·&nbsp; 값 미리보기 (정렬)</div>
+        <div class="pvbody"><span class="pun">[</span>
+  <span class="pun">{</span>
+    <span class="key">"id"</span><span class="pun">:</span> <span class="str">"seed01"</span><span class="pun">,</span>
+    <span class="key">"name"</span><span class="pun">:</span> <span class="str">"광장시장"</span><span class="pun">,</span>
+    <span class="key">"category"</span><span class="pun">:</span> <span class="str">"food"</span><span class="pun">,</span>
+    <span class="key">"lat"</span><span class="pun">:</span> <span class="num">37.5701</span><span class="pun">,</span> <span class="key">"lng"</span><span class="pun">:</span> <span class="num">126.9996</span><span class="pun">,</span> <span class="key">"rating"</span><span class="pun">:</span> <span class="num">5</span>
+  <span class="pun">},</span> <span class="pun">…</span>
+<span class="pun">]</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
