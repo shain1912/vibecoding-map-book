@@ -233,7 +233,7 @@
     steps:
       - "스크린샷: Node.js Setup Wizard의 Welcome 화면. 창 전체 캡처, Next 버튼이 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch02-f04
   chapter: 2
@@ -308,7 +308,7 @@
     steps:
       - "스크린샷: \"환경 변수 편집\" 창의 Path 목록에 `C:\\Program Files\\nodejs\\` 항목이 선택(하이라이트)된 상태. 창 전체 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch03-f01
   chapter: 3
@@ -446,7 +446,7 @@
     steps:
       - "스크린샷: claude.ai 로그인/가입 페이지. 구글 계정 버튼과 이메일 입력란이 보이도록 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch04-f03
   chapter: 4
@@ -539,7 +539,7 @@
     steps:
       - "스크린샷: github.com/signup 페이지. 이메일 입력란과 Continue 버튼이 보이게. 개인정보가 입력되지 않은 빈 상태로 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch05-f02
   chapter: 5
@@ -648,7 +648,7 @@
     steps:
       - "스크린샷: github.com/사용자이름/hello-github 저장소 페이지. README 내용과 커밋 1개가 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch06-f01
   chapter: 6
@@ -694,7 +694,7 @@
     steps:
       - "스크린샷: Orca 앱을 처음 실행해 프로젝트 폴더를 연 직후 화면. 왼쪽에 워크트리 카드 목록(비어 있거나 main 하나), 오른쪽에 터미널 영역이 보이도록. 창 전체 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch06-f04
   chapter: 6
@@ -2384,7 +2384,7 @@
     steps:
       - "촬영: 스마트폰으로 앱을 연 실제 사진. 지도 전체 화면에 마커와 클러스터가 보이고 손가락이 화면을 조작하는 모습"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch24-f01
   chapter: 24
@@ -2634,7 +2634,7 @@
     steps:
       - "스크린샷: 배포된 지도 앱이 열린 브라우저 위에 Win+Shift+S 캡처 도구 막대(사각형 영역 모드)가 떠 있고, 앱 영역이 드래그 선택된 순간. 지도에는 마커 여러 개와 열린 말풍선, 왼쪽에 사이드바 목록이 보이는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch26-f03
   chapter: 26
@@ -2779,6 +2779,7 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
 
 
 
