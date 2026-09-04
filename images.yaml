@@ -862,7 +862,8 @@
     steps:
       - "스크린샷: 탐색기 또는 VS Code 탐색기 패널에서 my-map 폴더 트리를 펼친 모습. index.html, package.json, src 폴더가 보이게"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch08-f02.png
 
 - id: ch08-f03
   chapter: 8
@@ -907,7 +908,8 @@
     steps:
       - "스크린샷: 에디터에서 .env 파일을 연 화면. VITE_KAKAO_JS_KEY=0123abcd... 형태의 더미 키 한 줄. 실제 키는 절대 노출 금지"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch08-f05.png
 
 - id: ch08-f06
   chapter: 8
@@ -1772,7 +1774,8 @@
     steps:
       - "스크린샷: 내보내기 버튼 클릭 후 다운로드된 my-map-places.json을 메모장(또는 VS Code)으로 연 모습. 들여쓰기 2칸의 JSON 배열에 id/name/category/lat/lng/rating/memo 필드가 보이는 상태"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch17-f06.png
 
 - id: ch17-f07
   chapter: 17
@@ -2396,7 +2399,8 @@
     steps:
       - "스크린샷: 에디터에서 my-map 프로젝트의 .gitignore를 연 화면. node_modules, dist, .env 세 항목이 잘 보이게. .env 줄을 강조 표시"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch24-f01.png
 
 - id: ch24-f02
   chapter: 24

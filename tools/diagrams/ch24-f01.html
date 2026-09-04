@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch24-f01</title>
+<style>
+  html,body{margin:0;padding:0;background:#1e1e1e;}
+  *{box-sizing:border-box;}
+  #canvas{font-family:'Consolas','D2Coding','Malgun Gothic',monospace;}
+  .tabbar{height:36px;background:#252526;display:flex;align-items:stretch;}
+  .tab{display:flex;align-items:center;padding:0 16px;background:#1e1e1e;color:#ffffff;font-size:16px;border-top:2px solid #007acc;}
+  .tab .ic{width:16px;height:16px;margin-right:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;color:#cccccc;}
+  .tab .dot{width:9px;height:9px;border-radius:50%;background:#c5c5c5;margin-left:14px;}
+  .breadcrumb{height:30px;background:#1e1e1e;display:flex;align-items:center;padding-left:22px;color:#a0a0a0;font-size:14px;border-bottom:1px solid #2b2b2b;}
+  .editor{position:relative;padding-top:14px;}
+  .row{display:flex;height:38px;align-items:center;}
+  .gnum{width:64px;text-align:right;color:#858585;font-size:21px;padding-right:22px;user-select:none;}
+  .txt{font-size:21px;color:#d4d4d4;white-space:pre;}
+  .cmt{color:#6a9955;}
+  .hlbg{background:#3a2f1a;}
+  .warn{color:#6a9955;font-weight:bold;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1000px;height:560px;position:relative;background:#1e1e1e;overflow:hidden;">
+  <div class="tabbar">
+    <div class="tab"><span class="ic">◆</span>.gitignore<span class="dot"></span></div>
+  </div>
+  <div class="breadcrumb">my-map &nbsp;›&nbsp; .gitignore</div>
+  <div class="editor">
+    <div class="row"><span class="gnum">1</span><span class="txt">node_modules      <span class="cmt"># 부품 창고 - 다시 받으면 됨</span></span></div>
+    <div class="row"><span class="gnum">2</span><span class="txt">dist              <span class="cmt"># 빌드 결과물 - 다시 만들면 됨</span></span></div>
+    <div class="row hlbg"><span class="gnum">3</span><span class="txt">.env              <span class="warn">← 비밀! 안 올라감</span></span></div>
+    <div class="row"><span class="gnum">4</span><span class="txt">*.local           <span class="cmt"># 내 컴퓨터에서만 쓰는 설정</span></span></div>
+  </div>
+</div>
+</body>
+</html>

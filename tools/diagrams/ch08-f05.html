@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch08-f05</title>
+<style>
+  html,body{margin:0;padding:0;background:#1e1e1e;}
+  *{box-sizing:border-box;}
+  #canvas{font-family:'Consolas','D2Coding','Malgun Gothic',monospace;}
+  .tabbar{height:36px;background:#252526;display:flex;align-items:stretch;}
+  .tab{display:flex;align-items:center;padding:0 16px;background:#1e1e1e;color:#ffffff;font-size:16px;border-top:2px solid #007acc;position:relative;}
+  .tab .ic{width:16px;height:16px;margin-right:8px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#cccccc;}
+  .tab .dot{width:9px;height:9px;border-radius:50%;background:#c5c5c5;margin-left:14px;}
+  .breadcrumb{height:30px;background:#1e1e1e;display:flex;align-items:center;padding-left:22px;color:#a0a0a0;font-size:14px;border-bottom:1px solid #2b2b2b;}
+  .editor{display:flex;padding-top:12px;}
+  .gutter{width:64px;text-align:right;color:#858585;font-size:21px;line-height:36px;padding-right:22px;user-select:none;}
+  .code{font-size:21px;line-height:36px;color:#d4d4d4;white-space:pre;}
+  .comment{color:#6a9955;}
+  .key{color:#9cdcfe;}
+  .op{color:#d4d4d4;}
+  .str{color:#ce9178;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1000px;height:560px;position:relative;background:#1e1e1e;overflow:hidden;">
+  <div class="tabbar">
+    <div class="tab"><span class="ic">⚙</span>.env<span class="dot"></span></div>
+  </div>
+  <div class="breadcrumb">my-map &nbsp;›&nbsp; .env</div>
+  <div class="editor">
+    <div class="gutter">1<br>2</div>
+    <div class="code"><span class="comment"># 카카오 JavaScript 키 (절대 깃허브에 올리지 않음)</span>
+<span class="key">VITE_KAKAO_JS_KEY</span><span class="op">=</span><span class="str">0123abcd4567ef89ab01cd23ef45ab67</span></div>
+  </div>
+</div>
+</body>
+</html>

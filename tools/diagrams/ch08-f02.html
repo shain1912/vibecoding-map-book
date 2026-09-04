@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ch08-f02</title>
+<style>
+  html,body{margin:0;padding:0;background:#1e1e1e;}
+  *{box-sizing:border-box;}
+  #canvas{font-family:'Consolas','D2Coding','Malgun Gothic',sans-serif;display:flex;}
+  .activity{width:50px;background:#333333;display:flex;flex-direction:column;align-items:center;padding-top:14px;gap:24px;}
+  .activity .ai{font-size:24px;color:#858585;}
+  .activity .ai.on{color:#ffffff;border-left:2px solid #007acc;margin-left:-2px;padding-left:0;}
+  .side{width:390px;background:#252526;padding-top:6px;}
+  .sh{color:#bbbbbb;font-size:13px;letter-spacing:1px;padding:8px 20px 6px;}
+  .proj{color:#cccccc;font-size:18px;font-weight:bold;padding:6px 12px;display:flex;align-items:center;}
+  .row{display:flex;align-items:center;height:34px;font-size:20px;color:#cccccc;padding-left:12px;}
+  .row .chev{width:20px;color:#cccccc;font-size:14px;}
+  .row .fic{width:26px;font-size:15px;font-weight:bold;text-align:center;}
+  .fold{color:#c09553;}
+  .js{color:#e8d44d;}
+  .css{color:#42a5f5;}
+  .html{color:#e37933;}
+  .json{color:#cbcb41;}
+  .cfg{color:#8a8a8a;}
+  .editor{flex:1;background:#1e1e1e;display:flex;align-items:center;justify-content:center;color:#5a5a5a;font-size:18px;}
+  .name{margin-left:4px;}
+</style>
+</head>
+<body>
+<div id="canvas" style="width:1000px;height:560px;position:relative;background:#1e1e1e;overflow:hidden;">
+  <div class="activity">
+    <span class="ai on">🗎</span>
+    <span class="ai">🔍</span>
+    <span class="ai">⑃</span>
+    <span class="ai">▷</span>
+    <span class="ai">▣</span>
+  </div>
+  <div class="side">
+    <div class="sh">탐색기</div>
+    <div class="proj"><span style="width:16px;font-size:13px;">⌄</span> MY-MAP</div>
+
+    <div class="row"><span class="chev">▸</span><span class="fic fold">🗀</span><span class="name">node_modules</span></div>
+    <div class="row"><span class="chev">▸</span><span class="fic fold">🗀</span><span class="name">public</span></div>
+    <div class="row"><span class="chev">▾</span><span class="fic fold">🗁</span><span class="name" style="color:#e0e0e0;">src</span></div>
+
+    <div class="row" style="padding-left:56px;"><span class="fic js">JS</span><span class="name">categories.js</span></div>
+    <div class="row" style="padding-left:56px;"><span class="fic js">JS</span><span class="name">defaultPlaces.js</span></div>
+    <div class="row" style="padding-left:56px;"><span class="fic js">JS</span><span class="name">loader.js</span></div>
+    <div class="row" style="padding-left:56px;"><span class="fic js">JS</span><span class="name">main.js</span></div>
+    <div class="row" style="padding-left:56px;"><span class="fic js">JS</span><span class="name">mapView.js</span></div>
+    <div class="row" style="padding-left:56px;"><span class="fic js">JS</span><span class="name">store.js</span></div>
+    <div class="row" style="padding-left:56px;"><span class="fic css">#</span><span class="name">style.css</span></div>
+
+    <div class="row" style="padding-left:32px;"><span class="fic cfg">◆</span><span class="name">.gitignore</span></div>
+    <div class="row" style="padding-left:32px;"><span class="fic html">&lt;&gt;</span><span class="name" style="color:#ffffff;">index.html</span></div>
+    <div class="row" style="padding-left:32px;"><span class="fic json">{}</span><span class="name" style="color:#ffffff;">package.json</span></div>
+  </div>
+  <div class="editor">my-map</div>
+</div>
+</body>
+</html>
