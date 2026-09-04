@@ -1724,7 +1724,8 @@
     steps:
       - "스크린샷: 개발자도구 Application 탭. 왼쪽 트리에서 Local Storage > http://localhost:5173 선택, 오른쪽 표에 Key \"hello\" / Value \"반갑습니다\" 행이 보이는 상태"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch17-f03.png
 
 - id: ch17-f04
   chapter: 17
@@ -1755,7 +1756,8 @@
     steps:
       - "스크린샷: 장소 추가 → 새로고침 후에도 마커가 유지된 지도 화면. 개발자도구 Application 탭을 함께 열어 Key \"my-map-places-v1\"에 JSON 문자열 값이 저장된 행이 보이도록 캡처"
     crop: window
-  status: pending
+  status: captured
+  source: tools/diagrams/out/ch17-f05.png
 
 - id: ch17-f06
   chapter: 17
