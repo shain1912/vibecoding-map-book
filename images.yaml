@@ -1170,7 +1170,7 @@
     steps:
       - "스크린샷: 지도 위에 카카오 예제 별 마커 이미지가 적용된 마커가 표시된 화면. 기본 마커와 비교되도록 기본 마커 1개를 옆에 함께 표시해도 좋음"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch11-f05
   chapter: 11
@@ -2760,6 +2760,7 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
 
 
