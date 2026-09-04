@@ -233,7 +233,7 @@
     steps:
       - "스크린샷: Node.js Setup Wizard의 Welcome 화면. 창 전체 캡처, Next 버튼이 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch02-f04
   chapter: 2
@@ -2384,7 +2384,7 @@
     steps:
       - "촬영: 스마트폰으로 앱을 연 실제 사진. 지도 전체 화면에 마커와 클러스터가 보이고 손가락이 화면을 조작하는 모습"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch24-f01
   chapter: 24
@@ -2779,6 +2779,8 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
+
 
 
 
