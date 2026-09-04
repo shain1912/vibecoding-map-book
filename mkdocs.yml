@@ -1,4 +1,5 @@
 site_name: 바이브코딩으로 만드는 나만의 지도 웹
+site_url: https://shain1912.github.io/vibecoding-map-book/
 site_description: AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼
 site_author: YLBook
 docs_dir: docs
