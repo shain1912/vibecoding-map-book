@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1691,7 +1693,12 @@
 <h2 id="52-github">5.2 GitHub 계정 만들기<a class="headerlink" href="#52-github" title="Permanent link">&para;</a></h2>
 <p>이미 깃허브 계정이 있다면 이 절은 건너뛰고 5.3절로 가셔도 됩니다. 처음이라면 함께 만들어 봅시다. 계정 생성은 무료이고, 신용카드도 필요 없습니다.</p>
 <p>브라우저에서 <strong>github.com</strong> 에 접속한 뒤 오른쪽 위의 <strong>Sign up</strong> 버튼을 누릅니다.</p>
-<p><img alt="그림 5.1 — GitHub 가입 페이지 (예시)" src="../images/ch05/ch05-f01.png" width="560" /></p>
+<figure>
+<p><img alt="GitHub 가입 페이지 (예시)" src="../images/ch05/ch05-f01.png" width="560" /></p>
+<figcaption>
+<p>그림 5.1 — GitHub 가입 페이지 (예시)</p>
+</figcaption>
+</figure>
 <p>가입 절차는 화면 안내를 따라가면 됩니다. 순서대로 정리하면 이렇습니다.</p>
 <ol>
 <li><strong>Email</strong> — 자주 확인하는 이메일 주소를 입력합니다. 인증 메일이 오니 실제 쓰는 주소여야 합니다.</li>
@@ -1716,14 +1723,24 @@
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">winget</span> <span class="n">install</span> <span class="n">GitHub</span><span class="p">.</span><span class="nb">cli</span>
 </span></code></pre></div>
 <p>처음 실행하면 약관(msstore 이용 약관) 동의를 묻는 경우가 있습니다. <code>Y</code>를 입력하고 Enter를 누르면 다운로드와 설치가 자동으로 진행됩니다.</p>
-<p><img alt="그림 5.2 — winget으로 GitHub CLI 설치 (출력 예시)" src="../images/ch05/ch05-f02.png" width="760" /></p>
+<figure>
+<p><img alt="winget으로 GitHub CLI 설치 (출력 예시)" src="../images/ch05/ch05-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 5.2 — winget으로 GitHub CLI 설치 (출력 예시)</p>
+</figcaption>
+</figure>
 <p>설치가 끝났다면 확인해 봅시다. 여기서 <strong>중요한 한 가지</strong> — 지금 열려 있는 터미널 창은 방금 설치된 <code>gh</code>의 위치(PATH)를 아직 모릅니다. <strong>터미널을 완전히 닫고 새로 연 다음</strong> 아래를 입력하세요.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">gh</span> <span class="p">-</span><span class="n">-version</span>
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>gh version 2.x.x (2025-xx-xx)
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>https://github.com/cli/cli/releases/tag/v2.x.x
 </span></code></pre></div>
-<p><img alt="그림 5.3 — gh 버전 확인" src="../images/ch05/ch05-f03.png" width="760" /></p>
+<figure>
+<p><img alt="gh 버전 확인" src="../images/ch05/ch05-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 5.3 — gh 버전 확인</p>
+</figcaption>
+</figure>
 <p>버전 번호가 나오면 성공입니다. 숫자는 책과 달라도 괜찮습니다. 만약 <code>'gh' 용어가 cmdlet... 이름으로 인식되지 않습니다</code> 같은 빨간 오류가 나온다면, 십중팔구 터미널을 새로 열지 않은 것이니 창을 닫고 다시 열어 보세요. 그래도 안 되면 컴퓨터를 한 번 재부팅하면 대부분 해결됩니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
@@ -1763,14 +1780,29 @@
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  Paste an authentication token
 </span></code></pre></div>
 <p><strong>Login with a web browser</strong> 를 선택합니다. 토큰 방식은 문자열을 직접 발급받아 붙여 넣는 방식으로, 지금은 필요 없습니다.</p>
-<p><img alt="그림 5.4 — gh auth login 질문 4단계" src="../images/ch05/ch05-f04.png" width="760" /></p>
+<figure>
+<p><img alt="gh auth login 질문 4단계" src="../images/ch05/ch05-f04.png" width="760" /></p>
+<figcaption>
+<p>그림 5.4 — gh auth login 질문 4단계</p>
+</figcaption>
+</figure>
 <p>여기까지 답하면 터미널에 <strong>일회용 코드</strong>가 나타납니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>! First copy your one-time code: A1B2-C3D4
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Press Enter to open https://github.com/login/device in your browser...
 </span></code></pre></div>
-<p><img alt="그림 5.5 — 일회용 코드 발급" src="../images/ch05/ch05-f05.png" width="760" /></p>
+<figure>
+<p><img alt="일회용 코드 발급" src="../images/ch05/ch05-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 5.5 — 일회용 코드 발급</p>
+</figcaption>
+</figure>
 <p>이 코드(예: <code>A1B2-C3D4</code>)를 마우스로 드래그해 복사(Ctrl+C)해 두고, <strong>Enter를 누릅니다.</strong> 그러면 기본 브라우저가 자동으로 열리면서 깃허브의 <strong>Device Activation</strong> 페이지가 나타납니다. (깃허브에 로그인돼 있지 않다면 먼저 로그인 화면이 나옵니다 — 5.2절에서 만든 계정으로 로그인하세요.)</p>
-<p><img alt="그림 5.6 — 브라우저의 Device Activation 화면" src="../images/ch05/ch05-f06.jpg" width="760" /></p>
+<figure>
+<p><img alt="브라우저의 Device Activation 화면" src="../images/ch05/ch05-f06.jpg" width="760" /></p>
+<figcaption>
+<p>그림 5.6 — 브라우저의 Device Activation 화면</p>
+</figcaption>
+</figure>
 <p>브라우저 화면의 입력 칸에 아까 복사한 코드를 붙여 넣고 <strong>Continue</strong>를 누릅니다. 이어서 "GitHub CLI가 계정에 접근하는 것을 허용할까요?"라고 묻는 <strong>Authorize github</strong> 화면이 나오면 초록색 <strong>Authorize</strong> 버튼을 누릅니다. "Congratulations, you're all set!" 같은 완료 메시지가 보이면 브라우저에서 할 일은 끝입니다.</p>
 <p>터미널로 돌아와 보세요. 몇 초 안에 이런 출력이 나타납니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>✓ Authentication complete.
@@ -1778,7 +1810,12 @@
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>✓ Configured git protocol
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>✓ Logged in as 여러분의아이디
 </span></code></pre></div>
-<p><img alt="그림 5.7 — 인증 완료, Logged in as" src="../images/ch05/ch05-f07.png" width="760" /></p>
+<figure>
+<p><img alt="인증 완료, Logged in as" src="../images/ch05/ch05-f07.png" width="760" /></p>
+<figcaption>
+<p>그림 5.7 — 인증 완료, Logged in as</p>
+</figcaption>
+</figure>
 <p><code>Logged in as</code> 뒤에 내 아이디가 나오면 연결 성공입니다. 방금 무슨 일이 일어난 걸까요? 브라우저에서 Authorize를 누르는 순간, 깃허브는 "이 터미널을 믿어도 된다"는 증표인 <strong>접근 토큰</strong>을 발급해서 <code>gh</code>에게 건네줍니다. <code>gh</code>는 이 토큰을 내 컴퓨터에 안전하게 저장해 두고, 이후 깃허브와 통신할 때마다 비밀번호 대신 토큰을 내밉니다. 비밀번호는 브라우저의 깃허브 화면에 딱 한 번 입력했을 뿐, 터미널에는 흔적도 남지 않습니다. 코드를 브라우저에 입력하는 이 방식이 번거로워 보여도 실은 비밀번호를 여기저기 흘리지 않기 위한 안전 설계인 셈입니다.</p>
 <p>이 인증은 한 번 해 두면 계속 유지됩니다. 컴퓨터를 껐다 켜도 다시 로그인할 필요가 없습니다. 다만 컴퓨터를 새로 장만하거나 포맷하면 토큰도 사라지므로 그때는 <code>gh auth login</code>을 다시 하면 됩니다. 언제든 상태가 궁금하면 <code>gh auth status</code> 를 입력해 보세요. 어떤 계정으로 로그인돼 있는지, 어떤 프로토콜을 쓰는지 보여 줍니다.</p>
 <div class="admonition warning">
@@ -1814,7 +1851,12 @@
 <p>정말 올라갔는지 눈으로 확인해 봅시다. 터미널에 아래를 입력하면 방금 만든 저장소가 브라우저로 열립니다.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">gh</span> <span class="n">repo</span> <span class="n">view</span> <span class="p">-</span><span class="n">-web</span>
 </span></code></pre></div>
-<p><img alt="그림 5.8 — 깃허브에 올라간 첫 저장소 (구성 예시)" src="../images/ch05/ch05-f08.png" width="820" /></p>
+<figure>
+<p><img alt="깃허브에 올라간 첫 저장소 (구성 예시)" src="../images/ch05/ch05-f08.png" width="820" /></p>
+<figcaption>
+<p>그림 5.8 — 깃허브에 올라간 첫 저장소 (구성 예시)</p>
+</figcaption>
+</figure>
 <p>브라우저에 <code>github.com/내아이디/hello-github</code> 페이지가 뜨고, 방금 만든 README가 그대로 보이면 성공입니다. 축하합니다 — 여러분의 코드가 처음으로 인터넷에 올라갔습니다. 저장소 페이지를 잠깐 둘러봅시다. 가운데에 파일 목록이 있고, 그 아래에 README 내용이 자동으로 펼쳐져 보입니다. 파일 목록 위의 "1 commit" 같은 표시를 누르면 커밋 역사를 볼 수 있습니다. 앞으로 커밋이 쌓일수록 이 역사가 길어지고, 프로필의 잔디밭(기여 그래프)에도 초록 칸이 하나씩 채워집니다.</p>
 <p>이제 이 흐름이 이 책 전체에서 습관처럼 반복됩니다. 작업이 하나 끝날 때마다 <strong>커밋하고(commit), 밀어 올리는(push)</strong> 두 박자. 저는 실제로 기능 하나를 바이브코딩으로 완성할 때마다 Claude Code에게 "커밋하고 푸시해 줘"라고 말하는 것을 마무리 인사처럼 씁니다. 하루 작업이 날아가는 최악의 사고는, 이 두 박자 습관만 있으면 절대 일어나지 않습니다. 24장에서는 지도 웹앱을 이 방법 그대로 올리고, 25장에서는 거기서 바로 배포까지 갑니다.</p>
 <div class="admonition tip">

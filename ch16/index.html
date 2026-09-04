@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1699,7 +1701,12 @@
 <h2 id="161">16.1 설계 먼저 — 입구는 둘, 문은 하나<a class="headerlink" href="#161" title="Permanent link">&para;</a></h2>
 <p>코드를 시키기 전에 잠깐 설계 이야기를 하겠습니다. 방금 "입구를 두 개 만든다"고 했는데, 초보 시절에 하기 쉬운 실수가 바로 <strong>입구마다 문을 따로 만드는 것</strong>입니다. 검색 추가용 폼 하나, 지도 클릭용 폼 하나. 당장은 돌아가지만, 나중에 폼에 별점 칸을 하나 추가하고 싶어지면 두 군데를 고쳐야 합니다. 한쪽만 고치고 다른 쪽을 잊으면? 사용자는 "어떤 때는 별점이 있고 어떤 때는 없는" 이상한 앱을 만나게 됩니다.</p>
 <p>그래서 우리는 처음부터 이렇게 설계합니다. <strong>입구는 둘이지만 문은 하나.</strong> 장소 추가 다이얼로그를 여는 함수 <code>openAddDialog</code>를 딱 하나 만들고, 검색 ＋ 버튼도, 지도 클릭도 이 함수 하나를 호출하게 합니다. 두 입구의 차이는 함수에 넘기는 재료뿐입니다. 검색 결과에서 왔다면 이름과 좌표를 이미 알고 있으니 <code>{ name, lat, lng }</code>를 넘기고, 지도 클릭에서 왔다면 좌표만 아니까 <code>{ lat, lng }</code>만 넘깁니다. 이름 칸은 비워진 채 열리겠죠.</p>
-<p><img alt="그림 16.1 — 입구는 둘, 문은 하나: 장소 추가의 전체 흐름" src="../images/ch16/ch16-f01.png" width="760" /></p>
+<figure>
+<p><img alt="입구는 둘, 문은 하나: 장소 추가의 전체 흐름" src="../images/ch16/ch16-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 16.1 — 입구는 둘, 문은 하나: 장소 추가의 전체 흐름</p>
+</figcaption>
+</figure>
 <p>이렇게 "같은 일을 하는 코드는 한 곳에만 둔다"는 원칙을 개발자들은 <strong>재사용</strong>이라고 부릅니다. 사실 여러분은 이미 여러 번 경험했습니다. 9장에서 SDK 로드를 <code>loader.js</code> 한 곳에 모아 둔 덕분에 15장에서 확장팩을 붙일 때 한 줄만 고쳤고, 15장의 <code>run</code> 함수 하나를 버튼 클릭과 Enter 키가 함께 썼습니다. 바이브코딩에서도 이 원칙은 그대로 중요합니다. AI에게 "검색 추가 폼 만들어줘", "클릭 추가 폼 만들어줘"라고 따로따로 시키면 AI는 정말로 폼을 두 벌 만들어 버릴 수 있습니다. <strong>공용으로 쓸 것이라고 처음부터 말해 주는 것</strong>, 그것이 기획자인 우리의 일입니다.</p>
 <p>그런데 문을 달기 전에 먼저 해결해야 할 문제가 하나 더 있습니다. 새 장소를 추가하면 그 장소는 <strong>어디에 담기나요?</strong> 지금 우리 장소 데이터는 12장의 <code>defaultPlaces.js</code>가 수출하는 <code>DEFAULT_PLACES</code> 배열이고, 14장의 <code>filteredPlaces()</code>도 이 배열만 바라봅니다. 그런데 <code>DEFAULT_PLACES</code>는 이름 그대로 "기본 데이터"입니다. 여기에 새 장소를 마구 <code>push</code>하기 시작하면 기본과 추가분이 뒤섞여 버리죠. 추가·수정·삭제가 시작되는 지금이, 데이터를 도맡을 전담 창구를 만들 때입니다.</p>
 <h2 id="162-store">16.2 장소 데이터의 이사 — store 모듈 만들기<a class="headerlink" href="#162-store" title="Permanent link">&para;</a></h2>
@@ -1806,7 +1813,12 @@
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
 </span></code></pre></div>
 <p><code>position: fixed</code>와 <code>inset: 0</code>으로 화면 전체를 덮는 층을 만들고, 반투명 검정(<code>rgb(0 0 0 / 0.35)</code>)을 깔았습니다. 다이얼로그 뒤의 지도가 어둑하게 비치면서 "지금은 이 폼에 집중하세요"라는 신호를 줍니다. 그 층을 flex 정중앙 정렬로 쓰니 하얀 카드가 화면 한가운데에 떠오릅니다.</p>
-<p><img alt="그림 16.2 — 화면 가운데에 뜬 장소 추가 다이얼로그" src="../images/ch16/ch16-f02.jpg" width="760" /></p>
+<figure>
+<p><img alt="화면 가운데에 뜬 장소 추가 다이얼로그" src="../images/ch16/ch16-f02.jpg" width="760" /></p>
+<figcaption>
+<p>그림 16.2 — 화면 가운데에 뜬 장소 추가 다이얼로그</p>
+</figcaption>
+</figure>
 <h2 id="164-storeadd">16.4 폼 검증과 store.add — 추가 버튼의 속사정<a class="headerlink" href="#164-storeadd" title="Permanent link">&para;</a></h2>
 <p>문은 만들었는데 아직 손잡이가 없습니다. 취소·추가 버튼에 일을 시켜야죠. 다이얼로그 UI를 시켰던 프롬프트와는 별도로, 버튼의 동작을 한 번 더 시킵니다. "시키고 → 읽고 → 확인"의 리듬을 지키는 것입니다.</p>
 <div class="admonition tip">
@@ -1870,7 +1882,12 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nx">initSearch</span><span class="p">({</span><span class="w"> </span><span class="nx">onChange</span><span class="o">:</span><span class="w"> </span><span class="nx">rerender</span><span class="w"> </span><span class="p">});</span>
 </span></code></pre></div>
 <p>이 다리가 놓인 <strong>다음부터</strong> "추가 버튼을 누르면 마커가 즉시 찍힌다"가 성립합니다. <code>store.add</code>만으로는 배열에만 쌓일 뿐 지도는 옛 그림 그대로거든요. 그리고 솔직히 말하면 이 다리는 임시 가설교입니다. 데이터가 바뀌는 곳이 늘어날 때마다 다리도 하나씩 더 놓아야 한다면 금방 번거로워지겠죠. 18장에서 "데이터가 바뀌면 화면이 알아서 따라오는" 구독 패턴으로 이 다리를 우아하게 대체합니다. 그때까지는 이 명시적인 한 줄이 단방향 흐름을 눈에 보이게 해 주는 좋은 교재입니다.</p>
-<p><img alt="그림 16.3 — 이름을 비우고 추가를 누르면 뜨는 검증 토스트" src="../images/ch16/ch16-f03.jpg" width="760" /></p>
+<figure>
+<p><img alt="이름을 비우고 추가를 누르면 뜨는 검증 토스트" src="../images/ch16/ch16-f03.jpg" width="760" /></p>
+<figcaption>
+<p>그림 16.3 — 이름을 비우고 추가를 누르면 뜨는 검증 토스트</p>
+</figcaption>
+</figure>
 <h2 id="165">16.5 검색 결과에 ＋ 버튼 달기<a class="headerlink" href="#165" title="Permanent link">&para;</a></h2>
 <p>문이 완성됐으니 첫 번째 입구를 뚫읍시다. 15장의 검색 결과 목록에 ＋ 버튼을 답니다.</p>
 <div class="admonition tip">
@@ -1918,9 +1935,19 @@
 <p>이 문제의 정공법이 지금 코드에 들어 있는 <strong>클릭 영역 분리</strong>입니다. 이동 리스너를 <code>&lt;li&gt;</code>가 아니라 <code>.search-info</code>에 달면, ＋ 버튼은 <code>.search-info</code>의 자식이 아니라 <strong>형제</strong>이므로 ＋에서 출발한 거품이 아무리 위로 올라가도(<code>li</code> → <code>ul</code> → ...) <code>.search-info</code>를 지나가지 않습니다. 버블링은 부모 방향으로만 번지지, 옆집(형제)으로는 번지지 않거든요. 두 클릭의 영토를 아예 갈라 버린, 구조로 푸는 해법입니다.</p>
 <p>그럼 ＋ 리스너 첫 줄의 <code>e.stopPropagation()</code>은 뭘까요? "이 클릭은 여기서 소화했으니 위로 올려 보내지 마"라고 번짐을 끊는 명령입니다. 영역 분리가 이미 문제를 해결했으니 지금 구조에서는 이 줄이 없어도 지도는 움직이지 않습니다. 즉, 이 한 줄은 <strong>보험</strong>입니다. ＋의 클릭은 여전히 <code>&lt;li&gt;</code>와 <code>&lt;ul&gt;</code>로 번져 올라가고 있고, 나중에 누군가(미래의 우리, 혹은 AI가) <code>&lt;li&gt;</code>나 목록 전체에 클릭 리스너를 다시 다는 순간 잠자던 버그가 깨어납니다. 그 가능성을 문장 하나로 미리 막아 둔 것이죠. 버튼 속의 버튼, 목록 속의 버튼을 만들 때는 "영역을 나눠 달고, 안쪽 버튼에서는 번짐을 끊는다"를 한 세트로 기억해 두세요.</p>
 <p>마지막의 <code>resultsEl.hidden = true</code>는 UX 다듬기입니다. 다이얼로그가 열리는데 뒤에 검색 결과 목록까지 계속 떠 있으면 화면이 어수선하니, 추가 폼을 여는 순간 목록을 접습니다.</p>
-<p><img alt="그림 16.4 — 검색 결과마다 달린 ＋ 버튼" src="../images/ch16/ch16-f04.jpg" width="760" /></p>
+<figure>
+<p><img alt="검색 결과마다 달린 ＋ 버튼" src="../images/ch16/ch16-f04.jpg" width="760" /></p>
+<figcaption>
+<p>그림 16.4 — 검색 결과마다 달린 ＋ 버튼</p>
+</figcaption>
+</figure>
 <p>브라우저에서 확인해 봅시다. "성수동 카페"를 검색하고 한 항목의 ＋를 누르면, 검색 목록이 사라지면서 다이얼로그가 뜹니다. 이름 칸에 그 카페의 이름이 <strong>미리 채워져</strong> 있는 것이 포인트입니다. <code>openAddDialog({ name: item.place_name, ... })</code>로 넘긴 이름이 16.3절의 <code>value="${escapeHtml(name)}"</code> 자리에 꽂힌 결과입니다. 카테고리는 첫 옵션인 🍜 맛집으로 열리니, select를 눌러 ☕ 카페로 바꾸고 추가를 누르면 — 토스트가 뜨고, 지도에 새 마커가 즉시 찍힙니다. 16.4절에서 놓은 <code>notifyChange</code> 다리가 제 몫을 하는 순간입니다.</p>
-<p><img alt="그림 16.5 — ＋를 누르면 이름이 미리 채워진 다이얼로그가 열린다" src="../images/ch16/ch16-f05.jpg" width="760" /></p>
+<figure>
+<p><img alt="＋를 누르면 이름이 미리 채워진 다이얼로그가 열린다" src="../images/ch16/ch16-f05.jpg" width="760" /></p>
+<figcaption>
+<p>그림 16.5 — ＋를 누르면 이름이 미리 채워진 다이얼로그가 열린다</p>
+</figcaption>
+</figure>
 <h2 id="166">16.6 지도 클릭으로 추가하기<a class="headerlink" href="#166" title="Permanent link">&para;</a></h2>
 <p>두 번째 입구는 허무할 만큼 쉽습니다. 문(<code>openAddDialog</code>)이 이미 있으니, 지도 클릭과 문을 연결만 하면 됩니다. 기억을 되살려 보면, 10장 미니 실습에서 우리는 지도를 클릭하면 콘솔에 좌표를 찍어 본 적이 있습니다. 그때 "이 좌표로 나중에 재미있는 걸 한다"고 예고했었죠. 그 나중이 바로 지금입니다.</p>
 <div class="admonition tip">
@@ -1947,7 +1974,12 @@
 <li><strong>검증</strong> — 지도를 클릭해 폼을 열고, 이름을 비운 채(또는 공백만 입력하고) 추가 클릭 → "이름을 입력하세요." 토스트가 뜨고 폼은 그대로 남아 있습니다.</li>
 <li><strong>취소와 영역 분리</strong> — 폼을 연 채 취소를 눌러 깔끔히 닫히는지 확인합니다. 그리고 다시 검색해서 이번에는 ＋가 아니라 <strong>이름·주소 영역</strong>을 클릭 — 다이얼로그 없이 지도만 이동하고, ＋를 클릭했을 때는 지도가 움직이지 않고 다이얼로그만 열리는지, 두 클릭 영역이 서로를 침범하지 않는지 확인합니다.</li>
 </ol>
-<p><img alt="그림 16.6 — 지도 클릭으로 추가한 장소에 마커가 찍힌 모습" src="../images/ch16/ch16-f06.jpg" width="760" /></p>
+<figure>
+<p><img alt="지도 클릭으로 추가한 장소에 마커가 찍힌 모습" src="../images/ch16/ch16-f06.jpg" width="760" /></p>
+<figcaption>
+<p>그림 16.6 — 지도 클릭으로 추가한 장소에 마커가 찍힌 모습</p>
+</figcaption>
+</figure>
 <p>네 가지가 모두 통과했다면 축하합니다. 여러분의 지도는 이제 <strong>자라는 지도</strong>입니다. 카카오의 전국 데이터베이스에서 골라 담을 수도 있고, 지도 위 어디든 콕 찍어 나만 아는 장소를 새길 수도 있습니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>

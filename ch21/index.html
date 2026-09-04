@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1712,7 +1714,12 @@
 <p>첫째, <strong>해시는 서버로 전송되지 않습니다.</strong> 브라우저가 서버에 페이지를 요청할 때 <code>#</code> 뒤의 내용은 잘라 내고 보냅니다. 서버 입장에서는 <code>#37.5,127.0,4</code>가 붙어 있든 말든 똑같은 요청이고, 똑같은 <code>index.html</code>을 돌려줍니다. 해시는 처음부터 끝까지 <strong>브라우저 안에서만 쓰라고 만들어진 메모 칸</strong>인 셈입니다.</p>
 <p>둘째, <strong>해시가 바뀌어도 페이지가 새로고침되지 않습니다.</strong> 경로가 바뀌면 브라우저는 새 페이지를 통째로 다시 받아 오지만, 해시만 바뀌면 화면은 그대로 두고 값만 갱신합니다. 원래 용도가 "같은 문서 안의 특정 위치로 점프"(긴 문서의 목차 링크를 떠올려 보세요)였기 때문입니다.</p>
 <p>이 두 성질을 합치면 재미있는 결론이 나옵니다. 해시는 <strong>서버 몰래, 새로고침 없이, 자바스크립트가 마음대로 읽고 쓸 수 있는 URL 속 주머니</strong>입니다. 우리 같은 프론트엔드 개발자가 앱의 상태를 URL에 실어 나르기에 이보다 좋은 자리가 없습니다. 실제로 수많은 웹앱이 이 기법을 씁니다. 이름도 있습니다. <strong>URL로 상태를 공유한다</strong>고 해서 딥 링크(deep link)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>라고 부르죠.</p>
-<p><img alt="그림 21.1 — URL 해부도와 해시의 특별한 성질" src="../images/ch21/ch21-f01.png" width="760" /></p>
+<figure>
+<p><img alt="URL 해부도와 해시의 특별한 성질" src="../images/ch21/ch21-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 21.1 — URL 해부도와 해시의 특별한 성질</p>
+</figcaption>
+</figure>
 <h2 id="212">21.2 상태를 문자열에 담기 — 인코딩 설계<a class="headerlink" href="#212" title="Permanent link">&para;</a></h2>
 <p>주머니를 찾았으니 무엇을 담을지 정할 차례입니다. "지금 보고 있는 화면"을 복원하는 데 필요한 최소한의 정보는 무엇일까요? 9장에서 지도를 만들 때 넘겼던 3요소를 떠올리면 답이 나옵니다. <strong>중심 위도, 중심 경도, 확대 레벨.</strong> 이 세 숫자만 있으면 지도는 같은 화면을 다시 그릴 수 있습니다.</p>
 <p>이 세 숫자를 하나의 문자열로 만드는 규칙을 정합니다. 우리는 가장 단순한 방식을 씁니다.</p>
@@ -1760,7 +1767,12 @@
 <p><strong>clipboard API</strong> — <code>navigator.clipboard.writeText(url)</code>은 문자열을 사용자의 클립보드에 써 넣습니다. 클립보드는 비밀번호가 담겨 있을 수도 있는 민감한 공간이라, 브라우저는 이 API에 조건을 겁니다. 20장의 Geolocation과 똑같이 <strong>https 또는 localhost</strong>에서만 동작하고, 사용자의 클릭 같은 실제 행동에서 출발한 코드만 쓸 수 있습니다. 그리고 이 함수는 결과를 <strong>Promise</strong>로 돌려주기 때문에 <code>await</code>로 기다립니다. 그래서 클릭 리스너 함수 앞에 <code>async</code>가 붙어 있는 것입니다.</p>
 <p><strong>try-catch로 실패 대비</strong> — 조건을 만족하지 못했거나 권한이 막혀 있으면 <code>writeText</code>는 실패합니다. 실패가 예정된 API를 부를 때는 17장의 localStorage 때처럼 try-catch로 감쌉니다. 중요한 것은 catch 안에서도 사용자를 버려두지 않는다는 점입니다. 복사가 안 됐어도 <code>replaceState</code> 덕분에 <strong>주소창에는 이미 완성된 링크가 떠 있으니</strong>, "직접 복사하세요"라고 안내하면 사용자는 목적을 이룰 수 있습니다. 실패해도 대안이 남는 순서로 코드를 배치한 것, 눈여겨볼 만한 설계입니다.</p>
 <p>이제 <code>main.js</code>에서 <code>initShare()</code>를 호출해 연결하면(잠시 뒤 코드로 확인합니다) 버튼이 살아납니다. 개발 서버를 켜고 지도를 아무 데로나 움직인 뒤 🔗 버튼을 눌러 보세요.</p>
-<p><img alt="그림 21.2 — 공유 버튼 클릭: 주소창에 해시가 생기고 복사 토스트가 뜬 화면" src="../images/ch21/ch21-f02.jpg" width="760" /></p>
+<figure>
+<p><img alt="공유 버튼 클릭: 주소창에 해시가 생기고 복사 토스트가 뜬 화면" src="../images/ch21/ch21-f02.jpg" width="760" /></p>
+<figcaption>
+<p>그림 21.2 — 공유 버튼 클릭: 주소창에 해시가 생기고 복사 토스트가 뜬 화면</p>
+</figcaption>
+</figure>
 <p>주소창에 <code>#37.5...,127.0...,4</code> 같은 해시가 생기고 토스트가 떴다면 절반은 성공입니다. 메모장에 ++ctrl+v++ 를 눌러 링크가 정말 복사됐는지도 확인해 보세요. 하지만 지금 이 링크를 새 탭에 붙여 넣어 열면… 여전히 서울시청이 뜹니다. 당연합니다. <strong>쓰는 쪽만 만들고 읽는 쪽은 아직 안 만들었으니까요.</strong></p>
 <h2 id="214">21.4 정규식으로 해시 읽기 — 디코딩<a class="headerlink" href="#214" title="Permanent link">&para;</a></h2>
 <p>이제 짝의 나머지 반쪽, 접속할 때 해시를 읽어 지도 시작 위치로 쓰는 파서를 만듭니다.</p>
@@ -1832,7 +1844,12 @@
 </tr>
 </tbody>
 </table>
-<p><img alt="그림 21.3 — 정규식 해부도: 패턴과 해시 문자열의 대응" src="../images/ch21/ch21-f03.png" width="760" /></p>
+<figure>
+<p><img alt="정규식 해부도: 패턴과 해시 문자열의 대응" src="../images/ch21/ch21-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 21.3 — 정규식 해부도: 패턴과 해시 문자열의 대응</p>
+</figcaption>
+</figure>
 <p>이어 붙여 읽으면 이렇게 됩니다. "맨 앞이 <code>#</code>이고, 숫자·점 덩어리(마이너스 허용), 쉼표, 숫자·점 덩어리(마이너스 허용), 쉼표, 순수 숫자 덩어리로 <strong>끝나는</strong> 문자열." 정확히 우리의 인코딩 규칙을 거울에 비춘 모양입니다. 21.2절에서 "인코딩과 디코딩은 짝으로 설계한다"고 했던 약속이 여기서 지켜지고 있는 겁니다.</p>
 <p><code>location.hash.match(정규식)</code>은 패턴이 맞으면 결과 배열을, 안 맞으면 <code>null</code>을 돌려줍니다. 결과 배열 <code>m</code>의 0번 칸에는 매칭된 전체 문자열이, 그리고 <strong>1번 칸부터는 괄호로 캡처한 조각들이 순서대로</strong> 들어 있습니다. <code>m[1]</code>이 위도, <code>m[2]</code>가 경도, <code>m[3]</code>이 레벨인 이유입니다. 캡처된 조각은 어디까지나 <strong>문자열</strong>이므로, 15장의 검색 결과 <code>x</code>·<code>y</code> 때와 마찬가지로 <code>Number()</code>를 씌워 숫자로 바꿔 돌려줍니다.</p>
 <p>여기서 <code>^</code>와 <code>$</code>, 그리고 <code>if (!m) return null;</code>의 가치를 짚고 넘어가야 합니다. 해시는 <strong>사용자가 주소창에서 마음대로 고칠 수 있는 값</strong>입니다. 누군가 <code>#abc</code>나 <code>#37.5,127.0</code>(레벨 빠짐), <code>#37.5,127.0,4,999</code>(뭔가 더 붙음) 같은 링크로 들어올 수 있습니다. 앞뒤가 열린 느슨한 패턴이라면 이런 엉터리도 어중간하게 통과해서, <code>NaN</code> 좌표로 지도를 만들다 앱이 깨질 수 있습니다. <code>^</code>와 <code>$</code>로 양끝을 봉인한 덕분에 형식에서 한 글자라도 어긋나면 통째로 탈락하고, 함수는 얌전히 <code>null</code>을 돌려줍니다. 19장에서 <code>escapeHtml</code>로 배웠던 교훈이 여기서도 반복됩니다. <strong>바깥에서 들어오는 값은 일단 의심한다.</strong> URL도 사용자 입력입니다.</p>
@@ -1855,7 +1872,12 @@
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nx">initShare</span><span class="p">();</span>
 </span></code></pre></div>
 <p><code>??</code>는 <strong>널 병합 연산자</strong>입니다. 왼쪽이 <code>null</code>이나 <code>undefined</code><strong>일 때만</strong> 오른쪽 값을 쓰는 연산자죠. 해시가 유효하면 <code>hashState</code>의 좌표로, 아니면(<code>parseHash</code>가 <code>null</code>을 돌려줬으면) 늘 쓰던 서울시청 좌표로 시작합니다. <code>hashState?.level</code>의 <code>?.</code>(옵셔널 체이닝)는 20장에서도 스쳐 지났던 문법으로, <code>hashState</code>가 <code>null</code>이면 에러를 내는 대신 그냥 <code>undefined</code>가 되게 해 줍니다. 그 <code>undefined</code>를 다시 <code>?? 7</code>이 받아서 기본 레벨로 처리하고요. 두 연산자의 합작으로, "해시가 있으면 해시대로, 없으면 원래대로"라는 분기가 if문 하나 없이 단정하게 표현됐습니다.</p>
-<p><img alt="그림 21.4 — 공유의 왕복: 인코딩(쓰기)과 파싱(읽기)의 흐름" src="../images/ch21/ch21-f04.png" width="760" /></p>
+<figure>
+<p><img alt="공유의 왕복: 인코딩(쓰기)과 파싱(읽기)의 흐름" src="../images/ch21/ch21-f04.png" width="760" /></p>
+<figcaption>
+<p>그림 21.4 — 공유의 왕복: 인코딩(쓰기)과 파싱(읽기)의 흐름</p>
+</figcaption>
+</figure>
 <h2 id="215">21.5 실행 확인 — 링크 한 줄의 왕복 여행<a class="headerlink" href="#215" title="Permanent link">&para;</a></h2>
 <p>쓰기와 읽기가 모두 연결됐습니다. 전체 흐름을 처음부터 끝까지 시험해 봅시다.</p>
 <ol>
@@ -1864,7 +1886,12 @@
 <li><strong>새 탭</strong>을 열고 주소창에 ++ctrl+v++ 로 붙여 넣어 이동합니다.</li>
 <li>새 탭의 지도가 기본 화면이 아니라 <strong>방금 보던 그 동네, 그 확대 레벨</strong>로 열리면 성공입니다.</li>
 </ol>
-<p><img alt="그림 21.5 — 복사한 링크를 새 탭에서 연 결과: 같은 위치·같은 레벨" src="../images/ch21/ch21-f05.png" width="820" /></p>
+<figure>
+<p><img alt="복사한 링크를 새 탭에서 연 결과: 같은 위치·같은 레벨" src="../images/ch21/ch21-f05.png" width="820" /></p>
+<figcaption>
+<p>그림 21.5 — 복사한 링크를 새 탭에서 연 결과: 같은 위치·같은 레벨</p>
+</figcaption>
+</figure>
 <p>한 걸음 더 나아가, 파서의 방어력도 시험해 봅시다. 주소창의 해시를 일부러 <code>#abc</code>로 고치고 Enter를 눌러 보세요. 지도가 깨지지 않고 기본 위치로 멀쩡히 뜨면, <code>parseHash</code>의 <code>null</code> 방어가 제 역할을 하고 있는 겁니다. 이번에는 <code>#999,999,7</code>처럼 <strong>형식은 맞지만 값이 엉터리인</strong> 해시도 넣어 보세요. 정규식은 통과하지만 범위 검사에 걸려, 역시 기본 화면으로 안전하게 시작합니다. 잘못된 입력에 <strong>조용히, 안전하게</strong> 대처하는 것도 기능입니다.</p>
 <p>혹시 복사 토스트 대신 "복사 실패" 안내가 뜬다면 접속 주소를 확인해 보세요. <code>localhost:5173</code>이 아니라 <code>192.168.x.x:5173</code> 같은 IP 주소로 접속했다면 클립보드 API의 보안 조건(https 또는 localhost)에 걸린 것입니다. 이 경우에도 주소창의 해시는 이미 갱신돼 있으니 URL을 손으로 복사하면 공유는 됩니다. 우리가 catch에서 그렇게 안내하도록 만들어 두었죠.</p>
 <div class="admonition tip">
@@ -1878,7 +1905,12 @@
 <p><strong>첫 번째 길: 해시에 데이터를 통째로 싣기.</strong> 장소 배열을 <code>JSON.stringify</code>로 문자열화하고, URL에 넣어도 안전한 문자로 변환해 해시에 붙이는 방법입니다. 서버 없이 되니 지금 우리 실력으로도 도전할 수 있습니다. 다만 약점이 뚜렷합니다. URL이 순식간에 수천 글자로 불어나고, 브라우저·메신저마다 URL 길이 제한이 있어 장소가 수십 개만 돼도 잘려 나갈 수 있습니다. 장소 3~5개짜리 "미니 코스 공유" 정도가 현실적인 한계입니다.</p>
 <p><strong>두 번째 길: 서버에 저장하고 짧은 코드만 공유하기.</strong> 장소 데이터를 서버 데이터베이스에 올려 두고 <code>#map=a1b2c3</code> 같은 짧은 코드만 URL에 싣는 방식입니다. 카카오맵의 "장소 공유"나 URL 단축 서비스가 이 구조입니다. 길이 제한이 없고, 원본을 수정하면 링크를 받은 사람에게도 반영되게 만들 수 있습니다. 대신 서버와 데이터베이스라는 새로운 세계가 필요합니다. 이 책의 범위를 넘어서지만, 26장에서 "다음 단계 로드맵"으로 다시 만나게 될 방향입니다.</p>
 <p>한계를 아는 것은 부끄러운 일이 아닙니다. 오히려 "이 기능은 여기까지, 그 너머는 이런 기술이 필요하다"를 말할 수 있는 것이야말로 그 기능을 진짜로 이해했다는 증거입니다.</p>
-<p><img alt="그림 21.6 — 공유되는 것과 공유되지 않는 것" src="../images/ch21/ch21-f06.png" width="760" /></p>
+<figure>
+<p><img alt="공유되는 것과 공유되지 않는 것" src="../images/ch21/ch21-f06.png" width="760" /></p>
+<figcaption>
+<p>그림 21.6 — 공유되는 것과 공유되지 않는 것</p>
+</figcaption>
+</figure>
 <h2 id="217">21.7 마무리<a class="headerlink" href="#217" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">📌 핵심 요약</p>

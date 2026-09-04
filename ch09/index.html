@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1754,7 +1756,12 @@
 </tr>
 </tbody>
 </table>
-<p><img alt="그림 9.1 — SDK를 불러오는 두 가지 방법" src="../images/ch09/ch09-f01.png" width="760" /></p>
+<figure>
+<p><img alt="SDK를 불러오는 두 가지 방법" src="../images/ch09/ch09-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 9.1 — SDK를 불러오는 두 가지 방법</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>"동적(dynamic)"이라는 말이 나오면 "실행 중에, 그때그때"로 바꿔 읽으세요. 동적 로드는 "페이지가 실행되는 도중에 그때그때 스크립트를 불러온다"는 뜻입니다. 반대말 "정적(static)"은 "미리 정해져 있다"입니다.</p>
@@ -1763,7 +1770,12 @@
 <p>동적 로드에는 함정이 하나 숨어 있습니다. SDK 파일 다운로드가 끝났다고 해서 <strong>지도를 만들 준비까지 끝난 것은 아니라는</strong> 점입니다.</p>
 <p>택배로 조립식 책장을 주문했다고 해 봅시다. 택배 상자가 현관에 도착했습니다(파일 다운로드 완료). 그 순간 바로 책을 꽂을 수 있나요? 아니죠. 상자를 뜯고 부품을 조립하는 시간이 따로 필요합니다. 카카오 SDK도 같습니다. 파일이 도착한 뒤 내부적으로 지도 모듈을 준비하는 <strong>초기화</strong> 작업이 한 박자 더 있습니다. 이 준비가 끝나기 전에 <code>new kakao.maps.Map(...)</code>으로 지도를 만들려 들면, "그런 건 아직 없는데요?"라는 에러가 납니다. 얄궂게도 이 에러는 <strong>날 때도 있고 안 날 때도 있습니다.</strong> 네트워크가 빠른 날엔 잘 되다가, 느린 날엔 갑자기 죽는 식이죠. 이런 "타이밍 운"에 기대는 코드가 가장 잡기 어려운 버그를 만듭니다.</p>
 <p>카카오는 이 문제를 위한 공식 장치를 준비해 두었습니다. SDK 주소 뒤에 <strong><code>autoload=false</code></strong> 라는 옵션을 붙이는 것입니다. "파일이 도착해도 <strong>자동으로 조립하지 말고</strong> 기다려"라는 뜻입니다. 그 대신 우리가 원하는 시점에 <code>kakao.maps.load(콜백)</code>을 부르면, SDK가 조립을 시작하고 <strong>조립이 완전히 끝난 순간</strong> 우리가 넘긴 콜백 함수<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>를 실행해 줍니다. 순서를 그림으로 그리면 이렇습니다.</p>
-<p><img alt="그림 9.2 — autoload=false일 때 SDK가 준비되는 순서" src="../images/ch09/ch09-f02.png" width="760" /></p>
+<figure>
+<p><img alt="autoload=false일 때 SDK가 준비되는 순서" src="../images/ch09/ch09-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 9.2 — autoload=false일 때 SDK가 준비되는 순서</p>
+</figcaption>
+</figure>
 <p>정리하면 우리의 로드 전략은 세 문장입니다. <strong>자바스크립트로 <code>script</code> 태그를 만들어 꽂는다. 주소에는 <code>.env</code>에서 읽은 키와 <code>autoload=false</code>를 붙인다. 그리고 <code>kakao.maps.load()</code>의 콜백 안에서만 지도를 만든다.</strong> 이 전략을 코드로 옮길 시간입니다. 물론, 우리 손으로 치는 게 아니라요.</p>
 <h2 id="93-claude-code">9.3 Claude Code에게 로더를 시키자<a class="headerlink" href="#93-claude-code" title="Permanent link">&para;</a></h2>
 <p>Claude Code를 열고(프로젝트 폴더에서 <code>claude</code>를 실행하는 것, 이제 익숙하시죠) 이렇게 시켜 봅시다. 4장에서 배운 프롬프트 4요소 — 맥락·목표·제약·출력 — 을 담았습니다.</p>
@@ -1872,7 +1884,12 @@
 <p>그리고 핵심, <strong><code>new kakao.maps.Map(컨테이너, 옵션)</code></strong>. 지도 한 장을 만드는 데 필요한 재료는 딱 셋입니다.</p>
 <p>첫째, <strong>컨테이너</strong>. 지도를 그릴 HTML 요소입니다. <code>document.getElementById('map')</code>으로 9.4절에서 만든 빈 상자를 집어 건넵니다.</p>
 <p>둘째, <strong>center</strong>. 지도가 처음 열릴 때 화면 한가운데 올 지점입니다. 좌표는 <code>kakao.maps.LatLng(위도, 경도)</code>로 만듭니다. LatLng는 위도(<strong>Lat</strong>itude)와 경도(<strong>L</strong>o<strong>ng</strong>itude)를 합친 이름인데, 지구 위의 한 점을 숫자 두 개로 찍는 전 세계 공통 주소 체계입니다. <strong>위도</strong>는 적도를 0으로 남북 방향 위치를(북쪽으로 갈수록 커짐), <strong>경도</strong>는 영국 그리니치를 0으로 동서 방향 위치를 나타냅니다. 서울시청은 위도 37.5665, 경도 126.978. 대한민국 땅이라면 위도는 대략 33~38, 경도는 124~132 사이입니다. 여러분 동네 좌표를 얻는 방법은 12장에서 배우니, 오늘은 서울시청에서 출발합시다.</p>
-<p><img alt="그림 9.3 — 위도와 경도: 숫자 두 개로 지구 위 한 점 찍기" src="../images/ch09/ch09-f03.png" width="760" /></p>
+<figure>
+<p><img alt="위도와 경도: 숫자 두 개로 지구 위 한 점 찍기" src="../images/ch09/ch09-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 9.3 — 위도와 경도: 숫자 두 개로 지구 위 한 점 찍기</p>
+</figcaption>
+</figure>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
 <p><code>LatLng</code>는 이름 그대로 <strong>위도가 먼저, 경도가 나중</strong>입니다. 순서를 바꿔 <code>LatLng(126.978, 37.5665)</code>라고 쓰면 에러 없이 지도가 뜨는데, 중심이 서울이 아니라 엉뚱한 바다 한가운데입니다. 지도가 떴는데 온통 파란색이라면 십중팔구 위경도가 뒤집힌 겁니다.</p>
@@ -1883,7 +1900,12 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>npm run dev
 </span></code></pre></div>
 <p>브라우저에서 <code>http://localhost:5173</code>을 여세요. 1~2초 뒤, 화면 가득 지도가 떠오릅니다.</p>
-<p><img alt="그림 9.4 — 첫 지도! 서울시청을 중심으로 화면 가득 뜬 카카오지도" src="../images/ch09/ch09-f04.jpg" width="760" /></p>
+<figure>
+<p><img alt="첫 지도! 서울시청을 중심으로 화면 가득 뜬 카카오지도" src="../images/ch09/ch09-f04.jpg" width="760" /></p>
+<figcaption>
+<p>그림 9.4 — 첫 지도! 서울시청을 중심으로 화면 가득 뜬 카카오지도</p>
+</figcaption>
+</figure>
 <p>축하합니다! 여러분의 웹페이지에 지도가 떴습니다. 잠깐 놀다 가세요. 마우스로 끌어서 고향 동네까지 가 보고, 휠로 확대해서 자주 가는 골목도 찾아보세요. 이 지도는 이미지 한 장이 아니라 <strong>살아 있는 지도</strong>입니다. 움직일 때마다 SDK가 필요한 지도 타일을 카카오 서버에서 실시간으로 받아와 이어 붙이고 있는 겁니다. 그 모든 통신에 여러분의 JavaScript 키가 신분증으로 쓰이고 있고요. 7장, 8장, 9장의 조각이 지금 이 화면 한 장에서 전부 맞물려 돌아가고 있습니다.</p>
 <p>놀다 오셨으면, 개발자에게 더 중요한 화면을 하나 확인합시다. <code>F12</code>(또는 <code>Ctrl+Shift+I</code>)로 브라우저 <strong>개발자 도구</strong>를 열고 <strong>Console</strong> 탭을 보세요. 빨간 에러 없이 조용하다면 완벽한 성공입니다. 콘솔은 앞으로 우리의 계기판입니다. 지도가 잘 떠도 콘솔을 한 번 들여다보는 습관을 들이면, 문제를 사용자보다 먼저 발견하는 개발자가 됩니다.</p>
 <h2 id="97">9.7 트러블슈팅 — 지도가 안 뜰 때 보는 처방전<a class="headerlink" href="#97" title="Permanent link">&para;</a></h2>
@@ -1891,8 +1913,18 @@
 <p><strong>증상 1: 하얀(또는 텅 빈) 화면 — 에러도 없다.</strong> 범인은 십중팔구 <strong><code>#map</code>의 높이 0</strong>입니다(9.4절의 함정). 개발자 도구의 Elements 탭에서 <code>#map</code>을 클릭해 보세요. 요소는 있는데 크기가 <code>너비×0</code>으로 나오면 확정입니다. <code>html, body, #app, #map</code>에 <code>height: 100%</code> 릴레이가 끊긴 곳이 없는지 <code>style.css</code>를 점검하세요. 지도를 만든 <strong>뒤에</strong> 늦게 높이가 생긴 경우라면 새로고침 한 번으로도 해결됩니다.</p>
 <p><strong>증상 2: 401 (Unauthorized) — "너 누구야?"</strong> 콘솔이나 Network 탭에 <code>401</code>이 찍혔을 때 <strong>가장 흔한 원인</strong>은 카카오 서버가 <strong>열쇠 자체를 인정하지 않은 경우</strong>입니다. 점검 순서는 이렇습니다. ① <code>.env</code>의 변수 이름이 정확히 <code>VITE_KAKAO_JS_KEY</code>인가(<code>VITE_</code> 접두사가 없으면 Vite가 아예 안 읽어 줍니다). ② 값이 <strong>JavaScript 키</strong>가 맞는가(REST API 키를 붙여 넣는 실수가 정말 많습니다. 7장의 플랫폼 키 화면에서 열을 다시 확인하세요). ③ 키 앞뒤에 따옴표나 공백이 붙지 않았는가. ④ 그리고 결정적으로 — <strong><code>.env</code>를 고쳤으면 개발 서버를 껐다 켰는가.</strong> Vite는 <code>.env</code>를 서버 시작 시점에 한 번만 읽습니다. 터미널에서 <code>Ctrl+C</code>로 끄고 <code>npm run dev</code>로 다시 켜세요.</p>
 <p><strong>증상 3: 403 (Forbidden) — "너는 알겠는데, 여기선 안 돼."</strong> 가장 흔한 원인은, 키는 진짜인데 <strong>요청이 출발한 주소가 등록되어 있지 않은 경우</strong>입니다. 7장에서 배운 도메인 제한이 작동한 것이죠. 참고로 "401=키, 403=도메인" 짝은 공식 분류표가 아니라 가장 흔한 원인을 가리키는 나침반이니, 어느 쪽이든 Network 탭에서 실패한 요청을 클릭해 실제 요청 URL과 응답을 눈으로 확인하고 시작하세요. 카카오 콘솔(developers.kakao.com) → 전체 앱 → 내 앱 → <strong>앱 &gt; 플랫폼 키 → JavaScript 키</strong>의 <strong>JavaScript SDK 도메인</strong>에 <code>http://localhost:5173</code>이 있는지 확인하세요. 있는데도 403이라면 오타를 의심하세요. 프로토콜(<code>http</code>/<code>https</code>)은 하나만 등록해도 양쪽에서 인정되지만 <strong>호스트와 포트는 정확히 일치</strong>해야 합니다. 포트가 <code>5173</code>이 아니거나(8장에서 배웠듯 5173이 사용 중이면 Vite가 5174로 옮겨 앉습니다 — 그러면 5174도 등록해야 합니다), 호스트 철자가 다르거나, 끝에 <code>/</code>가 더 붙은 경우가 단골입니다.</p>
-<p><img alt="그림 9.5 — 도메인 미등록 시 콘솔에 찍히는 403 에러" src="../images/ch09/ch09-f05.png" width="760" /></p>
-<p><img alt="그림 9.6 — 카카오 콘솔의 JavaScript SDK 도메인 등록 재확인" src="../images/ch09/ch09-f06.jpg" width="760" /></p>
+<figure>
+<p><img alt="도메인 미등록 시 콘솔에 찍히는 403 에러" src="../images/ch09/ch09-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 9.5 — 도메인 미등록 시 콘솔에 찍히는 403 에러</p>
+</figcaption>
+</figure>
+<figure>
+<p><img alt="카카오 콘솔의 JavaScript SDK 도메인 등록 재확인" src="../images/ch09/ch09-f06.jpg" width="760" /></p>
+<figcaption>
+<p>그림 9.6 — 카카오 콘솔의 JavaScript SDK 도메인 등록 재확인</p>
+</figcaption>
+</figure>
 <p><strong>증상 4: "지도를 불러오지 못했습니다: VITE_KAKAO_JS_KEY가 .env에 없습니다."</strong> 우리가 loader.js에 심어 둔 방어 코드가 작동한 겁니다. <code>.env</code> 파일이 프로젝트 <strong>최상위 폴더</strong>(package.json 옆)에 있는지, 파일 이름이 <code>.env.txt</code>처럼 되어 버리진 않았는지 확인하고, 역시 서버를 재시작하세요.</p>
 <p><strong>증상 5: 회색 바탕만 있고 지도 타일이 안 나온다.</strong> 지도 객체는 만들어졌는데 타일을 못 받았거나, 숨겨진(크기 0) 상자에 그렸다가 나중에 상자가 커진 경우입니다. 먼저 Network 탭에서 빨간 실패 요청이 있으면 증상 2·3의 처방을 따르세요. 통신은 멀쩡한데 회색이라면 상자 크기가 나중에 바뀐 경우이니 새로고침을 해 보고, 그래도 반복되면 "지도 컨테이너 크기가 바뀐 뒤 relayout을 호출해야 한다"는 것이 원인입니다 — 사이드바를 접었다 펴는 23장에서 정식으로 다룹니다.</p>
 <p>그리고 이 모든 처방보다 강력한 만능 열쇠가 하나 있습니다. <strong>에러를 Claude Code에게 그대로 보여주는 것</strong>입니다.</p>

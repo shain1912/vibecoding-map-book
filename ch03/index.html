@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1846,12 +1848,22 @@
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">git</span> <span class="n">-v</span>
 </span></code></pre></div>
 <p>두 가지 결과 중 하나가 나옵니다. <code>git version 2.51.0.windows.1</code>처럼 버전 번호가 나온다면 축하합니다 — 이미 설치되어 있으니 3.5절의 "첫 설정"으로 건너뛰시면 됩니다. 반대로 아래처럼 빨간 글씨의 오류가 나온다면, git이 없다는 뜻입니다.</p>
-<p><img alt="그림 3.1 — git이 설치되어 있지 않을 때의 터미널 화면 (출력 예시)" src="../images/ch03/ch03-f01.png" width="760" /></p>
+<figure>
+<p><img alt="git이 설치되어 있지 않을 때의 터미널 화면 (출력 예시)" src="../images/ch03/ch03-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 3.1 — git이 설치되어 있지 않을 때의 터미널 화면 (출력 예시)</p>
+</figcaption>
+</figure>
 <p>"용어가 인식되지 않습니다"라는 문구는 2장에서 본 것과 같은 의미입니다. 윈도우가 <code>git</code>이라는 이름의 프로그램을 어디서 찾아야 할지 모른다는 뜻이지요. 지금부터 설치해서 알려 주면 됩니다.</p>
 <hr />
 <h2 id="33">3.3 다운로드와 설치 시작<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
 <p>브라우저를 열고 주소창에 <strong>gitforwindows.org</strong> 를 입력합니다. "Git for Windows"라는 이름 그대로, 윈도우용 git을 배포하는 공식 사이트입니다. 첫 화면 한가운데의 <strong>Download</strong> 버튼을 누르면 다운로드 페이지로 이동합니다.</p>
-<p><img alt="그림 3.2 — gitforwindows.org 다운로드 페이지" src="../images/ch03/ch03-f02.png" width="760" /></p>
+<figure>
+<p><img alt="gitforwindows.org 다운로드 페이지" src="../images/ch03/ch03-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 3.2 — gitforwindows.org 다운로드 페이지</p>
+</figcaption>
+</figure>
 <p>다운로드 목록에서 <strong>64-bit Git for Windows Setup</strong>을 선택합니다. 요즘 윈도우 PC는 거의 전부 64비트이니 고민할 필요 없습니다. 내려받은 <code>Git-2.xx.x-64-bit.exe</code> 파일을 더블클릭해 실행합니다. "이 앱이 디바이스를 변경할 수 있도록 허용하시겠어요?"라는 사용자 계정 컨트롤 창이 뜨면 <strong>예</strong>를 누릅니다.</p>
 <p>설치 마법사가 시작되면 라이선스 안내(GNU General Public License) 화면이 먼저 나옵니다. git이 누구나 무료로 쓸 수 있는 오픈소스 소프트웨어라는 안내이니 <strong>Next</strong>를 누릅니다. 설치 경로 선택 화면도 기본값 그대로 <strong>Next</strong>, 구성 요소 선택 화면(바탕화면 아이콘, 탐색기 메뉴 연동 등을 고르는 곳)도 기본값 그대로 <strong>Next</strong>를 누릅니다.</p>
 <p>여기까지는 쉽습니다. 문제는 그다음부터입니다.</p>
@@ -1862,7 +1874,12 @@
 <h3 id="choosing-the-default-editor-used-by-git">화면 하나 — 기본 에디터 선택 (Choosing the default editor used by Git)<a class="headerlink" href="#choosing-the-default-editor-used-by-git" title="Permanent link">&para;</a></h3>
 <p>git이 여러분에게 메시지를 입력받아야 할 때 어떤 편집기를 열지 고르는 화면입니다. 기본값이 <strong>Vim</strong>으로 되어 있는데, 이것만은 바꾸시길 권합니다. Vim은 강력하지만 조작법이 워낙 독특해서, 초보자가 실수로 Vim 화면에 들어가면 종료하는 방법조차 몰라 당황하기 딱 좋습니다. 실제로 "Vim에서 나가는 법"은 전 세계 개발자 커뮤니티의 유명한 밈일 정도입니다.</p>
 <p>목록을 펼쳐 <strong>Use the Notepad as Git's default editor</strong>(메모장)를 선택하세요. 만약 Visual Studio Code를 이미 설치해 두셨다면 <strong>Use Visual Studio Code as Git's default editor</strong>도 좋은 선택입니다. 어느 쪽이든, 익숙한 편집기가 열린다는 사실이 중요합니다.</p>
-<p><img alt="그림 3.3 — 기본 에디터 선택 화면" src="../images/ch03/ch03-f03.png" width="620" /></p>
+<figure>
+<p><img alt="기본 에디터 선택 화면" src="../images/ch03/ch03-f03.png" width="620" /></p>
+<figcaption>
+<p>그림 3.3 — 기본 에디터 선택 화면</p>
+</figcaption>
+</figure>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
 <p>에디터 선택을 깜빡하고 Vim인 채로 설치를 마쳤더라도 걱정하지 마세요. 나중에 터미널에서 <code>git config --global core.editor notepad</code> 한 줄이면 메모장으로 바꿀 수 있습니다. 잘못 골랐다고 재설치할 필요는 없습니다. 사실 이 장의 설치 옵션 전부가 그렇습니다 — 어떤 선택도 나중에 바꿀 수 있으니, 긴장하지 않으셔도 됩니다.</p>
@@ -1875,7 +1892,12 @@
 <li><strong>Use Git and optional Unix tools from the Command Prompt</strong> — 유닉스 도구까지 몽땅 PATH에 넣는 옵션인데, 윈도우 기본 명령과 이름이 겹쳐 부작용이 생길 수 있습니다. 설치 화면 스스로 경고를 띄우는 옵션이니 피합니다.</li>
 </ul>
 <p>가운데 옵션이 기본으로 선택되어 있을 테니, 확인만 하고 <strong>Next</strong>를 누르면 됩니다.</p>
-<p><img alt="그림 3.4 — PATH 설정 화면. 가운데 Recommended 옵션이 선택된 모습" src="../images/ch03/ch03-f04.png" width="620" /></p>
+<figure>
+<p><img alt="PATH 설정 화면. 가운데 Recommended 옵션이 선택된 모습" src="../images/ch03/ch03-f04.png" width="620" /></p>
+<figcaption>
+<p>그림 3.4 — PATH 설정 화면. 가운데 Recommended 옵션이 선택된 모습</p>
+</figcaption>
+</figure>
 <h3 id="_1">나머지 화면들 — 전부 기본값으로<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>이후로도 질문이 계속 이어집니다. HTTPS 연결 방식, 줄바꿈 처리(Checkout Windows-style, commit Unix-style line endings), 터미널 에뮬레이터(MinTTY), <code>git pull</code>의 기본 동작, 자격 증명 관리자(Git Credential Manager)… 전부 기본값 그대로 <strong>Next</strong>를 누르시면 됩니다. 각각이 무슨 뜻인지 지금 알 필요는 없습니다. 마지막 화면에서 <strong>Install</strong>을 누르면 설치가 진행되고, 잠시 뒤 <strong>Finish</strong>로 마무리됩니다.</p>
 <p>혹시 설치 화면 중에 "Adjusting the name of the initial branch in new repositories"(새 저장소의 첫 브랜치 이름)라는 화면을 보셨다면, 이것도 기본값(Let Git decide)으로 두면 됩니다. 브랜치가 무엇인지는 이 장의 끝에서 곧 만나게 됩니다.</p>
@@ -1885,7 +1907,12 @@
 <p>설치가 끝났으면 확인할 차례입니다. 여기서 2장에서 배운 규칙 하나를 복습합니다 — <strong>터미널을 새로 열어야 합니다.</strong> 설치 전에 열어 둔 터미널은 바뀐 PATH를 모르는 상태라서, 거기서는 여전히 <code>git</code>이 인식되지 않습니다. 열려 있던 터미널 창을 닫고, 새 터미널을 열어 입력합니다.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">git</span> <span class="n">-v</span>
 </span></code></pre></div>
-<p><img alt="그림 3.5 — git 버전 확인 성공" src="../images/ch03/ch03-f05.png" width="760" /></p>
+<figure>
+<p><img alt="git 버전 확인 성공" src="../images/ch03/ch03-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 3.5 — git 버전 확인 성공</p>
+</figcaption>
+</figure>
 <p><code>git version 2.xx.x.windows.1</code> 같은 버전 번호가 나오면 성공입니다. 뒤의 숫자는 설치 시점에 따라 다를 수 있고, 달라도 전혀 문제없습니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
@@ -1900,7 +1927,12 @@
 <p>두 줄을 실행해도 터미널에는 아무 반응이 없습니다. 원래 그렇습니다. 잘 저장됐는지 눈으로 확인하고 싶다면 아래를 입력해 보세요.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="p">-</span><span class="n">-list</span>
 </span></code></pre></div>
-<p><img alt="그림 3.6 — user.name과 user.email이 등록된 모습" src="../images/ch03/ch03-f06.png" width="760" /></p>
+<figure>
+<p><img alt="user.name과 user.email이 등록된 모습" src="../images/ch03/ch03-f06.png" width="760" /></p>
+<figcaption>
+<p>그림 3.6 — user.name과 user.email이 등록된 모습</p>
+</figcaption>
+</figure>
 <p>목록에 <code>user.name=홍길동</code>과 <code>user.email=hong@example.com</code>이 보이면 완료입니다. 오타를 냈더라도 같은 명령을 다시 실행하면 새 값으로 덮어써지니 부담 갖지 마세요. 이 설정은 컴퓨터에 파일로 저장되어 계속 유지되므로, 이 두 줄은 이 책을 통틀어 오늘 딱 한 번만 입력하면 됩니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
@@ -1909,7 +1941,12 @@
 <hr />
 <h2 id="36">3.6 딱 세 단어만 알면 됩니다 — 저장소, 커밋, 브랜치<a class="headerlink" href="#36" title="Permanent link">&para;</a></h2>
 <p>git의 명령어는 수십 개가 넘지만, 이 책에서 여러분이 외워야 할 명령은 사실상 없습니다. 4장에서 Claude Code를 설치하고 나면, git 조작도 대부분 말로 시키게 되기 때문입니다. 대신 <strong>개념 세 개</strong>는 머릿속에 있어야 합니다. AI에게 시킬 때도, AI가 한 일을 확인할 때도 이 세 단어가 계속 나오거든요.</p>
-<p><img alt="그림 3.7 — 저장소·커밋·브랜치 한 컷 개념도" src="../images/ch03/ch03-f07.jpg" width="760" /></p>
+<figure>
+<p><img alt="저장소·커밋·브랜치 한 컷 개념도" src="../images/ch03/ch03-f07.jpg" width="760" /></p>
+<figcaption>
+<p>그림 3.7 — 저장소·커밋·브랜치 한 컷 개념도</p>
+</figcaption>
+</figure>
 <p><strong>저장소(repository)</strong> 는 git이 지켜보는 프로젝트 폴더입니다. 평범한 폴더에 "이제부터 여기를 기록해 줘"라고 선언하면(이 선언이 <code>git init</code>입니다) 폴더 안에 <code>.git</code>이라는 숨김 폴더가 생기고, 그 순간부터 폴더는 저장소가 됩니다. 겉보기엔 그냥 폴더인데, 안에 타임머신이 한 대 들어 있는 셈입니다.</p>
 <p><strong>커밋(commit)</strong> 은 세이브 포인트 그 자체입니다. "지금 이 순간의 폴더 전체 상태"를 사진 한 장처럼 찍어서 기록에 남기는 행위이자, 그렇게 남은 기록 하나하나를 부르는 이름입니다. 커밋에는 시각, 아까 등록한 이름과 이메일, 그리고 "지도에 마커 표시 기능 추가"처럼 무엇을 했는지 적는 한 줄 메시지가 함께 저장됩니다. 커밋이 쌓이면 프로젝트의 역사책이 됩니다. 그리고 역사책의 어느 페이지로든 되돌아갈 수 있다는 것 — 이게 3.1절에서 말한 안전벨트의 정체입니다.</p>
 <p>커밋 메시지를 쓰는 요령도 미리 하나 챙겨 두세요. 몇 주 뒤의 내가 읽어도 무슨 세이브인지 알 수 있게, "수정", "작업중" 같은 말 대신 "검색 결과 클릭하면 지도 이동하게 함"처럼 <strong>무엇이 달라졌는지</strong>를 적는 것입니다. 사실 바이브코딩에서는 이 메시지조차 AI가 대신 써 주는 경우가 많지만, AI가 써 준 메시지가 적절한지 알아보는 눈은 여러분에게 있어야 합니다. 세이브 포인트에 이름표가 잘 붙어 있을수록 "어디로 되돌아갈지" 고르기도 쉬워집니다.</p>

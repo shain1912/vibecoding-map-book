@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1892,7 +1894,12 @@
 </div>
 <hr />
 <p>이 부록은 처음부터 끝까지 읽는 장이 아닙니다. <strong>필요할 때 펼쳐서 베껴 쓰는 장</strong>입니다. 본문에서 만난 "🗣 이렇게 시키세요" 박스들을 한자리에 모았고, 책이 끝난 뒤 여러분이 자기 프로젝트를 만들다 마주칠 상황들을 위한 빈칸 템플릿을 더했습니다. 프롬프트는 주문이 아니라 대화입니다. 그러니 아래 문장들을 토씨 하나 안 틀리고 외울 필요는 없습니다. 대신 각 프롬프트가 <strong>무엇을 어떻게 말하고 있는지</strong> — 어떤 파일을 짚어 주는지, 어떤 함정을 미리 알려 주는지, 어디까지만 하라고 선을 긋는지 — 그 골격을 가져가세요. 골격만 있으면 살은 여러분의 프로젝트에 맞게 얼마든지 바꿔 붙일 수 있습니다.</p>
-<p><img alt="그림 A.1 — 프롬프트 템플릿 사용법: 골격은 가져오고 살은 바꾼다" src="../images/ch27/ch27-f01.png" width="760" /></p>
+<figure>
+<p><img alt="프롬프트 템플릿 사용법: 골격은 가져오고 살은 바꾼다" src="../images/ch27/ch27-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 A.1 — 프롬프트 템플릿 사용법: 골격은 가져오고 살은 바꾼다</p>
+</figcaption>
+</figure>
 <h2 id="a1-26">A.1 장별 핵심 프롬프트 모음 — 26장의 여정을 프롬프트로 다시 걷기<a class="headerlink" href="#a1-26" title="Permanent link">&para;</a></h2>
 <p>각 장에서 가장 중심이 되었던 프롬프트를 여정 순서대로 모았습니다. 프롬프트 앞의 한 줄은 "언제 이 프롬프트를 꺼내 쓰는가"입니다. 나중에 비슷한 일을 다시 하고 싶을 때, 해당 장을 뒤적이는 대신 여기서 바로 찾으세요.</p>
 <h3 id="1">1부 — 바이브코딩 준비운동<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -2035,7 +2042,12 @@
 </blockquote>
 </div>
 <p>마지막 줄 "고치기 전에 원인을 먼저 말해줘"는 작은 습관이지만 큰 차이를 만듭니다. AI의 진단이 엉뚱하면 수정도 엉뚱할 확률이 높은데, 진단을 먼저 들으면 코드가 바뀌기 전에 방향을 바로잡을 수 있습니다.</p>
-<p><img alt="그림 A.2 — 버그 리포트 3종 세트: 증상, 재현 절차, 기대 결과" src="../images/ch27/ch27-f02.png" width="760" /></p>
+<figure>
+<p><img alt="버그 리포트 3종 세트: 증상, 재현 절차, 기대 결과" src="../images/ch27/ch27-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 A.2 — 버그 리포트 3종 세트: 증상, 재현 절차, 기대 결과</p>
+</figcaption>
+</figure>
 <h3 id="2_1">② 리팩토링 — 동작은 그대로, 구조만 바꾸기<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <p>리팩토링은 "겉보기 동작은 하나도 안 바꾸면서 속 구조만 고치는 일"입니다. 이 정의를 프롬프트에 그대로 넣는 것이 요령입니다. 그리고 리팩토링 전에는 <strong>반드시 먼저 커밋</strong>하세요. 동작이 바뀌었는지 확인할 기준점이 있어야 하고, 잘못되면 돌아갈 곳이 있어야 합니다.</p>
 <div class="admonition tip">
@@ -2146,7 +2158,12 @@
 <li><strong>돌아갈 곳이 있나?</strong> — 큰 수정 전에는 커밋. 안전벨트는 채워 둘 때만 작동합니다.</li>
 </ul>
 <p>매번 네 요소를 논문 쓰듯 갖출 필요는 없습니다. "오타 고쳐줘"는 한 줄이면 충분합니다. 하지만 결과가 마음에 안 들 때 프롬프트를 다시 보면, 십중팔구 네 칸 중 하나가 비어 있습니다. 그때 이 표로 돌아오세요.</p>
-<p><img alt="그림 A.3 — 프롬프트 발사 전 점검: 4요소 + 3습관" src="../images/ch27/ch27-f03.png" width="760" /></p>
+<figure>
+<p><img alt="프롬프트 발사 전 점검: 4요소 + 3습관" src="../images/ch27/ch27-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 A.3 — 프롬프트 발사 전 점검: 4요소 + 3습관</p>
+</figcaption>
+</figure>
 <hr />
 <h2 id="a4">A.4 마무리<a class="headerlink" href="#a4" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">

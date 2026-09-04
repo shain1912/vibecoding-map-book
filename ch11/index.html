@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1697,7 +1699,12 @@
 <p>셋째 줄 <code>setMap(map)</code>이 재미있는 부분입니다. 마커를 만들었다고 해서 바로 화면에 보이는 게 아닙니다. 마커는 만들어진 순간 아직 "허공"에 있습니다. <code>setMap(map)</code>을 호출해서 "이 지도 위에 올라가라"라고 말해 줘야 비로소 화면에 나타납니다. 압정을 산 것(생성)과 지도에 꽂은 것(setMap)이 다른 것과 같습니다.</p>
 <p>이 구조의 좋은 점은 <strong>반대로도 된다</strong>는 것입니다. <code>marker.setMap(null)</code>을 호출하면 마커가 지도에서 내려옵니다. 삭제가 아니라 "잠깐 떼어 두기"에 가깝습니다. 나중에 다시 <code>setMap(map)</code> 하면 같은 마커가 다시 나타나죠. 이 켰다 껐다 하는 능력이 14장에서 카테고리 필터를 만들 때 결정적인 역할을 합니다. 지금은 "마커는 setMap으로 붙였다 뗐다 할 수 있다"만 기억해 두세요.</p>
 <p>저장하고 브라우저를 확인해 봅시다. Vite 개발 서버가 켜져 있다면 저장하는 순간 화면이 자동으로 새로고침됩니다. 서울 시청 위에 파란 몸통에 뾰족한 꼬리가 달린 카카오 기본 마커가 서 있으면 성공입니다.</p>
-<p><img alt="그림 11.1 — 서울 시청 위에 찍힌 첫 마커" src="../images/ch11/ch11-f01.jpg" width="760" /></p>
+<figure>
+<p><img alt="서울 시청 위에 찍힌 첫 마커" src="../images/ch11/ch11-f01.jpg" width="760" /></p>
+<figcaption>
+<p>그림 11.1 — 서울 시청 위에 찍힌 첫 마커</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>마커를 만들 때 <code>position</code>과 함께 <code>map</code>을 넘기면(<code>new kakao.maps.Marker({ position, map })</code>) <code>setMap</code> 호출 없이 곧바로 지도에 올라갑니다. 한 줄이 줄어드는 지름길이지만, 이 책에서는 <code>setMap</code>을 따로 쓰는 쪽을 권합니다. "만들기"와 "붙이기"를 분리해 두면 필터처럼 마커를 붙였다 떼는 기능을 만들 때 코드 흐름이 눈에 잘 들어오기 때문입니다.</p>
@@ -1728,7 +1735,12 @@
 </span></code></pre></div>
 <p>구조가 아름답습니다. 위쪽 <code>spots</code>는 <strong>데이터</strong>입니다. 장소 하나가 <code>{ name, lat, lng }</code> 모양의 객체 하나이고, 그런 객체들이 배열 <code>[ ]</code> 안에 나란히 담겨 있습니다. 아래쪽 <code>for...of</code> 반복문은 <strong>동작</strong>입니다. 배열에서 장소를 하나씩 꺼내(<code>spot</code>) 그 좌표로 마커를 만들어 지도에 올립니다. 장소가 4개든 400개든 아래쪽 코드는 한 글자도 바뀌지 않습니다. 배열에 줄만 추가하면 마커가 늘어나죠.</p>
 <p>새로 등장한 옵션 <code>title</code>도 눈여겨보세요. 마커에 마우스를 올리면 잠시 뒤 장소 이름이 작은 말풍선(브라우저 기본 툴팁)으로 나타나게 해 줍니다. HTML 태그의 <code>title</code> 속성과 같은 역할입니다. 화려하진 않지만 공짜로 얻는 기능이니 챙겨 둡시다. 제대로 예쁜 말풍선은 13장에서 직접 만듭니다.</p>
-<p><img alt="그림 11.2 — 반복문으로 찍은 마커 4개" src="../images/ch11/ch11-f02.jpg" width="760" /></p>
+<figure>
+<p><img alt="반복문으로 찍은 마커 4개" src="../images/ch11/ch11-f02.jpg" width="760" /></p>
+<figcaption>
+<p>그림 11.2 — 반복문으로 찍은 마커 4개</p>
+</figcaption>
+</figure>
 <p>여기서 잠깐, 방금 우리가 한 일의 의미를 짚고 넘어가겠습니다. 우리는 방금 <strong>"데이터와 화면을 분리"</strong>했습니다. 장소 정보는 배열에, 그리는 방법은 반복문에. 이 분리는 이 책 후반부 전체를 지탱하는 기둥입니다. 12장에서 이 배열을 제대로 된 장소 데이터 파일로 키우고, 17장에서는 localStorage에 저장하고, 사용자가 장소를 추가하면 배열에 넣고 다시 그리기만 하면 됩니다. 그리는 코드는 그대로인데 데이터만 바뀌는 구조. 오늘 그 첫 단추를 끼운 겁니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
@@ -1760,10 +1772,20 @@
 <p>첫째, <strong>이미지 주소</strong>(<code>imageSrc</code>)입니다. 웹에서 접근 가능한 이미지 URL이면 됩니다.</p>
 <p>둘째, <strong>크기</strong>(<code>Size</code>)입니다. 이미지를 지도 위에 몇 픽셀 크기로 보여줄지 정합니다. 가로 64, 세로 69픽셀이라는 뜻입니다.</p>
 <p>셋째가 중요합니다. <strong><code>offset</code></strong>, 우리말로 하면 "기준점"입니다. 이게 뭔지 이해하려면 질문을 하나 던져야 합니다. 마커 이미지는 가로세로가 있는 네모난 그림인데, 그 네모의 <strong>어느 지점</strong>이 좌표에 정확히 닿아야 할까요? 핀 모양 이미지라면 당연히 <strong>뾰족한 끝</strong>이 좌표를 찔러야 합니다. 이미지의 왼쪽 위 모서리가 좌표에 붙어 버리면, 핀은 실제 위치보다 오른쪽 아래를 가리키는 것처럼 보이겠죠. <code>offset: new kakao.maps.Point(27, 69)</code>는 "이미지의 왼쪽 위에서 오른쪽으로 27px, 아래로 69px 내려간 지점(즉 핀 끝)을 좌표에 맞춰라"라는 뜻입니다.</p>
-<p><img alt="그림 11.3 — offset 기준점의 의미" src="../images/ch11/ch11-f03.png" width="760" /></p>
+<figure>
+<p><img alt="offset 기준점의 의미" src="../images/ch11/ch11-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 11.3 — offset 기준점의 의미</p>
+</figcaption>
+</figure>
 <p>offset을 잘못 잡으면 이상한 일이 벌어집니다. 지도를 확대·축소할 때마다 마커가 미끄러지듯 어긋나 보이거든요. 좌표에 닿아 있는 지점이 핀 끝이 아니기 때문에, 지도가 늘어나고 줄어들 때 핀 끝이 가리키는 위치가 계속 달라지는 겁니다. 마커가 "떠다니는" 느낌이 든다면 offset부터 확인하세요.</p>
 <p>브라우저에서 확인해 보면 파란 기본 마커 대신 별이 그려진 빨간 마커가 서 있을 겁니다. 마커의 옷을 갈아입히는 데 성공했습니다.</p>
-<p><img alt="그림 11.4 — MarkerImage로 옷을 갈아입은 마커" src="../images/ch11/ch11-f04.png" width="420" /></p>
+<figure>
+<p><img alt="MarkerImage로 옷을 갈아입은 마커" src="../images/ch11/ch11-f04.png" width="420" /></p>
+<figcaption>
+<p>그림 11.4 — MarkerImage로 옷을 갈아입은 마커</p>
+</figcaption>
+</figure>
 <h2 id="114-svg-data-uri">11.4 이미지 파일 없이 핀 그리기 — SVG와 data URI<a class="headerlink" href="#114-svg-data-uri" title="Permanent link">&para;</a></h2>
 <p>남의 이미지를 빌려 쓰는 건 시험까지만입니다. 우리 앱에는 카테고리가 4개 있고(맛집·카페·여행·데이트), 카테고리마다 색이 다른 핀을 쓰고 싶습니다. 그럼 핀 이미지 4장을 그림판으로 그려서 프로젝트에 넣어야 할까요? 나중에 카테고리가 추가되면 또 그리고요?</p>
 <p>더 우아한 방법이 있습니다. <strong>코드로 그림을 그리는 겁니다.</strong> 여기서 두 가지 재료가 등장합니다.</p>
@@ -1801,7 +1823,12 @@
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nx">marker</span><span class="p">.</span><span class="nx">setMap</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
 </span></code></pre></div>
 <p>색 몇 개로 실험해 보세요. <code>#e74c3c</code>(빨강)는 맛집, <code>#8e5a2d</code>(갈색)는 카페, <code>#1e90ff</code>(파랑)는 여행, <code>#e84393</code>(분홍)은 데이트. 눈치채셨겠지만 이 색들이 12장에서 만들 카테고리 체계의 공식 색입니다.</p>
-<p><img alt="그림 11.5 — markerImageFor로 만든 카테고리별 커스텀 핀 4종" src="../images/ch11/ch11-f05.jpg" width="760" /></p>
+<figure>
+<p><img alt="markerImageFor로 만든 카테고리별 커스텀 핀 4종" src="../images/ch11/ch11-f05.jpg" width="760" /></p>
+<figcaption>
+<p>그림 11.5 — markerImageFor로 만든 카테고리별 커스텀 핀 4종</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>SVG가 어떻게 생긴 그림인지 눈으로 확인하고 싶다면, 코드의 <code>&lt;svg&gt;...&lt;/svg&gt;</code> 부분을 복사해 새 텍스트 파일에 붙여 넣고 <code>pin.svg</code>로 저장한 뒤 브라우저로 열어 보세요. 숫자를 바꿔 저장할 때마다 모양이 어떻게 변하는지 노는 것만으로 SVG와 금세 친해집니다. Claude Code에게 "핀을 더 통통하게 바꿔줘"라고 시켜 보는 것도 좋은 실험입니다.</p>
@@ -1844,7 +1871,12 @@
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'남산타워 전망대'</span><span class="p">,</span><span class="w">   </span><span class="nx">lat</span><span class="o">:</span><span class="w"> </span><span class="mf">37.5512</span><span class="p">,</span><span class="w"> </span><span class="nx">lng</span><span class="o">:</span><span class="w"> </span><span class="mf">126.9882</span><span class="p">,</span><span class="w"> </span><span class="nx">emoji</span><span class="o">:</span><span class="w"> </span><span class="s1">'💕'</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">'#e84393'</span><span class="w"> </span><span class="p">},</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">]);</span>
 </span></code></pre></div>
-<p><img alt="그림 11.6 — renderPlaces가 그린 나만의 장소 지도" src="../images/ch11/ch11-f06.jpg" width="760" /></p>
+<figure>
+<p><img alt="renderPlaces가 그린 나만의 장소 지도" src="../images/ch11/ch11-f06.jpg" width="760" /></p>
+<figcaption>
+<p>그림 11.6 — renderPlaces가 그린 나만의 장소 지도</p>
+</figcaption>
+</figure>
 <p>한 가지 고백할 것이 있습니다. 완성된 앱의 <code>mapView.js</code>를 열어 보면 <code>renderPlaces</code>가 이보다 조금 더 깁니다. 장소마다 이모지·색을 들고 다니는 대신 <code>place.category</code> 하나만 적으면 색과 이모지가 자동으로 정해지고(12장), 마커를 클릭하면 말풍선이 열리고(13장), 마커가 아주 많아지면 자동으로 뭉쳐집니다(22장). 하지만 뼈대는 오늘 만든 이 모습 그대로입니다. 앞으로의 장들은 이 뼈대에 살을 붙이는 과정입니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>

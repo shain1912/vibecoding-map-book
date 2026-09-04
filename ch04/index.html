@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1697,7 +1699,12 @@
 <p>Claude Code는 Anthropic이 만든 <strong>터미널에서 동작하는 AI 코딩 에이전트</strong>입니다. 챗봇에게 질문하고 답을 복사해 오는 방식이 아닙니다. Claude Code는 여러분의 프로젝트 폴더 안에 직접 들어와서 파일을 읽고, 코드를 쓰고, 명령을 실행하고, 에러가 나면 스스로 고칩니다. 여러분이 "지도를 화면에 띄워줘"라고 말하면, 어떤 파일을 만들어야 하는지 스스로 판단해서 만들어 줍니다.</p>
 <p>복사-붙여넣기가 없습니다. 이게 핵심입니다.</p>
 <p>챗봇으로 코딩을 해 본 분이라면 이런 경험이 있을 겁니다. 코드를 받아서 붙여넣었는데 에러가 나고, 에러 메시지를 다시 복사해서 챗봇에게 보여주고, 고친 코드를 또 붙여넣고… 이 왕복 배달이 바이브코딩의 가장 큰 병목이었습니다. Claude Code는 이 배달 일을 통째로 없앱니다. 에러가 나면 자기가 읽고 자기가 고칩니다. 여러분은 방향만 잡아주면 됩니다.</p>
-<p><img alt="그림 4.1 — 챗봇 방식과 Claude Code 방식의 차이" src="../images/ch04/ch04-f01.jpg" width="760" /></p>
+<figure>
+<p><img alt="챗봇 방식과 Claude Code 방식의 차이" src="../images/ch04/ch04-f01.jpg" width="760" /></p>
+<figcaption>
+<p>그림 4.1 — 챗봇 방식과 Claude Code 방식의 차이</p>
+</figcaption>
+</figure>
 <p>이런 방식으로 일하는 프로그램을 <strong>에이전트</strong>(agent)라고 부릅니다. 질문에 답만 하는 게 아니라, 목표를 받으면 계획을 세우고, 도구를 골라 쓰고, 중간 결과를 확인하면서 스스로 다음 행동을 결정하는 프로그램이라는 뜻입니다. 1장에서 "에이전트에게 일 시키는 마음가짐"을 이야기했는데, 그 에이전트가 바로 이 녀석입니다. 여러분의 역할은 코더가 아니라 <strong>일 시키는 사람</strong>입니다. 무엇을 만들지 정하고, 진행 상황을 확인하고, 방향이 틀어지면 바로잡는 것. 회사로 치면 신입 개발자를 옆자리에 앉힌 팀장의 역할에 가깝습니다.</p>
 <p>이 책의 나머지 전부 — 지도를 띄우고, 마커를 찍고, 검색을 붙이고, 배포하는 일 — 는 이 도구에게 시켜서 진행합니다. 그러니 이번 장에서 설치만 하고 끝내지 않고, <strong>어떻게 말을 걸어야 일을 잘하는지</strong>까지 함께 배웁니다. 도구를 길들이는 장입니다.</p>
 <h2 id="42-pro">4.2 계정 만들기와 Pro 플랜<a class="headerlink" href="#42-pro" title="Permanent link">&para;</a></h2>
@@ -1707,7 +1714,12 @@
 <li>구글 계정으로 가입하거나 이메일 주소로 가입합니다. 이메일로 가입하면 인증 메일이 오니 받은편지함을 확인해 주세요.</li>
 <li>가입이 끝나면 채팅 화면이 열립니다. 이 계정 하나로 웹의 Claude와 터미널의 Claude Code를 모두 씁니다.</li>
 </ol>
-<p><img alt="그림 4.2 — claude.ai 가입 화면 (예시)" src="../images/ch04/ch04-f02.png" width="560" /></p>
+<figure>
+<p><img alt="claude.ai 가입 화면 (예시)" src="../images/ch04/ch04-f02.png" width="560" /></p>
+<figcaption>
+<p>그림 4.2 — claude.ai 가입 화면 (예시)</p>
+</figcaption>
+</figure>
 <p>가입할 때 쓴 이메일 주소는 잘 기억해 두세요. 잠시 뒤 터미널에서 로그인할 때 같은 계정을 씁니다. 계정이 두 개면 "분명 결제했는데 왜 안 되지?" 하는 미궁에 빠지기 쉽습니다.</p>
 <p>다음은 플랜입니다. 무료 플랜으로도 Claude와 대화할 수 있지만, Claude Code를 본격적으로 쓰려면 <strong>Pro 플랜</strong>(월 20달러 수준)을 권합니다. 이 책의 실습은 Pro 플랜 기준으로 진행합니다. 화면 왼쪽 아래 프로필 → 설정에서 플랜을 업그레이드할 수 있습니다.</p>
 <p>"책 한 권 따라 하자고 유료 결제까지?"라는 생각이 들 수 있습니다. 솔직하게 말씀드리면, 이 20달러가 이 책 전체에서 가장 가성비 좋은 투자입니다. 지도 앱 하나를 처음부터 끝까지 만들면서 여러분 옆에 붙어 있는 개발자를 한 달 고용하는 비용이라고 생각해 주세요. 그래도 결제가 부담스럽다면, 이 장 끝의 무료 대안 박스를 참고하세요. 책의 흐름은 다른 도구로도 따라올 수 있습니다.</p>
@@ -1726,12 +1738,22 @@
 <li><code>@anthropic-ai/claude-code</code> — 패키지 이름. <code>@anthropic-ai/</code>는 Anthropic 팀이 배포한 공식 패키지라는 소속 표시입니다.</li>
 </ul>
 <p>잠시 진행 막대가 지나가고 몇 줄의 로그가 출력되면 설치 끝입니다.</p>
-<p><img alt="그림 4.3 — npm으로 Claude Code 설치 (출력 예시)" src="../images/ch04/ch04-f03.png" width="760" /></p>
+<figure>
+<p><img alt="npm으로 Claude Code 설치 (출력 예시)" src="../images/ch04/ch04-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 4.3 — npm으로 Claude Code 설치 (출력 예시)</p>
+</figcaption>
+</figure>
 <p>잘 설치됐는지 확인해 봅시다. Node.js 때 <code>node -v</code>로 확인했던 것과 똑같은 요령입니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>claude --version
 </span></code></pre></div>
 <p>버전 번호가 출력되면 성공입니다. 참고로 Claude Code는 업데이트가 아주 잦은 도구입니다. 새 기능이 매주 쏟아지다시피 하죠. 나중에 책의 화면과 여러분의 화면이 조금 다르더라도 놀라지 마세요. 큰 흐름 — 설치하고, 실행하고, 말로 시키고, 승인하는 구조 — 는 변하지 않습니다. 최신 버전으로 올리고 싶을 때는 설치 때와 똑같은 명령을 한 번 더 실행하면 됩니다.</p>
-<p><img alt="그림 4.4 — claude --version으로 설치 확인" src="../images/ch04/ch04-f04.png" width="760" /></p>
+<figure>
+<p><img alt="claude --version으로 설치 확인" src="../images/ch04/ch04-f04.png" width="760" /></p>
+<figcaption>
+<p>그림 4.4 — claude --version으로 설치 확인</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p><code>claude</code>를 입력했는데 "명령을 찾을 수 없습니다"라는 에러가 나면, 십중팔구 터미널을 새로 열면 해결됩니다. 설치 직후에는 기존 터미널 창이 새 명령어의 위치를 아직 모르는 경우가 있거든요. 2장의 PATH 이야기와 같은 원리입니다. 새 창에서도 안 되면 <code>npm install -g @anthropic-ai/claude-code</code>를 한 번 더 실행해 보세요.</p>
@@ -1744,7 +1766,12 @@
 </span></code></pre></div>
 <p><code>mkdir</code>은 폴더를 만드는 명령, <code>cd</code>는 그 폴더로 이동하는 명령입니다. 마지막 줄의 <code>claude</code>가 Claude Code를 실행합니다.</p>
 <p>처음 실행하면 몇 가지 초기 설정 화면이 나옵니다. 화면 테마를 고르는 정도의 가벼운 질문이니 마음에 드는 것을 선택하면 됩니다. 그다음이 중요한 단계, <strong>로그인</strong>입니다. 로그인 방법을 묻는 화면에서 Claude 구독 계정(Pro 플랜)으로 로그인하는 항목을 선택하세요. 그러면 브라우저가 자동으로 열리면서 claude.ai 인증 페이지로 이동합니다. 4.2절에서 만든 계정으로 로그인하고 승인 버튼을 누르면, 터미널로 돌아와 "로그인 완료" 안내를 볼 수 있습니다.</p>
-<p><img alt="그림 4.5 — Claude Code 첫 실행 화면" src="../images/ch04/ch04-f05.png" width="760" /></p>
+<figure>
+<p><img alt="Claude Code 첫 실행 화면" src="../images/ch04/ch04-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 4.5 — Claude Code 첫 실행 화면</p>
+</figcaption>
+</figure>
 <p>로그인이 끝나면 입력창이 깜빡이는 대화 화면이 나타납니다. 여기가 앞으로 이 책 내내 머물게 될 곳입니다. 인사부터 건네 볼까요.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
@@ -1769,7 +1796,12 @@
 <h2 id="45-4">4.5 길들이기 — 프롬프트의 4요소<a class="headerlink" href="#45-4" title="Permanent link">&para;</a></h2>
 <p>설치는 끝났습니다. 이제 이 장의 진짜 핵심, <strong>말 거는 법</strong>입니다.</p>
 <p>Claude Code는 유능하지만 독심술사는 아닙니다. 같은 일을 시켜도 어떻게 말하느냐에 따라 결과가 크게 달라집니다. 음식점에서 "맛있는 거 주세요"라고 주문하면 뭐가 나올지 알 수 없지만, "덜 맵게, 국물 많이, 계란 추가"라고 주문하면 원하는 음식이 나오는 것과 같은 이치입니다. AI에게 건네는 이런 주문서를 <strong>프롬프트</strong>(prompt)라고 부릅니다. 다행히 좋은 프롬프트에는 공식이 있습니다. 딱 네 가지만 기억하세요. <strong>맥락, 목표, 제약, 출력 형식</strong>입니다.</p>
-<p><img alt="그림 4.6 — 프롬프트의 4요소" src="../images/ch04/ch04-f06.png" width="760" /></p>
+<figure>
+<p><img alt="프롬프트의 4요소" src="../images/ch04/ch04-f06.png" width="760" /></p>
+<figcaption>
+<p>그림 4.6 — 프롬프트의 4요소</p>
+</figcaption>
+</figure>
 <p>하나씩 살펴봅시다. 예시는 전부 우리가 만들 지도 앱에서 가져왔습니다.</p>
 <p><strong>① 맥락(Context) — 지금 어떤 상황인지 알려주기.</strong> Claude Code는 폴더 안의 파일을 읽을 수 있지만, 여러분 머릿속 사정까지는 모릅니다. 프로젝트가 무엇인지, 지금 어디까지 왔는지 한 줄이라도 깔아주면 정확도가 크게 오릅니다.</p>
 <ul>
@@ -1820,7 +1852,12 @@
 <h2 id="46">4.6 안전하게 쓰기 — 권한 프롬프트 읽는 법<a class="headerlink" href="#46" title="Permanent link">&para;</a></h2>
 <p>4.4절에서 파일 하나 만드는데도 Claude Code가 허락을 구했던 것, 기억하시죠? 이 <strong>권한 프롬프트</strong>는 귀찮은 절차가 아니라 Claude Code의 가장 중요한 안전장치입니다.</p>
 <p>Claude Code는 여러분의 컴퓨터에서 실제로 파일을 고치고 명령을 실행하는 도구입니다. 강력한 만큼, 잘못된 지시 한 번이 실제 피해로 이어질 수 있습니다. 그래서 Claude Code는 <strong>파일을 새로 만들거나 수정할 때, 그리고 명령어를 실행할 때</strong> 먼저 계획을 보여주고 여러분의 승인을 기다립니다. "이 파일을 이렇게 고치겠습니다. 해도 될까요?" 하고 묻는 것이죠.</p>
-<p><img alt="그림 4.7 — 권한 프롬프트 화면" src="../images/ch04/ch04-f07.png" width="760" /></p>
+<figure>
+<p><img alt="권한 프롬프트 화면" src="../images/ch04/ch04-f07.png" width="760" /></p>
+<figcaption>
+<p>그림 4.7 — 권한 프롬프트 화면</p>
+</figcaption>
+</figure>
 <p>허용 여부를 판단하는 기준은 간단합니다.</p>
 <ul>
 <li><strong>파일 만들기·수정</strong>: 대상 파일이 내 프로젝트 폴더 안이고, 보여준 변경 내용이 내가 시킨 일과 맞으면 허용합니다.</li>

@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1714,7 +1716,12 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://developers.kakao.com
 </span></code></pre></div>
 <p>"카카오 디벨로퍼스(Kakao Developers)"라는 사이트가 열립니다. 카카오가 외부 개발자들에게 지도, 로그인, 메시지 같은 기능을 빌려주는 공식 창구입니다. 시간이 있다면 첫 화면을 잠깐 구경해 보세요. 카카오톡 메시지 보내기, 카카오로 로그인하기처럼 평소 다른 앱에서 봤던 기능들이 전부 여기서 출발한다는 사실을 알게 되면, 개발자 사이트가 조금은 친근하게 느껴질 겁니다.</p>
-<p><img alt="그림 7.1 — 카카오 디벨로퍼스 첫 화면" src="../images/ch07/ch07-f01.jpg" width="820" /></p>
+<figure>
+<p><img alt="카카오 디벨로퍼스 첫 화면" src="../images/ch07/ch07-f01.jpg" width="820" /></p>
+<figcaption>
+<p>그림 7.1 — 카카오 디벨로퍼스 첫 화면</p>
+</figcaption>
+</figure>
 <p>화면 오른쪽 위의 <strong>로그인</strong> 버튼을 누르세요. 카카오 계정 로그인 화면이 나타납니다. 여기서 좋은 소식 하나. <strong>카카오톡을 쓰고 있다면 이미 카카오 계정이 있습니다.</strong> 카카오톡에 연결된 이메일과 비밀번호로 그대로 로그인하면 됩니다. 별도의 "개발자 전용 회원가입" 절차는 없습니다.</p>
 <p>카카오 계정이 없거나 새로 만들고 싶다면 로그인 화면의 <strong>회원가입</strong> 링크를 눌러 이메일 인증을 거쳐 계정을 만들 수 있습니다. 몇 분이면 충분합니다.</p>
 <p>처음 로그인하면 개발자 사이트 이용을 위한 <strong>동의 화면</strong>이 나올 수 있습니다. 약관을 읽고 동의하면 여러분은 그 순간부터 "카카오 개발자"입니다. 자격증도 시험도 없습니다. 로그인 한 번이면 개발자가 되는 시대입니다.</p>
@@ -1727,14 +1734,24 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://developers.kakao.com/console/app
 </span></code></pre></div>
 <p><strong>전체 앱</strong>이라는 제목 아래에 앱 목록이 보입니다. 방금 가입했다면 텅 빈 목록이 보일 겁니다. 당연합니다. 아직 아무 앱도 만들지 않았으니까요.</p>
-<p><img alt="그림 7.2 — 개발자 콘솔의 전체 앱 목록과 &quot;앱 생성&quot; 버튼" src="../images/ch07/ch07-f02.png" width="520" /></p>
+<figure>
+<p><img alt="개발자 콘솔의 전체 앱 목록과 &quot;앱 생성&quot; 버튼" src="../images/ch07/ch07-f02.png" width="520" /></p>
+<figcaption>
+<p>그림 7.2 — 개발자 콘솔의 전체 앱 목록과 "앱 생성" 버튼</p>
+</figcaption>
+</figure>
 <p>화면 오른쪽 위의 <strong>앱 생성</strong> 버튼을 누르세요. 앱 정보를 입력하는 창이 열립니다. 입력할 것은 많지 않습니다.</p>
 <ul>
 <li><strong>앱 이름</strong> — 이 프로젝트의 이름입니다. 저는 <code>나만의지도</code>라고 지었습니다. 여러분은 <code>맛집지도</code>, <code>우리동네지도</code>처럼 마음에 드는 이름을 자유롭게 쓰세요. 나중에 언제든 바꿀 수 있습니다.</li>
 <li><strong>회사명(사업자명)</strong> — 회사가 아니어도 됩니다. 개인 개발자는 자기 이름이나 닉네임을 적으면 충분합니다.</li>
 <li><strong>카테고리</strong> — 앱의 분류를 고르는 항목이 있다면 지도·위치와 관련된 것을 고르거나, 마땅한 게 없으면 기타를 골라도 실습에는 아무 지장이 없습니다.</li>
 </ul>
-<p><img alt="그림 7.3 — 앱 생성 창에 앱 이름 입력" src="../images/ch07/ch07-f03.jpg" width="760" /></p>
+<figure>
+<p><img alt="앱 생성 창에 앱 이름 입력" src="../images/ch07/ch07-f03.jpg" width="760" /></p>
+<figcaption>
+<p>그림 7.3 — 앱 생성 창에 앱 이름 입력</p>
+</figcaption>
+</figure>
 <p>입력을 마치고 저장(생성) 버튼을 누르면, 전체 앱 목록에 방금 만든 앱이 한 줄로 나타납니다. 축하합니다. 여러분의 첫 애플리케이션이 등록됐습니다. 목록에서 앱 이름을 클릭하면 그 앱의 관리 화면으로 들어가는데, 왼쪽에 <strong>앱 설정, 대시보드, 앱, 유료 API, 제품 설정, 통계</strong> 같은 메뉴가 세로로 늘어서 있습니다. 앞으로 우리가 드나들 곳은 이 가운데 <strong>앱</strong> 메뉴 하나뿐이니, 나머지는 "이런 것도 있구나" 하고 눈도장만 찍어 두세요.</p>
 <p>참고로 애플리케이션은 여러 개 만들 수 있습니다. 나중에 다른 프로젝트를 시작하면 그 프로젝트용 앱을 새로 하나 만들면 됩니다. 프로젝트마다 앱을 따로 두면 키도 설정도 분리되어 관리가 깔끔해집니다. 실수로 만든 앱은 앱 관리 화면 안에서 삭제할 수도 있으니, 잘못 만들었다고 당황할 필요는 없습니다.</p>
 <div class="admonition tip">
@@ -1743,7 +1760,12 @@
 </div>
 <h2 id="74-3-javascript">7.4 플랫폼 키 3종 — 우리가 쓸 건 JavaScript 키<a class="headerlink" href="#74-3-javascript" title="Permanent link">&para;</a></h2>
 <p>이제 열쇠를 보러 갑시다. 앱 관리 화면의 왼쪽 메뉴에서 <strong>앱</strong>을 펼치면 그 아래에 <strong>일반, 플랫폼 키, 어드민 키, 제품 링크 관리</strong> 같은 하위 메뉴가 보입니다. 이 중 <strong>플랫폼 키</strong>를 클릭하세요. "플랫폼별(Android, iOS, 웹)로 API 요청을 인증하는 키를 생성하고 관리"한다는 설명과 함께, 키들이 세 묶음으로 나뉘어 여러분을 기다리고 있습니다.</p>
-<p><img alt="그림 7.4 — 앱 &gt; 플랫폼 키 화면의 키 3종 (JavaScript 키에 강조 표시)" src="../images/ch07/ch07-f04.jpg" width="760" /></p>
+<figure>
+<p><img alt="앱 &gt; 플랫폼 키 화면의 키 3종 (JavaScript 키에 강조 표시)" src="../images/ch07/ch07-f04.jpg" width="760" /></p>
+<figcaption>
+<p>그림 7.4 — 앱 &gt; 플랫폼 키 화면의 키 3종 (JavaScript 키에 강조 표시)</p>
+</figcaption>
+</figure>
 <p>키가 세 종류나 되는 이유는, 카카오 기능을 <strong>어디에서 부르느냐</strong>에 따라 쓰는 열쇠가 다르기 때문입니다. 하나씩 살펴봅시다.</p>
 <table>
 <thead>
@@ -1784,12 +1806,22 @@
 <p>키를 확인했으니 이제 끝... 이면 좋겠지만, 한 단계가 더 남았습니다. 그리고 이 단계가 <strong>초보자들이 가장 많이 빠뜨리는 단계</strong>입니다. 9장에서 지도가 안 뜨고 회색 화면만 보인다면 십중팔구 여기가 원인입니다.</p>
 <p>카카오는 JavaScript 키를 내주면서 이렇게 묻습니다. <strong>"이 키를 어느 주소의 웹사이트에서 쓸 건가요?"</strong> 미리 등록된 주소에서 온 요청만 받아 주겠다는 뜻입니다. 결혼식장 입구의 하객 명단을 떠올리면 쉽습니다. 청첩장(키)을 들고 있어도 명단(등록 도메인)에 없는 사람은 들여보내지 않는 것이죠. 이 명단은 별도의 메뉴가 아니라 <strong>JavaScript 키 자체에 붙어</strong> 있습니다. 키마다 "이 키가 통하는 주소 목록"을 따로 갖는 구조입니다.</p>
 <p>방금 보던 <strong>플랫폼 키</strong> 화면에서, JavaScript 키 묶음의 기본 키(Default JS Key)를 클릭하세요. <strong>JavaScript 키 수정</strong> 화면이 열립니다. 위에서부터 ① 키 값(복사 버튼 포함), ② 키 이름, ③ <strong>JavaScript SDK 도메인</strong>, ④ 카카오 로그인 리다이렉트 URI 순으로 항목이 늘어서 있습니다. ④는 카카오 로그인용이라 이 책에서는 쓰지 않고, 우리의 목적지는 ③입니다. 설명문에 적힌 그대로입니다 — "JavaScript 키를 사용할 웹사이트 도메인을 등록합니다. 등록한 도메인에서만 JavaScript 키로 Kakao SDK for JavaScript를 사용할 수 있습니다."</p>
-<p><img alt="그림 7.5 — JavaScript 키 수정 화면의 JavaScript SDK 도메인 항목" src="../images/ch07/ch07-f05.jpg" width="760" /></p>
+<figure>
+<p><img alt="JavaScript 키 수정 화면의 JavaScript SDK 도메인 항목" src="../images/ch07/ch07-f05.jpg" width="760" /></p>
+<figcaption>
+<p>그림 7.5 — JavaScript 키 수정 화면의 JavaScript SDK 도메인 항목</p>
+</figcaption>
+</figure>
 <p><strong>JavaScript SDK 도메인</strong> 입력란에 다음 주소를 정확히 입력하세요.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>http://localhost:5173
 </span></code></pre></div>
 <p>여기서 규칙 하나를 정확히 알아 둡시다. <strong>호스트와 포트는 등록한 값과 정확히 일치</strong>해야 합니다 — 카카오 입장에서 <code>localhost:5173</code>과 <code>localhost:5174</code>는 서로 다른 주소입니다. 다만 프로토콜만은 예외라서, <code>http</code>와 <code>https</code> 중 <strong>하나만 등록해도 양쪽 모두 인정</strong>됩니다. 우리는 개발 서버 주소 그대로 <code>http://localhost:5173</code>으로 적습니다. 입력했으면 옆의 <strong>+</strong> 버튼으로 목록에 추가하고, 화면 아래의 <strong>저장</strong> 버튼까지 눌러야 반영됩니다.</p>
-<p><img alt="그림 7.6 — JavaScript SDK 도메인에 http://localhost:5173 이 등록된 모습" src="../images/ch07/ch07-f06.jpg" width="760" /></p>
+<figure>
+<p><img alt="JavaScript SDK 도메인에 http://localhost:5173 이 등록된 모습" src="../images/ch07/ch07-f06.jpg" width="760" /></p>
+<figcaption>
+<p>그림 7.6 — JavaScript SDK 도메인에 http://localhost:5173 이 등록된 모습</p>
+</figcaption>
+</figure>
 <p>그런데 이 이상한 주소는 대체 뭘까요? 미리 살짝 설명해 두겠습니다.</p>
 <ul>
 <li><strong>localhost</strong>는 "내 컴퓨터 자신"을 가리키는 특별한 주소입니다. 인터넷 어딘가의 서버가 아니라, 지금 여러분이 쓰고 있는 바로 그 PC를 뜻합니다.</li>

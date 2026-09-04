@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1693,7 +1695,12 @@
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>.env
 </span></code></pre></div>
 <p>한 줄씩 읽어 봅시다. <code>node_modules</code>는 방금 이야기한 부품 창고, <code>.env</code>는 열쇠 서랍입니다. <code>dist</code>는 아직 낯설 텐데, 25장에서 <code>npm run build</code>를 실행하면 생기는 <strong>빌드 결과물</strong> 폴더입니다. 이것도 창고와 같은 이유 — 소스코드만 있으면 언제든 다시 만들 수 있어서 — 로 뺍니다. Vite 템플릿의 <code>.gitignore</code>에는 이 밖에도 <code>*.local</code>, 로그 파일, 에디터 설정 폴더 같은 항목이 미리 들어 있는데, 모두 "다시 만들 수 있거나, 내 컴퓨터에서만 의미 있는 것"이라는 같은 원칙으로 묶입니다.</p>
-<p><img alt="그림 24.1 — 점검을 마친 .gitignore 파일" src="../images/ch24/ch24-f01.png" width="620" /></p>
+<figure>
+<p><img alt="점검을 마친 .gitignore 파일" src="../images/ch24/ch24-f01.png" width="620" /></p>
+<figcaption>
+<p>그림 24.1 — 점검을 마친 .gitignore 파일</p>
+</figcaption>
+</figure>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
 <p><code>.gitignore</code>는 <strong>앞으로의 커밋</strong>에서만 파일을 빼 줍니다. 이미 커밋된 파일을 소급해서 지워 주지는 않습니다. Git은 역사를 기록하는 도구라서, 한번 커밋에 들어간 <code>.env</code>는 나중에 파일을 지우고 다시 커밋해도 <strong>과거 역사 속에 그대로 남습니다.</strong> 깃허브에서 커밋 역사를 뒤지면 누구나 꺼내 볼 수 있지요. 그래서 순서가 중요합니다 — 반드시 <code>.gitignore</code> 점검이 먼저, 커밋은 그다음입니다. 만약 이미 <code>.env</code>가 커밋된 뒤라면 이 장 끝의 24.4절 응급처치를 따라 주세요.</p>
@@ -1726,7 +1733,12 @@
 <li><code>git commit -m "..."</code> — 대기석에 오른 모습 그대로 역사에 도장을 찍습니다. <code>-m</code> 뒤가 이 커밋의 이름표입니다.</li>
 </ul>
 <p>검문소에서 무엇을 봐야 할까요? <code>git status</code>의 출력에서 <strong>Untracked files</strong> 목록을 훑어보세요. <code>index.html</code>, <code>package.json</code>, <code>package-lock.json</code>, <code>.gitignore</code>, <code>src/</code> — 이런 이름들이 보이면 정상입니다. 반대로 <code>.env</code>나 <code>node_modules/</code>가 보이면 <strong>절대 진행하면 안 됩니다.</strong> 24.1절의 <code>.gitignore</code> 점검으로 돌아가야 합니다. <code>.gitignore</code>가 제 역할을 하고 있다면 두 이름은 목록에 아예 나타나지 않습니다 — Git이 정말로 "못 본 척"하기 때문입니다.</p>
-<p><img alt="그림 24.2 — 커밋 전 git status 검문소" src="../images/ch24/ch24-f02.png" width="760" /></p>
+<figure>
+<p><img alt="커밋 전 git status 검문소" src="../images/ch24/ch24-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 24.2 — 커밋 전 git status 검문소</p>
+</figcaption>
+</figure>
 <p>목록이 깨끗하면 진행을 승인합니다. 커밋이 완료되면 이런 출력이 나옵니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[master (root-commit) a1b2c3d] 지도 웹앱 완성: 마커·필터·검색·저장·공유
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a> 14 files changed, 1042 insertions(+)
@@ -1735,7 +1747,12 @@
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a> ...
 </span></code></pre></div>
 <p>첫 줄의 <code>a1b2c3d</code> 같은 문자열은 이 커밋의 <strong>해시</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, 즉 커밋마다 붙는 고유한 일련번호입니다. <code>14 files changed</code> 숫자는 여러분의 파일 수에 따라 다를 수 있습니다. 중요한 건 그 목록 어디에도 <code>.env</code>가 없다는 사실입니다.</p>
-<p><img alt="그림 24.3 — 첫 커밋 완료" src="../images/ch24/ch24-f03.png" width="760" /></p>
+<figure>
+<p><img alt="첫 커밋 완료" src="../images/ch24/ch24-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 24.3 — 첫 커밋 완료</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>커밋 직후 <code>git ls-files | Select-String env</code> 를 실행해 보면 저장소가 추적 중인 파일 중에 <code>env</code>가 들어간 이름이 있는지 한 번 더 확인할 수 있습니다. 아무것도 안 나오면 합격입니다. <code>git ls-files</code>는 "지금 Git 장부에 올라 있는 파일 전체 목록"을 보여 주는 명령으로, 의심스러울 때마다 꺼내 쓰기 좋은 검사 도구입니다.</p>
@@ -1756,7 +1773,12 @@
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>✓ Added remote https://github.com/여러분의아이디/my-map.git
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>✓ Pushed commits to https://github.com/여러분의아이디/my-map.git
 </span></code></pre></div>
-<p><img alt="그림 24.4 — gh repo create 실행 결과" src="../images/ch24/ch24-f04.png" width="760" /></p>
+<figure>
+<p><img alt="gh repo create 실행 결과" src="../images/ch24/ch24-f04.png" width="760" /></p>
+<figcaption>
+<p>그림 24.4 — gh repo create 실행 결과</p>
+</figcaption>
+</figure>
 <p>체크 표시 세 줄 — 만들었고(Created), 연결했고(Added remote), 올렸습니다(Pushed). 몇 달의 작업이 클라우드에 안착하는 데 걸린 시간은 몇 초입니다. 만약 "Name already exists" 오류가 나온다면 예전에 같은 이름의 저장소를 만든 적이 있다는 뜻이니, 이름을 <code>my-map-app</code>처럼 바꾸거나 기존 저장소를 정리한 뒤 다시 실행하면 됩니다. 인증 관련 오류가 나온다면 <code>gh auth status</code>로 로그인 상태부터 확인하세요(5장).</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
@@ -1767,7 +1789,12 @@
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">gh</span> <span class="n">repo</span> <span class="n">view</span> <span class="p">-</span><span class="n">-web</span>
 </span></code></pre></div>
 <p>브라우저에 <code>github.com/여러분의아이디/my-map</code> 저장소 페이지가 열립니다. 가운데 파일 목록에 <code>index.html</code>, <code>package.json</code>, <code>src</code> 폴더가 보이고, <code>src</code>를 클릭해 들어가면 <code>main.js</code>, <code>mapView.js</code>, <code>store.js</code> 등 우리가 함께 만들어 온 파일들이 그대로 있습니다. 여러분의 코드가 인터넷 주소를 가진 순간입니다.</p>
-<p><img alt="그림 24.5 — 깃허브에 올라간 my-map 저장소" src="../images/ch24/ch24-f05.jpg" width="760" /></p>
+<figure>
+<p><img alt="깃허브에 올라간 my-map 저장소" src="../images/ch24/ch24-f05.jpg" width="760" /></p>
+<figcaption>
+<p>그림 24.5 — 깃허브에 올라간 my-map 저장소</p>
+</figcaption>
+</figure>
 <p>이제 검수 목록을 하나씩 확인합니다.</p>
 <ol>
 <li><strong><code>.env</code>가 파일 목록에 없는가?</strong> — 가장 중요합니다. 목록을 위에서 아래까지 훑어보세요. 없어야 정상입니다.</li>
@@ -1775,7 +1802,12 @@
 <li><strong><code>.gitignore</code>는 있는가?</strong> — 이 파일 자체는 비밀이 아니므로 올라가는 게 맞습니다. 오히려 올라가 있어야 다른 컴퓨터에서 받아 작업할 때도 같은 보호가 유지됩니다.</li>
 <li><strong>커밋이 보이는가?</strong> — 파일 목록 위의 커밋 수 표시(예: "1 commit")를 눌러 보세요. 방금 만든 "지도 웹앱 완성: ..." 커밋이 역사의 첫 페이지에 기록돼 있습니다.</li>
 </ol>
-<p><img alt="그림 24.6 — 검수 포인트: .env와 node_modules가 없다" src="../images/ch24/ch24-f06.png" width="620" /></p>
+<figure>
+<p><img alt="검수 포인트: .env와 node_modules가 없다" src="../images/ch24/ch24-f06.png" width="620" /></p>
+<figcaption>
+<p>그림 24.6 — 검수 포인트: .env와 node_modules가 없다</p>
+</figcaption>
+</figure>
 <p>검색창에서도 확인할 수 있습니다. 저장소 페이지 상단의 검색창에 <code>VITE_KAKAO_JS_KEY</code>를 입력해 보세요. 검색 결과에 <code>loader.js</code> 같은 코드 파일(키를 <strong>부르는</strong> 쪽)만 나오고, 키값이 적힌 파일(키를 <strong>담은</strong> 쪽)은 나오지 않아야 합니다. 이 확인까지 통과했다면, 여러분은 "비밀을 지키며 공개하는" 오픈소스 세계의 기본기를 정확히 해낸 것입니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
@@ -1799,7 +1831,12 @@
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>...
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>a1b2c3d 지도 웹앱 완성: 마커·필터·검색·저장·공유
 </span></code></pre></div>
-<p><img alt="그림 24.7 — git log --oneline으로 본 커밋 역사" src="../images/ch24/ch24-f07.png" width="760" /></p>
+<figure>
+<p><img alt="git log --oneline으로 본 커밋 역사" src="../images/ch24/ch24-f07.png" width="760" /></p>
+<figcaption>
+<p>그림 24.7 — git log --oneline으로 본 커밋 역사</p>
+</figcaption>
+</figure>
 <p>이 목록이 곧 여러분의 개발 일지입니다. 깃허브 프로필의 잔디밭(기여 그래프)에도 커밋한 날마다 초록 칸이 채워지니, 꾸준함이 눈에 보이는 재미도 있습니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>

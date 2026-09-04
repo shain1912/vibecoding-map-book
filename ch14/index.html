@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1681,14 +1683,24 @@
 </span></code></pre></div>
 <p>이 변수가 바로 <strong>필터 상태</strong>입니다. <code>'all'</code>이면 전체 보기, <code>'cafe'</code>면 카페만 보기. 지도에 마커가 몇 개 떠 있든, 진실은 언제나 이 변수 하나에 있습니다. 화면은 이 변수를 보고 그려지는 <strong>결과물</strong>일 뿐입니다.</p>
 <p>이 관점의 전환이 왜 강력한지 비유로 설명해 보겠습니다. 식당의 주문서를 떠올려 보세요. 주방장이 손님 얼굴을 일일이 기억해서 요리를 바꾸는 식당은 손님이 늘면 반드시 실수합니다. 잘 되는 식당은 <strong>주문서 한 장</strong>을 진실로 삼습니다. 주문서가 바뀌면 주방은 주문서대로 다시 만들 뿐이죠. <code>currentFilter</code>가 주문서이고, 지도 화면이 요리입니다. 버튼은 주문서를 고쳐 쓰는 펜일 뿐, 요리에 직접 손대지 않습니다.</p>
-<p><img alt="그림 14.1 — 필터가 없을 때: 모든 카테고리 마커가 뒤섞여 표시된 지도" src="../images/ch14/ch14-f01.jpg" width="760" /></p>
+<figure>
+<p><img alt="필터가 없을 때: 모든 카테고리 마커가 뒤섞여 표시된 지도" src="../images/ch14/ch14-f01.jpg" width="760" /></p>
+<figcaption>
+<p>그림 14.1 — 필터가 없을 때: 모든 카테고리 마커가 뒤섞여 표시된 지도</p>
+</figcaption>
+</figure>
 <p>그림으로 정리하면 흐름은 딱 세 단계입니다.</p>
 <ol>
 <li>버튼 클릭 → <strong>상태를 바꾼다</strong> (<code>currentFilter = 'cafe'</code>)</li>
 <li>상태 기준으로 → <strong>데이터를 거른다</strong> (<code>filteredPlaces()</code>)</li>
 <li>걸러진 데이터로 → <strong>화면을 다시 그린다</strong> (<code>renderPlaces(...)</code>)</li>
 </ol>
-<p><img alt="그림 14.2 — 단방향 데이터 흐름: 버튼 → 상태 → 필터링 → 렌더링" src="../images/ch14/ch14-f02.png" width="760" /></p>
+<figure>
+<p><img alt="단방향 데이터 흐름: 버튼 → 상태 → 필터링 → 렌더링" src="../images/ch14/ch14-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 14.2 — 단방향 데이터 흐름: 버튼 → 상태 → 필터링 → 렌더링</p>
+</figcaption>
+</figure>
 <p>화살표가 오른쪽으로만 흐른다는 점을 눈여겨보세요. 화면이 상태를 거꾸로 바꾸는 일은 없습니다. 이것을 <strong>단방향 데이터 흐름</strong>이라고 부르고, React나 Vue 같은 유명 프레임워크들도 전부 이 원리 위에 서 있습니다. 우리는 프레임워크 없이 바닐라 자바스크립트로 같은 원리를 직접 구현해 봅니다. 원리를 손으로 만들어 본 사람은 나중에 어떤 프레임워크를 만나도 낯설지 않습니다.</p>
 <h2 id="142-ui">14.2 필터 바 UI 만들기<a class="headerlink" href="#142-ui" title="Permanent link">&para;</a></h2>
 <p>개념을 잡았으니 Claude Code에게 일을 시킬 차례입니다. 늘 그랬듯 코드를 직접 치지 않습니다. 무엇을 원하는지 정확히 말하는 것이 우리의 일입니다.</p>
@@ -1724,7 +1736,12 @@
 </span></code></pre></div>
 <p><code>border-radius: 999px</code>는 버튼을 알약(pill) 모양으로 만드는 CSS 관용구입니다. 높이의 절반보다 큰 값이면 무조건 완전한 반원 모서리가 되니, 넉넉하게 999를 주는 거죠. 그리고 마지막 줄이 오늘의 주인공 중 하나입니다. <code>.filter-btn.active</code> — "filter-btn이면서 <strong>동시에</strong> active 클래스를 가진 요소"라는 뜻으로, 선택된 버튼만 배경이 채워집니다. 클래스 하나를 붙였다 뗐다 하는 것만으로 "선택됨"을 표현하는, 웹에서 가장 흔한 패턴입니다.</p>
 <p>저장하고 브라우저를 확인해 보세요. 사이드바 제목 아래로 알약 버튼 다섯 개가 가지런히 놓여 있으면 성공입니다. 물론 아직 눌러도 아무 일도 일어나지 않습니다. 상태와 연결하지 않았으니까요. 미리 한마디 얹어 두면, 15장에서 검색창이 제목과 이 필터 바 사이에 끼어들어 와서 사이드바의 최종 레이아웃은 위에서부터 <strong>검색창 → 필터 → 목록(18장)</strong> 순이 됩니다.</p>
-<p><img alt="그림 14.3 — 완성된 필터 바 UI (&quot;전체&quot;가 active 상태)" src="../images/ch14/ch14-f03.png" width="420" /></p>
+<figure>
+<p><img alt="완성된 필터 바 UI (&quot;전체&quot;가 active 상태)" src="../images/ch14/ch14-f03.png" width="420" /></p>
+<figcaption>
+<p>그림 14.3 — 완성된 필터 바 UI ("전체"가 active 상태)</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p><code>data-category</code>의 값(<code>food</code>, <code>cafe</code>, <code>travel</code>, <code>date</code>)은 12장 <code>categories.js</code>의 키, 그리고 장소 데이터의 <code>category</code> 값과 <strong>철자까지 완전히 같아야</strong> 합니다. 한 글자라도 다르면(예: <code>cafe</code> vs <code>caffe</code>) 필터가 조용히 빈 결과만 내놓습니다. 에러도 안 나서 찾기 어려운 버그죠. 이런 "같은 이름을 여러 곳에서 쓰는" 값은 categories.js처럼 한 파일에 모아 두고 나머지가 따라가게 하는 것이 12장에서 배운 설계의 힘입니다.</p>
@@ -1801,8 +1818,18 @@
 <li><strong>전체</strong>를 누르세요. 다섯 개가 모두 돌아옵니다.</li>
 <li>말풍선이 열린 상태에서 필터를 바꿔 보세요. 말풍선도 함께 정리됩니다(<code>renderPlaces</code> 첫 줄의 <code>closeOverlay()</code> 덕분입니다).</li>
 </ol>
-<p><img alt="그림 14.4 — ☕ 카페 필터 적용: 카페 마커만 남은 지도" src="../images/ch14/ch14-f04.jpg" width="760" /></p>
-<p><img alt="그림 14.5 — 💕 데이트 필터 적용: active 버튼과 걸러진 마커" src="../images/ch14/ch14-f05.jpg" width="760" /></p>
+<figure>
+<p><img alt="☕ 카페 필터 적용: 카페 마커만 남은 지도" src="../images/ch14/ch14-f04.jpg" width="760" /></p>
+<figcaption>
+<p>그림 14.4 — ☕ 카페 필터 적용: 카페 마커만 남은 지도</p>
+</figcaption>
+</figure>
+<figure>
+<p><img alt="💕 데이트 필터 적용: active 버튼과 걸러진 마커" src="../images/ch14/ch14-f05.jpg" width="760" /></p>
+<figcaption>
+<p>그림 14.5 — 💕 데이트 필터 적용: active 버튼과 걸러진 마커</p>
+</figcaption>
+</figure>
 <p>네 가지가 모두 잘 된다면 오늘의 기능은 완성입니다. 잊지 말고 안전벨트도 채워 둡시다. 3장에서 약속한 대로, 기능 하나가 눈으로 확인될 때마다 커밋을 남깁니다. 터미널에서 <code>git add -A</code> 한 뒤 <code>git commit -m "카테고리 필터 추가"</code>라고 입력하거나, 더 편하게는 Claude Code에게 "지금까지 작업 커밋해줘. 메시지는 카테고리 필터 추가로"라고 시키면 됩니다. 다음 절에서 이런저런 실험을 하다가 코드가 꼬여도, 이 커밋 지점으로 언제든 되돌아올 수 있습니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
@@ -1810,7 +1837,12 @@
 </div>
 <h2 id="145">14.5 단방향 흐름이 주는 선물<a class="headerlink" href="#145" title="Permanent link">&para;</a></h2>
 <p>버튼 다섯 개짜리 기능 치고는 설계 이야기를 길게 했습니다. 그만한 값어치가 있기 때문입니다. 오늘 세운 구조를 다시 보죠.</p>
-<p><img alt="그림 14.6 — rerender 하나로 모이는 구조: 필터·추가·삭제 어떤 변화든 같은 길로 화면이 된다" src="../images/ch14/ch14-f06.png" width="760" /></p>
+<figure>
+<p><img alt="rerender 하나로 모이는 구조: 필터·추가·삭제 어떤 변화든 같은 길로 화면이 된다" src="../images/ch14/ch14-f06.png" width="760" /></p>
+<figcaption>
+<p>그림 14.6 — rerender 하나로 모이는 구조: 필터·추가·삭제 어떤 변화든 같은 길로 화면이 된다</p>
+</figcaption>
+</figure>
 <p>만약 우리가 처음의 직관대로 "버튼이 마커를 직접 숨기는" 코드를 짰다면 어땠을까요? 15장에서 검색이 들어오고, 16장에서 장소 추가가 들어올 때마다 "지금 어떤 필터가 걸려 있더라?"를 각 기능이 알아서 챙겨야 합니다. 기능이 다섯 개면 조합은 수십 가지가 되고, 어딘가에서 반드시 어긋납니다.</p>
 <p>단방향 구조에서는 이야기가 다릅니다. 어떤 기능이든 <strong>상태만 바꾸고 <code>rerender()</code>를 부르면 끝</strong>입니다. 새 장소가 추가되면? 데이터에 넣고 <code>rerender()</code>. 필터가 걸린 상태였다면 <code>filteredPlaces()</code>가 알아서 거르니, 추가 기능은 필터의 존재조차 몰라도 됩니다. 실제로 16장에서 장소 추가가, 17장에서 저장이 들어오고, 18장에 이르면 "데이터가 바뀔 때마다 자동으로 rerender를 부르는" 구독 패턴으로 이 구조가 한 번 더 진화하는데, 그 진화가 가능한 것도 오늘 길을 하나로 모아 뒀기 때문입니다.</p>
 <p>바이브코딩 관점에서도 짚어 둘 것이 있습니다. 사실 이 구조는 우리가 처음부터 설계도를 그려서 나온 게 아니라, AI에게 "필터가 바뀌면 화면을 다시 그리는 콜백을 호출해줘"라고 시켰더니 자연스럽게 따라온 것입니다. AI는 수많은 코드에서 검증된 패턴을 기본값으로 내놓는 경향이 있습니다. 그래서 <strong>AI가 짠 코드의 "모양"을 읽고 왜 이렇게 생겼는지 묻는 것</strong>이 최고의 공부가 됩니다. 이해가 안 되는 구조를 만나면 그대로 물어보세요. "왜 버튼에서 마커를 직접 안 지우고 콜백을 호출해?" — 이 질문 하나면 Claude Code가 방금 제가 한 설명을 여러분의 코드 기준으로 다시 들려줄 겁니다.</p>

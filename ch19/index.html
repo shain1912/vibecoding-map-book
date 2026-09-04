@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1703,7 +1705,12 @@
 <li><strong>메모 칸</strong> — 여러 줄 입력이 되는 <code>textarea</code></li>
 <li><strong>동작 버튼</strong> — 저장, 그리고 빨간 글씨의 삭제</li>
 </ol>
-<p><img alt="그림 19.1 — 상세 패널의 네 덩어리 구조" src="../images/ch19/ch19-f01.png" width="760" /></p>
+<figure>
+<p><img alt="상세 패널의 네 덩어리 구조" src="../images/ch19/ch19-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 19.1 — 상세 패널의 네 덩어리 구조</p>
+</figcaption>
+</figure>
 <p>자리는 지도 <strong>오른쪽 위</strong>가 좋습니다. 왼쪽은 사이드바가 차지하고 있으니, 반대편에 띄우면 목록과 상세를 나란히 놓고 볼 수 있습니다. 13장의 말풍선처럼 지도 위에 겹쳐 뜨는 요소이므로 <code>position: absolute</code>를 쓰고, 평소에는 <code>hidden</code> 속성으로 숨겨 둡니다. 15장의 검색 결과 목록과 똑같은 작전입니다. 화면 요소는 상태에 따라 나타나고 사라진다 — 이제 익숙한 리듬이죠.</p>
 <p>그런데 한 가지 미리 결정할 것이 있습니다. 패널의 <strong>속 내용물</strong>을 HTML에 미리 다 써 둘까요, 아니면 그때그때 자바스크립트로 만들어 넣을까요? 검색 결과 목록은 후자였습니다. 상세 패널도 후자가 맞습니다. 어떤 장소가 클릭될지, 별점이 몇 개일지, 메모가 뭐라고 적혀 있을지는 <strong>클릭되는 순간에야</strong> 알 수 있으니까요. 그래서 HTML에는 빈 그릇만 두고, 열 때마다 내용을 새로 그려 넣는 방식으로 갑니다. Claude Code에게 그릇과 스타일부터 부탁합시다.</p>
 <div class="admonition tip">
@@ -1780,7 +1787,12 @@
 </span></code></pre></div>
 <p><code>&lt;button class="star"&gt;★&lt;/button&gt;</code>를 다섯 번 복사해 붙이는 대신, <code>[1, 2, 3, 4, 5]</code> 배열을 <code>map</code>으로 돌려 다섯 개를 <strong>찍어 냅니다</strong>. 각 버튼은 자기 번호 <code>n</code>을 알고 있고, <code>n &lt;= place.rating</code>이면, 그러니까 자기 번호가 현재 별점 이하이면 <code>on</code> 클래스를 답니다. 별점이 3이면 1·2·3번 별에만 <code>on</code>이 붙어 노랗게 빛나는 것이죠. <code>place.rating || 0</code>은 별점이 아직 없는(=<code>undefined</code>) 장소를 0점으로 취급하는 안전장치입니다. 삼항 연산자<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> <code>조건 ? 참일때 : 거짓일때</code>는 이렇게 클래스 이름을 골라 넣을 때 특히 자주 만나게 됩니다.</p>
 <p><code>data-n="${n}"</code>도 눈에 익지 않나요? 15장 검색 결과의 <code>data-i</code>와 같은 <strong>번호표</strong>입니다. 잠시 뒤 클릭된 별이 몇 번째인지 알아내는 데 씁니다. 그리고 이름과 메모에 씌워진 <code>escapeHtml</code> — 아직은 "외부 문자열엔 이걸 씌운다"는 주문으로만 알고 넘어가세요. 19.5절에서 이 주문을 안 외우면 무슨 일이 벌어지는지 눈으로 보게 됩니다.</p>
-<p><img alt="그림 19.2 — 마커를 클릭하면 오른쪽 위에 열리는 상세 패널" src="../images/ch19/ch19-f02.jpg" width="760" /></p>
+<figure>
+<p><img alt="마커를 클릭하면 오른쪽 위에 열리는 상세 패널" src="../images/ch19/ch19-f02.jpg" width="760" /></p>
+<figcaption>
+<p>그림 19.2 — 마커를 클릭하면 오른쪽 위에 열리는 상세 패널</p>
+</figcaption>
+</figure>
 <h2 id="193">19.3 별점 버튼 — 클릭하면 다시 그린다<a class="headerlink" href="#193" title="Permanent link">&para;</a></h2>
 <p><code>innerHTML</code>로 그리기가 끝나면, 이어서 방금 만든 버튼들에 생명을 불어넣습니다. <code>openDetail</code>의 뒷부분입니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">  </span><span class="nx">panel</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#detail-close'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="nx">closeDetail</span><span class="p">);</span>
@@ -1799,7 +1811,12 @@
 <p>그런데 뒤쪽의 <code>openDetail(id)</code>가 묘합니다. 지금 실행 중인 함수를 <strong>자기가 다시 부릅니다</strong>. 왜일까요? 별점은 방금 3에서 5로 바뀌었는데, 화면의 별들은 여전히 3개만 노란 상태이기 때문입니다. 노란 별을 두 개 더 칠하는 코드를 조심조심 짤 수도 있겠지만, 그보다 훨씬 단순한 방법이 있습니다. <strong>패널을 통째로 다시 그리는 것</strong>입니다. <code>openDetail</code>은 어차피 "현재 데이터를 읽어 패널을 그리는 함수"이니, 데이터를 바꾼 뒤 한 번 더 부르면 바뀐 별점이 반영된 새 패널이 나타납니다. 화면을 요리조리 수선하지 않고 <strong>상태를 바꾸고 → 다시 그린다</strong>. 14장 필터에서 익힌 단방향 흐름이 여기서도 반복됩니다. 요즘 유행하는 React 같은 프레임워크의 핵심 사상도 사실 이것과 똑같습니다. 우리는 그걸 바닐라 자바스크립트로 손수 해 보고 있는 셈입니다.</p>
 <p>그리고 <code>openDetail(id)</code>를 앞뒤로 감싼 두 줄, <code>draft</code>를 보관했다가 되돌려 놓는 코드가 이 방식의 <strong>비용을 계산한 흔적</strong>입니다. 패널을 통째로 다시 그린다는 것은 textarea도 새로 만든다는 뜻입니다. 만약 메모 칸에 <strong>저장 안 한 글</strong>을 쓰던 중에 별을 눌렀다면, 새 textarea에는 저장된 옛 메모가 들어가면서 쓰던 글이 증발해 버립니다. 열심히 쓴 후기 세 줄이 별 한 번 눌렀다고 사라진다면 사용자는 배신감을 느끼겠죠. 그래서 다시 그리기 <strong>전에</strong> textarea의 현재 값을 <code>draft</code> 변수에 피신시켜 두고, 다시 그린 <strong>후에</strong> 그 값을 새 textarea에 되돌려 놓습니다. 철거 전에 귀중품부터 챙기는 것입니다. "통째로 다시 그리기"의 단순함은 지키면서, 그 부작용만 두 줄로 막은 절충안입니다.</p>
 <p>한 가지 더 좋은 일이 공짜로 따라옵니다. <code>store.update</code>가 <code>save()</code>를 부르면, 18장에서 심어 둔 <strong>구독 패턴</strong>이 발동합니다. <code>main.js</code>의 <code>store.subscribe(rerender)</code> 덕분에 지도의 마커와 말풍선도 자동으로 다시 그려지죠. 말풍선에는 별점이 ★★★☆☆처럼 표시되고 있었는데(13장), 상세 패널에서 별을 바꾸는 순간 말풍선의 별도 함께 바뀝니다. 우리가 이번 장에서 그 연동 코드를 한 줄도 안 썼는데도요. 데이터의 길목 한 곳(<code>save</code>)에 방송국을 세워 둔 설계가 이렇게 계속 이자를 쳐서 돌아옵니다.</p>
-<p><img alt="그림 19.3 — 별 5개를 클릭한 직후, 패널과 말풍선의 별이 함께 바뀐 모습" src="../images/ch19/ch19-f03.jpg" width="760" /></p>
+<figure>
+<p><img alt="별 5개를 클릭한 직후, 패널과 말풍선의 별이 함께 바뀐 모습" src="../images/ch19/ch19-f03.jpg" width="760" /></p>
+<figcaption>
+<p>그림 19.3 — 별 5개를 클릭한 직후, 패널과 말풍선의 별이 함께 바뀐 모습</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>"바꾸고 다시 그리기"를 쓰는 화면에서는 <strong>입력 중이던 값</strong>이 항상 요주의 대상입니다. 우리는 textarea 하나뿐이라 <code>draft</code> 두 줄로 끝났지만, 입력칸이 여러 개라면 챙길 짐도 늘어납니다. React 같은 프레임워크가 입력 상태를 별도로 관리하는 이유가 바로 이 문제 때문입니다. AI가 짜 준 "다시 그리기" 코드를 검토할 때는 "다시 그리는 순간 사용자가 쓰던 값이 날아가지 않아?"라고 한 번 물어보는 습관을 들이세요. 연습 문제에서 이 두 줄을 직접 실험해 봅니다.</p>
@@ -1831,7 +1848,12 @@
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
 </span></code></pre></div>
 <p><code>hidden</code>을 되돌리고, "지금 열려 있는 장소" 기억(<code>currentId</code>)을 비웁니다. 열 때 <code>currentId = id</code>로 적어 두고 닫을 때 지우는 이 변수는, 나중에 다른 모듈이 "지금 상세 패널에 어떤 장소가 떠 있지?"를 물어볼 때를 위한 장부입니다.</p>
-<p><img alt="그림 19.4 — 삭제 버튼을 누르면 뜨는 confirm 다이얼로그" src="../images/ch19/ch19-f04.png" width="760" /></p>
+<figure>
+<p><img alt="삭제 버튼을 누르면 뜨는 confirm 다이얼로그" src="../images/ch19/ch19-f04.png" width="760" /></p>
+<figcaption>
+<p>그림 19.4 — 삭제 버튼을 누르면 뜨는 confirm 다이얼로그</p>
+</figcaption>
+</figure>
 <p>마지막으로 연결입니다. Claude Code가 <code>main.js</code>에서 두 곳을 <code>openDetail</code>로 이어 붙였습니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">openDetail</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./detail.js'</span><span class="p">;</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">// ...</span>
@@ -1858,7 +1880,12 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&lt;img src=x onerror="alert('해킹!')"&gt;
 </span></code></pre></div>
 <p>깨진 이미지 태그입니다. 브라우저는 <code>x</code>라는 이미지를 못 찾으니 <code>onerror</code>에 적힌 <strong>자바스크립트를 실행</strong>합니다. <code>escapeHtml</code>이 없는 앱이라면, 이 "이름"의 장소를 여는 순간 경고창이 뜹니다. 장소 이름을 그렸을 뿐인데 남이 쓴 코드가 내 브라우저에서 돌아간 것입니다. 이런 공격을 <strong>XSS(Cross-Site Scripting, 교차 사이트 스크립팅)</strong><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>라고 부릅니다. 웹에서 가장 오래되고 가장 흔한 공격 중 하나입니다.</p>
-<p><img alt="그림 19.5 — XSS 공격의 원리: 입력이 코드가 되는 순간" src="../images/ch19/ch19-f05.png" width="760" /></p>
+<figure>
+<p><img alt="XSS 공격의 원리: 입력이 코드가 되는 순간" src="../images/ch19/ch19-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 19.5 — XSS 공격의 원리: 입력이 코드가 되는 순간</p>
+</figcaption>
+</figure>
 <p>"내 지도에 내가 이상한 이름을 넣어 봤자 나만 당하는 거 아닌가요?" 좋은 질문입니다. 지금 우리 앱은 데이터가 내 브라우저 안에만 있으니 실제 피해자는 나뿐입니다. 하지만 세 가지를 생각해 보세요. 첫째, 17장에서 만든 <strong>가져오기</strong> 기능으로 남이 준 JSON 파일을 불러올 수 있습니다. 그 파일 속 장소 이름에 공격 코드가 심겨 있다면? 둘째, 15장의 검색 결과도 엄밀히는 <strong>바깥에서 온 데이터</strong>입니다. 카카오를 믿지만, 원칙적으로 외부 데이터는 전부 의심 대상입니다. 셋째, 언젠가 이 앱에 서버를 붙여 여러 사람이 장소를 공유하게 되면, 한 명이 심은 공격 코드가 <strong>모든 방문자의 브라우저</strong>에서 실행됩니다. 진짜 세상의 XSS 사고는 대부분 이런 식으로 터집니다. 방명록에, 댓글에, 닉네임에 심긴 스크립트가 그 페이지를 여는 모든 사람을 공격하는 것이죠.</p>
 <p>참고로 우리 앱의 방어는 이스케이프 한 겹만이 아닙니다. 17장에서 store에 세운 검문소 <code>normalize</code>를 기억하시나요? 가져오기 파일이 들어오면 이름·좌표만이 아니라 <strong><code>id</code>까지</strong> 검사해서, 영문·숫자·밑줄·하이픈으로만 된 id가 아니면 안전한 새 id로 갈아 끼웁니다. id는 화면에 보이는 값이 아니라서 방심하기 쉽지만, <code>data-id="${p.id}"</code>처럼 HTML 속성에 끼워 넣는 코드가 어딘가 생기는 순간 공격 통로가 될 수 있거든요. <strong>들어올 때 검증하고(normalize), 나갈 때 이스케이프한다(escapeHtml)</strong> — 문과 창문에 각각 잠금장치를 다는 이 이중 방어가 보안의 기본 자세입니다. 한쪽을 깜빡해도 다른 쪽이 버텨 주니까요.</p>
 <p>그래서 원칙은 이렇게 외웁니다. <strong>사용자(또는 외부)가 만든 문자열을 innerHTML에 넣을 때는 반드시 이스케이프한다.</strong> 우리의 방패 <code>escapeHtml</code>은 <code>mapView.js</code>에 있는 여섯 줄짜리 함수입니다.</p>
@@ -1907,7 +1934,12 @@
 </tbody>
 </table>
 <p>이제 15장의 문장을 완성할 수 있습니다. 검색 결과의 <code>place_name</code>에, 상세 패널의 <code>place.name</code>과 <code>place.memo</code>에, 13장 말풍선의 이름에 — 외부에서 온 문자열이 <code>innerHTML</code>을 통과하는 <strong>모든 길목</strong>에 우리 앱은 이미 이 방패를 세워 뒀습니다. 여러분이 아까 <code>&lt;b&gt;굵은 국밥집&lt;/b&gt;</code>을 넣었을 때 태그가 글자 그대로 보인 이유입니다.</p>
-<p><img alt="그림 19.6 — escapeHtml 덕분에 태그가 글자 그대로 표시된 상세 패널" src="../images/ch19/ch19-f06.jpg" width="760" /></p>
+<figure>
+<p><img alt="escapeHtml 덕분에 태그가 글자 그대로 표시된 상세 패널" src="../images/ch19/ch19-f06.jpg" width="760" /></p>
+<figcaption>
+<p>그림 19.6 — escapeHtml 덕분에 태그가 글자 그대로 표시된 상세 패널</p>
+</figcaption>
+</figure>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
 <p><code>textarea</code> 안에 값을 넣을 때도 이스케이프가 필요합니다. "textarea는 입력칸이니까 괜찮겠지"라고 생각하기 쉽지만, 메모에 <code>&lt;/textarea&gt;</code>라는 문자열이 들어 있으면 브라우저가 입력칸을 거기서 닫아 버리고 나머지를 HTML로 해석합니다. 우리 코드가 <code>${escapeHtml(place.memo || '')}</code>로 감싼 이유입니다. 규칙은 예외 없이: <strong>innerHTML로 들어가는 외부 문자열은 전부 이스케이프.</strong></p>

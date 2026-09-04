@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1675,7 +1677,12 @@
 <p>그리고 이 장에는 보너스가 하나 있습니다. 17장에서 <code>store.js</code>를 읽을 때 "18장의 예고편"이라며 미뤄 둔 수수께끼의 코드, 기억하시나요? 텅 빈 명단 <code>listeners</code> 배열과, <code>save()</code> 끝에서 그 명단을 향해 헛방송을 하던 <code>forEach</code> 한 줄 말입니다. 오늘 그 명단에 드디어 이름이 올라갑니다. 이름하여 <strong>구독 패턴</strong> — 데이터가 바뀌는 순간 지도와 목록이 <strong>알아서 동시에</strong> 갱신되게 만드는, 이 앱 구조의 마지막 퍼즐 조각입니다. 16장에서 "추가했으면 직접 알려라"라며 손으로 놓았던 <code>notifyChange</code> 임시 다리도 오늘 이 패턴으로 승격되면서 우아하게 철거됩니다.</p>
 <h2 id="181">18.1 목록도 상태의 그림자다<a class="headerlink" href="#181" title="Permanent link">&para;</a></h2>
 <p>새 기능이지만 설계는 새로 할 것이 없습니다. 14장에서 세운 원칙을 그대로 한 번 더 적용하면 되거든요. <strong>진실은 상태에 있고, 화면은 상태의 그림자다.</strong> 지도 위의 마커들이 <code>store</code>의 장소 배열을 그린 결과물이었듯, 사이드바의 목록도 <strong>같은 배열을 다른 모양으로 그린 결과물</strong>일 뿐입니다.</p>
-<p><img alt="그림 18.1 — 하나의 데이터, 두 개의 화면: store를 지도(renderPlaces)와 목록(renderList)이 각자 그린다" src="../images/ch18/ch18-f01.png" width="760" /></p>
+<figure>
+<p><img alt="하나의 데이터, 두 개의 화면: store를 지도(renderPlaces)와 목록(renderList)이 각자 그린다" src="../images/ch18/ch18-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 18.1 — 하나의 데이터, 두 개의 화면: store를 지도(renderPlaces)와 목록(renderList)이 각자 그린다</p>
+</figcaption>
+</figure>
 <p>그림 18.1의 구조에서 눈여겨볼 점은 지도와 목록이 <strong>서로를 전혀 모른다</strong>는 것입니다. 목록이 지도에게 "나 갱신했으니 너도 갱신해"라고 말하지 않습니다. 둘 다 그저 store만 바라보고, store가 바뀌면 각자 자기 화면을 다시 그립니다. 초보 시절에 흔히 저지르는 실수가 "장소를 추가하는 코드에서 지도도 고치고, 목록도 고치고, 개수 표시도 고치고…" 하는 식으로 화면 조각들을 일일이 챙기는 것인데, 화면 조각이 하나 늘 때마다 고칠 곳이 늘어나 금방 지옥이 됩니다. 우리는 반대로 갑니다. 데이터를 바꾸는 쪽은 데이터만 바꾸고, 화면들은 각자 알아서 따라오게 합니다. 그 "알아서 따라오게" 하는 장치가 이 장 후반의 구독 패턴입니다.</p>
 <p>목록이 그려질 자리부터 마련합시다. 지금 <code>index.html</code>의 사이드바에는 목록을 담을 태그가 아직 없으니, 필터 바 아래에 빈 <code>&lt;ul&gt;</code> 하나를 추가하는 것으로 이 장을 시작합니다.</p>
 <div class="admonition tip">
@@ -1750,7 +1757,12 @@
 </span></code></pre></div>
 <p><code>#place-list</code>의 <code>flex: 1</code>과 <code>overflow-y: auto</code> 조합이 실속 있는 부분입니다. 사이드바 안에서 남는 세로 공간을 목록이 전부 차지하되, 장소가 많아져 넘치면 <strong>목록 안에서만</strong> 스크롤이 생깁니다. 사이드바 전체가 밀려 내려가지 않죠. <code>cursor: pointer</code>와 <code>:hover</code> 배경색은 "이거 클릭할 수 있어요"라는 무언의 신호입니다. 아직 클릭 기능을 달기 전이지만, AI가 다음 단계를 내다보고 미리 깔아 둔 셈입니다.</p>
 <p>저장하고 확인해 봅시다. <code>main.js</code>에서 <code>initSidebar()</code>가 호출될 때 <code>renderList()</code>도 한 번 실행되도록 연결되어 있다면(잠시 뒤 전체 코드에서 확인합니다), 사이드바 필터 바 아래로 장소들이 카드처럼 줄지어 나타납니다.</p>
-<p><img alt="그림 18.2 — 완성된 사이드바 장소 목록: 이모지·이름·카테고리·별점이 줄지어 표시된다" src="../images/ch18/ch18-f02.jpg" width="760" /></p>
+<figure>
+<p><img alt="완성된 사이드바 장소 목록: 이모지·이름·카테고리·별점이 줄지어 표시된다" src="../images/ch18/ch18-f02.jpg" width="760" /></p>
+<figcaption>
+<p>그림 18.2 — 완성된 사이드바 장소 목록: 이모지·이름·카테고리·별점이 줄지어 표시된다</p>
+</figcaption>
+</figure>
 <p>목록이 떴으니 14장의 필터 버튼과도 이어 줄 차례입니다. 지금 ☕ 카페를 눌러 보면 지도는 걸러지는데 <strong>목록은 그대로</strong>일 겁니다. 14장의 클릭 핸들러가 지도 갱신 콜백(<code>onFilterChange</code>)만 부를 뿐, 오늘 태어난 <code>renderList()</code>의 존재를 아직 모르기 때문이죠. 14장에서 "18장에서 목록 갱신 한 줄이 추가된다"고 예고했던 바로 그 한 줄을 지금 넣습니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
@@ -1770,7 +1782,12 @@
 </span></code></pre></div>
 <p>주석 두 줄이 14장에서 예고한 구분 그대로입니다. 목록은 sidebar.js 자신의 화면이니 콜백 없이 직접 부르고, 지도는 여전히 콜백 너머 조립 담당 <code>main.js</code>의 몫입니다. 모듈의 경계는 그대로인 채 한 줄만 늘어난 것이죠.</p>
 <p>이제 필터 버튼을 눌러 보세요. <code>renderList()</code>가 <code>store.all()</code>이 아니라 <code>filteredPlaces()</code>를 데이터원으로 삼았기 때문에, ☕ 카페를 누르면 <strong>지도의 마커와 사이드바의 목록이 함께</strong> 카페만 남습니다. 필터라는 상태 하나를 두 화면이 공유하는, 단방향 구조의 힘이 눈에 보이는 순간입니다.</p>
-<p><img alt="그림 18.3 — 필터와 목록의 동기화: ☕ 카페 필터를 누르면 마커와 목록이 함께 걸러진다" src="../images/ch18/ch18-f03.jpg" width="760" /></p>
+<figure>
+<p><img alt="필터와 목록의 동기화: ☕ 카페 필터를 누르면 마커와 목록이 함께 걸러진다" src="../images/ch18/ch18-f03.jpg" width="760" /></p>
+<figcaption>
+<p>그림 18.3 — 필터와 목록의 동기화: ☕ 카페 필터를 누르면 마커와 목록이 함께 걸러진다</p>
+</figcaption>
+</figure>
 <h2 id="183">18.3 빈 목록에도 할 말이 있다<a class="headerlink" href="#183" title="Permanent link">&para;</a></h2>
 <p><code>renderList()</code> 앞부분의 <code>if (places.length === 0)</code> 분기를 다시 봅시다. 장소가 하나도 없으면 목록 대신 안내 문구를 보여주고 곧바로 <code>return</code>으로 함수를 끝냅니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">places</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1784,7 +1801,12 @@
 </span></code></pre></div>
 <p>스타일도 의도가 있습니다. 흐린 색(<code>--muted</code>)과 넉넉한 여백으로 "이건 데이터가 아니라 안내문"임을 시각적으로 구분합니다. 진짜 목록 항목처럼 진하게 그리면 사용자가 클릭하려 들 테니까요.</p>
 <p>확인해 봅시다. 필터에서 결과가 0개가 되게 만들면 됩니다. 예를 들어 아직 데이트 장소를 하나도 추가하지 않았다면 💕 데이트 필터를 눌러 보세요. 또는 19장을 미리 맛보는 셈 치고, 개발자도구 콘솔에서 <code>localStorage.clear()</code>를 입력하고 새로고침하면 저장된 장소가 모두 사라져 완전한 빈 목록을 볼 수 있습니다(17장에서 만든 내보내기로 백업해 두셨죠? 가져오기로 언제든 복구할 수 있으니 겁내지 않아도 됩니다).</p>
-<p><img alt="그림 18.4 — 빈 목록 안내: 텅 빈 여백 대신 상황과 다음 행동을 알려준다" src="../images/ch18/ch18-f04.jpg" width="760" /></p>
+<figure>
+<p><img alt="빈 목록 안내: 텅 빈 여백 대신 상황과 다음 행동을 알려준다" src="../images/ch18/ch18-f04.jpg" width="760" /></p>
+<figcaption>
+<p>그림 18.4 — 빈 목록 안내: 텅 빈 여백 대신 상황과 다음 행동을 알려준다</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>빈 상태는 목록만의 문제가 아닙니다. 검색 결과가 0건일 때, 이미지를 불러오는 중일 때, 네트워크가 끊겼을 때 — 화면이 "정상 데이터"가 아닌 모든 순간이 디자인 대상입니다. AI에게 화면을 시킬 때 "비었을 때/실패했을 때는 이렇게 보여줘"까지 말해 주는 습관을 들이면, 앱의 완성도가 눈에 띄게 달라집니다. 프롬프트에 예외 상황 한 줄을 얹는 것, 그게 프로와 아마추어 화면의 차이를 만듭니다.</p>
@@ -1841,7 +1863,12 @@
 <p>전반부는 10장의 복습입니다. <code>setLevel(4)</code>로 동네가 보이는 수준까지 확대하고, <code>setCenter()</code> 대신 <code>panTo()</code>를 써서 지도가 순간이동이 아니라 <strong>미끄러지듯</strong> 이동하게 합니다. 이 부드러운 움직임 하나가 "내가 클릭한 곳으로 가고 있구나"라는 방향 감각을 만들어 줍니다.</p>
 <p>후반부가 흥미롭습니다. <code>markers</code> 배열은 13장에서 <code>{ marker, overlay, place }</code>를 짝지어 보관하기로 한 바로 그 배열입니다. <code>find()</code>로 클릭된 장소의 짝꿍을 찾아, 미리 만들어 둔 말풍선(<code>entry.overlay</code>)을 지도에 붙입니다. 그 직전의 <code>closeOverlay()</code>는 13장의 약속 — "말풍선은 한 번에 하나만" — 을 지키기 위해 열려 있던 말풍선을 먼저 닫는 것입니다. 마커를 직접 클릭했을 때와 목록에서 클릭했을 때, 서로 다른 입구로 들어와도 똑같은 말풍선 규칙이 지켜집니다.</p>
 <p>저장하고 실행해 봅시다. 목록에서 아무 장소나 클릭해 보세요. 지도가 스르륵 미끄러져 그 장소를 중앙에 놓고, 확대되고, 말풍선이 열립니다. 목록을 위아래로 훑으며 여러 장소를 연달아 클릭해 보세요. 저장해 둔 장소들 사이를 목록으로 순간이동하는, 꽤 그럴듯한 지도 앱이 됐습니다.</p>
-<p><img alt="그림 18.5 — 목록 클릭 → focusPlace: 지도가 해당 장소로 이동·확대되고 말풍선이 열린 모습" src="../images/ch18/ch18-f05.jpg" width="760" /></p>
+<figure>
+<p><img alt="목록 클릭 → focusPlace: 지도가 해당 장소로 이동·확대되고 말풍선이 열린 모습" src="../images/ch18/ch18-f05.jpg" width="760" /></p>
+<figcaption>
+<p>그림 18.5 — 목록 클릭 → focusPlace: 지도가 해당 장소로 이동·확대되고 말풍선이 열린 모습</p>
+</figcaption>
+</figure>
 <p>기능이 눈으로 확인됐으니 안전벨트를 챙깁니다. Claude Code에게 "지금까지 작업 커밋해줘. 메시지는 사이드바 장소 목록과 지도 연동 추가로"라고 시켜 두세요.</p>
 <h2 id="185">18.5 구독 패턴 — 데이터가 바뀌면 화면이 따라온다<a class="headerlink" href="#185" title="Permanent link">&para;</a></h2>
 <p>이제 이 장의 하이라이트이자, 17장에서 미뤄 둔 수수께끼를 풀 시간입니다. 현재 목록에는 흠이 하나 있습니다. 지도를 클릭해 새 장소를 추가하면 지도에는 즉시 마커가 생기는데, <strong>목록은 옛날 그대로</strong>라는 것. 새로고침해야 비로소 새 장소가 목록에 나타납니다. 왜일까요? 16장에서 놓은 <code>notifyChange</code> 다리가 <code>rerender</code>(지도 다시 그리기) <strong>하나에만</strong> 연결되어 있기 때문입니다. <code>store.add()</code> 뒤에 지도는 다리를 통해 소식을 듣지만, 오늘 태어난 <code>renderList()</code>는 아직 아무에게도 소식을 못 받습니다.</p>
@@ -1896,7 +1923,12 @@
 </span></code></pre></div>
 <p>다리가 사라졌는데 어떻게 마커가 계속 즉시 찍힐까요? <code>store.add()</code>의 마지막 일이 <code>save()</code>이고, <code>save()</code> 끝의 방송이 구독자 <code>rerender</code>를 부르기 때문입니다. 추가하는 쪽 코드는 이제 화면의 존재 자체를 모릅니다. 데이터만 바꾸면 나머지는 방송이 알아서 — 18.1절에서 예고한 "알아서 따라오게 하는 장치"가 완성된 것입니다.</p>
 <p>이것으로 그림 18.1의 구조가 완성됐습니다. 확인해 봅시다. 지도의 빈 곳을 클릭해서 새 장소를 추가해 보세요. 다이얼로그에서 저장을 누르는 순간 — 지도에 마커가 돋아나고, <strong>동시에 사이드바 목록에도 새 항목이 스윽 나타납니다.</strong> 목록에서 방금 그 항목을 클릭하면 지도가 그리로 날아가는 것까지, 모든 것이 맞물려 돌아갑니다. 검색으로 추가해도, 가져오기로 파일을 통째로 불러와도 마찬가지입니다. 우리는 어디에도 "목록을 갱신하라"는 코드를 추가로 심지 않았습니다. 데이터가 바뀌었고, 구독자들이 각자 따라왔을 뿐입니다.</p>
-<p><img alt="그림 18.6 — 구독 패턴: 어떤 경로로 데이터가 바뀌든 save()가 방송하고, 구독자(지도·목록)가 각자 갱신한다" src="../images/ch18/ch18-f06.png" width="760" /></p>
+<figure>
+<p><img alt="구독 패턴: 어떤 경로로 데이터가 바뀌든 save()가 방송하고, 구독자(지도·목록)가 각자 갱신한다" src="../images/ch18/ch18-f06.png" width="760" /></p>
+<figcaption>
+<p>그림 18.6 — 구독 패턴: 어떤 경로로 데이터가 바뀌든 save()가 방송하고, 구독자(지도·목록)가 각자 갱신한다</p>
+</figcaption>
+</figure>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
 <p>구독 패턴을 쓸 때 초보가 가장 많이 빠지는 함정은 <strong>구독한 함수 안에서 다시 데이터를 바꾸는 것</strong>입니다. 예컨대 renderList 안에서 <code>store.update(...)</code>를 부르면, update가 save를 부르고, save가 다시 renderList를 부르고… 무한 반복에 빠져 브라우저가 멈춥니다. 규칙은 간단합니다. <strong>구독자는 읽고 그리기만 한다. 쓰지 않는다.</strong> 화면이 얼어붙으면서 콘솔에 "Maximum call stack size exceeded"가 보인다면 이 순환을 의심하고, Claude Code에게 "store를 구독한 함수 중에 store를 다시 수정하는 곳이 있는지 찾아줘"라고 시키세요.</p>

@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1673,12 +1675,22 @@
 <hr />
 <p>16장은 우리 앱의 큰 도약이었습니다. 지도를 클릭해서, 또 검색 결과의 ＋ 버튼으로 장소를 추가할 수 있게 됐죠. 성수동 카페를 검색해 담고, 지도를 클릭해 단골 국밥집도 넣고, 나만의 지도가 제법 채워졌을 겁니다. 그런데 지금부터 아주 잔인한 실험을 하나 해 보겠습니다. 장소를 두세 개 정성껏 추가한 다음, ++f5++ 를 눌러 <strong>새로고침</strong>해 보세요.</p>
 <p>방금 추가한 장소가 전부 사라졌습니다. 마커도, 목록도, 흔적도 없이. 남은 것은 12장에서 넣어 둔 기본 장소들뿐입니다. 열심히 만든 지도가 새로고침 한 번에 초기화된다면, 이 앱은 장난감이지 도구가 아닙니다. 이번 장에서는 이 문제를 해결합니다. 새로고침해도, 브라우저를 껐다 켜도, 컴퓨터를 재부팅해도 내 장소가 그대로 남아 있는 <strong>진짜 저장</strong>을 만듭니다. 그리고 한 걸음 더 나아가, 내 지도를 파일로 <strong>내보내고 가져오는</strong> 백업 기능까지 답니다.</p>
-<p><img alt="그림 17.1 — 새로고침 전(왼쪽)과 후(오른쪽): 추가한 장소가 사라졌다" src="../images/ch17/ch17-f01.png" width="860" /></p>
+<figure>
+<p><img alt="새로고침 전(왼쪽)과 후(오른쪽): 추가한 장소가 사라졌다" src="../images/ch17/ch17-f01.png" width="860" /></p>
+<figcaption>
+<p>그림 17.1 — 새로고침 전(왼쪽)과 후(오른쪽): 추가한 장소가 사라졌다</p>
+</figcaption>
+</figure>
 <h2 id="171">17.1 왜 사라질까 — 변수는 메모리에 산다<a class="headerlink" href="#171" title="Permanent link">&para;</a></h2>
 <p>범인부터 찾아봅시다. 우리 장소 데이터는 지금 <code>store.js</code> 안의 <code>places</code>라는 <strong>변수</strong>에 배열로 담겨 있습니다. 16장에서 <code>store.add()</code>를 호출하면 이 배열에 새 장소가 <code>push</code>되고, 화면에 마커가 찍혔습니다. 여기까지는 완벽합니다. 문제는 이 변수가 사는 동네입니다.</p>
 <p>자바스크립트 변수는 컴퓨터의 <strong>메모리(RAM)</strong>에 삽니다. 메모리는 아주 빠르지만 치명적인 특징이 하나 있습니다. <strong>전원이 꺼지면, 프로그램이 끝나면, 내용이 통째로 증발한다</strong>는 것입니다. 브라우저에서 "프로그램이 끝나는" 순간이 언제일까요? 바로 새로고침입니다. 새로고침은 페이지를 살짝 다듬는 게 아니라, 실행 중이던 자바스크립트 세계를 완전히 철거하고 처음부터 다시 짓는 일입니다. <code>places</code> 배열도 철거와 함께 사라지고, 새로 지어진 세계에서는 <code>defaultPlaces.js</code>의 기본 데이터로 다시 시작합니다. 우리가 추가한 장소는 어디에도 기록된 적이 없으니 돌아올 방법도 없습니다.</p>
 <p>책상에 비유하면 이렇습니다. 메모리는 <strong>책상 위</strong>입니다. 지금 작업 중인 서류를 펼쳐 놓고 빠르게 읽고 쓰기에 좋지만, 퇴근할 때(새로고침) 책상은 싹 치워집니다. 내일도 봐야 할 서류라면 퇴근 전에 <strong>서랍</strong>에 넣어 둬야 합니다. 서랍은 책상보다 여닫기 번거롭지만, 내용물이 밤새 사라지지 않습니다. 우리에게 필요한 것이 바로 이 서랍, 즉 <strong>영속 저장소</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>입니다. 그리고 브라우저는 모든 웹사이트에게 작은 서랍을 하나씩 기본으로 제공합니다. 이름이 바로 localStorage입니다.</p>
-<p><img alt="그림 17.2 — 책상(메모리)과 서랍(localStorage)" src="../images/ch17/ch17-f02.png" width="760" /></p>
+<figure>
+<p><img alt="책상(메모리)과 서랍(localStorage)" src="../images/ch17/ch17-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 17.2 — 책상(메모리)과 서랍(localStorage)</p>
+</figcaption>
+</figure>
 <h2 id="172-localstorage">17.2 localStorage — 브라우저 안의 작은 서랍<a class="headerlink" href="#172-localstorage" title="Permanent link">&para;</a></h2>
 <p>localStorage는 브라우저가 사이트마다 하나씩 마련해 주는 <strong>키-값(key-value) 저장소</strong>입니다. 사용법은 이름표(키)를 붙여 값을 넣고, 나중에 같은 이름표로 꺼내는 것이 전부입니다. 백문이 불여일견, 개발자도구 콘솔(++f12++)에서 직접 만져 봅시다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span><span class="w"> </span><span class="s1">'반갑습니다'</span><span class="p">);</span><span class="w">  </span><span class="c1">// 저장</span>
@@ -1688,7 +1700,12 @@
 <div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span><span class="w">   </span><span class="c1">// → '반갑습니다' (살아 있다!)</span>
 </span></code></pre></div>
 <p>값이 그대로 살아 있습니다. 브라우저를 완전히 껐다 켜도, 내일 다시 열어도 남아 있습니다. 변수와는 완전히 다른 세계죠. 개발자도구의 <strong>Application 탭 → Local Storage → http://localhost:5173</strong>을 열면 방금 저장한 키와 값을 눈으로 확인할 수 있습니다. 한국어 크롬에서는 탭 이름이 <strong>「애플리케이션」</strong>으로 표시되고, 탭 목록에 안 보이면 개발자도구 오른쪽 끝의 <code>»</code> 버튼 속에 숨어 있습니다. 이 화면은 앞으로 우리 서랍 속을 들여다보는 창문 역할을 하니 위치를 기억해 두세요.</p>
-<p><img alt="그림 17.3 — 개발자도구 Application 탭에서 본 localStorage" src="../images/ch17/ch17-f03.png" width="760" /></p>
+<figure>
+<p><img alt="개발자도구 Application 탭에서 본 localStorage" src="../images/ch17/ch17-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 17.3 — 개발자도구 Application 탭에서 본 localStorage</p>
+</figcaption>
+</figure>
 <p>localStorage의 성격을 세 가지만 정리하면 이렇습니다.</p>
 <ul>
 <li><strong>사이트별 서랍입니다.</strong> <code>localhost:5173</code>이 저장한 값은 <code>localhost:5173</code>에서만 보입니다. 다른 사이트가 우리 서랍을 열어 볼 수 없고, 우리도 남의 서랍을 못 엽니다. 이 구분 단위를 오리진(origin)<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>이라고 부릅니다.</li>
@@ -1717,7 +1734,12 @@
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nx">unpacked</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span><span class="w">     </span><span class="c1">// → '어니언 성수'  (완벽하게 복원!)</span>
 </span></code></pre></div>
 <p><code>stringify</code>가 만든 결과는 사람 눈에도 원본과 거의 비슷하게 생겼지만, 정체는 순수한 <strong>문자열</strong>입니다. 구조 정보(중괄호·대괄호·따옴표)가 전부 글자로 기록되어 있어서, <code>parse</code>가 이 글자들을 읽고 원래의 배열·객체를 그대로 다시 조립해 낼 수 있습니다. 이 왕복이 손실 없이 이루어진다는 것이 핵심입니다. 포장(<code>stringify</code>) → 서랍 보관(<code>setItem</code>) → 꺼내기(<code>getItem</code>) → 개봉(<code>parse</code>)의 4단계 파이프라인만 있으면, 어떤 데이터든 새로고침 너머로 살려 보낼 수 있습니다.</p>
-<p><img alt="그림 17.4 — 직렬화 왕복 파이프라인" src="../images/ch17/ch17-f04.png" width="760" /></p>
+<figure>
+<p><img alt="직렬화 왕복 파이프라인" src="../images/ch17/ch17-f04.png" width="760" /></p>
+<figcaption>
+<p>그림 17.4 — 직렬화 왕복 파이프라인</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p><code>JSON.parse</code>는 까다로운 검사관입니다. 문자열이 JSON 문법에 조금이라도 어긋나면(따옴표 하나만 빠져도) 값을 돌려주는 대신 <strong>에러를 던지며</strong> 멈춥니다. "이상한 값을 조용히 돌려주는 것보다 크게 소리치는 게 낫다"는 설계인데, 덕분에 우리는 에러에 대비하는 코드를 함께 써야 합니다. 바로 다음 절의 try-catch가 그 역할입니다.</p>
@@ -1836,7 +1858,12 @@
 <p><strong>확인 ① — 서랍에 기록됐는가.</strong> 브라우저를 새로고침하고, 지도를 클릭해 장소를 하나 추가하세요. 그리고 개발자도구의 Application(「애플리케이션」) 탭 → Local Storage → <code>http://localhost:5173</code>을 엽니다. <code>my-map-places-v1</code> 키 아래에 우리 장소들이 JSON 문자열로 얌전히 누워 있으면, <code>save()</code>가 제 일을 한 것입니다. 방금 추가한 장소의 이름이 문자열 안에 보이는지까지 확인해 보세요.</p>
 <p><strong>확인 ② — 새로고침 후에도 화면에 남는가.</strong> 이제 ++f5++. <strong>장소가 그대로 있습니다.</strong> 브라우저를 완전히 껐다가 다시 열어도, 내일 아침에 열어도 그대로입니다. 이 두 번째 확인이 성립하는 데는 사실 두 장의 합작이 필요했습니다. 오늘의 <code>load()</code>가 시작 시점에 서랍을 열어 <code>places</code>를 채우고, <strong>16장에서 데이터 원천을 <code>store.all()</code>로 옮겨 둔 덕분에</strong> 첫 화면을 그리는 <code>rerender()</code>가 그 배열을 그대로 지도에 올리는 것입니다. 만약 화면이 아직 14장처럼 <code>DEFAULT_PLACES</code>를 보고 있었다면, 서랍에 아무리 쌓여도 화면은 기본 다섯 개만 보여 줬을 겁니다. ①은 되는데 ②가 안 된다면 바로 그 지점 — <code>filteredPlaces()</code>가 어느 배열을 보는지 — 을 의심하세요.</p>
 <p>새로고침 한 번에 사라지던 장난감이, 방금 기록이 쌓이는 도구가 됐습니다.</p>
-<p><img alt="그림 17.5 — 새로고침 후에도 살아남은 장소와 Application 탭의 저장 데이터" src="../images/ch17/ch17-f05.png" width="760" /></p>
+<figure>
+<p><img alt="새로고침 후에도 살아남은 장소와 Application 탭의 저장 데이터" src="../images/ch17/ch17-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 17.5 — 새로고침 후에도 살아남은 장소와 Application 탭의 저장 데이터</p>
+</figcaption>
+</figure>
 <h2 id="175">17.5 내보내기와 가져오기 — 내 데이터는 내가 지킨다<a class="headerlink" href="#175" title="Permanent link">&para;</a></h2>
 <p>축배를 들기 전에, localStorage의 한계도 정직하게 알아 둡시다. 서랍은 <strong>이 컴퓨터, 이 브라우저</strong>에 붙어 있습니다. 크롬에 저장한 지도는 엣지에서 안 보이고, 집 컴퓨터의 지도는 노트북에 없습니다. 더 아픈 시나리오도 있습니다. 브라우저 설정에서 "사이트 데이터 삭제"나 "인터넷 사용 기록 삭제"를 실행하면 서랍째 비워집니다. 반년 동안 모은 맛집 100곳이 청소 버튼 한 번에 날아갈 수 있다는 뜻입니다.</p>
 <p>그래서 진짜 서비스들은 데이터를 서버에 보관하지만, 서버는 이 책의 범위를 넘어갑니다(26장에서 다음 단계로 소개합니다). 대신 우리는 실용적인 절충안을 답니다. 내 장소 전체를 <strong>JSON 파일로 다운로드</strong>하는 내보내기와, 그 파일을 다시 읽어 오는 <strong>가져오기</strong>입니다. 파일로 뽑아 두면 그것이 곧 백업이고, 다른 컴퓨터로 옮기는 이삿짐이며, 친구에게 "내 맛집 지도 받아"라며 건넬 수 있는 선물이 됩니다.</p>
@@ -1914,8 +1941,18 @@
 <li>이번에는 아무 텍스트 파일이나 골라 보세요 — "가져오기 실패: ..." 토스트가 뜨고, 지도는 멀쩡합니다.</li>
 </ol>
 <p>19장에서 삭제 버튼이 생기면, 그때 "진짜로 지웠다가 백업으로 살려 내는" 훈련을 한 번 더 해 보세요. 오늘 만든 두 버튼이 그날의 안전망입니다.</p>
-<p><img alt="그림 17.6 — 내보내기로 받은 my-map-places.json 파일" src="../images/ch17/ch17-f06.png" width="620" /></p>
-<p><img alt="그림 17.7 — 가져오기 성공 토스트" src="../images/ch17/ch17-f07.jpg" width="760" /></p>
+<figure>
+<p><img alt="내보내기로 받은 my-map-places.json 파일" src="../images/ch17/ch17-f06.png" width="620" /></p>
+<figcaption>
+<p>그림 17.6 — 내보내기로 받은 my-map-places.json 파일</p>
+</figcaption>
+</figure>
+<figure>
+<p><img alt="가져오기 성공 토스트" src="../images/ch17/ch17-f07.jpg" width="760" /></p>
+<figcaption>
+<p>그림 17.7 — 가져오기 성공 토스트</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>localStorage를 통째로 비우고 처음부터 테스트하고 싶다면 콘솔에서 <code>localStorage.removeItem('my-map-places-v1')</code>을 실행하고 새로고침하세요. 기본 장소로 리셋됩니다. 반대로, 22장에서 마커 100개 실험을 할 때는 가져오기 기능이 대량 데이터를 투입하는 통로로 재활용됩니다. 오늘 만든 기능이 도구 상자에 하나 더 들어간 셈입니다.</p>

@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1748,7 +1750,12 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">});</span>
 </span></code></pre></div>
 <p>InfoWindow 객체를 만들 때 <code>content</code>에 HTML 문자열을 넣고, 마커 클릭 이벤트에서 <code>open(지도, 마커)</code>를 부르면 끝입니다. 저장하고 브라우저에서 마커를 눌러 보세요. 정말로 말풍선이 뜹니다. 3분 만에 성공입니다.</p>
-<p><img alt="그림 13.1 — 기본 InfoWindow가 열린 모습" src="../images/ch13/ch13-f01.jpg" width="760" /></p>
+<figure>
+<p><img alt="기본 InfoWindow가 열린 모습" src="../images/ch13/ch13-f01.jpg" width="760" /></p>
+<figcaption>
+<p>그림 13.1 — 기본 InfoWindow가 열린 모습</p>
+</figcaption>
+</figure>
 <p>그런데 화면을 가만히 보면 뭔가 아쉽습니다. 말풍선의 테두리, 배경, 꼬리 모양이 전부 <strong>카카오가 정해 둔 그대로</strong>입니다. 모서리를 더 둥글게 하고 싶고, 그림자를 넣고 싶고, 별점을 노란색으로 예쁘게 찍고 싶고, 닫기 버튼도 우리 앱 분위기에 맞추고 싶은데 — InfoWindow는 내용물(content)만 바꿀 수 있을 뿐, <strong>바깥 껍데기는 손댈 수 없습니다.</strong> 껍데기 스타일이 SDK 내부에 굳어 있기 때문입니다.</p>
 <p>비유하자면 InfoWindow는 편의점 도시락입니다. 반찬(내용물)은 조금 고를 수 있지만 도시락 용기 모양은 정해져 있죠. 우리가 원하는 것은 그릇부터 직접 고르는 요리입니다. 그래서 카카오지도 SDK는 도시락 옆에 빈 그릇도 함께 팝니다. 그 빈 그릇의 이름이 <strong>CustomOverlay</strong>(커스텀 오버레이)입니다.</p>
 <div class="admonition tip">
@@ -1777,7 +1784,12 @@
 <li><code>yAnchor: 0.5</code> — 오버레이의 <strong>세로 중앙</strong>이 좌표에 옵니다. (기본값)</li>
 <li><code>yAnchor: 1</code> — 오버레이의 <strong>맨 아래</strong>가 좌표에 닿습니다. 오버레이가 좌표 위로 올라갑니다.</li>
 </ul>
-<p><img alt="그림 13.2 — yAnchor 값에 따라 달라지는 말풍선 위치" src="../images/ch13/ch13-f02.png" width="760" /></p>
+<figure>
+<p><img alt="yAnchor 값에 따라 달라지는 말풍선 위치" src="../images/ch13/ch13-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 13.2 — yAnchor 값에 따라 달라지는 말풍선 위치</p>
+</figcaption>
+</figure>
 <p>그런데 우리 앱의 코드를 보면 <code>yAnchor: 1.35</code>입니다. 1을 넘는 값이라니, 이상하지 않나요? 규칙을 그대로 연장하면 됩니다. 1이 "맨 아래가 좌표에 닿는" 상태이니, 1.35는 거기서 <strong>오버레이 높이의 35%만큼 더 위로</strong> 밀어 올린 상태입니다.</p>
 <p>왜 더 올릴까요? 좌표 위에는 이미 <strong>마커 핀이 서 있기 때문</strong>입니다. 11장에서 만든 우리의 SVG 핀은 높이가 46px이고, 핀의 뾰족한 발끝이 정확히 좌표를 딛고 서 있습니다. <code>yAnchor: 1</code>로 하면 말풍선의 밑변이 좌표에 닿아 버려서 핀과 말풍선이 겹칩니다. 그래서 35%만큼 여유를 줘서 말풍선을 핀 머리 위로 띄운 겁니다. 이 숫자는 물리 법칙이 아니라 디자인 조정값입니다. 여러분의 핀 크기가 다르면 1.2도, 1.5도 될 수 있습니다. "숫자를 바꿔 가며 눈으로 맞춘다"가 정답인 종류의 값입니다.</p>
 <div class="admonition tip">
@@ -1822,7 +1834,12 @@
 <p><strong>요소 만들기</strong> — <code>document.createElement('div')</code>로 진짜 DOM 요소를 만들고 <code>innerHTML</code>로 속을 채웁니다. CustomOverlay의 <code>content</code>에는 HTML 문자열을 바로 줄 수도 있지만, <strong>요소로 만들어 두면 그 안의 버튼에 클릭 이벤트를 달 수 있다</strong>는 결정적 장점이 있습니다. × 닫기 버튼이 실제로 동작하려면 이 방식이어야 합니다. 13.5절에서 확인하게 됩니다.</p>
 <p><strong>구조</strong> — 말풍선 본체(<code>bubble-inner</code>)와 꼬리(<code>bubble-tail</code>)를 형제로 나란히 두고, 둘을 <code>bubble</code>이라는 껍데기로 감쌌습니다. 본체와 꼬리를 분리해 두면 CSS로 각각 다듬기 쉽습니다.</p>
 <p><strong>escapeHtml</strong> — 잠깐, 이건 왜 필요할까요? <code>innerHTML</code>은 문자열을 <strong>HTML로 해석</strong>합니다. 만약 장소 이름에 <code>&lt;img src=x onerror=...&gt;</code> 같은 문자열이 들어 있다면, 이름을 표시하려던 것뿐인데 브라우저가 그걸 태그로 해석해서 <strong>코드가 실행</strong>될 수 있습니다. 지금은 우리가 만든 데이터라 괜찮지만, 16장부터는 사용자가 장소 이름을 직접 입력합니다. escapeHtml은 <code>&lt;</code>를 <code>&amp;lt;</code>처럼 "그냥 글자"로 바꿔서 이런 사고를 막는 함수입니다. 이 주제(XSS<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>)는 19장에서 제대로 다시 다룹니다. 지금은 <strong>"사용자가 입력한 문자열을 innerHTML에 넣을 땐 반드시 이스케이프"</strong>라는 규칙만 기억해 두세요.</p>
-<p><img alt="그림 13.3 — 말풍선의 구조 분해도" src="../images/ch13/ch13-f03.png" width="760" /></p>
+<figure>
+<p><img alt="말풍선의 구조 분해도" src="../images/ch13/ch13-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 13.3 — 말풍선의 구조 분해도</p>
+</figcaption>
+</figure>
 <h2 id="134-css-border">13.4 꼬리 삼각형 — CSS border 트릭<a class="headerlink" href="#134-css-border" title="Permanent link">&para;</a></h2>
 <p>말풍선에서 가장 재미있는 부분은 꼬리입니다. Claude Code가 style.css에 추가해 준 스타일을 봅시다.</p>
 <div class="language-css highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c">/* ── 말풍선(커스텀 오버레이) ───────────── */</span>
@@ -1845,7 +1862,12 @@
 <p><code>bubble-inner</code>는 익숙한 속성들입니다. 흰 배경, 둥근 모서리 10px, 은은한 그림자, 이름이 길어도 줄바꿈되지 않게 <code>white-space: nowrap</code>. 오른쪽 패딩만 30px로 넉넉한 이유는 그 자리에 × 버튼이 <code>position: absolute</code>로 떠 있기 때문입니다. 껍데기 <code>.bubble</code>에 <code>position: relative</code>를 준 것도 이 버튼의 기준 좌표를 만들기 위해서입니다.</p>
 <p>진짜 마술은 <code>bubble-tail</code>입니다. 가로세로가 0인데 어떻게 삼각형이 보일까요?</p>
 <p>비밀은 <strong>테두리(border)가 만나는 모서리</strong>에 있습니다. CSS에서 두꺼운 테두리를 가진 상자를 그리면, 위 테두리와 옆 테두리가 만나는 모서리는 45도로 비스듬히 잘립니다. 액자 틀의 모서리가 대각선으로 이어 붙는 것과 같습니다. 이제 상자의 <strong>본체 크기를 0으로 줄이면</strong> 남는 것은 테두리뿐이고, 각 방향의 테두리는 삼각형 4개가 됩니다. 여기서 위쪽 테두리만 흰색(<code>border-top-color: #fff</code>)으로 칠하고 나머지는 투명(<code>transparent</code>)으로 두면 — <strong>아래를 향한 흰 삼각형</strong>만 남습니다. 아래쪽 테두리는 아예 없애서(<code>border-bottom: none</code>) 삼각형 밑에 투명한 여백이 생기지 않게 했습니다. <code>margin: 0 auto</code>는 이 삼각형을 말풍선 가로 중앙에 정렬합니다.</p>
-<p><img alt="그림 13.4 — border 트릭으로 삼각형이 만들어지는 과정" src="../images/ch13/ch13-f04.png" width="760" /></p>
+<figure>
+<p><img alt="border 트릭으로 삼각형이 만들어지는 과정" src="../images/ch13/ch13-f04.png" width="760" /></p>
+<figcaption>
+<p>그림 13.4 — border 트릭으로 삼각형이 만들어지는 과정</p>
+</figcaption>
+</figure>
 <p>이 트릭은 지도 말풍선만이 아니라 툴팁, 드롭다운 화살표 등 웹 어디서나 쓰이는 고전 기법입니다. 원리를 한 번 이해해 두면 다른 사람의 CSS를 읽다가 <code>width: 0; height: 0; border: ...</code>가 나왔을 때 "아, 삼각형이구나" 하고 바로 알아볼 수 있습니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
@@ -1917,7 +1939,12 @@
 <p><strong>× 버튼과 stopPropagation</strong> — 13.3절에서 content를 DOM 요소로 만든 보람이 여기서 나옵니다. <code>el.querySelector('.bubble-close')</code>로 말풍선 안의 × 버튼을 찾아 클릭 이벤트를 달 수 있으니까요. 그런데 <code>e.stopPropagation()</code>은 뭘까요? 브라우저에서 클릭 이벤트는 눌린 요소에서 부모로 <strong>거품처럼 번져 올라갑니다</strong>(버블링). ×를 눌렀는데 이벤트가 말풍선 본체까지 번지면, 나중에 말풍선 클릭에 다른 동작(18~19장에서 상세 패널 열기를 답니다)을 달았을 때 "닫으려고 눌렀는데 상세가 열리는" 황당한 일이 생깁니다. <code>stopPropagation()</code>은 "이 클릭은 여기서 끝, 위로 번지지 마"라는 선언입니다.</p>
 <p><strong><code>clickable: true</code></strong> — 오버레이 옵션에 붙은 이 한 줄도 같은 계열의 방어입니다. <code>stopPropagation</code>이 말풍선 <strong>안</strong>에서의 번짐을 막는다면, <code>clickable: true</code>는 말풍선 클릭이 <strong>지도 자체의 click 이벤트</strong>로 번지는 것을 SDK 차원에서 막아 줍니다. 16장에서 "지도 클릭 = 장소 추가"를 달고 나면 이 옵션의 진가가 드러나는데, 없을 경우 말풍선을 누를 때마다 장소 추가 다이얼로그가 튀어나오는 황당한 사고가 납니다.</p>
 <p><strong>renderPlaces 첫 줄의 closeOverlay()</strong> — 목록을 다시 그릴 때는 기존 마커와 오버레이를 전부 버리고 새로 만듭니다. 그런데 열려 있던 말풍선을 안 닫고 버리면, 화면에는 붙어 있는데 아무도 기억하지 못하는 "유령 말풍선"이 남습니다. 그래서 다시 그리기 전에 반드시 먼저 닫습니다. 14장에서 필터 버튼을 누를 때마다 renderPlaces가 다시 불리게 되는데, 이 한 줄이 그때 진가를 발휘합니다.</p>
-<p><img alt="그림 13.5 — &quot;하나만 열기&quot; 상태 흐름도" src="../images/ch13/ch13-f05.png" width="760" /></p>
+<figure>
+<p><img alt="&quot;하나만 열기&quot; 상태 흐름도" src="../images/ch13/ch13-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 13.5 — "하나만 열기" 상태 흐름도</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>실제 앱의 mapView.js를 열어 보면 renderPlaces가 <code>clusterer.addMarkers(...)</code>를 쓰고, 마커 클릭 시 <code>onMarkerClick(place.id)</code>도 함께 부릅니다. 각각 22장(마커 클러스터러)과 19장(상세 패널)에서 배우는 내용이라 이 장의 코드에서는 <code>marker.setMap(map)</code>으로 단순화했습니다. 책의 진도에 따라 같은 함수가 점점 자라나는 과정 자체가 실전 개발의 모습입니다.</p>
@@ -1930,7 +1957,12 @@
 <li><strong>× 버튼</strong> — 말풍선이 닫히나요?</li>
 <li><strong>지도 드래그·확대</strong> — 말풍선이 마커에 딱 붙어 함께 움직이나요?</li>
 </ol>
-<p><img alt="그림 13.6 — 완성된 커스텀 말풍선" src="../images/ch13/ch13-f06.png" width="520" /></p>
+<figure>
+<p><img alt="완성된 커스텀 말풍선" src="../images/ch13/ch13-f06.png" width="520" /></p>
+<figcaption>
+<p>그림 13.6 — 완성된 커스텀 말풍선</p>
+</figcaption>
+</figure>
 <p>네 가지가 모두 통과라면 축하합니다. InfoWindow로는 흉내 낼 수 없는, 우리 앱만의 말풍선이 완성됐습니다. 혹시 말풍선이 마커 뒤에 숨는다면 <code>zIndex</code>를, 위치가 어긋난다면 <code>yAnchor</code>를 의심하세요. 그리고 이런 미세 조정이야말로 바이브코딩이 빛나는 순간입니다. "말풍선이 핀에 살짝 겹쳐 보여. yAnchor를 조금씩 바꿔 가면서 안 겹치는 값을 찾아줘"라고 시키면 됩니다.</p>
 <hr />
 <h2 id="137">13.7 마무리<a class="headerlink" href="#137" title="Permanent link">&para;</a></h2>

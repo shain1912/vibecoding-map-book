@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1704,7 +1706,12 @@
 <li><strong>데이터</strong> = 주문서. "광장시장, 맛집, 위도 37.5701, 경도 126.9996, 별 5개" 같은 순수한 정보 목록입니다. 지도가 뭔지, 마커가 뭔지 전혀 모릅니다.</li>
 <li><strong>화면 그리는 코드</strong> = 요리사. 장소 목록을 받아서 "장소 하나당 마커 하나"를 찍는 방법만 압니다. 목록에 뭐가 들어 있는지는 신경 쓰지 않습니다.</li>
 </ul>
-<p><img alt="그림 12.1 — 데이터와 화면의 분리" src="../images/ch12/ch12-f01.jpg" width="760" /></p>
+<figure>
+<p><img alt="데이터와 화면의 분리" src="../images/ch12/ch12-f01.jpg" width="760" /></p>
+<figcaption>
+<p>그림 12.1 — 데이터와 화면의 분리</p>
+</figcaption>
+</figure>
 <p>이렇게 갈라놓으면 무엇이 좋을까요? 첫째, <strong>장소 추가가 쉬워집니다.</strong> 코드를 건드리지 않고 데이터 목록에 한 줄만 보태면 마커가 하나 늘어납니다. 둘째, <strong>기능 확장이 쉬워집니다.</strong> 같은 데이터 목록을 사이드바 목록에도, 검색에도, 저장에도 재사용할 수 있습니다. 마커용 데이터 따로, 목록용 데이터 따로 관리하는 악몽을 피할 수 있죠. 셋째, <strong>고장이 줄어듭니다.</strong> 데이터에 오타가 나면 데이터 파일만 보면 되고, 마커가 이상하게 그려지면 그리는 함수만 보면 됩니다. 문제의 범인이 숨을 곳이 절반으로 줄어듭니다.</p>
 <p>이 원칙은 카카오지도만의 이야기가 아닙니다. 엑셀과 차트, 데이터베이스와 웹페이지, 유튜브 서버와 유튜브 앱 — 세상의 거의 모든 소프트웨어가 이 구조로 만들어져 있습니다. 오늘 이 감각을 몸에 익히면, 나중에 어떤 프레임워크를 배우든 훨씬 수월해집니다.</p>
 <div class="admonition tip">
@@ -1839,7 +1846,12 @@
 </span></code></pre></div>
 <p>같이 읽어 봅시다. 파일 전체가 하는 일은 단 하나, <strong>객체 5개가 든 배열을 <code>DEFAULT_PLACES</code>라는 이름으로 내보내는 것</strong>입니다. <code>export const</code>는 8장에서 배운 모듈 문법 그대로입니다. 다른 파일에서 <code>import { DEFAULT_PLACES } from './defaultPlaces.js'</code> 한 줄이면 이 목록을 가져다 쓸 수 있습니다.</p>
 <p>객체 하나하나는 정확히 표 12.1의 스키마를 따릅니다. id는 <code>seed01</code>부터 <code>seed05</code>까지 — "seed"는 씨앗이라는 뜻으로, 프로그램에 미리 심어 두는 초기 데이터를 개발자들이 흔히 <strong>시드 데이터</strong>라고 부르기 때문에 붙인 이름입니다. 나중에 사용자가 직접 추가하는 장소는 다른 방식의 id를 갖게 되므로, "seed로 시작하면 예시 데이터구나" 하고 구분하기도 좋습니다.</p>
-<p><img alt="그림 12.2 — Claude Code가 defaultPlaces.js를 생성한 모습" src="../images/ch12/ch12-f02.png" width="760" /></p>
+<figure>
+<p><img alt="Claude Code가 defaultPlaces.js를 생성한 모습" src="../images/ch12/ch12-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 12.2 — Claude Code가 defaultPlaces.js를 생성한 모습</p>
+</figcaption>
+</figure>
 <p>여기서 눈여겨볼 점이 하나 있습니다. 이 파일에는 <strong>지도 코드가 한 줄도 없습니다.</strong> <code>kakao</code>라는 단어도, <code>Marker</code>라는 단어도 등장하지 않죠. 순수한 정보만 담겨 있어서, 극단적으로 말하면 카카오지도를 네이버지도로 갈아타도 이 파일은 그대로 재사용할 수 있습니다. 이것이 12.1절에서 말한 분리의 힘입니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
@@ -1869,7 +1881,12 @@
 </span></code></pre></div>
 <p><code>CATEGORIES</code>는 "객체 안에 객체"가 든 구조입니다. 바깥 객체의 키는 카테고리 id(<code>food</code>, <code>cafe</code>...)이고, 값은 표시 정보 묶음(<code>label</code>·<code>emoji</code>·<code>color</code>)입니다. <code>CATEGORIES['food'].color</code>처럼 꺼내 쓰면 <code>'#e74c3c'</code>(빨강)가 나옵니다. 색상값은 8장에서 스쳐 지나간 16진수 색상 코드입니다.</p>
 <p><code>categoryOf</code> 함수의 <code>??</code>는 처음 보는 기호일 텐데, <strong>널 병합 연산자</strong>라고 읽습니다. "왼쪽 값이 있으면 왼쪽을, 없으면(<code>undefined</code>나 <code>null</code>이면) 오른쪽을 써라"라는 뜻입니다. 데이터에 오타가 나서 <code>category: 'fodo'</code> 같은 엉뚱한 값이 들어와도, 앱이 죽는 대신 회색 📍 "기타" 핀으로 안전하게 표시됩니다. 이렇게 잘못된 입력이 와도 무너지지 않게 받쳐 주는 안전망을 <strong>폴백</strong>(fallback)이라고 부릅니다. 좋은 코드의 조용한 미덕이죠.</p>
-<p><img alt="그림 12.3 — categories.js 한 곳을 여러 화면이 참조하는 구조" src="../images/ch12/ch12-f03.png" width="760" /></p>
+<figure>
+<p><img alt="categories.js 한 곳을 여러 화면이 참조하는 구조" src="../images/ch12/ch12-f03.png" width="760" /></p>
+<figcaption>
+<p>그림 12.3 — categories.js 한 곳을 여러 화면이 참조하는 구조</p>
+</figcaption>
+</figure>
 <p>11장에서 만든 <code>markerImageFor</code> 함수를 다시 떠올려 보세요. SVG 핀의 색과 이모지를 이 파일에서 가져다 썼습니다(<code>const { emoji, color } = categoryOf(category)</code>). 14장의 필터 버튼도, 18장의 목록도 전부 이 파일 하나를 바라보게 됩니다. 언젠가 "🏕 캠핑" 카테고리를 추가하고 싶어지면? <code>CATEGORIES</code>에 한 줄만 넣으면 마커·버튼·목록이 한꺼번에 캠핑을 알게 됩니다.</p>
 <h2 id="125-renderplaces">12.5 데이터를 화면으로 — renderPlaces 함수<a class="headerlink" href="#125-renderplaces" title="Permanent link">&para;</a></h2>
 <p>주문서(데이터)가 준비됐으니 요리사(렌더링 함수)를 만들 차례입니다. 목표는 명확합니다. <strong>장소 배열을 받아서, 장소 하나당 마커 하나를 찍는 함수.</strong></p>
@@ -1913,12 +1930,22 @@
 <p><strong>2단계 — 데이터만큼 반복.</strong> <code>for...of</code> 반복문이 배열을 한 바퀴 돌며 장소마다 마커를 만듭니다. 11장에서 배열과 반복문으로 마커 여러 개를 찍던 코드와 골격이 같은데, 결정적 차이가 하나 있습니다. 반복문 안 어디에도 <code>'광장시장'</code>이나 <code>37.5701</code> 같은 구체적인 값이 없다는 점입니다. 전부 <code>place.name</code>, <code>place.lat</code>처럼 <strong>데이터에서 꺼내 옵니다.</strong> 이 함수는 장소가 5개든 500개든, 서울이든 제주든 전혀 상관하지 않습니다. 요리사는 주문서를 읽을 뿐입니다.</p>
 <p>만든 마커를 <code>markers.push(marker)</code>로 배열에 챙겨 두는 것도 잊지 않았습니다. 다음번에 지우려면 손잡이를 쥐고 있어야 하니까요.</p>
 <p>이제 저장하고 브라우저를 확인해 봅시다. 개발 서버(<code>npm run dev</code>)가 켜져 있다면 저장하는 순간 화면이 갱신됩니다.</p>
-<p><img alt="그림 12.4 — DEFAULT_PLACES 다섯 곳이 카테고리 핀으로 찍힌 지도" src="../images/ch12/ch12-f04.jpg" width="760" /></p>
+<figure>
+<p><img alt="DEFAULT_PLACES 다섯 곳이 카테고리 핀으로 찍힌 지도" src="../images/ch12/ch12-f04.jpg" width="760" /></p>
+<figcaption>
+<p>그림 12.4 — DEFAULT_PLACES 다섯 곳이 카테고리 핀으로 찍힌 지도</p>
+</figcaption>
+</figure>
 <p>서울 지도 위에 다섯 가지 핀이 색색으로 찍혀 있다면 성공입니다. 겉보기에는 11장의 결과와 비슷해 보여도, 속은 완전히 다른 앱이 됐습니다. 시험 삼아 <code>defaultPlaces.js</code>에 여러분의 단골 가게를 한 객체 추가하고 저장해 보세요. 지도 코드는 한 글자도 안 건드렸는데 마커가 하나 늘어납니다. 이 순간의 편안함이 바로 데이터와 화면을 분리한 보상입니다.</p>
 <h2 id="126">12.6 좌표는 어떻게 구할까<a class="headerlink" href="#126" title="Permanent link">&para;</a></h2>
 <p>방금 "단골 가게를 추가해 보세요"라고 했는데, 아마 손이 멈췄을 겁니다. 우리 가게의 위도·경도를 어떻게 알아내죠? 좌표 구하는 방법 두 가지를 소개합니다.</p>
 <p><strong>방법 1 — 카카오맵에서 우클릭.</strong> 브라우저에서 카카오맵(map.kakao.com)을 열고, 원하는 지점을 찾아 <strong>마우스 오른쪽 버튼</strong>을 눌러 보세요. 작은 메뉴가 나타나는데, 여기서 클릭한 지점의 <strong>주소를 확인</strong>할 수 있습니다(길찾기 출발지·도착지로 지정하는 메뉴도 함께 보입니다). 장소 이름과 주소를 정확히 알아 두는 것만으로도 절반은 해결입니다. 15장에서 키워드 검색을 배우면 이름만으로 좌표까지 자동으로 받아 오게 되거든요.</p>
-<p><img alt="그림 12.5 — 카카오맵에서 우클릭으로 지점 정보 확인" src="../images/ch12/ch12-f05.png" width="760" /></p>
+<figure>
+<p><img alt="카카오맵에서 우클릭으로 지점 정보 확인" src="../images/ch12/ch12-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 12.5 — 카카오맵에서 우클릭으로 지점 정보 확인</p>
+</figcaption>
+</figure>
 <p><strong>방법 2 — 우리 지도를 좌표 자판기로 쓰기.</strong> 더 개발자다운 방법입니다. 10장 미니 실습에서 지도를 클릭하면 콘솔에 좌표를 찍는 코드를 만들었던 것, 기억하시나요? 바로 그 코드가 오늘을 위한 복선이었습니다. 혹시 지워 버렸다면 Claude Code에게 다시 부탁하면 됩니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
@@ -1927,7 +1954,12 @@
 </blockquote>
 </div>
 <p>앱을 띄우고 F12로 개발자 도구 콘솔을 연 다음, 지도에서 원하는 지점을 클릭해 보세요. 콘솔에 <code>lat: 37.5546, lng: 126.8957</code> 같은 좌표가 찍힙니다. 지도를 확대(레벨을 낮게)할수록 클릭 지점이 정밀해지니, 건물 하나를 정확히 찍고 싶다면 최대한 확대한 뒤 클릭하세요. 찍힌 좌표를 그대로 복사해 <code>defaultPlaces.js</code>의 새 객체에 붙여 넣으면 끝입니다.</p>
-<p><img alt="그림 12.6 — 지도 클릭으로 콘솔에 좌표 찍기" src="../images/ch12/ch12-f06.png" width="820" /></p>
+<figure>
+<p><img alt="지도 클릭으로 콘솔에 좌표 찍기" src="../images/ch12/ch12-f06.png" width="820" /></p>
+<figcaption>
+<p>그림 12.6 — 지도 클릭으로 콘솔에 좌표 찍기</p>
+</figcaption>
+</figure>
 <p>이 클릭 좌표 얻기는 16장에서 "지도를 클릭하면 그 자리에 장소 추가" 기능으로 승격됩니다. 지금은 콘솔에 찍기만 하지만, 곧 클릭 한 번으로 입력 폼이 열리는 앱이 될 겁니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>

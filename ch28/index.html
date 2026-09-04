@@ -53,6 +53,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1815,7 +1817,12 @@
 <p>npm run dev로 서버를 켜고 localhost:5173에 들어갔는데 지도가 안 뜨고 콘솔에 이 에러가 나와: (에러 메시지 전체 붙여넣기). 원인을 찾아서 고쳐줘. 고치기 전에 뭘 바꿀 건지 먼저 설명해줘.</p>
 </blockquote>
 </div>
-<p><img alt="그림 B.1 — 고장 수리 3단계 흐름" src="../images/ch28/ch28-f01.png" width="760" /></p>
+<figure>
+<p><img alt="고장 수리 3단계 흐름" src="../images/ch28/ch28-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 B.1 — 고장 수리 3단계 흐름</p>
+</figcaption>
+</figure>
 <p>이제 고장 사전입니다. 증상별로 <strong>지도·키</strong>, <strong>개발 환경</strong>, <strong>기능</strong>, <strong>배포</strong> 네 묶음으로 나눴습니다.</p>
 <h3 id="_1">지도와 키 — 첫 화면에서 막힐 때<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>첫 지도를 띄우는 9장 근처에서 가장 많이 만나는 고장들입니다. 공통 뿌리는 하나, <strong>카카오 서버와의 악수가 실패</strong>했다는 것입니다. 회색 화면만 예외인데, 이건 서버가 아니라 우리 CSS의 문제입니다. 콘솔에 에러가 있으면 아래에서 번호(401/403)를 찾고, 에러가 <strong>없는데</strong> 회색이면 첫 번째 항목부터 보세요.</p>
@@ -1954,7 +1961,12 @@
 <p class="admonition-title">⚠️ 주의</p>
 <p>표의 해결책을 적용해도 브라우저가 <strong>옛날 파일을 기억</strong>하고 있으면 증상이 그대로일 수 있습니다. 특히 배포 관련 문제는 고친 뒤 ++ctrl+shift+r++ (캐시 무시 새로고침)로 확인하세요. "고쳤는데도 똑같아요"의 절반은 캐시입니다.</p>
 </div>
-<p><img alt="그림 B.2 — 403 Forbidden 에러가 찍힌 콘솔" src="../images/ch28/ch28-f02.png" width="760" /></p>
+<figure>
+<p><img alt="403 Forbidden 에러가 찍힌 콘솔" src="../images/ch28/ch28-f02.png" width="760" /></p>
+<figcaption>
+<p>그림 B.2 — 403 Forbidden 에러가 찍힌 콘솔</p>
+</figcaption>
+</figure>
 <h2 id="b2-git-gh-npm">B.2 명령어 치트시트 — git · gh · npm<a class="headerlink" href="#b2-git-gh-npm" title="Permanent link">&para;</a></h2>
 <p>이 책에서 손에 익힌 터미널 명령을 모았습니다. 명령은 외우는 것이 아니라 <strong>찾는 것</strong>입니다. 이 표를 펴 놓고 쓰다 보면 자주 쓰는 것부터 저절로 손에 붙습니다. 각 표의 제목에 그 도구가 처음 등장한 장을 적어 두었으니, "이 명령이 왜 필요하더라?" 싶으면 그 장으로 돌아가세요.</p>
 <p>시작하기 전에 터미널의 만능 치트키 하나만 소개합니다. 어떤 명령이든 뒤에 <code>--help</code>를 붙이면(<code>git commit --help</code>, <code>gh repo create --help</code>) 그 명령의 사용법과 옵션 목록이 나옵니다. 이 표에 없는 옵션이 궁금할 때 검색보다 빠를 때가 많습니다.</p>

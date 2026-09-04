@@ -55,6 +55,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1705,7 +1707,12 @@
 <li><strong>기술</strong> — "뭘로 만들었지?"에 대한 답. 개발자 방문객이 가장 먼저 훑는 부분이고, 나중에 여러분의 포트폴리오가 되는 부분입니다.</li>
 <li><strong>실행법</strong> — "나도 돌려 볼 수 있나?"에 대한 답. 클론부터 실행까지 명령어를 순서대로. 우리 앱은 카카오 키가 필요하니 <code>.env</code> 안내가 필수입니다.</li>
 </ol>
-<p><img alt="그림 26.1 — README 4단 구성" src="../images/ch26/ch26-f01.png" width="760" /></p>
+<figure>
+<p><img alt="README 4단 구성" src="../images/ch26/ch26-f01.png" width="760" /></p>
+<figcaption>
+<p>그림 26.1 — README 4단 구성</p>
+</figcaption>
+</figure>
 <p>이 구성이 강력한 이유는 <strong>읽다가 아무 데서나 떠나도 된다</strong>는 점입니다. 지나가던 사람은 스크린샷만 보고 갑니다. 관심 생긴 사람은 기능까지 읽습니다. 개발자는 기술을 확인하고, 정말 돌려 볼 사람만 실행법까지 내려옵니다. 모든 독자를 만족시키는 문서는 이렇게 층층이 씁니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
@@ -1719,7 +1726,12 @@
 <li>지도를 여러분의 장소가 <strong>가장 몰려 있는 동네</strong>로 옮기고, 마커·말풍선·사이드바가 한 화면에 어우러지게 확대 레벨을 조절합니다. 말풍선을 하나 열어 두면 화면이 훨씬 생동감 있습니다.</li>
 <li>개발자도구(++f12++)는 닫습니다. 브라우저 창을 적당히 키우고, 관계없는 탭이나 북마크바가 지저분하면 앱 영역만 드래그해서 담습니다.</li>
 </ul>
-<p><img alt="그림 26.2 — Win+Shift+S 캡처 도구로 앱 화면 캡처" src="../images/ch26/ch26-f02.png" width="860" /></p>
+<figure>
+<p><img alt="Win+Shift+S 캡처 도구로 앱 화면 캡처" src="../images/ch26/ch26-f02.png" width="860" /></p>
+<figcaption>
+<p>그림 26.2 — Win+Shift+S 캡처 도구로 앱 화면 캡처</p>
+</figcaption>
+</figure>
 <p>저장 위치도 정해 둡시다. 프로젝트 안에 <code>docs</code> 폴더를 만들고 <code>screenshot.png</code>로 저장하는 것을 추천합니다. <code>src</code>는 앱 코드의 집이니 문서용 이미지는 따로 사는 게 깔끔합니다. 이렇게 리포 안에 이미지를 넣어 두면 README에서 <code>![대체 텍스트](docs/screenshot.png)</code> 한 줄로 불러올 수 있고, 리포를 복제해 간 어디에서든 그림이 함께 따라갑니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
@@ -1791,7 +1803,12 @@
 </blockquote>
 </div>
 <p>푸시가 끝나면 브라우저에서 리포지토리를 새로고침해 보세요. 파일 목록 아래에 스크린샷과 기능 목록이 근사하게 펼쳐집니다. 설명서 없는 상자가 드디어 얼굴을 얻었습니다.</p>
-<p><img alt="그림 26.3 — GitHub 리포 첫 화면에 렌더링된 README" src="../images/ch26/ch26-f03.png" width="620" /></p>
+<figure>
+<p><img alt="GitHub 리포 첫 화면에 렌더링된 README" src="../images/ch26/ch26-f03.png" width="620" /></p>
+<figcaption>
+<p>그림 26.3 — GitHub 리포 첫 화면에 렌더링된 README</p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>리포 오른쪽 위 <strong>About</strong>(톱니바퀴 아이콘)에 한 줄 설명과 배포 URL도 등록해 두세요. 리포 목록이나 검색 결과에서는 README보다 About이 먼저 보입니다. Website 칸에 Pages 주소를 넣으면 리포 첫 화면에 클릭 가능한 링크가 항상 떠 있게 됩니다.</p>
@@ -1804,7 +1821,12 @@
 <li><strong>2단계, SNS에 올리기.</strong> 26.2절에서 찍은 스크린샷에 링크를 곁들여 인스타그램 스토리든 X든 블로그든 올려 보세요. "코딩 몰랐는데 AI랑 같이 지도 앱 만들어 봤다"는 이야기 자체가 훌륭한 콘텐츠입니다. 만드는 과정에서 겪은 삽질(회색 지도! 403!)을 함께 쓰면 더 사랑받습니다.</li>
 <li><strong>3단계, 개발 커뮤니티에 공유하기.</strong> GitHub 리포 링크와 함께 개발 커뮤니티나 스터디 모임에 올리면 코드에 대한 피드백까지 받을 수 있습니다. README를 잘 갖춰 놓은 보람이 여기서 나옵니다.</li>
 </ul>
-<p><img alt="그림 26.4 — 자랑하기 3단계 코스" src="../images/ch26/ch26-f04.png" width="760" /></p>
+<figure>
+<p><img alt="자랑하기 3단계 코스" src="../images/ch26/ch26-f04.png" width="760" /></p>
+<figcaption>
+<p>그림 26.4 — 자랑하기 3단계 코스</p>
+</figcaption>
+</figure>
 <p>한 가지만 미리 일러두겠습니다. 링크를 받은 친구의 지도에는 <strong>여러분의 장소가 보이지 않습니다.</strong> 17장에서 배웠듯 장소 데이터는 각자의 브라우저 localStorage에 있으니까요. 친구는 기본 장소만 있는 빈 지도에서 시작합니다. "어? 네 맛집 목록 어디 갔어?"라는 질문이 들어오면 당황하지 말고 17장의 <strong>내보내기</strong> 파일을 건네 <strong>가져오기</strong>로 읽게 하세요. 그리고 이 어색함이야말로, 바로 다음 절에서 이야기할 "다음 단계"가 필요한 이유입니다.</p>
 <h2 id="265">26.5 다음 단계 로드맵 — 지도는 계속된다<a class="headerlink" href="#265" title="Permanent link">&para;</a></h2>
 <p>이 책의 지도는 완성됐지만, 여러분의 지도는 이제 시작입니다. 지금 앱의 한계를 정확히 알면 다음에 배울 것이 저절로 정해집니다. 난이도 순으로 네 갈래 길을 소개합니다. 각각이 책 한 권 분량의 세계라서 여기서는 문패만 달아 두지만, 방향을 아는 것과 모르는 것의 차이는 큽니다.</p>
@@ -1812,7 +1834,12 @@
 <p><strong>둘째, 로그인 — 여러 사람의 지도.</strong> 백엔드가 생기면 자연스럽게 "누구의 데이터인가"라는 질문이 따라옵니다. 카카오 로그인 같은 소셜 로그인을 붙이면 사용자마다 자기 지도를 갖게 되고, 그다음엔 "커플이 함께 쓰는 데이트 지도", "친구들과 공동 편집하는 맛집 지도" 같은 진짜 서비스의 문이 열립니다.</p>
 <p><strong>셋째, 사진 업로드 — 장소에 추억을.</strong> 별점과 메모만으로는 아쉽죠. 그 집 대표 메뉴 사진 한 장이면 말풍선이 완전히 달라집니다. 파일 업로드, 이미지 저장소, 용량·보안 처리를 배우게 되는 갈래입니다.</p>
 <p><strong>넷째, 다른 API — 지도 위에 데이터를 얹기.</strong> 카카오지도 SDK에도 우리가 안 쓴 기능(길찾기 연동, 로드뷰, 도형 그리기)이 남아 있고, 세상에는 공공데이터포털의 무료 API가 수천 개 있습니다. 우리 동네 무인 도서 반납함, 전기차 충전소, 미세먼지 측정소… 7장에서 키 발급을, 15장에서 API 호출과 콜백을 이미 겪어 봤으니 여러분은 어떤 API 문서를 만나도 낯이 익을 겁니다.</p>
-<p><img alt="그림 26.5 — 다음 단계 로드맵 네 갈래 길" src="../images/ch26/ch26-f05.png" width="760" /></p>
+<figure>
+<p><img alt="다음 단계 로드맵 네 갈래 길" src="../images/ch26/ch26-f05.png" width="760" /></p>
+<figcaption>
+<p>그림 26.5 — 다음 단계 로드맵 네 갈래 길</p>
+</figcaption>
+</figure>
 <p>무엇부터 갈지 고르는 기준은 하나면 충분합니다. <strong>여러분이 실제로 아쉬웠던 것부터.</strong> 친구에게 지도를 못 보여 줘서 아쉬웠다면 백엔드+로그인부터, 말풍선이 심심했다면 사진부터. 필요가 이끄는 학습이 제일 오래갑니다. 그리고 어느 길을 고르든 진행 방식은 이 책에서 한 그대로입니다 — 작게 시키고, 확인하고, 커밋하고, 막히면 에러 메시지를 통째로 붙여 넣고.</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
@@ -1821,7 +1848,12 @@
 <h2 id="266">26.6 바이브코딩 회고 — 우리가 걸어온 지도<a class="headerlink" href="#266" title="Permanent link">&para;</a></h2>
 <p>마지막으로, 잠깐 뒤를 돌아봅시다. 0장에서 이 책은 여러분에게 낯선 약속을 하나 했습니다. "코드를 직접 치지 않고, AI에게 시켜서 만든다." 그 약속이 어떻게 지켜졌는지 여정을 펼쳐 보면 이렇습니다.</p>
 <p>1부(1~6장)에서는 작업대를 차렸습니다. Node.js와 Git이라는 기반, Claude Code라는 파트너, GitHub라는 저장소, Orca라는 지휘소. 2부(7~10장)에서는 카카오 키를 발급받고 Vite 프로젝트에 첫 지도를 띄웠습니다. 회색 화면과 403의 쓴맛도 여기서 봤죠. 3부(11~19장)는 앱의 심장이었습니다. 마커, 데이터 설계, 말풍선, 필터, 검색, 추가, 저장, 목록, 상세 — 상태와 화면을 잇는 웹 앱의 뼈대를 아홉 장에 걸쳐 세웠습니다. 4부(20~23장)에서는 내 위치, URL 공유, 클러스터러, 모바일 대응으로 앱의 완성도를 끌어올렸고, 5부(24~26장)에서 세상에 내보냈습니다.</p>
-<p><img alt="그림 26.6 — 이 책의 여정 지도 (0장→26장)" src="../images/ch26/ch26-f06.png" width="760" /></p>
+<figure>
+<p><img alt="이 책의 여정 지도 (0장→26장)" src="../images/ch26/ch26-f06.png" width="760" /></p>
+<figcaption>
+<p>그림 26.6 — 이 책의 여정 지도 (0장→26장)</p>
+</figcaption>
+</figure>
 <p>이 여정에서 여러분이 얻은 것은 지도 앱 하나가 아닙니다. 돌아보면 우리는 세 가지 근육을 계속 단련해 왔습니다.</p>
 <p><strong>첫째, 시키는 근육.</strong> 1장에서 "작게 시키기"를 약속했고, 실제로 그렇게 했습니다. "지도 앱 만들어줘"라고 시킨 적은 한 번도 없습니다. "SDK 주소에 clusterer를 추가해줘, 다른 부분은 건드리지 마"처럼 맥락과 목표와 제약을 갖춘 작은 주문을 수십 번 쌓았죠. 이 책의 프롬프트들을 다시 훑어 보면(부록 A에 모아 뒀습니다) 좋은 지시의 패턴이 보일 겁니다. 이 근육은 AI 도구가 무엇으로 바뀌어도 그대로 쓰입니다.</p>
 <p><strong>둘째, 읽는 근육.</strong> 우리는 코드를 외우지 않았지만, AI가 만들어 온 코드를 매번 함께 읽었습니다. <code>autoload=false</code>가 왜 필요한지, <code>subscribe</code>가 어떻게 화면을 자동 갱신하는지, <code>escapeHtml</code>이 무엇을 막는지. "이해하려 노력하되 외우지 않는다" — 1장의 이 철학 덕분에 여러분은 AI가 이상한 코드를 가져왔을 때 알아챌 수 있는 감식안을 갖게 됐습니다. 바이브코딩에서 사람의 역할은 타이핑이 아니라 <strong>판단</strong>이라는 것, 이제 몸으로 아실 겁니다.</p>
