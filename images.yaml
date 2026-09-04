@@ -2594,7 +2594,7 @@
   chapter: 25
   type: 스크린샷
   caption: "배포 완료: github.io 주소에서 동작하는 내 지도"
-  file: images/ch25/ch25-f07.png
+  file: images/ch25/ch25-f07.jpg
   capture:
     kind: web
     command: null
@@ -2603,7 +2603,7 @@
     steps:
       - "스크린샷: 브라우저 주소창에 https://아이디.github.io/my-map/ 이 보이는 상태로 완성 앱 전체 화면. 지도·마커·사이드바·필터가 모두 표시된 모습. 가능하면 스마트폰으로 같은 주소를 연 사진을 작게 곁들이면 더 좋음"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch26-f01
   chapter: 26
@@ -2779,6 +2779,7 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
 
 
 
