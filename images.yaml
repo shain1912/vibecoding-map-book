@@ -1026,7 +1026,7 @@
   chapter: 10
   type: 스크린샷
   caption: "콘솔에서 __map.setLevel(3)을 실행해 확대된 지도"
-  file: images/ch10/ch10-f01.png
+  file: images/ch10/ch10-f01.jpg
   capture:
     kind: web
     command: null
@@ -1057,7 +1057,7 @@
   chapter: 10
   type: 스크린샷
   caption: "같은 위치, 다른 레벨: 레벨 3(왼쪽)과 레벨 7(오른쪽)"
-  file: images/ch10/ch10-f03.png
+  file: images/ch10/ch10-f03.jpg
   source: _working_raw/raw/app2-level-compare.png
   capture:
     kind: web
@@ -1105,7 +1105,7 @@
   chapter: 10
   type: 스크린샷
   caption: "지도를 클릭할 때마다 콘솔에 찍히는 좌표"
-  file: images/ch10/ch10-f06.png
+  file: images/ch10/ch10-f06.jpg
   capture:
     kind: web
     command: null
@@ -1293,7 +1293,7 @@
   chapter: 12
   type: 스크린샷
   caption: "지도 클릭으로 콘솔에 좌표 찍기"
-  file: images/ch12/ch12-f06.png
+  file: images/ch12/ch12-f06.jpg
   capture:
     kind: web
     command: null
@@ -2625,7 +2625,7 @@
   chapter: 26
   type: 스크린샷
   caption: "Win+Shift+S 캡처 도구로 앱 화면 캡처"
-  file: images/ch26/ch26-f02.png
+  file: images/ch26/ch26-f02.jpg
   capture:
     kind: window
     command: null
