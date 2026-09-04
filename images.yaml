@@ -233,7 +233,7 @@
     steps:
       - "스크린샷: Node.js Setup Wizard의 Welcome 화면. 창 전체 캡처, Next 버튼이 보이게"
     crop: window
-  status: captured
+  status: pending
 
 - id: ch02-f04
   chapter: 2
@@ -248,7 +248,7 @@
     steps:
       - "스크린샷: Custom Setup 화면에서 트리 목록에 \"npm package manager\"와 \"Add to PATH\" 항목이 보이는 상태. 두 항목이 잘 보이도록 창 전체 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch02-f05
   chapter: 2
@@ -263,7 +263,7 @@
     steps:
       - "스크린샷: Tools for Native Modules 화면, \"Automatically install the necessary tools\" 체크박스가 해제된 상태로 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch02-f06
   chapter: 2
@@ -278,7 +278,7 @@
     steps:
       - "스크린샷: \"Completed the Node.js Setup Wizard\" 문구와 Finish 버튼이 보이는 마지막 화면. 창 전체 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch02-f07
   chapter: 2
@@ -709,7 +709,7 @@
     steps:
       - "스크린샷: Orca의 워크트리 카드 하나를 연 상태. 터미널 영역에 Claude Code가 실행되어 환영 배너와 프롬프트 입력창이 보이는 화면. 카드 이름(예: \"마커 기능\")이 함께 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch06-f05
   chapter: 6
@@ -724,7 +724,7 @@
     steps:
       - "스크린샷: Orca 왼쪽 패널에 워크트리 카드 3장이 세로로 늘어선 화면. 각 카드에 작업 이름이 붙어 있고, 진행 중임을 알 수 있는 상태 표시가 보이게. 오른쪽에는 그중 한 카드의 터미널에서 에이전트가 작업 로그를 출력 중인 장면"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch06-f06
   chapter: 6
@@ -2384,7 +2384,7 @@
     steps:
       - "촬영: 스마트폰으로 앱을 연 실제 사진. 지도 전체 화면에 마커와 클러스터가 보이고 손가락이 화면을 조작하는 모습"
     crop: window
-  status: captured
+  status: pending
 
 - id: ch24-f01
   chapter: 24
@@ -2779,6 +2779,8 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
+
 
 
 
