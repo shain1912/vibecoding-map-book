@@ -53,7 +53,7 @@
   type: 스크린샷
   caption: "키워드 검색 결과와 장소 추가 버튼"
   file: images/ch00/ch00-f04.jpg
-  source: images/raw/app-search-results.jpg
+  source: images/raw/app2-search-results.jpg
   capture:
     kind: web
     command: null
@@ -1051,6 +1051,7 @@
   type: 스크린샷
   caption: "같은 위치, 다른 레벨: 레벨 3(왼쪽)과 레벨 7(오른쪽)"
   file: images/ch10/ch10-f03.png
+  source: images/raw/app2-level-compare.png
   capture:
     kind: web
     command: null
@@ -1059,7 +1060,7 @@
     steps:
       - "스크린샷: 서울시청을 중심으로 레벨 3으로 확대한 지도와 레벨 7로 축소한 지도를 좌우로 나란히 합성. 각 이미지 위에 \"level: 3\", \"level: 7\" 라벨"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch10-f04
   chapter: 10
@@ -1112,7 +1113,8 @@
   chapter: 11
   type: 스크린샷
   caption: "서울 시청 위에 찍힌 첫 마커"
-  file: images/ch11/ch11-f01.png
+  file: images/ch11/ch11-f01.jpg
+  source: images/raw/app2-single-marker.jpg
   capture:
     kind: web
     command: null
@@ -1121,13 +1123,14 @@
     steps:
       - "스크린샷: 앱 실행 화면. 서울 시청 부근을 중심으로 한 지도 위에 카카오 기본 파란 마커 1개가 표시된 상태. 마커가 화면 중앙에 오도록 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch11-f02
   chapter: 11
   type: 스크린샷
   caption: "반복문으로 찍은 마커 4개"
-  file: images/ch11/ch11-f02.png
+  file: images/ch11/ch11-f02.jpg
+  source: images/raw/app2-four-markers.jpg
   capture:
     kind: web
     command: null
@@ -1136,7 +1139,7 @@
     steps:
       - "스크린샷: 서울 중심부 지도에 기본 마커 4개(경복궁·남산타워·광장시장·한강공원)가 표시된 화면. 마커 하나에 마우스를 올려 title 툴팁 \"남산타워\"가 보이는 순간 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch11-f03
   chapter: 11
@@ -1173,7 +1176,8 @@
   chapter: 11
   type: 스크린샷
   caption: "markerImageFor로 만든 카테고리별 커스텀 핀 4종"
-  file: images/ch11/ch11-f05.png
+  file: images/ch11/ch11-f05.jpg
+  source: images/raw/app2-category-pins.jpg
   capture:
     kind: web
     command: null
@@ -1182,13 +1186,14 @@
     steps:
       - "스크린샷: 지도 위에 색이 다른 SVG 핀 4개 — 빨강🍜, 갈색☕, 파랑🏝, 분홍💕 — 이 나란히 표시된 화면. 핀 모양과 이모지가 잘 보이게 확대 레벨을 낮춰 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch11-f06
   chapter: 11
   type: 스크린샷
   caption: "renderPlaces가 그린 나만의 장소 지도"
-  file: images/ch11/ch11-f06.png
+  file: images/ch11/ch11-f06.jpg
+  source: images/raw/app2-default-map.jpg
   capture:
     kind: web
     command: null
@@ -1197,7 +1202,7 @@
     steps:
       - "스크린샷: 서울 지도 위에 커스텀 핀 3개(빨강🍜 광장시장, 갈색☕ 연남동, 분홍💕 남산타워)가 표시된 앱 화면. 한 핀 위에 title 툴팁이 보이면 더 좋음"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch12-f01
   chapter: 12
@@ -1532,7 +1537,7 @@
   type: 스크린샷
   caption: "\"성수동 카페\" 검색 결과 상위 7개"
   file: images/ch15/ch15-f04.jpg
-  source: images/raw/app-search-results-7.jpg
+  source: images/raw/app2-search-results.jpg
   capture:
     kind: web
     command: null
@@ -1547,7 +1552,8 @@
   chapter: 15
   type: 스크린샷
   caption: "결과 클릭 후 레벨 3으로 확대 이동한 지도"
-  file: images/ch15/ch15-f05.png
+  file: images/ch15/ch15-f05.jpg
+  source: images/raw/app2-search-zoom.jpg
   capture:
     kind: web
     command: null
@@ -1556,7 +1562,7 @@
     steps:
       - "스크린샷: 검색 결과 하나를 클릭한 직후. 지도가 해당 장소 중심으로 레벨 3까지 확대된 상태. 사이드바 결과 목록에서 클릭한 항목이 보이도록 함께 캡처"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch15-f06
   chapter: 15
@@ -1609,7 +1615,8 @@
   chapter: 16
   type: 스크린샷
   caption: "이름을 비우고 추가를 누르면 뜨는 검증 토스트"
-  file: images/ch16/ch16-f03.png
+  file: images/ch16/ch16-f03.jpg
+  source: images/raw/app2-addname-toast.jpg
   capture:
     kind: web
     command: null
@@ -1618,7 +1625,7 @@
     steps:
       - "스크린샷: 장소 추가 다이얼로그가 열린 채 이름 칸이 비어 있고, 화면 하단 중앙에 \"이름을 입력하세요.\" 검은 토스트가 떠 있는 상태. 다이얼로그가 닫히지 않고 남아 있는 것이 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch16-f04
   chapter: 16
@@ -1763,7 +1770,8 @@
   chapter: 17
   type: 스크린샷
   caption: "가져오기 성공 토스트"
-  file: images/ch17/ch17-f07.png
+  file: images/ch17/ch17-f07.jpg
+  source: images/raw/app2-import-toast.jpg
   capture:
     kind: web
     command: null
@@ -1772,7 +1780,7 @@
     steps:
       - "스크린샷: 가져오기 버튼으로 JSON 파일 선택 직후, 화면 하단에 \"가져오기 완료!\" 토스트가 떠 있는 상태. 새로고침 후 마커가 파일 시점대로 복원된 지도가 보이면 더 좋음"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch18-f01
   chapter: 18
@@ -2037,13 +2045,14 @@
     steps:
       - "스크린샷: 🧭 클릭 후 지도가 레벨 4로 확대되어 이동한 상태. 지도 중앙에 흰 테두리 + 반투명 링이 있는 파란 점이 표시됨. 파란 점 부분을 확대한 인셋 포함"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch20-f06
   chapter: 20
   type: 스크린샷
   caption: "권한 거부 시 토스트 안내"
-  file: images/ch20/ch20-f06.png
+  file: images/ch20/ch20-f06.jpg
+  source: images/raw/app2-denied-toast.jpg
   capture:
     kind: web
     command: null
@@ -2052,7 +2061,7 @@
     steps:
       - "스크린샷: 사이트 설정에서 위치를 차단한 뒤 🧭 클릭. 화면 하단 중앙에 \"위치 권한이 거부되었습니다\" 토스트 메시지가 떠 있는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch20-f07
   chapter: 20
@@ -2090,7 +2099,8 @@
   chapter: 21
   type: 스크린샷
   caption: "공유 버튼 클릭: 주소창에 해시가 생기고 복사 토스트가 뜬 화면"
-  file: images/ch21/ch21-f02.png
+  file: images/ch21/ch21-f02.jpg
+  source: images/raw/app2-share-toast.jpg
   capture:
     kind: web
     command: null
@@ -2099,7 +2109,7 @@
     steps:
       - "스크린샷: 앱 전체 화면. 주소창에 http://localhost:5173/#37.5xxxx,127.0xxxx,4 형태의 해시가 보이도록 하고, 오른쪽 아래 🔗 버튼과 하단 중앙의 \"지도 링크를 복사했습니다!\" 토스트가 함께 보이는 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch21-f03
   chapter: 21
@@ -2750,6 +2760,7 @@
       - "스크린샷: Chrome 개발자도구 Console 탭. dapi.kakao.com 요청에 붉은 403 (Forbidden) 에러가 표시된 화면. Network 탭 대신 Console 기준, 에러 줄이 잘 보이게 확대"
     crop: window
   status: pending
+
 
 
 
