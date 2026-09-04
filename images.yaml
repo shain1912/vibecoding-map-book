@@ -608,7 +608,8 @@
   chapter: 5
   type: 스크린샷
   caption: "브라우저의 Device Activation 화면"
-  file: images/ch05/ch05-f06.png
+  file: images/ch05/ch05-f06.jpg
+  source: images/raw/github-device.jpg
   capture:
     kind: web
     command: null
@@ -617,7 +618,7 @@
     steps:
       - "스크린샷: github.com/login/device 페이지. 8자리 코드 입력 칸이 보이게. 코드 미입력 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch05-f07
   chapter: 5
@@ -775,7 +776,8 @@
   chapter: 7
   type: 스크린샷
   caption: "앱 생성 창에 앱 이름 입력"
-  file: images/ch07/ch07-f03.png
+  file: images/ch07/ch07-f03.jpg
+  source: images/raw/kakao-app-create.jpg
   capture:
     kind: web
     command: null
@@ -784,7 +786,7 @@
     steps:
       - "스크린샷: \"+ 앱 생성\"을 눌러 열린 앱 생성 화면. 앱 이름 \"나만의지도\", 회사명 입력란이 채워진 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch07-f04
   chapter: 7
@@ -820,7 +822,8 @@
   chapter: 7
   type: 스크린샷
   caption: "JavaScript SDK 도메인에 http://localhost:5173 이 등록된 모습"
-  file: images/ch07/ch07-f06.png
+  file: images/ch07/ch07-f06.jpg
+  source: images/raw/kakao-jssdk-domain.jpg
   capture:
     kind: web
     command: null
@@ -829,7 +832,7 @@
     steps:
       - "스크린샷: JavaScript 키 수정 화면의 JavaScript SDK 도메인 목록에 http://localhost:5173 이 추가·저장 완료된 상태, 키 값은 모자이크 처리"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch08-f01
   chapter: 8
@@ -2445,7 +2448,8 @@
   chapter: 24
   type: 스크린샷
   caption: "깃허브에 올라간 my-map 저장소"
-  file: images/ch24/ch24-f05.png
+  file: images/ch24/ch24-f05.jpg
+  source: images/raw/gh-repo-main.jpg
   capture:
     kind: web
     command: null
@@ -2454,13 +2458,14 @@
     steps:
       - "스크린샷: github.com의 my-map 저장소 첫 화면. 파일 목록(index.html, package.json, src 등)과 커밋 메시지, Public 배지가 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch24-f06
   chapter: 24
   type: 스크린샷
   caption: "검수 포인트: .env와 node_modules가 없다"
   file: images/ch24/ch24-f06.png
+  source: images/raw/gh-filelist.png
   capture:
     kind: web
     command: null
@@ -2469,7 +2474,7 @@
     steps:
       - "스크린샷: 저장소 파일 목록 클로즈업. .gitignore·index.html·package.json·src는 있고 .env·node_modules는 없는 상태. 목록 전체가 한눈에 들어오게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch24-f07
   chapter: 24
@@ -2521,7 +2526,8 @@
   chapter: 25
   type: 스크린샷
   caption: "리포지토리 Secrets에 VITE_KAKAO_JS_KEY 등록"
-  file: images/ch25/ch25-f03.png
+  file: images/ch25/ch25-f03.jpg
+  source: images/raw/gh-secret-new.jpg
   capture:
     kind: web
     command: null
@@ -2530,13 +2536,14 @@
     steps:
       - "스크린샷: GitHub 리포 Settings → Secrets and variables → Actions 화면. New repository secret 폼에 Name: VITE_KAKAO_JS_KEY 입력, Secret 값은 더미 키(0123abcd... 형태)를 일부만 보이게. 등록 후 목록에 자물쇠 아이콘과 함께 표시된 모습이면 더 좋음"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch25-f04
   chapter: 25
   type: 스크린샷
   caption: "Settings → Pages에서 Source를 GitHub Actions로"
-  file: images/ch25/ch25-f04.png
+  file: images/ch25/ch25-f04.jpg
+  source: images/raw/gh-pages-actions.jpg
   capture:
     kind: web
     command: null
@@ -2545,13 +2552,13 @@
     steps:
       - "스크린샷: GitHub 리포 Settings → Pages 화면. Build and deployment 섹션의 Source 드롭다운이 열려 \"GitHub Actions\"와 \"Deploy from a branch\" 두 선택지가 보이고, GitHub Actions가 선택된 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch25-f05
   chapter: 25
   type: 스크린샷
   caption: "Actions 탭: build → deploy 모두 초록 체크"
-  file: images/ch25/ch25-f05.png
+  file: images/ch25/ch25-f05.jpg
   capture:
     kind: web
     command: null
@@ -2560,7 +2567,7 @@
     steps:
       - "스크린샷: 리포 Actions 탭에서 \"Deploy to GitHub Pages\" 워크플로 실행 상세 화면. build와 deploy 두 작업이 모두 초록 체크로 성공했고, deploy 쪽에 배포 URL(https://아이디.github.io/my-map/)이 링크로 표시된 상태"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch25-f06
   chapter: 25
@@ -2628,6 +2635,7 @@
   type: 스크린샷
   caption: "GitHub 리포 첫 화면에 렌더링된 README"
   file: images/ch26/ch26-f03.png
+  source: images/raw/gh-readme.png
   capture:
     kind: web
     command: null
@@ -2636,7 +2644,7 @@
     steps:
       - "스크린샷: GitHub 리포지토리 메인 페이지. 파일 목록 아래로 README가 렌더링되어 제목 \"나만의 지도\", 배포 링크, 앱 스크린샷, 이모지 기능 목록이 보이는 상태. 오른쪽 About 영역도 함께 보이게"
     crop: window
-  status: pending
+  status: captured
 
 - id: ch26-f04
   chapter: 26
@@ -2765,6 +2773,7 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
 
 
 
