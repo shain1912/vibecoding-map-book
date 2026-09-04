@@ -223,7 +223,7 @@
 - id: ch02-f03
   chapter: 2
   type: 스크린샷
-  caption: "설치 마법사 시작 화면"
+  caption: "설치 마법사 시작 화면 (예시)"
   file: images/ch02/ch02-f03.png
   capture:
     kind: window
@@ -238,7 +238,7 @@
 - id: ch02-f04
   chapter: 2
   type: 스크린샷
-  caption: "구성 요소 선택 화면 (npm과 Add to PATH 확인)"
+  caption: "구성 요소 선택 화면 예시 (npm과 Add to PATH 확인)"
   file: images/ch02/ch02-f04.png
   capture:
     kind: window
@@ -253,7 +253,7 @@
 - id: ch02-f05
   chapter: 2
   type: 스크린샷
-  caption: "Tools for Native Modules 화면 (체크 해제 상태)"
+  caption: "Tools for Native Modules 화면 예시 (체크 해제 상태)"
   file: images/ch02/ch02-f05.png
   capture:
     kind: window
@@ -268,7 +268,7 @@
 - id: ch02-f06
   chapter: 2
   type: 스크린샷
-  caption: "설치 완료 화면"
+  caption: "설치 완료 화면 (예시)"
   file: images/ch02/ch02-f06.png
   capture:
     kind: window
@@ -283,7 +283,7 @@
 - id: ch02-f07
   chapter: 2
   type: 스크린샷
-  caption: "`node -v`와 `npm -v` 버전 확인 결과"
+  caption: "`node -v`와 `npm -v` 버전 확인 결과 (출력 예시)"
   file: images/ch02/ch02-f07.png
   source: _working_raw/raw/term-node-npm-version.png
   capture:
@@ -313,7 +313,7 @@
 - id: ch03-f01
   chapter: 3
   type: 스크린샷
-  caption: "git이 설치되어 있지 않을 때의 터미널 화면"
+  caption: "git이 설치되어 있지 않을 때의 터미널 화면 (출력 예시)"
   file: images/ch03/ch03-f01.png
   capture:
     kind: terminal
@@ -344,7 +344,7 @@
 - id: ch03-f03
   chapter: 3
   type: 스크린샷
-  caption: "기본 에디터 선택 화면에서 Notepad를 고른 모습"
+  caption: "기본 에디터 선택 화면 (기본값은 Vim이다 — 목록을 펼쳐 Notepad로 바꾼다)"
   file: images/ch03/ch03-f03.png
   capture:
     kind: window
@@ -436,7 +436,7 @@
 - id: ch04-f02
   chapter: 4
   type: 스크린샷
-  caption: "claude.ai 가입 화면"
+  caption: "claude.ai 가입 화면 (예시)"
   file: images/ch04/ch04-f02.png
   capture:
     kind: web
@@ -451,7 +451,7 @@
 - id: ch04-f03
   chapter: 4
   type: 스크린샷
-  caption: "npm으로 Claude Code 설치"
+  caption: "npm으로 Claude Code 설치 (출력 예시)"
   file: images/ch04/ch04-f03.png
   capture:
     kind: terminal
@@ -529,7 +529,7 @@
 - id: ch05-f01
   chapter: 5
   type: 스크린샷
-  caption: "GitHub 가입 페이지"
+  caption: "GitHub 가입 페이지 (예시)"
   file: images/ch05/ch05-f01.png
   capture:
     kind: web
@@ -544,7 +544,7 @@
 - id: ch05-f02
   chapter: 5
   type: 스크린샷
-  caption: "winget으로 GitHub CLI 설치"
+  caption: "winget으로 GitHub CLI 설치 (출력 예시)"
   file: images/ch05/ch05-f02.png
   capture:
     kind: terminal
@@ -638,7 +638,7 @@
 - id: ch05-f08
   chapter: 5
   type: 스크린샷
-  caption: "깃허브에 올라간 첫 저장소"
+  caption: "깃허브에 올라간 첫 저장소 (구성 예시)"
   file: images/ch05/ch05-f08.png
   capture:
     kind: web
@@ -684,7 +684,7 @@
 - id: ch06-f03
   chapter: 6
   type: 스크린샷
-  caption: "Orca 첫 실행 화면"
+  caption: "Orca 첫 실행 화면 (구성 예시)"
   file: images/ch06/ch06-f03.png
   capture:
     kind: window
@@ -699,7 +699,7 @@
 - id: ch06-f04
   chapter: 6
   type: 스크린샷
-  caption: "워크트리 터미널에서 실행한 Claude Code"
+  caption: "워크트리 터미널에서 실행한 Claude Code (구성 예시)"
   file: images/ch06/ch06-f04.png
   capture:
     kind: window
@@ -714,7 +714,7 @@
 - id: ch06-f05
   chapter: 6
   type: 스크린샷
-  caption: "카드 세 장이 동시에 굴러가는 모습"
+  caption: "카드 세 장이 동시에 굴러가는 모습 (구성 예시)"
   file: images/ch06/ch06-f05.png
   capture:
     kind: window
@@ -1025,7 +1025,7 @@
 - id: ch10-f01
   chapter: 10
   type: 스크린샷
-  caption: "콘솔에서 `__map.setLevel(3)`을 실행해 확대된 지도"
+  caption: "콘솔에서 __map.setLevel(3)을 실행해 확대된 지도"
   file: images/ch10/ch10-f01.png
   capture:
     kind: web
@@ -2000,7 +2000,7 @@
 - id: ch20-f02
   chapter: 20
   type: 스크린샷
-  caption: "크롬의 위치 권한 프롬프트"
+  caption: "브라우저의 위치 권한 프롬프트"
   file: images/ch20/ch20-f02.png
   capture:
     kind: web
@@ -2283,7 +2283,7 @@
 - id: ch23-f01
   chapter: 23
   type: 스크린샷
-  caption: "크롬 개발자도구 디바이스 모드 진입 (기기 툴바 아이콘과 기기 선택 메뉴)"
+  caption: "크롬 개발자도구 디바이스 모드 진입(기기 툴바와 기기 선택 메뉴)"
   file: images/ch23/ch23-f01.png
   capture:
     kind: web
@@ -2374,7 +2374,7 @@
 - id: ch23-f07
   chapter: 23
   type: 일러스트
-  caption: "실제 스마트폰에서 열어 본 나만의 지도 (같은 와이파이, Network 주소 접속)"
+  caption: "스마트폰에서 열어 본 나만의 지도 — 접속 예시 (같은 와이파이, Network 주소)"
   file: images/ch23/ch23-f07.png
   capture:
     kind: manual
