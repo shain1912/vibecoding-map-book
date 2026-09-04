@@ -1,0 +1,1920 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼">
+      
+      
+        <meta name="author" content="YLBook">
+      
+      
+        <link rel="canonical" href="https://shain1912.github.io/vibecoding-map-book/ch06/">
+      
+      
+        <link rel="prev" href="../ch05/">
+      
+      
+        <link rel="next" href="../ch07/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>6장 Orca로 에이전트 지휘하기 - 바이브코딩으로 만드는 나만의 지도 웹</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-orca" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-header__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            바이브코딩으로 만드는 나만의 지도 웹
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6장 Orca로 에이전트 지휘하기
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-nav__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    바이브코딩으로 만드는 나만의 지도 웹
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0장 이 책에서 만드는 것
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1부 바이브코딩 준비운동
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1부 바이브코딩 준비운동
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2장 Node.js 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3장 Git for Windows 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4장 Claude Code 설치하고 길들이기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 에이전트가 하나면 아쉬워지는 순간
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 워크트리 — 병렬 작업의 비밀
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-orca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Orca 설치하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 터미널에 Claude Code 띄우기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 작업을 병렬로 돌리기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 저자의 실전 화면 구성
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2부 카카오 지도 첫걸음
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2부 카카오 지도 첫걸음
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7장 카카오 개발자 계정과 앱 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8장 Vite로 프로젝트 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9장 첫 지도 띄우기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10장 지도 다루기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3부 나만의 장소 지도 만들기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3부 나만의 장소 지도 만들기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11장 마커 찍기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12장 장소 데이터 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13장 커스텀 오버레이 말풍선
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14장 카테고리 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16장 클릭·검색으로 장소 추가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17장 localStorage 저장
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19장 상세 패널
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4부 한 단계 더
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4부 한 단계 더
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21장 URL로 지도 공유
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5부 세상에 공개하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5부 세상에 공개하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24장 GitHub에 올리기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25장 GitHub Pages 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26장 README와 자랑하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    부록
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 A 프롬프트 템플릿 모음
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 B 트러블슈팅 & 치트시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 에이전트가 하나면 아쉬워지는 순간
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 워크트리 — 병렬 작업의 비밀
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-orca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Orca 설치하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 터미널에 Claude Code 띄우기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 작업을 병렬로 돌리기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 저자의 실전 화면 구성
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-orca">6장 Orca로 에이전트 지휘하기<a class="headerlink" href="#6-orca" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">이 장에서 배우는 것</p>
+<ul>
+<li>여러 AI 에이전트를 동시에 부리는 도구, Orca가 무엇인지 이해합니다</li>
+<li>바이브코딩의 숨은 주역인 git 워크트리(worktree) 개념을 익힙니다</li>
+<li>Orca 터미널에 Claude Code를 띄우고 작업을 병렬로 돌리는 흐름을 배웁니다</li>
+<li>저자가 실제로 쓰는 화면 구성을 구경하며 나만의 작업 방식을 상상해 봅니다</li>
+</ul>
+</div>
+<hr />
+<h2 id="61">6.1 에이전트가 하나면 아쉬워지는 순간<a class="headerlink" href="#61" title="Permanent link">&para;</a></h2>
+<p>4장에서 Claude Code를 설치하고 첫 대화를 나눠 보셨습니다. 아마 이런 생각이 드셨을 겁니다. "오, 시키면 진짜 하네?" 맞습니다. 그런데 조금만 더 쓰다 보면 새로운 아쉬움이 생깁니다.</p>
+<p>Claude Code에게 일을 시키면, 에이전트가 파일을 읽고 코드를 고치는 동안 우리는 <strong>기다립니다</strong>. 1~2분짜리 작업이면 괜찮은데, 큰 작업을 시키면 5분, 10분씩 걸리기도 합니다. 그 시간 동안 멍하니 화면만 보고 있자니 아깝지요. 게다가 이런 상황도 생깁니다.</p>
+<ul>
+<li>지도에 마커 찍는 기능을 만드는 <strong>동안</strong>, 사이드바 디자인도 손보고 싶다</li>
+<li>에이전트 A에게 기능을 만들게 하고, 에이전트 B에게는 A가 만든 코드를 검토시키고 싶다</li>
+<li>실험적인 수정을 해 보고 싶은데, 지금 잘 돌아가는 코드는 건드리고 싶지 않다</li>
+</ul>
+<p>사람 팀이라면 답은 간단합니다. 일을 나눠서 <strong>동시에</strong> 하면 됩니다. AI 에이전트도 똑같습니다. 한 명(?)만 고용할 이유가 없습니다. 여러 에이전트에게 서로 다른 일을 맡기고, 우리는 관리자처럼 결과만 확인하면 됩니다. 1장에서 "바이브코딩은 코드를 치는 일이 아니라 일을 시키는 일"이라고 했지요. 그 말을 끝까지 밀고 나가면 자연스럽게 이런 그림에 도착합니다. 우리는 개발자라기보다 <strong>지휘자</strong>에 가까워지고, 지휘자에게 필요한 것은 빠른 손이 아니라 전체를 보는 눈입니다.</p>
+<p>이런 일하는 방식을 도와주는 도구가 이번 장의 주인공, <strong>Orca</strong>입니다.</p>
+<p>Orca는 여러 AI 코딩 에이전트를 <strong>작업 공간 단위로 병렬 지휘</strong>하는 데스크톱 앱입니다. 범고래(orca)가 무리를 지어 사냥하듯, 여러 에이전트를 한 화면에서 부린다는 이름입니다. 화면 왼쪽에는 작업(워크트리) 목록이 카드처럼 늘어서 있고, 각 작업을 클릭하면 그 작업 전용 터미널이 열립니다. 터미널마다 Claude Code 같은 에이전트를 한 명씩 앉혀 두고, 우리는 카드 사이를 오가며 "이건 어떻게 됐나?" 하고 순시하는 그림입니다.</p>
+<p><img alt="그림 6.1 — 에이전트 한 명 vs 여러 명 지휘" src="../images/ch06/ch06-f01.png" width="760" /></p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의 — 이 장은 건너뛰어도 됩니다</p>
+<p>먼저 분명히 해 두겠습니다. <strong>이 책의 모든 실습은 Claude Code 하나만 있어도 따라갈 수 있습니다.</strong> Orca는 저자가 실제로 쓰는 방식을 소개하는 선택 사항입니다. "터미널 하나로도 벅찬데?" 싶으시면 이 장은 가볍게 읽고 넘어가셨다가, 책을 다 만든 뒤에 다시 돌아오셔도 전혀 문제없습니다. 병렬 작업은 어디까지나 편의이지, 필수가 아닙니다.</p>
+</div>
+<hr />
+<h2 id="62">6.2 워크트리 — 병렬 작업의 비밀<a class="headerlink" href="#62" title="Permanent link">&para;</a></h2>
+<p>에이전트를 여러 명 부리려면 먼저 풀어야 할 문제가 있습니다. 바로 <strong>작업 공간 충돌</strong>입니다.</p>
+<p>같은 폴더에서 에이전트 두 명이 동시에 일한다고 상상해 보세요. A가 <code>main.js</code>를 고치는 중인데 B도 <code>main.js</code>를 고칩니다. 서로의 수정이 뒤엉켜서 파일이 엉망이 됩니다. 사람 두 명이 같은 공책에 동시에 필기하는 꼴입니다. 공책을 한 권씩 나눠 줘야 합니다.</p>
+<p>여기서 3장에서 설치한 git이 다시 등장합니다. git에는 <strong>워크트리(worktree)</strong>라는 기능이 있습니다. 하나의 저장소에서 <strong>브랜치마다 독립된 폴더를 하나씩 더 꺼내 쓰는</strong> 기능입니다.</p>
+<p>3장에서 브랜치를 "평행우주"에 비유했던 것을 기억하시나요? 보통은 브랜치를 바꾸면(checkout) 같은 폴더의 내용물이 통째로 갈아 끼워집니다. 우주는 여러 개인데 문은 하나인 셈이지요. 워크트리는 여기에 <strong>문을 하나 더 다는</strong> 기능입니다. <code>git worktree add</code> 한 번이면, 같은 저장소를 바라보는 별도의 폴더가 하나 생기고, 그 폴더는 자기만의 브랜치를 물고 있습니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>H:\my-map\               ← 원래 폴더 (main 브랜치)
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>H:\my-map-feature\       ← 워크트리 1 (feature/marker 브랜치)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>H:\my-map-review\        ← 워크트리 2 (review 브랜치)
+</span></code></pre></div>
+<p>이렇게 되면 폴더가 세 개니까 에이전트 세 명이 <strong>서로를 전혀 방해하지 않고</strong> 동시에 일할 수 있습니다. 각자 자기 폴더에서 마음껏 파일을 고치고, 결과가 마음에 들면 git으로 합치고(merge), 마음에 안 들면 폴더째 버리면 됩니다. 복사-붙여넣기로 폴더를 통째로 복제하는 것과 달리, 워크트리는 저장소의 역사(커밋 기록)를 공유하기 때문에 용량도 아끼고 합치기도 쉽습니다.</p>
+<p><img alt="그림 6.2 — 워크트리 개념도" src="../images/ch06/ch06-f02.png" width="760" /></p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁 — 워크트리는 바이브코딩의 안전벨트 2호</p>
+<p>3장에서 "되돌리기(커밋)는 바이브코딩의 안전벨트"라고 했습니다. 워크트리는 안전벨트 2호입니다. 에이전트에게 과감한 실험을 시킬 때 워크트리에서 하게 하면, 원본 폴더의 잘 돌아가는 코드는 <strong>애초에 건드려질 일이 없습니다</strong>. 실험이 실패해도 워크트리만 지우면 끝입니다.</p>
+</div>
+<p>궁금하신 분을 위해, 워크트리가 실제로 어떤 명령인지 잠깐 맛만 보겠습니다. 외울 필요는 없습니다. Orca가 대신해 줄 것이고, 필요하면 에이전트에게 "워크트리 하나 만들어 줘"라고 시켜도 되기 때문입니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git worktree add ..\my-map-feature -b feature/marker
+</span></code></pre></div>
+<p>이 한 줄이 "저장소 옆에 <code>my-map-feature</code> 폴더를 만들고, 거기에 <code>feature/marker</code>라는 새 브랜치를 물려라"라는 뜻입니다. <code>git worktree list</code>를 치면 지금 열려 있는 워크트리 목록이 나오고, 다 쓴 워크트리는 <code>git worktree remove</code> 명령으로 정리합니다. 명령어 세 개가 전부입니다. 이 정도면 뒤에서 Orca가 무슨 일을 대신해 주는지 감을 잡기에 충분합니다.</p>
+<p>그런데 워크트리를 손으로 관리하려면 명령어를 몇 개 외워야 하고, 폴더가 늘어날수록 "어느 폴더가 무슨 작업이었지?" 하고 헷갈리기 시작합니다. Orca는 바로 이 지점을 맡아 줍니다. 버튼 하나로 워크트리를 만들고, 작업마다 카드로 정리해 주고, 다 쓴 워크트리는 정리까지 해 줍니다. 말하자면 <strong>워크트리 매니저 + 에이전트 지휘소</strong>입니다.</p>
+<hr />
+<h2 id="63-orca">6.3 Orca 설치하기<a class="headerlink" href="#63-orca" title="Permanent link">&para;</a></h2>
+<p>Orca는 윈도우에서 동작하는 데스크톱 앱입니다. 설치 파일과 최신 설치 방법은 공식 사이트에서 확인하는 것이 가장 정확합니다. 이런 도구들은 업데이트가 잦아서, 책에 적어 둔 버튼 이름이 몇 달 뒤에는 달라져 있을 수 있기 때문입니다.</p>
+<p>설치 절차의 큰 흐름은 여느 윈도우 앱과 같습니다.</p>
+<ol>
+<li>공식 사이트(검색창에 "Orca 에이전트" 또는 안내받은 주소)에서 윈도우용 설치 파일을 내려받습니다</li>
+<li>내려받은 파일을 실행하고 안내에 따라 설치를 마칩니다</li>
+<li>Orca를 실행한 뒤, 우리가 작업할 <strong>프로젝트 폴더(git 저장소)</strong>를 엽니다</li>
+</ol>
+<p>세부 화면이 책과 조금 다르더라도 당황할 필요 없습니다. 이 장에서 중요한 것은 버튼의 위치가 아니라 <strong>워크트리 카드로 작업을 나누고, 카드마다 에이전트를 앉힌다</strong>는 뼈대이며, 이 뼈대는 버전이 바뀌어도 그대로입니다. 설치 화면이 낯설면 화면을 캡처해서 Claude Code에게 "이 화면에서 뭘 눌러야 해?"라고 물어보는 것도 아주 바이브코딩다운 해결책입니다.</p>
+<p><img alt="그림 6.3 — Orca 첫 실행 화면 (구성 예시)" src="../images/ch06/ch06-f03.png" width="820" /></p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>Orca는 2장의 Node.js, 3장의 git, 4장의 Claude Code가 <strong>먼저 설치되어 있어야</strong> 제 역할을 합니다. 특히 워크트리는 git 기능이므로, 열려는 폴더가 git 저장소가 아니면 워크트리 기능을 쓸 수 없습니다. 아직 우리 지도 프로젝트는 만들기 전이니(8장에서 만듭니다), 지금은 아무 연습용 폴더에서 <code>git init</code>을 해 보거나, 화면 구경만 하고 넘어가셔도 충분합니다.</p>
+</div>
+<hr />
+<h2 id="64-claude-code">6.4 터미널에 Claude Code 띄우기<a class="headerlink" href="#64-claude-code" title="Permanent link">&para;</a></h2>
+<p>Orca의 기본 단위는 <strong>"워크트리 카드 하나 = 작업 하나 = 터미널 하나"</strong>입니다. 사용 흐름은 이렇습니다.</p>
+<p><strong>첫째, 작업 카드를 만듭니다.</strong> 새 워크트리를 만들면 카드가 하나 생깁니다. 카드에는 "마커 기능 만들기"처럼 작업 이름을 붙입니다. 뒤에서는 git이 새 브랜치와 새 폴더를 만들어 주지만, 우리 눈에는 그냥 카드 한 장이 늘어난 것으로 보입니다. 이름은 나중에 봐도 무슨 일이었는지 알 수 있게 짓는 것이 좋습니다. "작업1", "테스트" 같은 이름은 사흘만 지나면 정체불명이 됩니다. "검색기능", "사이드바-디자인"처럼 <strong>일의 내용이 그대로 드러나는 이름</strong>을 추천합니다.</p>
+<p><strong>둘째, 카드의 터미널에 에이전트를 앉힙니다.</strong> 카드를 열면 그 워크트리 폴더를 바라보는 터미널이 나옵니다. 여기서 4장에서 배운 대로 입력하면 됩니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>claude
+</span></code></pre></div>
+<p>이게 전부입니다. 4장에서 쓰던 Claude Code와 완전히 같은 프로그램이 뜨는데, 단지 <strong>이 카드 전용 폴더 안에서</strong> 동작한다는 점만 다릅니다. 에이전트가 무슨 파일을 고치든 이 워크트리 밖으로는 나가지 않습니다. Orca를 위해 새로 배울 명령이 따로 있는 게 아니라, 이미 아는 도구를 <strong>자리만 옮겨서</strong> 쓰는 것입니다. 4장에서 익힌 습관 — 권한 프롬프트를 읽고 허용하기, 작게 시키고 확인하기 — 도 그대로 통합니다.</p>
+<p><strong>셋째, 평소처럼 일을 시킵니다.</strong> 프롬프트를 쓰는 요령은 4장의 4요소(맥락·목표·제약·출력) 그대로입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>이 폴더는 카카오지도 웹앱 프로젝트야. 지도에 마커를 찍는 기능을 만들어 줘. 기존 코드 스타일을 따르고, 다 만들면 바꾼 파일 목록을 정리해 줘.</p>
+</blockquote>
+</div>
+<p><img alt="그림 6.4 — 워크트리 터미널에서 실행한 Claude Code (구성 예시)" src="../images/ch06/ch06-f04.png" width="720" /></p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁 — Claude Code 말고 다른 에이전트도</p>
+<p>터미널은 그냥 터미널이라서, Claude Code 대신 다른 CLI 에이전트를 띄워도 됩니다. 4장 끝에서 소개한 codex 같은 무료 대안을 어떤 카드에는 Claude Code, 어떤 카드에는 codex 식으로 섞어 앉힐 수 있습니다. 저는 한 에이전트가 만든 코드를 <strong>다른 회사 에이전트에게 검토</strong>시키는 용도로 즐겨 씁니다. 같은 모델끼리는 비슷한 실수를 눈감아 주는 경향이 있는데, 서로 다른 모델은 의외로 냉정하게 흠을 잡아 주기 때문입니다.</p>
+</div>
+<hr />
+<h2 id="65">6.5 작업을 병렬로 돌리기<a class="headerlink" href="#65" title="Permanent link">&para;</a></h2>
+<p>이제 진짜 재미있는 부분입니다. 카드를 <strong>여러 장</strong> 만들어 봅시다.</p>
+<p>예를 들어 우리 지도 앱을 만들다가 이런 상황이 왔다고 해 보겠습니다. 할 일이 세 가지인데, 서로 건드리는 파일이 다릅니다.</p>
+<table>
+<thead>
+<tr>
+<th>카드(워크트리)</th>
+<th>맡길 일</th>
+<th>에이전트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>feature-search</code></td>
+<td>검색 기능 만들기</td>
+<td>Claude Code</td>
+</tr>
+<tr>
+<td><code>style-sidebar</code></td>
+<td>사이드바 디자인 다듬기</td>
+<td>Claude Code</td>
+</tr>
+<tr>
+<td><code>review</code></td>
+<td>어제 만든 코드 검토</td>
+<td>codex</td>
+</tr>
+</tbody>
+</table>
+<p>카드 세 장을 만들고, 각 터미널에 에이전트를 띄우고, 각각 프롬프트를 던집니다. 그러면 세 작업이 <strong>동시에</strong> 굴러갑니다. 우리가 할 일은 카드 사이를 오가며 진행 상황을 확인하고, 에이전트가 물어보는 것(권한 허용, 선택지 결정)에 답해 주는 것뿐입니다. 체감상 가장 큰 변화는 <strong>기다리는 시간이 사라진다</strong>는 점입니다. A가 일하는 동안 B를 확인하고, B가 일하는 동안 C에게 다음 일을 시키는 식으로, 우리 손이 놀지 않게 됩니다.</p>
+<p>어떤 일을 병렬로 묶을지 판단하는 기준도 하나 알려드리겠습니다. 스스로에게 이렇게 물어보세요. <strong>"이 두 일은 서로의 결과가 필요한가?"</strong> 검색 기능과 사이드바 디자인은 서로의 결과가 필요 없으니 동시에 돌려도 됩니다. 반면 "마커 찍기"와 "마커를 클릭하면 말풍선 띄우기"는 앞의 결과 위에 뒤가 쌓이는 일이라, 병렬이 아니라 <strong>순서대로</strong> 시켜야 합니다. 독립적인 일은 옆으로 나란히, 의존적인 일은 앞뒤로 줄 세우기 — 이것이 지휘의 기본 문법입니다. 사실 이 판단력은 사람 팀을 이끌 때 필요한 것과 정확히 같아서, 에이전트 지휘를 연습하다 보면 일 나누는 감각 자체가 늘어 있는 걸 발견하게 됩니다.</p>
+<p>작업이 끝난 카드는 어떻게 할까요? 결과가 마음에 들면 그 워크트리의 브랜치를 main으로 <strong>합칩니다</strong>(merge — git이 해 주고, 에이전트에게 "이 브랜치 main에 합쳐 줘"라고 시켜도 됩니다). 마음에 안 들면 카드를 버립니다. 워크트리를 지워도 원본 폴더는 멀쩡하니, 부담 없이 실험하고 부담 없이 버리면 됩니다.</p>
+<p><img alt="그림 6.5 — 카드 세 장이 동시에 굴러가는 모습 (구성 예시)" src="../images/ch06/ch06-f05.png" width="820" /></p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의 — 병렬은 만능이 아닙니다</p>
+<p><strong>같은 파일을 고치는 작업 두 개를 동시에 돌리면 안 됩니다.</strong> 폴더는 분리되어 있으니 작업 중에는 충돌이 없지만, 나중에 두 브랜치를 합칠 때 같은 파일의 같은 부분이 다르게 고쳐져 있으면 git이 "어느 쪽이 맞아요?" 하고 충돌(conflict)을 냅니다. 처리 못 할 일은 아니지만 입문 단계에서는 골치 아픕니다. 병렬로 돌릴 일은 <strong>서로 다른 파일을 건드리는 일</strong>로 고르는 것이 요령입니다. 그리고 에이전트를 여럿 돌리면 4장에서 이야기한 사용량(요금제 한도)도 그만큼 빨리 소모된다는 점도 기억해 두세요.</p>
+</div>
+<hr />
+<h2 id="66">6.6 저자의 실전 화면 구성<a class="headerlink" href="#66" title="Permanent link">&para;</a></h2>
+<p>제가 이 책과 예제 앱을 만들 때 실제로 쓰는 구성을 공개합니다. 거창하지 않습니다.</p>
+<ul>
+<li><strong>모니터 왼쪽 절반 — Orca.</strong> 워크트리 카드 목록과 터미널. 보통 카드 2~4장이 살아 있습니다. 하나는 지금 만드는 기능, 하나는 검토나 문서 작업, 나머지는 실험용입니다.</li>
+<li><strong>모니터 오른쪽 절반 — 브라우저.</strong> 만들고 있는 지도 앱 화면(<code>localhost:5173</code>)을 띄워 두고, 에이전트가 "다 했습니다" 하면 바로 새로고침해서 눈으로 확인합니다.</li>
+<li><strong>정기 순찰.</strong> 몇 분에 한 번씩 카드를 훑으며 멈춰 있는 에이전트(질문 대기 중)를 풀어 주고, 끝난 작업은 결과를 확인해서 합치거나 버립니다.</li>
+</ul>
+<p>이 책을 쓰는 동안의 어느 오후를 예로 들면 이렇습니다. 카드 1에서는 Claude Code가 지도 앱의 새 기능을 만들고 있고, 카드 2에서는 다른 에이전트가 어제 쓴 원고의 오탈자와 어색한 문장을 검토하고 있고, 카드 3은 "이렇게 바꾸면 어떨까?" 싶은 실험을 던져 둔 상태입니다. 저는 커피를 마시면서 카드 1 → 2 → 3 순서로 돌아보고, 질문에 답해 주고, 끝난 것을 합칩니다. 세 시간짜리 일이 한 시간 남짓에 끝나는 날도 있습니다. 물론 셋 다 엉뚱한 결과를 내서 전부 버린 날도 있습니다만, 워크트리 덕분에 버리는 것조차 부담이 없었습니다.</p>
+<p>핵심은 화려한 설정이 아니라 <strong>리듬</strong>입니다. 시키고 → 다른 카드 보고 → 확인하고 → 합치고. 이 리듬이 몸에 붙으면, 혼자서도 작은 개발팀 하나를 운영하는 감각이 생깁니다. 관리자가 팀원 일을 다 대신하지 않듯, 우리도 코드를 다 직접 쓰지 않습니다. 대신 <strong>무엇을 시킬지 정하고, 결과를 판단하는 눈</strong>을 기릅니다. 그 눈은 이 책을 따라 지도 앱을 만들면서 자연스럽게 길러질 겁니다.</p>
+<p><img alt="그림 6.6 — 저자의 작업 화면 배치도" src="../images/ch06/ch06-f06.png" width="760" /></p>
+<p>다시 한번 강조합니다. 이 구성은 <strong>선택</strong>입니다. 다음 장부터의 모든 실습은 터미널 하나 + Claude Code 하나로 진행할 수 있게 쓰여 있습니다. 다만 책 후반쯤 가서 "기다리는 시간이 아깝다"는 생각이 들기 시작하면, 그때 이 장으로 돌아와 카드를 두 장으로 늘려 보세요. 한번 맛보면 돌아가기 어렵습니다.</p>
+<hr />
+<h2 id="67">6.7 마무리<a class="headerlink" href="#67" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">📌 핵심 요약</p>
+<ul>
+<li>Orca는 여러 AI 에이전트를 <strong>워크트리 단위로 병렬 지휘</strong>하는 데스크톱 앱입니다</li>
+<li>워크트리는 하나의 git 저장소에서 <strong>브랜치별 독립 폴더</strong>를 꺼내 쓰는 기능으로, 에이전트끼리 파일 충돌 없이 동시에 일하게 해 줍니다</li>
+<li>각 워크트리의 터미널에서 <code>claude</code>를 실행하면 그 폴더 전용 Claude Code가 뜹니다</li>
+<li>병렬 작업은 <strong>서로 다른 파일을 건드리는 일</strong>끼리 묶는 것이 요령입니다</li>
+<li>이 책의 실습은 <strong>Claude Code 하나만으로 전부 가능</strong>하며, Orca는 선택 사항입니다</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">🤔 생각해보기</p>
+<p>Q1. 지금 만들고 싶은 웹앱에서, 서로 다른 파일을 건드릴 것 같아서 병렬로 시켜도 될 작업 두 가지를 골라 본다면 무엇인가요?</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>Q2. 에이전트가 만든 코드를 다른 에이전트에게 검토시키면 어떤 점이 좋을까요? 사람 팀에 빗대어 생각해 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">✏️ 연습 문제</p>
+<ol>
+<li>워크트리와 "폴더 통째로 복사"의 차이를 두 가지 이상 설명해 보세요.</li>
+<li>같은 파일을 고치는 작업 두 개를 병렬로 돌리면 안 되는 이유를, 합치기(merge) 시점에 벌어지는 일로 설명해 보세요.</li>
+<li>(선택) 연습용 폴더에서 <code>git init</code> 후 <code>git worktree add ../연습-실험 -b experiment</code>를 실행해 폴더가 생기는지 확인하고, <code>git worktree list</code>로 목록을 본 뒤 <code>git worktree remove ../연습-실험</code>으로 정리해 보세요.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">🔎 더 찾아보기</p>
+<ul>
+<li><code>git worktree</code> — 워크트리를 명령어로 직접 다루는 git 공식 기능</li>
+<li><code>머지 충돌(merge conflict)</code> — 두 브랜치가 같은 부분을 다르게 고쳤을 때 벌어지는 일과 해결법</li>
+<li><code>멀티에이전트 워크플로</code> — 에이전트 여러 명에게 역할(개발·검토·테스트)을 나눠 주는 작업 패턴</li>
+<li><code>tmux</code> — 터미널 화면 분할 도구. 앱 없이 터미널만으로 비슷한 병렬 구성을 꾸미는 고전적 방법</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>다음 장 예고</strong> — 준비운동이 끝났습니다. 다음 장부터는 드디어 지도 앱 만들기가 시작됩니다. 카카오 개발자 사이트에서 계정을 만들고, 우리 앱의 신분증인 <strong>JavaScript 키</strong>를 발급받고, 지도를 띄울 주소(<code>localhost:5173</code>)를 등록합니다. 지도를 화면에 띄우기 위한 마지막 열쇠를 받으러 갑시다.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

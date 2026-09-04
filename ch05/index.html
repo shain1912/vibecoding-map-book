@@ -1,0 +1,1937 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼">
+      
+      
+        <meta name="author" content="YLBook">
+      
+      
+        <link rel="canonical" href="https://shain1912.github.io/vibecoding-map-book/ch05/">
+      
+      
+        <link rel="prev" href="../ch04/">
+      
+      
+        <link rel="next" href="../ch06/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>5장 GitHub CLI로 깃허브 연결 - 바이브코딩으로 만드는 나만의 지도 웹</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-github-cli" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-header__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            바이브코딩으로 만드는 나만의 지도 웹
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5장 GitHub CLI로 깃허브 연결
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-nav__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    바이브코딩으로 만드는 나만의 지도 웹
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0장 이 책에서 만드는 것
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1부 바이브코딩 준비운동
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1부 바이브코딩 준비운동
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2장 Node.js 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3장 Git for Windows 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4장 Claude Code 설치하고 길들이기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 깃허브, 내 코드의 클라우드 금고
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 GitHub 계정 만들기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-github-cli-winget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 GitHub CLI 설치 — winget 한 줄이면 끝
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-gh-auth-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 gh auth login — 터미널과 깃허브 악수시키기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-gh-repo-create-git-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 첫 원격 저장소 — gh repo create와 git push
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2부 카카오 지도 첫걸음
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2부 카카오 지도 첫걸음
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7장 카카오 개발자 계정과 앱 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8장 Vite로 프로젝트 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9장 첫 지도 띄우기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10장 지도 다루기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3부 나만의 장소 지도 만들기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3부 나만의 장소 지도 만들기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11장 마커 찍기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12장 장소 데이터 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13장 커스텀 오버레이 말풍선
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14장 카테고리 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16장 클릭·검색으로 장소 추가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17장 localStorage 저장
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19장 상세 패널
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4부 한 단계 더
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4부 한 단계 더
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21장 URL로 지도 공유
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5부 세상에 공개하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5부 세상에 공개하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24장 GitHub에 올리기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25장 GitHub Pages 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26장 README와 자랑하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    부록
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 A 프롬프트 템플릿 모음
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 B 트러블슈팅 & 치트시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 깃허브, 내 코드의 클라우드 금고
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 GitHub 계정 만들기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-github-cli-winget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 GitHub CLI 설치 — winget 한 줄이면 끝
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-gh-auth-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 gh auth login — 터미널과 깃허브 악수시키기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-gh-repo-create-git-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 첫 원격 저장소 — gh repo create와 git push
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="5-github-cli">5장 GitHub CLI로 깃허브 연결<a class="headerlink" href="#5-github-cli" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">이 장에서 배우는 것</p>
+<ul>
+<li>깃허브(GitHub)가 무엇이고 왜 필요한지 이해합니다</li>
+<li>GitHub 계정을 만들고, GitHub CLI(<code>gh</code>)를 winget으로 설치합니다</li>
+<li><code>gh auth login</code>으로 터미널과 깃허브를 브라우저 인증으로 연결합니다</li>
+<li><code>gh repo create</code>로 첫 원격 저장소를 만들고 <code>git push</code>로 올려 봅니다</li>
+</ul>
+</div>
+<hr />
+<h2 id="51">5.1 깃허브, 내 코드의 클라우드 금고<a class="headerlink" href="#51" title="Permanent link">&para;</a></h2>
+<p>3장에서 우리는 Git을 설치하면서 "되돌리기는 바이브코딩의 안전벨트"라고 배웠습니다. Git은 내 컴퓨터 안에서 코드의 역사를 기록해 주는 도구였지요. 그런데 한 가지 불안이 남습니다. 그 역사가 전부 <strong>내 컴퓨터 안에만</strong> 있다는 점입니다.</p>
+<p>노트북을 잃어버리면? 하드디스크가 고장 나면? 커피를 쏟으면? 지금까지 쌓아 온 커밋이 통째로 사라집니다. 사진을 구글 포토나 아이클라우드에 백업하듯, 코드에도 클라우드 백업이 필요합니다. 그 역할을 하는 곳이 바로 <strong>깃허브(GitHub)</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>입니다.</p>
+<p>깃허브는 Git 저장소를 인터넷에 올려 두는 서비스입니다. 내 컴퓨터의 저장소를 깃허브에 올려 두면(이걸 <strong>푸시(push)</strong>라고 합니다) 컴퓨터가 어떻게 되든 코드는 안전합니다. 다른 컴퓨터에서 내려받아 이어서 작업할 수도 있고, 링크 하나로 다른 사람에게 보여 줄 수도 있습니다.</p>
+<p>이 책에서 깃허브는 세 가지 역할을 맡습니다.</p>
+<ol>
+<li><strong>백업</strong> — 매일의 작업을 클라우드에 안전하게 보관합니다.</li>
+<li><strong>포트폴리오</strong> — 완성한 지도 웹앱의 코드가 내 깃허브 프로필에 쌓입니다. 개발자에게 깃허브 프로필은 명함이자 이력서입니다.</li>
+<li><strong>배포</strong> — 25장에서 우리는 깃허브의 무료 호스팅 기능(GitHub Pages)으로 지도 웹을 전 세계에 공개합니다. 깃허브에 올라가 있어야 배포도 할 수 있습니다.</li>
+</ol>
+<p>깃허브에는 백업 이상의 매력도 있습니다. 전 세계 개발자들이 깃허브에 코드를 공개해 두고 서로의 코드를 읽고, 고치고, 나눕니다. 우리가 이 책에서 쓰는 도구들 — Node.js도, Git도, 심지어 GitHub CLI 자신도 — 전부 깃허브에 코드가 공개돼 있는 오픈소스입니다. 계정을 만든다는 것은 이 거대한 공유의 세계에 내 자리를 하나 마련하는 일이기도 합니다.</p>
+<p>그런데 깃허브를 터미널에서 편하게 다루려면 도구가 하나 더 필요합니다. 바로 <strong>GitHub CLI</strong>, 명령어로는 <code>gh</code>입니다. CLI는 Command Line Interface의 약자로, 마우스 클릭 대신 명령어로 조작하는 프로그램을 말합니다. 원래 깃허브에 저장소를 만들려면 브라우저를 열고, 로그인하고, 버튼을 여러 번 눌러야 합니다. <code>gh</code>가 있으면 터미널에서 명령 한 줄로 끝납니다. 저장소 만들기, 목록 보기, 삭제, 나중에 배울 풀 리퀘스트까지 깃허브에서 할 수 있는 거의 모든 일을 터미널에서 처리할 수 있습니다.</p>
+<p>무엇보다 중요한 건, <strong>Claude Code가 <code>gh</code>를 아주 잘 쓴다</strong>는 점입니다. "이 프로젝트 깃허브에 올려 줘"라고 시키면 Claude Code는 속으로 <code>gh</code> 명령을 실행합니다. 브라우저는 사람의 도구이지 에이전트의 도구가 아닙니다. 에이전트는 터미널에서 일하기 때문에, 터미널에서 깃허브를 다룰 수 있는 <code>gh</code>가 곧 에이전트의 손발이 됩니다. 우리가 미리 <code>gh</code>를 설치하고 로그인해 두면, 그때부터 깃허브 관련 일은 전부 에이전트에게 맡길 수 있게 되는 겁니다. 이 장에서 우리가 하는 일은 말하자면 에이전트에게 깃허브 출입증을 만들어 주는 일입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>Git과 GitHub는 이름이 비슷해서 자주 헷갈립니다. <strong>Git</strong>은 내 컴퓨터에서 도는 버전 관리 프로그램이고, <strong>GitHub</strong>는 Git 저장소를 올려 두는 웹 서비스입니다. "한글(프로그램)"과 "네이버 클라우드(서비스)"의 관계와 비슷합니다. GitHub 말고도 GitLab, Bitbucket 같은 비슷한 서비스가 있지만, 세계에서 가장 많이 쓰이는 곳은 GitHub입니다.</p>
+</div>
+<hr />
+<h2 id="52-github">5.2 GitHub 계정 만들기<a class="headerlink" href="#52-github" title="Permanent link">&para;</a></h2>
+<p>이미 깃허브 계정이 있다면 이 절은 건너뛰고 5.3절로 가셔도 됩니다. 처음이라면 함께 만들어 봅시다. 계정 생성은 무료이고, 신용카드도 필요 없습니다.</p>
+<p>브라우저에서 <strong>github.com</strong> 에 접속한 뒤 오른쪽 위의 <strong>Sign up</strong> 버튼을 누릅니다.</p>
+<p><img alt="그림 5.1 — GitHub 가입 페이지 (예시)" src="../images/ch05/ch05-f01.png" width="560" /></p>
+<p>가입 절차는 화면 안내를 따라가면 됩니다. 순서대로 정리하면 이렇습니다.</p>
+<ol>
+<li><strong>Email</strong> — 자주 확인하는 이메일 주소를 입력합니다. 인증 메일이 오니 실제 쓰는 주소여야 합니다.</li>
+<li><strong>Password</strong> — 15자 이상, 또는 숫자와 소문자를 포함한 8자 이상이어야 합니다.</li>
+<li><strong>Username</strong> — 깃허브에서 나를 부르는 이름입니다. 프로필 주소가 <code>github.com/사용자이름</code> 이 되니 신중하게 고릅시다. 영문 소문자와 숫자, 하이픈(-)만 쓸 수 있습니다.</li>
+<li><strong>이메일 인증</strong> — 입력한 메일함으로 온 인증 코드(또는 퍼즐 확인)를 입력하면 가입이 끝납니다.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>Username은 나중에 포트폴리오 주소가 됩니다. <code>github.com/kimcoding</code> 처럼 깔끔한 이름이 <code>github.com/qwer1234asdf</code> 보다 훨씬 보기 좋습니다. 본명 로마자, 닉네임, 블로그 아이디 등 오래 써도 부끄럽지 않을 이름을 추천합니다. 나중에 바꿀 수는 있지만, 바꾸면 기존 주소 링크가 끊어질 수 있습니다.</p>
+</div>
+<p>가입을 마치면 몇 가지 설문(팀 규모, 관심사 등)이 나올 수 있는데, 아래쪽의 건너뛰기(Skip) 링크를 눌러도 아무 문제 없습니다. 유료 플랜을 권하는 화면이 나와도 마찬가지입니다 — 이 책의 모든 작업은 <strong>무료 플랜(Free)</strong>으로 충분합니다. 공개 저장소는 개수 제한 없이 만들 수 있고, 비공개 저장소도 무료로 쓸 수 있으며, 25장에서 쓸 GitHub Pages 배포까지 전부 무료 범위 안입니다. 대시보드 화면이 나오면 계정 준비 완료입니다.</p>
+<p>시간이 있다면 한 가지를 더 해 두면 좋습니다. 프로필 설정에서 <strong>2단계 인증(Two-factor authentication)</strong>을 켜는 것입니다. 비밀번호가 유출돼도 휴대폰 인증 앱의 확인이 없으면 로그인할 수 없게 막아 주는 장치입니다. 깃허브 계정에는 앞으로 여러분의 모든 코드가 쌓이게 되므로, 은행 계좌만큼은 아니어도 이메일 계정만큼은 소중히 지킬 가치가 있습니다. 오른쪽 위 프로필 아이콘 → Settings → Password and authentication 메뉴에서 켤 수 있습니다. 지금 당장 하지 않아도 이 장을 진행하는 데 지장은 없습니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>가입에 쓴 <strong>이메일 주소를 기억해 두세요.</strong> 3장에서 <code>git config user.email</code>에 설정한 주소와 깃허브 가입 주소가 같아야, 내가 올린 커밋이 내 프로필 활동(잔디밭)으로 집계됩니다. 다르게 설정했다면 <code>git config --global user.email "깃허브가입메일"</code> 로 맞춰 주면 됩니다.</p>
+</div>
+<hr />
+<h2 id="53-github-cli-winget">5.3 GitHub CLI 설치 — winget 한 줄이면 끝<a class="headerlink" href="#53-github-cli-winget" title="Permanent link">&para;</a></h2>
+<p>이번에는 설치가 아주 쉽습니다. 2장의 Node.js처럼 홈페이지에서 설치 파일을 내려받아 마법사를 몇 번씩 넘길 필요도 없습니다. 윈도우에 기본으로 들어 있는 패키지 관리자 <strong>winget</strong><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>을 쓰면 명령 한 줄로 끝납니다. 패키지 관리자란 프로그램의 다운로드·설치·업데이트를 명령어로 대신해 주는 도구입니다. 스마트폰에서 앱스토어가 하는 일을 터미널에서 한다고 생각하면 정확합니다. 명령줄에 익숙해질수록 이런 설치 방식이 오히려 클릭보다 빠르고 실수도 적다는 걸 느끼게 되실 겁니다.</p>
+<p><strong>PowerShell</strong>(또는 Windows Terminal)을 열고 아래 명령을 입력하세요.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">winget</span> <span class="n">install</span> <span class="n">GitHub</span><span class="p">.</span><span class="nb">cli</span>
+</span></code></pre></div>
+<p>처음 실행하면 약관(msstore 이용 약관) 동의를 묻는 경우가 있습니다. <code>Y</code>를 입력하고 Enter를 누르면 다운로드와 설치가 자동으로 진행됩니다.</p>
+<p><img alt="그림 5.2 — winget으로 GitHub CLI 설치 (출력 예시)" src="../images/ch05/ch05-f02.png" width="760" /></p>
+<p>설치가 끝났다면 확인해 봅시다. 여기서 <strong>중요한 한 가지</strong> — 지금 열려 있는 터미널 창은 방금 설치된 <code>gh</code>의 위치(PATH)를 아직 모릅니다. <strong>터미널을 완전히 닫고 새로 연 다음</strong> 아래를 입력하세요.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">gh</span> <span class="p">-</span><span class="n">-version</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>gh version 2.x.x (2025-xx-xx)
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>https://github.com/cli/cli/releases/tag/v2.x.x
+</span></code></pre></div>
+<p><img alt="그림 5.3 — gh 버전 확인" src="../images/ch05/ch05-f03.png" width="760" /></p>
+<p>버전 번호가 나오면 성공입니다. 숫자는 책과 달라도 괜찮습니다. 만약 <code>'gh' 용어가 cmdlet... 이름으로 인식되지 않습니다</code> 같은 빨간 오류가 나온다면, 십중팔구 터미널을 새로 열지 않은 것이니 창을 닫고 다시 열어 보세요. 그래도 안 되면 컴퓨터를 한 번 재부팅하면 대부분 해결됩니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>winget install GitHub.cli 를 실행했는데 새 터미널에서도 gh --version이 안 먹혀. 오류 메시지는 이거야: (오류 붙여넣기) 원인 찾아서 고쳐 줘.</p>
+</blockquote>
+<p>설치 문제야말로 Claude Code에게 맡기기 좋은 일입니다. 4장에서 설치한 Claude Code를 띄우고 오류 메시지를 그대로 붙여 넣으면, PATH 환경 변수를 점검하고 해결 방법을 단계별로 알려 줍니다. 오류 메시지를 요약하지 말고 <strong>통째로 복사해서</strong> 주는 게 요령입니다.</p>
+</div>
+<hr />
+<h2 id="54-gh-auth-login">5.4 gh auth login — 터미널과 깃허브 악수시키기<a class="headerlink" href="#54-gh-auth-login" title="Permanent link">&para;</a></h2>
+<p><code>gh</code>를 설치했지만 아직 <code>gh</code>는 내가 누군지 모릅니다. 이 상태로 저장소를 만들려고 하면 "먼저 로그인하라"는 안내만 돌아옵니다. 터미널이 "저는 방금 가입한 그 계정 주인입니다"라고 깃허브에 증명하는 절차가 필요합니다. 이것을 <strong>인증(authentication)</strong>이라고 하고, 명령은 <code>gh auth login</code> 입니다.</p>
+<p>과정이 여러 단계처럼 보이지만 실제로는 3분이면 끝납니다. 큰 흐름은 이렇습니다: <strong>터미널이 8자리 코드를 보여 준다 → 브라우저가 열린다 → 코드를 입력한다 → 끝.</strong> 은행 앱에서 새 기기를 등록할 때 인증 번호를 확인하는 것과 같은 원리입니다. 하나씩 따라가 봅시다.</p>
+<p>새 터미널에서 입력합니다.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">gh</span> <span class="n">auth</span> <span class="n">login</span>
+</span></code></pre></div>
+<p>그러면 터미널이 물음표(?)가 붙은 질문을 차례로 던집니다. 화살표 키(↑↓)로 고르고 Enter로 확정합니다.</p>
+<p><strong>질문 1 — 어디에 로그인할까요?</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>? Where do you use GitHub?  [Use arrows to move, type to filter]
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>&gt; GitHub.com
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  other
+</span></code></pre></div>
+<p><strong>GitHub.com</strong> 을 선택합니다. (회사에서 쓰는 별도 깃허브 서버가 아니라면 항상 이것입니다.)</p>
+<p><strong>질문 2 — Git 통신 방식은?</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>? What is your preferred protocol for Git operations on this host?
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>&gt; HTTPS
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  SSH
+</span></code></pre></div>
+<p><strong>HTTPS</strong> 를 선택합니다. SSH는 열쇠 파일을 따로 만들어야 하는 고급 방식인데, HTTPS로도 전혀 부족함이 없습니다.</p>
+<p><strong>질문 3 — Git 인증도 깃허브 계정으로?</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>? Authenticate Git with your GitHub credentials?
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&gt; Yes
+</span></code></pre></div>
+<p><strong>Yes</strong> 를 선택합니다. 이걸 Yes로 해 두면 나중에 <code>git push</code> 할 때 아이디와 비밀번호를 따로 묻지 않습니다. 아주 편해지는 옵션이니 꼭 Yes로 하세요.</p>
+<p><strong>질문 4 — 어떻게 로그인할까요?</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>? How would you like to authenticate GitHub CLI?
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>&gt; Login with a web browser
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  Paste an authentication token
+</span></code></pre></div>
+<p><strong>Login with a web browser</strong> 를 선택합니다. 토큰 방식은 문자열을 직접 발급받아 붙여 넣는 방식으로, 지금은 필요 없습니다.</p>
+<p><img alt="그림 5.4 — gh auth login 질문 4단계" src="../images/ch05/ch05-f04.png" width="760" /></p>
+<p>여기까지 답하면 터미널에 <strong>일회용 코드</strong>가 나타납니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>! First copy your one-time code: A1B2-C3D4
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Press Enter to open https://github.com/login/device in your browser...
+</span></code></pre></div>
+<p><img alt="그림 5.5 — 일회용 코드 발급" src="../images/ch05/ch05-f05.png" width="760" /></p>
+<p>이 코드(예: <code>A1B2-C3D4</code>)를 마우스로 드래그해 복사(Ctrl+C)해 두고, <strong>Enter를 누릅니다.</strong> 그러면 기본 브라우저가 자동으로 열리면서 깃허브의 <strong>Device Activation</strong> 페이지가 나타납니다. (깃허브에 로그인돼 있지 않다면 먼저 로그인 화면이 나옵니다 — 5.2절에서 만든 계정으로 로그인하세요.)</p>
+<p><img alt="그림 5.6 — 브라우저의 Device Activation 화면" src="../images/ch05/ch05-f06.jpg" width="760" /></p>
+<p>브라우저 화면의 입력 칸에 아까 복사한 코드를 붙여 넣고 <strong>Continue</strong>를 누릅니다. 이어서 "GitHub CLI가 계정에 접근하는 것을 허용할까요?"라고 묻는 <strong>Authorize github</strong> 화면이 나오면 초록색 <strong>Authorize</strong> 버튼을 누릅니다. "Congratulations, you're all set!" 같은 완료 메시지가 보이면 브라우저에서 할 일은 끝입니다.</p>
+<p>터미널로 돌아와 보세요. 몇 초 안에 이런 출력이 나타납니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>✓ Authentication complete.
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>- gh config set -h github.com git_protocol https
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>✓ Configured git protocol
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>✓ Logged in as 여러분의아이디
+</span></code></pre></div>
+<p><img alt="그림 5.7 — 인증 완료, Logged in as" src="../images/ch05/ch05-f07.png" width="760" /></p>
+<p><code>Logged in as</code> 뒤에 내 아이디가 나오면 연결 성공입니다. 방금 무슨 일이 일어난 걸까요? 브라우저에서 Authorize를 누르는 순간, 깃허브는 "이 터미널을 믿어도 된다"는 증표인 <strong>접근 토큰</strong>을 발급해서 <code>gh</code>에게 건네줍니다. <code>gh</code>는 이 토큰을 내 컴퓨터에 안전하게 저장해 두고, 이후 깃허브와 통신할 때마다 비밀번호 대신 토큰을 내밉니다. 비밀번호는 브라우저의 깃허브 화면에 딱 한 번 입력했을 뿐, 터미널에는 흔적도 남지 않습니다. 코드를 브라우저에 입력하는 이 방식이 번거로워 보여도 실은 비밀번호를 여기저기 흘리지 않기 위한 안전 설계인 셈입니다.</p>
+<p>이 인증은 한 번 해 두면 계속 유지됩니다. 컴퓨터를 껐다 켜도 다시 로그인할 필요가 없습니다. 다만 컴퓨터를 새로 장만하거나 포맷하면 토큰도 사라지므로 그때는 <code>gh auth login</code>을 다시 하면 됩니다. 언제든 상태가 궁금하면 <code>gh auth status</code> 를 입력해 보세요. 어떤 계정으로 로그인돼 있는지, 어떤 프로토콜을 쓰는지 보여 줍니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>일회용 코드에는 <strong>유효 시간</strong>이 있습니다. 코드를 받아 놓고 한참 뒤에 입력하면 만료돼서 실패합니다. 만료됐다면 당황하지 말고 터미널에서 <code>gh auth login</code> 을 처음부터 다시 실행하면 새 코드가 나옵니다. 또 하나 — 인증 과정에서 깃허브 비밀번호는 <strong>브라우저의 github.com 화면에만</strong> 입력합니다. 터미널이 비밀번호 자체를 묻는 일은 없습니다.</p>
+</div>
+<hr />
+<h2 id="55-gh-repo-create-git-push">5.5 첫 원격 저장소 — gh repo create와 git push<a class="headerlink" href="#55-gh-repo-create-git-push" title="Permanent link">&para;</a></h2>
+<p>연결이 됐으니 기념으로 첫 저장소를 깃허브에 올려 봅시다. 지도 앱은 8장부터 만들 것이므로, 여기서는 연습용 미니 저장소로 전체 흐름만 경험합니다. 흐름은 네 박자입니다. <strong>폴더 만들기 → git init(지역 저장소) → commit(기록) → gh repo create(깃허브에 올리기).</strong></p>
+<p>바이브코딩답게, 이번에는 Claude Code에게 통째로 시켜 보겠습니다. 연습 폴더를 하나 만들어 Claude Code를 띄운 뒤 이렇게 말합니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>hello-github 라는 연습용 저장소를 만들고 싶어. 이 폴더에 나를 소개하는 README.md를 한국어로 짧게 만들고, git 저장소로 초기화해서 첫 커밋을 한 다음, gh로 내 깃허브에 public 리포로 올려 줘.</p>
+</blockquote>
+</div>
+<p>Claude Code는 권한을 물어 가며(4장에서 배운 그 확인 창입니다) 대략 다음 명령들을 실행합니다. AI가 실행하는 명령을 하나씩 함께 읽어 봅시다. 우리가 직접 칠 일은 없지만, <strong>무슨 일이 벌어지는지는 알고 있어야</strong> 에이전트를 지휘할 수 있습니다.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">git</span> <span class="n">init</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">git</span> <span class="n">add</span> <span class="n">README</span><span class="p">.</span><span class="nb">md</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">git</span> <span class="n">commit</span> <span class="n">-m</span> <span class="s2">"첫 커밋: README 추가"</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">gh</span> <span class="n">repo</span> <span class="n">create</span> <span class="n">hello-github</span> <span class="p">-</span><span class="n">-public</span> <span class="p">-</span><span class="n">-source</span><span class="p">=.</span> <span class="p">-</span><span class="n">-push</span>
+</span></code></pre></div>
+<p>한 줄씩 뜯어 보면 이렇습니다.</p>
+<ul>
+<li><code>git init</code> — 이 폴더를 Git 저장소로 만듭니다(3장 복습). 아직 내 컴퓨터 안 이야기입니다.</li>
+<li><code>git add</code> / <code>git commit</code> — README 파일을 기록장에 올리고 "첫 커밋"이라는 이름으로 역사에 도장을 찍습니다.</li>
+<li><code>gh repo create hello-github --public --source=. --push</code> — 이 한 줄이 오늘의 주인공입니다. 깃허브에 <code>hello-github</code>라는 저장소를 만들고(<code>--public</code>: 누구나 볼 수 있게), 현재 폴더(<code>--source=.</code>)를 그 저장소와 연결한 뒤, 지금까지의 커밋을 즉시 올립니다(<code>--push</code>).</li>
+</ul>
+<p>여기서 개념 하나만 짚고 갑시다. 내 컴퓨터의 저장소와 깃허브의 저장소가 연결되면, 깃허브 쪽을 <strong>원격 저장소(remote)</strong>라고 부르고 보통 <strong>origin</strong>이라는 별명을 붙입니다. 이후로 커밋을 깃허브에 올릴 때는 이렇게 씁니다.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">git</span> <span class="n">push</span>
+</span></code></pre></div>
+<p><code>push</code>는 "밀어 올리다"라는 뜻 그대로, 내 컴퓨터에 쌓인 새 커밋을 origin(깃허브)으로 밀어 올리는 명령입니다. 반대로 깃허브의 내용을 내 컴퓨터로 끌어오는 명령은 <code>git pull</code>입니다. 올릴 땐 push, 받을 땐 pull — 이 두 단어만 기억하면 됩니다.</p>
+<p>정말 올라갔는지 눈으로 확인해 봅시다. 터미널에 아래를 입력하면 방금 만든 저장소가 브라우저로 열립니다.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">gh</span> <span class="n">repo</span> <span class="n">view</span> <span class="p">-</span><span class="n">-web</span>
+</span></code></pre></div>
+<p><img alt="그림 5.8 — 깃허브에 올라간 첫 저장소 (구성 예시)" src="../images/ch05/ch05-f08.png" width="820" /></p>
+<p>브라우저에 <code>github.com/내아이디/hello-github</code> 페이지가 뜨고, 방금 만든 README가 그대로 보이면 성공입니다. 축하합니다 — 여러분의 코드가 처음으로 인터넷에 올라갔습니다. 저장소 페이지를 잠깐 둘러봅시다. 가운데에 파일 목록이 있고, 그 아래에 README 내용이 자동으로 펼쳐져 보입니다. 파일 목록 위의 "1 commit" 같은 표시를 누르면 커밋 역사를 볼 수 있습니다. 앞으로 커밋이 쌓일수록 이 역사가 길어지고, 프로필의 잔디밭(기여 그래프)에도 초록 칸이 하나씩 채워집니다.</p>
+<p>이제 이 흐름이 이 책 전체에서 습관처럼 반복됩니다. 작업이 하나 끝날 때마다 <strong>커밋하고(commit), 밀어 올리는(push)</strong> 두 박자. 저는 실제로 기능 하나를 바이브코딩으로 완성할 때마다 Claude Code에게 "커밋하고 푸시해 줘"라고 말하는 것을 마무리 인사처럼 씁니다. 하루 작업이 날아가는 최악의 사고는, 이 두 박자 습관만 있으면 절대 일어나지 않습니다. 24장에서는 지도 웹앱을 이 방법 그대로 올리고, 25장에서는 거기서 바로 배포까지 갑니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>연습이 끝난 <code>hello-github</code> 저장소는 지워도 됩니다. 깃허브 저장소 페이지에서 <strong>Settings</strong> 탭 맨 아래 Danger Zone의 <strong>Delete this repository</strong>를 누르면 됩니다. 실수 삭제를 막으려고 저장소 이름을 그대로 입력해야 지워지게 되어 있으니, 반대로 말하면 웬만해선 실수로 지워질 일도 없습니다. 그냥 둬도 물론 괜찮습니다.</p>
+</div>
+<hr />
+<h2 id="56">5.6 마무리<a class="headerlink" href="#56" title="Permanent link">&para;</a></h2>
+<p>이제 우리 작업 환경의 마지막 퍼즐이 맞춰졌습니다. Node.js(2장) 위에서 도구들이 돌고, Git(3장)이 역사를 기록하고, Claude Code(4장)가 코드를 짜고, GitHub CLI(5장)가 그 결과를 클라우드로 올립니다. 앞으로 어떤 장에서든 "지금까지 작업 깃허브에 올려 줘" 한마디면 커밋과 푸시가 자동으로 이루어지는 환경이 완성된 것입니다. 터미널에서 <code>gh auth status</code> 한 줄로 언제든 연결 상태를 확인할 수 있다는 것도 기억해 두세요.</p>
+<div class="admonition abstract">
+<p class="admonition-title">📌 핵심 요약</p>
+<ul>
+<li><strong>GitHub</strong>는 Git 저장소의 클라우드 백업이자 포트폴리오, 그리고 배포(25장)의 발판입니다.</li>
+<li><strong>GitHub CLI(<code>gh</code>)</strong>는 <code>winget install GitHub.cli</code> 한 줄로 설치하며, 설치 후에는 터미널을 새로 열어야 합니다.</li>
+<li><strong><code>gh auth login</code></strong>은 GitHub.com → HTTPS → Yes → 브라우저 로그인 순서로 답하고, 일회용 코드를 브라우저에 입력하면 끝납니다. 인증은 한 번이면 계속 유지됩니다.</li>
+<li><strong><code>gh repo create 이름 --public --source=. --push</code></strong>로 현재 폴더를 깃허브 저장소로 만들어 즉시 올릴 수 있습니다.</li>
+<li>올릴 땐 <strong><code>git push</code></strong>, 받을 땐 <strong><code>git pull</code></strong>. 깃허브 쪽 저장소의 별명은 <strong>origin</strong>입니다.</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">🤔 생각해보기</p>
+<p>Q1. Git과 GitHub의 차이를 한 문장으로 설명한다면 어떻게 말할 수 있을까요?</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>Q2. <code>gh auth login</code> 인증을 컴퓨터마다 다시 해야 하는 이유는 무엇일까요? (힌트: "이 컴퓨터의 터미널"이 증명하는 것은 무엇인가요?)</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">✏️ 연습 문제</p>
+<ol>
+<li><code>gh auth status</code>를 실행해 출력에서 ① 로그인된 계정 이름 ② Git 통신 프로토콜(https) 두 가지를 찾아보세요.</li>
+<li><code>hello-github</code> 저장소의 README.md를 수정한 뒤, Claude Code에게 "변경 사항 커밋하고 푸시해 줘"라고 시켜 보세요. 그리고 브라우저에서 새로고침해 수정이 반영됐는지 확인해 보세요.</li>
+<li><code>gh repo view --web</code> 대신 <code>gh repo list</code>를 실행하면 무엇이 나오는지 확인해 보세요.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">🔎 더 찾아보기</p>
+<ul>
+<li><code>SSH 키 인증</code> — HTTPS 대신 열쇠 파일 쌍으로 인증하는 방식. 서버 작업이 많아지면 배울 가치가 있습니다.</li>
+<li><code>gh pr</code> — 협업의 핵심인 풀 리퀘스트(Pull Request)를 터미널에서 만들고 리뷰하는 명령 모음.</li>
+<li><code>Personal Access Token</code> — 브라우저 없이 문자열 토큰으로 인증하는 방법. CI 서버 등 자동화 환경에서 쓰입니다.</li>
+<li><code>프라이빗 저장소</code> — <code>--public</code> 대신 <code>--private</code>을 붙이면 나만 볼 수 있는 저장소가 됩니다.</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>다음 장 예고</strong> — 도구가 모두 갖춰졌습니다. 6장에서는 저자가 실제로 쓰는 지휘소, <strong>Orca</strong>를 소개합니다. 여러 개의 Claude Code 에이전트를 워크트리라는 독립된 작업 공간에 하나씩 앉혀 두고 동시에 일을 시키는, 한 단계 위의 바이브코딩을 경험해 봅니다.</p>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>GitHub(깃허브) — 2008년 시작된 세계 최대 코드 호스팅 서비스. 2018년부터 마이크로소프트 소유이며, 공개 저장소는 무료로 무제한 사용할 수 있습니다. https://github.com&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>winget — 윈도우 10/11에 기본 포함된 명령줄 패키지 관리자(Windows Package Manager). 스마트폰의 앱스토어처럼 명령 한 줄로 프로그램을 설치·업데이트할 수 있습니다.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

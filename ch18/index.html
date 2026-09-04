@@ -1,0 +1,2019 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼">
+      
+      
+        <meta name="author" content="YLBook">
+      
+      
+        <link rel="canonical" href="https://shain1912.github.io/vibecoding-map-book/ch18/">
+      
+      
+        <link rel="prev" href="../ch17/">
+      
+      
+        <link rel="next" href="../ch19/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>18장 사이드바 장소 목록 - 바이브코딩으로 만드는 나만의 지도 웹</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#18" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-header__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            바이브코딩으로 만드는 나만의 지도 웹
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              18장 사이드바 장소 목록
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-nav__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    바이브코딩으로 만드는 나만의 지도 웹
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0장 이 책에서 만드는 것
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1부 바이브코딩 준비운동
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1부 바이브코딩 준비운동
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2장 Node.js 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3장 Git for Windows 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4장 Claude Code 설치하고 길들이기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2부 카카오 지도 첫걸음
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2부 카카오 지도 첫걸음
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7장 카카오 개발자 계정과 앱 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8장 Vite로 프로젝트 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9장 첫 지도 띄우기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10장 지도 다루기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3부 나만의 장소 지도 만들기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3부 나만의 장소 지도 만들기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11장 마커 찍기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12장 장소 데이터 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13장 커스텀 오버레이 말풍선
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14장 카테고리 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16장 클릭·검색으로 장소 추가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17장 localStorage 저장
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 목록도 상태의 그림자다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#182-map-join-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 map과 join — 배열을 HTML로 바꾸는 정석
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#183" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 빈 목록에도 할 말이 있다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#184" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 목록 클릭 → 지도가 날아간다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#185" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 구독 패턴 — 데이터가 바뀌면 화면이 따라온다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#186" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19장 상세 패널
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4부 한 단계 더
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4부 한 단계 더
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21장 URL로 지도 공유
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5부 세상에 공개하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5부 세상에 공개하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24장 GitHub에 올리기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25장 GitHub Pages 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26장 README와 자랑하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    부록
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 A 프롬프트 템플릿 모음
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 B 트러블슈팅 & 치트시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 목록도 상태의 그림자다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#182-map-join-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 map과 join — 배열을 HTML로 바꾸는 정석
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#183" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 빈 목록에도 할 말이 있다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#184" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 목록 클릭 → 지도가 날아간다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#185" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 구독 패턴 — 데이터가 바뀌면 화면이 따라온다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#186" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="18">18장 사이드바 장소 목록<a class="headerlink" href="#18" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">이 장에서 배우는 것</p>
+<ul>
+<li>배열의 <code>map()</code>과 <code>join()</code>으로 데이터 배열을 HTML 목록으로 바꾸는 정석 패턴을 익힙니다</li>
+<li>목록 항목을 클릭하면 지도가 그 장소로 날아가 말풍선을 여는 <code>focusPlace()</code> 연동을 만듭니다</li>
+<li>데이터가 바뀌면 화면이 저절로 갱신되는 <strong>구독(subscribe) 패턴</strong>을 완성합니다</li>
+<li>목록이 비었을 때 사용자를 안내하는 <strong>빈 상태(empty state)</strong> UI를 배웁니다</li>
+</ul>
+</div>
+<hr />
+<p>17장까지 오면서 우리 앱은 어느새 "진짜 앱"의 꼴을 갖췄습니다. 지도를 클릭하거나 검색해서 장소를 추가할 수 있고, 추가한 장소는 localStorage에 저장되어 새로고침해도 사라지지 않습니다. 그런데 며칠 쓰다 보면 묘한 답답함이 생깁니다. "내가 지금까지 저장한 장소가 몇 개더라? 지난주에 넣어 둔 그 카페 이름이 뭐였지?" 답을 알려면 지도를 이리저리 끌고 다니며 핀을 하나씩 눌러 봐야 합니다. 지도는 <strong>어디에 있는지</strong>를 보여주는 데는 최고지만, <strong>무엇이 있는지</strong>를 훑어보는 데는 영 서툴거든요.</p>
+<p>카카오맵 앱을 열어 보세요. 지도 옆이나 아래에 항상 <strong>목록</strong>이 함께 있습니다. 음식점을 검색하면 왼쪽엔 이름·별점·주소가 줄줄이 나오는 리스트, 오른쪽엔 핀이 찍힌 지도가 나란히 서고, 목록을 클릭하면 지도가 그리로 움직입니다. 지도와 목록은 같은 데이터를 두 가지 방식으로 보여주는 단짝입니다. 이번 장에서 우리 앱에도 이 단짝을 만들어 줍니다.</p>
+<p>그리고 이 장에는 보너스가 하나 있습니다. 17장에서 <code>store.js</code>를 읽을 때 "18장의 예고편"이라며 미뤄 둔 수수께끼의 코드, 기억하시나요? 텅 빈 명단 <code>listeners</code> 배열과, <code>save()</code> 끝에서 그 명단을 향해 헛방송을 하던 <code>forEach</code> 한 줄 말입니다. 오늘 그 명단에 드디어 이름이 올라갑니다. 이름하여 <strong>구독 패턴</strong> — 데이터가 바뀌는 순간 지도와 목록이 <strong>알아서 동시에</strong> 갱신되게 만드는, 이 앱 구조의 마지막 퍼즐 조각입니다. 16장에서 "추가했으면 직접 알려라"라며 손으로 놓았던 <code>notifyChange</code> 임시 다리도 오늘 이 패턴으로 승격되면서 우아하게 철거됩니다.</p>
+<h2 id="181">18.1 목록도 상태의 그림자다<a class="headerlink" href="#181" title="Permanent link">&para;</a></h2>
+<p>새 기능이지만 설계는 새로 할 것이 없습니다. 14장에서 세운 원칙을 그대로 한 번 더 적용하면 되거든요. <strong>진실은 상태에 있고, 화면은 상태의 그림자다.</strong> 지도 위의 마커들이 <code>store</code>의 장소 배열을 그린 결과물이었듯, 사이드바의 목록도 <strong>같은 배열을 다른 모양으로 그린 결과물</strong>일 뿐입니다.</p>
+<p><img alt="그림 18.1 — 하나의 데이터, 두 개의 화면: store를 지도(renderPlaces)와 목록(renderList)이 각자 그린다" src="../images/ch18/ch18-f01.png" width="760" /></p>
+<p>그림 18.1의 구조에서 눈여겨볼 점은 지도와 목록이 <strong>서로를 전혀 모른다</strong>는 것입니다. 목록이 지도에게 "나 갱신했으니 너도 갱신해"라고 말하지 않습니다. 둘 다 그저 store만 바라보고, store가 바뀌면 각자 자기 화면을 다시 그립니다. 초보 시절에 흔히 저지르는 실수가 "장소를 추가하는 코드에서 지도도 고치고, 목록도 고치고, 개수 표시도 고치고…" 하는 식으로 화면 조각들을 일일이 챙기는 것인데, 화면 조각이 하나 늘 때마다 고칠 곳이 늘어나 금방 지옥이 됩니다. 우리는 반대로 갑니다. 데이터를 바꾸는 쪽은 데이터만 바꾸고, 화면들은 각자 알아서 따라오게 합니다. 그 "알아서 따라오게" 하는 장치가 이 장 후반의 구독 패턴입니다.</p>
+<p>목록이 그려질 자리부터 마련합시다. 지금 <code>index.html</code>의 사이드바에는 목록을 담을 태그가 아직 없으니, 필터 바 아래에 빈 <code>&lt;ul&gt;</code> 하나를 추가하는 것으로 이 장을 시작합니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>index.html 사이드바의 필터 바(#filter-bar) 바로 아래에 장소 목록이 들어갈 빈 ul을 추가해줘. id는 place-list로 하고, 내용은 자바스크립트로 채울 거니까 비워둬.</p>
+</blockquote>
+</div>
+<p>Claude Code가 <code>index.html</code>에 추가한 마크업입니다. 필터 바와 17장에서 만든 내보내기/가져오기 푸터 사이, 딱 한 줄입니다.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"filter-btn"</span> <span class="na">data-category</span><span class="o">=</span><span class="s">"date"</span><span class="p">&gt;</span>💕 데이트<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">"place-list"</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>   <span class="cm">&lt;!-- ← 오늘 추가된 목록 자리 --&gt;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">&lt;</span><span class="nt">footer</span> <span class="na">id</span><span class="o">=</span><span class="s">"sidebar-footer"</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>저장하고 새로고침해도 화면에는 아무 변화가 없습니다. 당연합니다. 빈 <code>&lt;ul&gt;</code>은 눈에 보이지 않으니까요. 이 텅 빈 그릇을 채우는 것이 오늘 할 일입니다.</p>
+<h2 id="182-map-join-html">18.2 map과 join — 배열을 HTML로 바꾸는 정석<a class="headerlink" href="#182-map-join-html" title="Permanent link">&para;</a></h2>
+<p>Claude Code에게 일을 시켜 봅시다. 원하는 목록의 생김새를 구체적으로 말하는 것이 포인트입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>sidebar.js에 renderList() 함수를 만들어서 #place-list에 장소 목록을 그려줘. 필터가 적용된 장소들(filteredPlaces)을 대상으로 하고, 항목마다 카테고리 이모지(카테고리 색을 연하게 깐 동그란 배경), 장소 이름(굵게), 카테고리 이름과 별점(★ 반복, 작은 회색 글씨)을 보여줘. 각 li에는 data-id로 장소 id를 달아줘. 장소 이름은 escapeHtml로 감싸는 것 잊지 말고. 장소가 하나도 없으면 "장소가 없습니다. 검색하거나 지도를 클릭해 추가해 보세요!"라는 안내 문구를 보여줘.</p>
+</blockquote>
+</div>
+<p>Claude Code가 <code>sidebar.js</code>에 추가한 <code>renderList()</code>입니다. 이 장의 심장이니 천천히 읽어 봅시다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./store.js'</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">categoryOf</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./categories.js'</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">escapeHtml</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./mapView.js'</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">renderList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">ul</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'place-list'</span><span class="p">);</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">places</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">filteredPlaces</span><span class="p">();</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">places</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nx">ul</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'&lt;li class="empty"&gt;장소가 없습니다.&lt;br&gt;검색하거나 지도를 클릭해 추가해 보세요!&lt;/li&gt;'</span><span class="p">;</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nx">ul</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">places</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">categoryOf</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">category</span><span class="p">);</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">stars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'★'</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">rating</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="sb">        &lt;li class="place-item" data-id="</span><span class="si">${</span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">"&gt;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="sb">          &lt;span class="place-emoji" style="background:</span><span class="si">${</span><span class="nx">cat</span><span class="p">.</span><span class="nx">color</span><span class="si">}</span><span class="sb">22"&gt;</span><span class="si">${</span><span class="nx">cat</span><span class="p">.</span><span class="nx">emoji</span><span class="si">}</span><span class="sb">&lt;/span&gt;</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="sb">          &lt;span class="place-info"&gt;</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="sb">            &lt;strong&gt;</span><span class="si">${</span><span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span><span class="si">}</span><span class="sb">&lt;/strong&gt;</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="sb">            &lt;small&gt;</span><span class="si">${</span><span class="nx">cat</span><span class="p">.</span><span class="nx">label</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">stars</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'· '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">stars</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="sb">&lt;/small&gt;</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="sb">          &lt;/span&gt;</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="sb">        &lt;/li&gt;`</span><span class="p">;</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="p">})</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>핵심 구조는 단 세 단계입니다. <strong>배열 → <code>map()</code>으로 HTML 문자열 배열 → <code>join('')</code>으로 하나의 큰 문자열 → <code>innerHTML</code>에 대입.</strong> 자바스크립트로 목록을 그리는 가장 유명한 관용구라서, AI에게 "배열을 목록으로 그려줘"라고 시키면 열에 아홉은 이 모양의 코드가 나옵니다. 하나씩 뜯어 봅시다.</p>
+<p><strong><code>map()</code></strong> — 14장에서 배운 <code>filter()</code>의 형제입니다. <code>filter()</code>가 시험을 통과한 요소만 골라내는 체라면, <code>map()</code>은 <strong>모든 요소를 다른 모습으로 변신시키는 공장</strong>입니다. 요소 수는 그대로 유지하면서, 각 요소에 함수를 적용한 결과로 새 배열을 만듭니다. 콘솔에서 감을 잡아 보세요.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">[</span><span class="s1">'광장시장'</span><span class="p">,</span><span class="w"> </span><span class="s1">'성수동 카페거리'</span><span class="p">].</span><span class="nx">map</span><span class="p">((</span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="sb">`&lt;li&gt;</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">&lt;/li&gt;`</span><span class="p">);</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1">// → ['&lt;li&gt;광장시장&lt;/li&gt;', '&lt;li&gt;성수동 카페거리&lt;/li&gt;']</span>
+</span></code></pre></div>
+<p>장소 객체 배열이 들어가서 <code>&lt;li&gt;...&lt;/li&gt;</code> 문자열 배열이 되어 나옵니다. 데이터가 화면 조각으로 변신하는 순간이죠.</p>
+<p><strong><code>join('')</code></strong> — <code>map()</code>이 돌려준 것은 아직 문자열의 <strong>배열</strong>입니다. <code>innerHTML</code>에는 배열이 아니라 문자열 하나를 넣어야 하므로, <code>join('')</code>으로 배열의 모든 요소를 이어 붙여 긴 문자열 하나로 만듭니다. 괄호 안의 <code>''</code>는 "이어 붙일 때 사이에 아무것도 끼우지 말라"는 뜻입니다. 이걸 빼먹고 <code>join()</code>이라고만 쓰면 기본 구분자인 쉼표가 끼어들어서, 목록 항목 사이마다 정체불명의 쉼표가 찍히는 우스운 화면이 됩니다. AI가 짠 코드를 검토할 때 한 번쯤 확인해 볼 만한 지점입니다.</p>
+<p><strong>백틱(<code>`</code>) 문자열</strong> — <code>&lt;li&gt;...&lt;/li&gt;</code> 부분을 감싼 것은 따옴표가 아니라 백틱입니다. <strong>템플릿 리터럴</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>이라고 부르는 이 문법은 두 가지 특권이 있습니다. 문자열 안에서 줄바꿈을 마음껏 할 수 있고, <code>${...}</code> 자리에 변수나 표현식을 끼워 넣을 수 있습니다. HTML 조각을 만들 때 이만한 도구가 없죠. <code>${p.id}</code>, <code>${cat.emoji}</code>, <code>${escapeHtml(p.name)}</code>이 전부 이 문법입니다.</p>
+<p><strong><code>data-id="${p.id}"</code></strong> — 14장의 필터 버튼에서 만난 데이터 속성이 다시 등장했습니다. 각 <code>&lt;li&gt;</code>에 자기가 어떤 장소를 나타내는지 이름표를 달아 두는 것입니다. 잠시 뒤 클릭 처리에서 "어느 항목이 눌렸는가"를 알아내는 열쇠가 됩니다.</p>
+<p><strong><code>'★'.repeat(p.rating || 0)</code></strong> — 문자열의 <code>repeat()</code> 메서드는 문자열을 주어진 횟수만큼 반복합니다. 별점이 3이면 <code>'★★★'</code>가 되죠. 뒤에 붙은 <code>|| 0</code>은 방어 코드입니다. 아직 별점을 매기지 않은 장소는 <code>rating</code>이 <code>undefined</code>일 수 있는데, <code>undefined</code>를 <code>repeat()</code>에 넣으면 에러가 납니다. <code>|| 0</code>은 "값이 없으면 0으로 치라"는 안전장치입니다. 그리고 목록 쪽 템플릿의 <code>${stars ? '· ' + stars : ''}</code>는 별이 하나라도 있을 때만 가운뎃점과 함께 표시하는 잔손질입니다. 별점 0개짜리 장소에 점만 덩그러니 찍히는 것을 막는 거죠. 이런 한 끗이 UI의 완성도를 만듭니다.</p>
+<p><strong><code>escapeHtml(p.name)</code></strong> — 13장과 15장에서 약속한 규칙, "사용자가 입력했을 수 있는 문자열을 <code>innerHTML</code>에 넣을 땐 반드시 이스케이프"가 여기서도 지켜지고 있습니다. 16장부터 장소 이름은 사용자가 직접 입력한 값입니다. 이 규칙이 왜 목숨줄인지는 예고대로 19장에서 XSS라는 이름과 함께 파헤칩니다.</p>
+<p><code>style.css</code>에는 목록 스타일이 추가됐습니다.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">#</span><span class="nn">place-list</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">list-style</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"> </span><span class="k">flex</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="k">overflow-y</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span><span class="w"> </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">.</span><span class="nc">place-item</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span><span class="w"> </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span><span class="w"> </span><span class="k">gap</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">.</span><span class="nc">place-item</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#f0fdfa</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p><code>#place-list</code>의 <code>flex: 1</code>과 <code>overflow-y: auto</code> 조합이 실속 있는 부분입니다. 사이드바 안에서 남는 세로 공간을 목록이 전부 차지하되, 장소가 많아져 넘치면 <strong>목록 안에서만</strong> 스크롤이 생깁니다. 사이드바 전체가 밀려 내려가지 않죠. <code>cursor: pointer</code>와 <code>:hover</code> 배경색은 "이거 클릭할 수 있어요"라는 무언의 신호입니다. 아직 클릭 기능을 달기 전이지만, AI가 다음 단계를 내다보고 미리 깔아 둔 셈입니다.</p>
+<p>저장하고 확인해 봅시다. <code>main.js</code>에서 <code>initSidebar()</code>가 호출될 때 <code>renderList()</code>도 한 번 실행되도록 연결되어 있다면(잠시 뒤 전체 코드에서 확인합니다), 사이드바 필터 바 아래로 장소들이 카드처럼 줄지어 나타납니다.</p>
+<p><img alt="그림 18.2 — 완성된 사이드바 장소 목록: 이모지·이름·카테고리·별점이 줄지어 표시된다" src="../images/ch18/ch18-f02.jpg" width="760" /></p>
+<p>목록이 떴으니 14장의 필터 버튼과도 이어 줄 차례입니다. 지금 ☕ 카페를 눌러 보면 지도는 걸러지는데 <strong>목록은 그대로</strong>일 겁니다. 14장의 클릭 핸들러가 지도 갱신 콜백(<code>onFilterChange</code>)만 부를 뿐, 오늘 태어난 <code>renderList()</code>의 존재를 아직 모르기 때문이죠. 14장에서 "18장에서 목록 갱신 한 줄이 추가된다"고 예고했던 바로 그 한 줄을 지금 넣습니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>sidebar.js의 필터 버튼 클릭 핸들러에서, active 클래스를 옮긴 다음에 renderList()도 호출해줘. 필터가 바뀌면 지도뿐 아니라 목록도 현재 필터에 맞게 다시 그려지게.</p>
+</blockquote>
+</div>
+<p><code>initSidebar()</code>의 필터 부분이 이렇게 바뀝니다. 추가된 것은 <code>renderList()</code> 한 줄뿐입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.filter-btn'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">btn</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">currentFilter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">btn</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">category</span><span class="p">;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.filter-btn'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">b</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">'active'</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">btn</span><span class="p">));</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nx">renderList</span><span class="p">();</span><span class="w">      </span><span class="c1">// ← 오늘 추가: 내 화면(목록)은 직접 다시 그린다</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nx">onFilterChange</span><span class="p">();</span><span class="w">  </span><span class="c1">// 남의 화면(지도)은 여전히 main.js의 콜백에게</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>주석 두 줄이 14장에서 예고한 구분 그대로입니다. 목록은 sidebar.js 자신의 화면이니 콜백 없이 직접 부르고, 지도는 여전히 콜백 너머 조립 담당 <code>main.js</code>의 몫입니다. 모듈의 경계는 그대로인 채 한 줄만 늘어난 것이죠.</p>
+<p>이제 필터 버튼을 눌러 보세요. <code>renderList()</code>가 <code>store.all()</code>이 아니라 <code>filteredPlaces()</code>를 데이터원으로 삼았기 때문에, ☕ 카페를 누르면 <strong>지도의 마커와 사이드바의 목록이 함께</strong> 카페만 남습니다. 필터라는 상태 하나를 두 화면이 공유하는, 단방향 구조의 힘이 눈에 보이는 순간입니다.</p>
+<p><img alt="그림 18.3 — 필터와 목록의 동기화: ☕ 카페 필터를 누르면 마커와 목록이 함께 걸러진다" src="../images/ch18/ch18-f03.jpg" width="760" /></p>
+<h2 id="183">18.3 빈 목록에도 할 말이 있다<a class="headerlink" href="#183" title="Permanent link">&para;</a></h2>
+<p><code>renderList()</code> 앞부분의 <code>if (places.length === 0)</code> 분기를 다시 봅시다. 장소가 하나도 없으면 목록 대신 안내 문구를 보여주고 곧바로 <code>return</code>으로 함수를 끝냅니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">places</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nx">ul</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'&lt;li class="empty"&gt;장소가 없습니다.&lt;br&gt;검색하거나 지도를 클릭해 추가해 보세요!&lt;/li&gt;'</span><span class="p">;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>"장소가 없으면 그냥 아무것도 안 그리면 되는 것 아닌가?" 싶을 수 있습니다. 기능만 보면 맞는 말입니다. 하지만 사용자 입장에서 상상해 보세요. 처음 앱을 연 사람, 혹은 필터를 눌렀더니 결과가 0개인 사람 앞에 <strong>그냥 하얀 여백</strong>만 있다면 어떤 생각이 들까요? "고장 났나?" "로딩 중인가?" 텅 빈 화면은 침묵이고, 침묵은 사용자를 불안하게 합니다.</p>
+<p>그래서 잘 만든 앱들은 비어 있는 화면을 그냥 두지 않습니다. 이것을 <strong>빈 상태(empty state)</strong> 디자인이라고 부릅니다. 좋은 빈 상태 문구는 두 가지를 말해 줍니다. 첫째, <strong>지금 상황</strong>("장소가 없습니다" — 고장이 아니라 원래 빈 것임). 둘째, <strong>다음 행동</strong>("검색하거나 지도를 클릭해 추가해 보세요!" — 이걸 채우려면 뭘 하면 되는지). 우리 문구가 정확히 이 두 문장으로 이루어져 있죠. 카카오톡의 "친구와 대화를 시작해 보세요", 메일 앱의 "받은 편지함이 비어 있어요" 같은 문구가 전부 같은 원리입니다.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">.</span><span class="nc">empty</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span><span class="w"> </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--muted</span><span class="p">);</span><span class="w"> </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.7</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p>스타일도 의도가 있습니다. 흐린 색(<code>--muted</code>)과 넉넉한 여백으로 "이건 데이터가 아니라 안내문"임을 시각적으로 구분합니다. 진짜 목록 항목처럼 진하게 그리면 사용자가 클릭하려 들 테니까요.</p>
+<p>확인해 봅시다. 필터에서 결과가 0개가 되게 만들면 됩니다. 예를 들어 아직 데이트 장소를 하나도 추가하지 않았다면 💕 데이트 필터를 눌러 보세요. 또는 19장을 미리 맛보는 셈 치고, 개발자도구 콘솔에서 <code>localStorage.clear()</code>를 입력하고 새로고침하면 저장된 장소가 모두 사라져 완전한 빈 목록을 볼 수 있습니다(17장에서 만든 내보내기로 백업해 두셨죠? 가져오기로 언제든 복구할 수 있으니 겁내지 않아도 됩니다).</p>
+<p><img alt="그림 18.4 — 빈 목록 안내: 텅 빈 여백 대신 상황과 다음 행동을 알려준다" src="../images/ch18/ch18-f04.jpg" width="760" /></p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>빈 상태는 목록만의 문제가 아닙니다. 검색 결과가 0건일 때, 이미지를 불러오는 중일 때, 네트워크가 끊겼을 때 — 화면이 "정상 데이터"가 아닌 모든 순간이 디자인 대상입니다. AI에게 화면을 시킬 때 "비었을 때/실패했을 때는 이렇게 보여줘"까지 말해 주는 습관을 들이면, 앱의 완성도가 눈에 띄게 달라집니다. 프롬프트에 예외 상황 한 줄을 얹는 것, 그게 프로와 아마추어 화면의 차이를 만듭니다.</p>
+</div>
+<h2 id="184">18.4 목록 클릭 → 지도가 날아간다<a class="headerlink" href="#184" title="Permanent link">&para;</a></h2>
+<p>이제 목록과 지도를 잇습니다. 목표는 카카오맵과 같은 경험입니다. 목록에서 "광장시장"을 클릭하면 지도가 광장시장으로 미끄러지듯 이동하고, 확대되면서, 말풍선까지 활짝 열리는 것.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>목록 항목을 클릭하면 지도가 그 장소로 이동하게 해줘. renderList에서 각 항목에 클릭 이벤트를 달아서 data-id를 콜백으로 넘기고, main.js에서는 그 id로 store에서 장소를 찾아 mapView의 focusPlace를 호출해줘. focusPlace는 지도를 레벨 4로 확대하면서 panTo로 부드럽게 이동하고, 그 장소의 말풍선을 열어줘.</p>
+</blockquote>
+</div>
+<p><code>renderList()</code>의 끝에 코드가 몇 줄 붙었습니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">ul</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.place-item'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">li</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nx">li</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">onSelect</span><span class="p">(</span><span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">));</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">});</span>
+</span></code></pre></div>
+<p><code>innerHTML</code>로 목록을 그린 <strong>직후에</strong> 이벤트를 다는 순서가 중요합니다. <code>innerHTML</code>에 새 값을 대입하면 기존 요소들은 통째로 버려지고 문자열로부터 완전히 새 요소들이 태어납니다. 예전 요소에 달아 뒀던 이벤트 리스너도 요소와 함께 사라지죠. 그래서 목록을 다시 그릴 때마다 새 요소들에게 이벤트도 다시 달아 줘야 합니다. "그리기와 이벤트 달기는 한 세트"라고 기억해 두세요. AI가 만든 목록에서 "처음엔 클릭이 되는데 갱신 후엔 안 돼요" 같은 증상이 보이면 십중팔구 이 순서가 어긋난 것입니다.</p>
+<p>클릭된 항목이 어느 장소인지는 <code>li.dataset.id</code>로 알아냅니다. 18.2절에서 심어 둔 이름표가 여기서 수확되는 거죠. 그런데 <code>onSelect</code>는 뭘까요? <code>sidebar.js</code> 위쪽을 보면 이렇게 준비되어 있습니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">onSelect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{};</span><span class="w">   </span><span class="c1">// 목록 항목이 선택되면 호출할 함수 (main.js가 넣어줌)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">initSidebar</span><span class="p">({</span><span class="w"> </span><span class="nx">onSelectPlace</span><span class="p">,</span><span class="w"> </span><span class="nx">onFilter</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nx">onSelect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">onSelectPlace</span><span class="p">;</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="c1">// ... 14장에서 만들고 18.2절에서 renderList()를 보탠 필터 버튼 연결 ...</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>14장의 <code>onFilterChange</code>와 똑같은 구도입니다. sidebar.js는 "항목이 선택됐다"고 종만 울릴 뿐, 그래서 무슨 일이 벌어지는지는 모릅니다. 지도를 움직일지, 상세 화면을 열지(19장의 스포일러입니다)는 조립 담당인 <code>main.js</code>가 정합니다. 사이드바는 지도의 존재조차 모른 채 자기 일만 하는 것 — 모듈을 나눈 보람이 이런 데서 나타납니다.</p>
+<p><code>main.js</code>의 조립 부분입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">focusPlace</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./mapView.js'</span><span class="p">;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">initSidebar</span><span class="p">,</span><span class="w"> </span><span class="nx">filteredPlaces</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./sidebar.js'</span><span class="p">;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nx">initSidebar</span><span class="p">({</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nx">onSelectPlace</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="nx">focusPlace</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span><span class="nx">onFilter</span><span class="o">:</span><span class="w"> </span><span class="nx">rerender</span><span class="p">,</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>id로 <code>store.get(id)</code>를 호출해 장소 객체를 찾고, 찾았으면 <code>focusPlace(p)</code>에 넘깁니다. <code>if (p)</code> 확인은 만에 하나 목록과 데이터가 어긋났을 때(예: 방금 삭제된 장소의 목록이 아직 화면에 남은 찰나에 클릭) 에러 대신 조용히 무시하게 하는 안전장치입니다. 19장에서 상세 패널이 생기면 이 콜백에 <code>openDetail(id)</code> 한 줄이 더 붙게 됩니다 — 사이드바 코드는 그대로 둔 채 말이죠.</p>
+<p>마지막 주자는 <code>mapView.js</code>의 <code>focusPlace()</code>입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">focusPlace</span><span class="p">(</span><span class="nx">place</span><span class="p">,</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">LatLng</span><span class="p">(</span><span class="nx">place</span><span class="p">.</span><span class="nx">lat</span><span class="p">,</span><span class="w"> </span><span class="nx">place</span><span class="p">.</span><span class="nx">lng</span><span class="p">);</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nx">map</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="nx">level</span><span class="p">);</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nx">map</span><span class="p">.</span><span class="nx">panTo</span><span class="p">(</span><span class="nx">pos</span><span class="p">);</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">markers</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">m</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">place</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">place</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nx">closeOverlay</span><span class="p">();</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="nx">entry</span><span class="p">.</span><span class="nx">overlay</span><span class="p">.</span><span class="nx">setMap</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="nx">openOverlay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span><span class="p">.</span><span class="nx">overlay</span><span class="p">;</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>전반부는 10장의 복습입니다. <code>setLevel(4)</code>로 동네가 보이는 수준까지 확대하고, <code>setCenter()</code> 대신 <code>panTo()</code>를 써서 지도가 순간이동이 아니라 <strong>미끄러지듯</strong> 이동하게 합니다. 이 부드러운 움직임 하나가 "내가 클릭한 곳으로 가고 있구나"라는 방향 감각을 만들어 줍니다.</p>
+<p>후반부가 흥미롭습니다. <code>markers</code> 배열은 13장에서 <code>{ marker, overlay, place }</code>를 짝지어 보관하기로 한 바로 그 배열입니다. <code>find()</code>로 클릭된 장소의 짝꿍을 찾아, 미리 만들어 둔 말풍선(<code>entry.overlay</code>)을 지도에 붙입니다. 그 직전의 <code>closeOverlay()</code>는 13장의 약속 — "말풍선은 한 번에 하나만" — 을 지키기 위해 열려 있던 말풍선을 먼저 닫는 것입니다. 마커를 직접 클릭했을 때와 목록에서 클릭했을 때, 서로 다른 입구로 들어와도 똑같은 말풍선 규칙이 지켜집니다.</p>
+<p>저장하고 실행해 봅시다. 목록에서 아무 장소나 클릭해 보세요. 지도가 스르륵 미끄러져 그 장소를 중앙에 놓고, 확대되고, 말풍선이 열립니다. 목록을 위아래로 훑으며 여러 장소를 연달아 클릭해 보세요. 저장해 둔 장소들 사이를 목록으로 순간이동하는, 꽤 그럴듯한 지도 앱이 됐습니다.</p>
+<p><img alt="그림 18.5 — 목록 클릭 → focusPlace: 지도가 해당 장소로 이동·확대되고 말풍선이 열린 모습" src="../images/ch18/ch18-f05.jpg" width="760" /></p>
+<p>기능이 눈으로 확인됐으니 안전벨트를 챙깁니다. Claude Code에게 "지금까지 작업 커밋해줘. 메시지는 사이드바 장소 목록과 지도 연동 추가로"라고 시켜 두세요.</p>
+<h2 id="185">18.5 구독 패턴 — 데이터가 바뀌면 화면이 따라온다<a class="headerlink" href="#185" title="Permanent link">&para;</a></h2>
+<p>이제 이 장의 하이라이트이자, 17장에서 미뤄 둔 수수께끼를 풀 시간입니다. 현재 목록에는 흠이 하나 있습니다. 지도를 클릭해 새 장소를 추가하면 지도에는 즉시 마커가 생기는데, <strong>목록은 옛날 그대로</strong>라는 것. 새로고침해야 비로소 새 장소가 목록에 나타납니다. 왜일까요? 16장에서 놓은 <code>notifyChange</code> 다리가 <code>rerender</code>(지도 다시 그리기) <strong>하나에만</strong> 연결되어 있기 때문입니다. <code>store.add()</code> 뒤에 지도는 다리를 통해 소식을 듣지만, 오늘 태어난 <code>renderList()</code>는 아직 아무에게도 소식을 못 받습니다.</p>
+<p>정공법대로라면 이렇게 고치면 됩니다. "다리를 하나 더 놓아서 <code>renderList()</code>도 불러 준다." 하지만 세어 봅시다. 장소가 바뀌는 곳이 어디어디죠? 지도 클릭 추가(16장), 검색 결과 추가(16장), 가져오기(17장), 그리고 다가올 19장의 별점 수정·메모 수정·삭제까지. 여섯 군데가 넘습니다. 그 모든 곳에서 <code>renderList()</code>도 부르고 <code>rerender()</code>도 부르고… 데이터가 바뀌는 곳 × 갱신할 화면 조각 수만큼 다리가 늘어나고, 하나라도 빠뜨리면 "저장은 됐는데 화면은 옛날" 버그가 됩니다. 16장에서 다리를 놓으며 "임시 가설교"라고 예고했던 이유가 이것입니다. 18.1절에서 경고한 바로 그 지옥이죠.</p>
+<p>발상을 뒤집어 봅시다. 화면들이 데이터 바뀌는 곳을 쫓아다니는 게 아니라, <strong>데이터 쪽에서 "나 바뀌었어!"라고 방송을 하면 어떨까요?</strong> 화면들은 그 방송을 구독해 두기만 하면 됩니다. 신문 구독과 똑같습니다. 독자(화면)가 매일 신문사에 전화해서 "새 소식 있어요?"라고 묻는 게 아니라, 한 번 구독 신청을 해 두면 새 신문이 나올 때마다 집 앞에 배달되는 거죠.</p>
+<p>17장에서 스쳐 지나간 <code>store.js</code>의 그 코드가 정확히 이 장치입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">listeners</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span><span class="w">            </span><span class="c1">// 구독자 명단</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kd">function</span><span class="w"> </span><span class="nx">save</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">STORAGE_KEY</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">places</span><span class="p">));</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">'localStorage 저장 실패'</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">);</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">  </span><span class="nx">listeners</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">fn</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">fn</span><span class="p">(</span><span class="nx">places</span><span class="p">));</span><span class="w">   </span><span class="c1">// ← 수수께끼였던 그 줄: 구독자 전원에게 방송</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="p">}</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">  </span><span class="c1">// ...add, update, remove, replaceAll...</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">  </span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">    </span><span class="nx">listeners</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">fn</span><span class="p">);</span><span class="w">          </span><span class="c1">// 구독 신청: 명단에 함수를 올린다</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="p">};</span>
+</span></code></pre></div>
+<p>구조가 허무할 만큼 단순합니다. <code>subscribe(fn)</code>은 함수를 <code>listeners</code> 배열에 넣어 두는 게 전부입니다. 그리고 <code>save()</code> — 17장에서 확인했듯 <code>add</code>든 <code>remove</code>든 <code>update</code>든 데이터가 바뀌면 <strong>반드시 마지막에 거쳐 가는 단 하나의 길목</strong> — 의 끝에서, 명단에 있는 함수를 전부 호출합니다. 데이터가 바뀌는 모든 사건이 어차피 <code>save()</code>를 지나가니, 거기서 한 번만 방송하면 빠뜨릴 일이 원천적으로 없습니다. 17장에서 "저장 시점을 <code>save()</code> 한 곳으로 모은" 설계가 여기서 두 번째 보상을 주는 셈입니다.</p>
+<p>이 구조에는 <strong>발행-구독 패턴</strong><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>이라는 근사한 이름이 있습니다. 유튜브 채널 구독, 앱 푸시 알림, 이메일 뉴스레터 — 여러분이 매일 쓰는 서비스들이 전부 이 패턴의 거대한 버전입니다. 그리고 방금 우리는 그것을 배열 하나와 <code>forEach</code> 한 줄로 직접 만들었습니다.</p>
+<p>이제 구독 신청만 하면 됩니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>store에 subscribe로 화면 갱신 함수들을 등록해서, 장소 데이터가 바뀌면 지도와 사이드바 목록이 자동으로 다시 그려지게 해줘. 지도 갱신(rerender)은 main.js에서, 목록 갱신(renderList)은 sidebar.js의 initSidebar 안에서 구독해줘. 이제 구독이 갱신을 책임지니까, 16장에 만들었던 search.js의 onChange 콜백(notifyChange)은 걷어내고 initSearch()는 인자 없이 호출하게 정리해줘.</p>
+</blockquote>
+</div>
+<p>두 군데에 각각 한 줄씩입니다. 먼저 <code>sidebar.js</code>의 <code>initSidebar()</code> 끝부분.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">initSidebar</span><span class="p">({</span><span class="w"> </span><span class="nx">onSelectPlace</span><span class="p">,</span><span class="w"> </span><span class="nx">onFilter</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="c1">// ...필터 버튼, 내보내기/가져오기 연결...</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nx">store</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">renderList</span><span class="p">);</span><span class="w">   </span><span class="c1">// 데이터가 바뀌면 목록을 다시 그려주세요</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nx">renderList</span><span class="p">();</span><span class="w">                  </span><span class="c1">// 첫 화면은 직접 한 번 그린다</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>그리고 <code>main.js</code>.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">rerender</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">renderPlaces</span><span class="p">(</span><span class="nx">filteredPlaces</span><span class="p">());</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nx">store</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">rerender</span><span class="p">);</span><span class="w">       </span><span class="c1">// 데이터가 바뀌면 지도도 다시 그려주세요</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nx">rerender</span><span class="p">();</span>
+</span></code></pre></div>
+<p>구독은 신청만 해 두는 것이라 <strong>미래의</strong> 변경에만 반응합니다. 그래서 두 곳 모두 구독 직후에 <code>renderList()</code>와 <code>rerender()</code>를 한 번씩 직접 호출해 첫 화면을 그립니다. 신문 구독을 시작해도 어제 신문은 배달되지 않으니, 첫 부는 가판대에서 직접 사 오는 것과 같습니다.</p>
+<p>여기서 18.2절의 그 한 줄을 다시 떠올려 봅시다. 필터 클릭 핸들러에서는 <code>renderList()</code>를 직접 불렀는데, 구독이 있으니 그 줄은 이제 지워도 될까요? 안 됩니다. 구독 방송은 <code>save()</code> — 즉 <strong>store의 데이터가 바뀔 때</strong> — 에만 울립니다. 그런데 필터 클릭은 사이드바의 화면 상태(<code>currentFilter</code>)만 바꿀 뿐, store는 손끝 하나 건드리지 않죠. <code>save()</code>도, 방송도 일어나지 않으니 구독자는 아무 소식을 못 듣습니다. 정리하면 갱신 경로는 두 갈래입니다. <strong>데이터 변경은 구독이 책임지고, 필터처럼 store를 거치지 않는 변경은 직접 호출로 챙긴다.</strong> 두 갈래가 공존하는 것이 어중간한 타협이 아니라, "무엇이 바뀌었는가"에 따라 알맞은 길을 고른 결과입니다.</p>
+<p>그리고 약속대로 임시 가설교를 철거합니다. 16장에서 <code>search.js</code>에 두었던 <code>notifyChange</code> 변수와 추가 버튼 속의 <code>notifyChange()</code> 호출이 지워지고, <code>main.js</code>의 호출부도 원래의 단정한 모습으로 돌아갑니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nx">initSearch</span><span class="p">();</span><span class="w">   </span><span class="c1">// 16장의 onChange 다리는 구독이 대신하므로 인자가 사라졌다</span>
+</span></code></pre></div>
+<p>다리가 사라졌는데 어떻게 마커가 계속 즉시 찍힐까요? <code>store.add()</code>의 마지막 일이 <code>save()</code>이고, <code>save()</code> 끝의 방송이 구독자 <code>rerender</code>를 부르기 때문입니다. 추가하는 쪽 코드는 이제 화면의 존재 자체를 모릅니다. 데이터만 바꾸면 나머지는 방송이 알아서 — 18.1절에서 예고한 "알아서 따라오게 하는 장치"가 완성된 것입니다.</p>
+<p>이것으로 그림 18.1의 구조가 완성됐습니다. 확인해 봅시다. 지도의 빈 곳을 클릭해서 새 장소를 추가해 보세요. 다이얼로그에서 저장을 누르는 순간 — 지도에 마커가 돋아나고, <strong>동시에 사이드바 목록에도 새 항목이 스윽 나타납니다.</strong> 목록에서 방금 그 항목을 클릭하면 지도가 그리로 날아가는 것까지, 모든 것이 맞물려 돌아갑니다. 검색으로 추가해도, 가져오기로 파일을 통째로 불러와도 마찬가지입니다. 우리는 어디에도 "목록을 갱신하라"는 코드를 추가로 심지 않았습니다. 데이터가 바뀌었고, 구독자들이 각자 따라왔을 뿐입니다.</p>
+<p><img alt="그림 18.6 — 구독 패턴: 어떤 경로로 데이터가 바뀌든 save()가 방송하고, 구독자(지도·목록)가 각자 갱신한다" src="../images/ch18/ch18-f06.png" width="760" /></p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>구독 패턴을 쓸 때 초보가 가장 많이 빠지는 함정은 <strong>구독한 함수 안에서 다시 데이터를 바꾸는 것</strong>입니다. 예컨대 renderList 안에서 <code>store.update(...)</code>를 부르면, update가 save를 부르고, save가 다시 renderList를 부르고… 무한 반복에 빠져 브라우저가 멈춥니다. 규칙은 간단합니다. <strong>구독자는 읽고 그리기만 한다. 쓰지 않는다.</strong> 화면이 얼어붙으면서 콘솔에 "Maximum call stack size exceeded"가 보인다면 이 순환을 의심하고, Claude Code에게 "store를 구독한 함수 중에 store를 다시 수정하는 곳이 있는지 찾아줘"라고 시키세요.</p>
+</div>
+<p>바이브코딩 관점의 한마디. 오늘 우리가 AI에게 시킨 프롬프트 어디에도 "발행-구독 패턴으로 만들어줘"라는 전문 용어는 없었습니다. "데이터가 바뀌면 지도와 목록이 자동으로 다시 그려지게 해줘"라고 <strong>원하는 결과</strong>를 말했을 뿐인데, AI는 검증된 패턴을 꺼내 왔습니다. 용어를 몰라도 결과를 정확히 말하면 좋은 구조가 나온다 — 다만 나온 코드를 오늘처럼 읽고 이름을 알아 두면, 다음부터는 "구독 패턴으로 해줘" 한마디로 더 정확하게 시킬 수 있게 됩니다. 어휘가 늘수록 프롬프트가 짧아지는 것, 그것이 바이브코딩의 성장 곡선입니다.</p>
+<h2 id="186">18.6 마무리<a class="headerlink" href="#186" title="Permanent link">&para;</a></h2>
+<p>지도와 목록이 한 몸처럼 움직이기 시작했습니다. 그리고 그 뒤에는 "데이터는 방송하고, 화면은 구독한다"는 우아한 구조가 자리 잡았습니다. 19장에서 수정·삭제 기능이 들어와도 화면 갱신 걱정은 이제 없습니다. 구독자들이 알아서 따라올 테니까요.</p>
+<div class="admonition abstract">
+<p class="admonition-title">📌 핵심 요약</p>
+<ul>
+<li>목록 렌더링의 정석은 <strong>배열 → <code>map()</code>으로 HTML 문자열 변환 → <code>join('')</code>으로 합치기 → <code>innerHTML</code> 대입</strong> 4단계입니다.</li>
+<li><code>innerHTML</code>로 다시 그리면 기존 요소와 이벤트가 함께 사라지므로, <strong>그린 직후 이벤트를 다시 답니다.</strong> 어느 항목인지는 <code>data-id</code>로 식별합니다.</li>
+<li>빈 목록에는 침묵 대신 <strong>빈 상태(empty state)</strong> 안내를 — "지금 상황"과 "다음 행동"을 알려 줍니다.</li>
+<li><code>focusPlace()</code>는 <code>setLevel</code> + <code>panTo</code>로 지도를 부드럽게 이동시키고, <code>markers</code> 배열에서 짝꿍 말풍선을 찾아 엽니다.</li>
+<li><strong>구독 패턴</strong>: <code>store.subscribe(fn)</code>으로 구독자 명단에 함수를 올려 두면, 데이터가 바뀔 때마다 <code>save()</code>가 명단의 함수를 전부 호출합니다. 데이터를 바꾸는 쪽은 화면의 존재를 몰라도 됩니다.</li>
+<li>구독자는 <strong>읽고 그리기만</strong> 합니다. 구독한 함수 안에서 데이터를 다시 바꾸면 무한 반복에 빠집니다.</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">🤔 생각해보기</p>
+<p>Q1. <code>renderList()</code>는 장소가 하나만 바뀌어도 목록 전체를 지우고 다시 그립니다. 장소가 1만 개라면 문제가 될 수도 있는 방식인데, 우리 앱에서는 왜 이 단순한 방식을 선택해도 괜찮을까요? 단순함과 성능 사이의 저울질을 여러분의 언어로 적어 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>Q2. 지금은 지도(rerender)와 목록(renderList) 두 구독자가 있습니다. 만약 사이드바 상단에 "저장된 장소 12개"처럼 개수를 보여주는 기능을 추가한다면, 구독 패턴 덕분에 코드 몇 줄이면 될까요? 어디에 무엇을 쓰면 될지 상상해 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">✏️ 연습 문제</p>
+<ol>
+<li>브라우저 콘솔에서 <code>['a','b','c'].map((x) =&gt; x.toUpperCase())</code>와 <code>['a','b','c'].join('-')</code>을 각각 실행해 결과를 확인하고, 두 개를 이어서 <code>map(...).join('')</code> 형태로도 실행해 보세요.</li>
+<li>Claude Code에게 시켜 목록 항목에 좌표(<code>lat</code>, <code>lng</code>)를 소수점 4자리까지 작게 표시해 보세요. 확인했다면 git으로 되돌려도 좋습니다.</li>
+<li>콘솔에서 <code>store.subscribe(() =&gt; console.log('데이터가 바뀌었다!'))</code>처럼 나만의 구독자를 등록해 보세요(모듈이라 직접 접근이 안 되면 Claude Code에게 "콘솔에서 store를 쓸 수 있게 window에 잠깐 노출해줘"라고 시키세요). 장소를 추가할 때마다 콘솔에 메시지가 찍히나요?</li>
+<li>Claude Code에게 "목록을 이름 가나다순으로 정렬해서 보여줘"라고 시켜 보세요. <code>renderList()</code>의 어느 지점에 <code>sort()</code>가 끼어드는지, 원본 배열을 건드리지 않으려고 AI가 어떤 처리를 하는지 관찰해 보세요.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">🔎 더 찾아보기</p>
+<ul>
+<li><code>이벤트 위임 (event delegation)</code> — 항목마다 리스너를 다는 대신 부모 <code>&lt;ul&gt;</code>에 하나만 달고 <code>event.target</code>으로 구분하는 기법. 항목이 수천 개일 때의 정석입니다.</li>
+<li><code>Array.prototype.sort</code> — 배열 정렬 메서드. 원본을 바꾸는 메서드라서 <code>[...배열].sort()</code>처럼 복사 후 정렬하는 관용구와 함께 알아 두세요.</li>
+<li><code>옵저버 패턴 (Observer pattern)</code> — 발행-구독 패턴의 뿌리가 되는 고전 디자인 패턴. Vue의 반응성, React 상태 관리 라이브러리들의 조상입니다.</li>
+<li><code>&lt;template&gt; 태그</code> — HTML 조각을 문자열이 아닌 진짜 DOM 조각으로 미리 만들어 두고 복제해 쓰는 표준 방법.</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>다음 장 예고</strong> — 목록에서 장소를 클릭하면 지도가 날아가지만, 정작 그 장소의 별점을 고치거나 메모를 남기거나 삭제할 방법이 아직 없습니다. 19장에서는 장소 하나를 자세히 보여주는 <strong>상세 패널</strong>을 만듭니다. 별점 버튼, 메모 저장, confirm을 곁들인 삭제 — 그리고 13장부터 미뤄 온 숙제, <code>escapeHtml</code>이 막아 주는 XSS 공격의 정체를 드디어 정면으로 다룹니다. 여러분의 첫 보안 수업입니다.</p>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>템플릿 리터럴(template literal) — 백틱(<code>`</code>)으로 감싼 문자열. 여러 줄을 그대로 쓸 수 있고 <code>${표현식}</code>으로 값을 끼워 넣을 수 있어, HTML 조각을 만들 때 특히 유용한 ES6 문법입니다.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>발행-구독 패턴(publish-subscribe pattern) — 데이터를 바꾸는 쪽(발행자)과 그 변화에 반응하는 쪽(구독자)을 직접 연결하지 않고, "구독 명단"을 사이에 두어 느슨하게 잇는 설계 방식. 발행자는 구독자가 몇이든 누구든 신경 쓰지 않고 방송만 하면 됩니다.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

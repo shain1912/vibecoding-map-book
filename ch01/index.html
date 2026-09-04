@@ -1,0 +1,1844 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼">
+      
+      
+        <meta name="author" content="YLBook">
+      
+      
+        <link rel="canonical" href="https://shain1912.github.io/vibecoding-map-book/ch01/">
+      
+      
+        <link rel="prev" href="../ch00/">
+      
+      
+        <link rel="next" href="../ch02/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>1장 왜 바이브코딩인가 - 바이브코딩으로 만드는 나만의 지도 웹</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-header__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            바이브코딩으로 만드는 나만의 지도 웹
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1장 왜 바이브코딩인가
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-nav__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    바이브코딩으로 만드는 나만의 지도 웹
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0장 이 책에서 만드는 것
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1부 바이브코딩 준비운동
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1부 바이브코딩 준비운동
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 코드를 몰라도 만드는 시대
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 저자의 실제 워크플로 — 이 책은 그 방식 그대로 갑니다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 이해하려 노력하되, 외우지 않는다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 에이전트에게 일 시키는 마음가짐 — 작게, 확인, 되돌리기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 이 책에서 쓸 도구 5종 한눈에 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2장 Node.js 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3장 Git for Windows 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4장 Claude Code 설치하고 길들이기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2부 카카오 지도 첫걸음
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2부 카카오 지도 첫걸음
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7장 카카오 개발자 계정과 앱 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8장 Vite로 프로젝트 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9장 첫 지도 띄우기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10장 지도 다루기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3부 나만의 장소 지도 만들기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3부 나만의 장소 지도 만들기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11장 마커 찍기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12장 장소 데이터 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13장 커스텀 오버레이 말풍선
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14장 카테고리 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16장 클릭·검색으로 장소 추가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17장 localStorage 저장
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19장 상세 패널
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4부 한 단계 더
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4부 한 단계 더
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21장 URL로 지도 공유
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5부 세상에 공개하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5부 세상에 공개하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24장 GitHub에 올리기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25장 GitHub Pages 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26장 README와 자랑하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    부록
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 A 프롬프트 템플릿 모음
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 B 트러블슈팅 & 치트시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 코드를 몰라도 만드는 시대
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 저자의 실제 워크플로 — 이 책은 그 방식 그대로 갑니다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 이해하려 노력하되, 외우지 않는다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 에이전트에게 일 시키는 마음가짐 — 작게, 확인, 되돌리기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 이 책에서 쓸 도구 5종 한눈에 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1">1장 왜 바이브코딩인가<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">이 장에서 배우는 것</p>
+<ul>
+<li>바이브코딩이 무엇인지, 왜 지금 이 방식으로 배우는 것이 유리한지 이해합니다.</li>
+<li>저자가 실제로 쓰는 작업 흐름(Claude Code + Orca + Git + GitHub CLI)을 미리 구경합니다.</li>
+<li>"이해하려 노력하되 외우지 않는다"는 이 책의 학습 철학을 익힙니다.</li>
+<li>AI 에이전트에게 일을 시킬 때의 세 가지 마음가짐 — 작게 시키기, 확인하기, 되돌리기 — 을 배웁니다.</li>
+<li>다음 장부터 설치할 도구 5종이 각각 어떤 역할인지 큰 그림을 그립니다.</li>
+</ul>
+</div>
+<hr />
+<h2 id="11">1.1 코드를 몰라도 만드는 시대<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<p>혹시 이런 경험이 있으신가요? "나만의 맛집 지도를 웹으로 만들어 보고 싶다"는 생각이 들어 검색을 시작했는데, HTML을 배워야 하고, CSS를 배워야 하고, 자바스크립트를 배워야 하고, API가 뭔지도 알아야 한다는 글을 읽다가 조용히 브라우저 탭을 닫아버린 경험 말입니다. 프로그래밍을 배우다 포기한 분들의 이야기를 들어보면 대부분 비슷합니다. 만들고 싶은 것은 분명한데, 그것을 만들기까지 배워야 할 것이 너무 많아서 시작조차 못 하는 것입니다.</p>
+<p>바이브코딩(vibe coding)은 이 순서를 뒤집습니다. 문법부터 배우고 나서 만드는 것이 아니라, <strong>먼저 만들고 싶은 것을 말로 설명하면 AI가 코드를 대신 작성</strong>합니다. 여러분은 결과물을 눈으로 확인하고, 마음에 안 들면 다시 말로 고쳐 달라고 시킵니다. "지도를 화면에 꽉 차게 띄워줘", "마커를 클릭하면 말풍선이 뜨게 해줘"처럼 한국어 문장으로 요청하면, AI 코딩 도구가 실제로 동작하는 코드를 만들어 줍니다.</p>
+<p>이 단어는 2025년 초, AI 연구자 안드레이 카파시(Andrej Karpathy)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>가 "코드의 존재조차 잊고 분위기(vibe)에 몸을 맡긴 채 개발한다"고 표현한 데서 널리 퍼졌습니다. 처음에는 반쯤 농담이었지만, 지금은 실제로 많은 개발자와 비개발자가 이 방식으로 소프트웨어를 만들고 있습니다. 이 책의 원고와 예제 앱 역시 상당 부분 바이브코딩으로 만들어졌습니다.</p>
+<p><img alt="그림 1.1 — 전통적 코딩과 바이브코딩의 순서 비교" src="../images/ch01/ch01-f01.png" width="760" /></p>
+<p>여기서 오해 하나를 짚고 넘어가겠습니다. 바이브코딩은 "코딩을 안 배워도 된다"는 뜻이 아닙니다. 정확히 말하면 <strong>배우는 순서와 방법이 바뀐다</strong>는 뜻입니다. 예전에는 문법을 다 외운 다음에야 뭔가를 만들 수 있었다면, 이제는 만들면서 필요한 만큼 이해하면 됩니다. 운전을 배울 때 엔진의 열역학부터 공부하지 않는 것과 같습니다. 일단 운전대를 잡고 도로에 나가되, 계기판이 무엇을 말하는지, 경고등이 왜 켜졌는지는 알아야 안전하게 다닐 수 있습니다. 이 책이 여러분께 드리려는 것이 바로 그 "계기판 읽는 법"입니다.</p>
+<p>그리고 한 가지 더. 이 책에는 복사-붙여넣기가 없습니다. 긴 코드를 책에서 보고 한 글자씩 따라 치는 실습도 없습니다. 대신 매 실습마다 ① AI에게 시키는 프롬프트를 먼저 보여드리고, ② AI가 만들어 준 코드를 함께 읽고, ③ 왜 그렇게 동작하는지 해설한 다음, ④ 브라우저에서 결과를 확인합니다. 타이핑은 AI가 하고, 판단은 여러분이 합니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>바이브코딩이라는 이름 때문에 "대충 감으로 한다"고 오해하기 쉽지만, 잘하는 사람일수록 요청을 명확하게 하고 결과를 꼼꼼히 확인합니다. 분위기에 맡기는 것은 타이핑이지, 판단이 아닙니다.</p>
+</div>
+<h2 id="12">1.2 저자의 실제 워크플로 — 이 책은 그 방식 그대로 갑니다<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<p>시중의 많은 입문서는 "교육용으로 정리된 방법"을 가르칩니다. 이 책은 조금 다르게, 저자가 실제 프로젝트에서 매일 쓰는 작업 흐름을 거의 그대로 보여드립니다. 도구는 네 가지 축으로 구성됩니다.</p>
+<p>첫째, <strong>Claude Code</strong>입니다. 터미널에서 실행하는 AI 코딩 에이전트로, 이 책의 주인공입니다. 단순히 코드 조각을 답해 주는 챗봇이 아니라, 프로젝트 폴더 안에서 파일을 직접 만들고, 고치고, 명령어를 실행하고, 에러를 읽고 스스로 수정하는 "에이전트"입니다. 여러분이 "검색 기능을 붙여줘"라고 하면, 어떤 파일을 어떻게 바꿀지 계획을 세우고 실제로 바꿉니다.</p>
+<p>둘째, <strong>Git</strong>입니다. 코드의 시간을 되돌리는 타임머신입니다. AI가 코드를 대신 쓰는 세계에서 Git은 선택이 아니라 안전벨트입니다. AI가 만든 수정이 마음에 안 들면, 언제든 마지막으로 잘 동작하던 시점으로 되돌릴 수 있어야 하기 때문입니다. 이 이야기는 3장에서 자세히 다룹니다.</p>
+<p>셋째, <strong>GitHub CLI(gh)</strong>입니다. 만든 코드를 인터넷 저장소인 GitHub에 올리고 관리하는 명령줄 도구입니다. 브라우저에서 버튼을 찾아 클릭하는 대신 명령어 한 줄로 저장소를 만들 수 있어서, AI 에이전트와 궁합이 아주 좋습니다.</p>
+<p>넷째, <strong>Orca</strong>입니다. 여러 AI 에이전트를 나란히 띄워 놓고 지휘하는 데스크톱 앱입니다. 한 에이전트에게 기능 A를 시켜 놓고, 기다리는 동안 다른 에이전트에게 기능 B를 시키는 식의 병렬 작업이 가능합니다. 처음에는 없어도 되지만, 손에 익으면 작업 속도가 눈에 띄게 달라집니다.</p>
+<p><img alt="그림 1.2 — 저자의 바이브코딩 워크플로 한눈에 보기" src="../images/ch01/ch01-f02.png" width="760" /></p>
+<p>이 네 가지가 맞물려 돌아가는 하루를 상상해 보면 이렇습니다. 아침에 Orca를 켜고 Claude Code에게 "어제 만든 지도에 카테고리 필터를 붙여줘"라고 시킵니다. 에이전트가 코드를 고치는 동안 커피를 내리고 돌아와서, 브라우저로 결과를 확인합니다. 마음에 들면 Git으로 저장(커밋)하고 GitHub에 올립니다. 마음에 안 들면 "버튼 색이 너무 튀는데 차분하게 바꿔줘"라고 다시 시키거나, 아예 되돌리고 요청을 다르게 써 봅니다. 코드를 한 줄도 직접 타이핑하지 않은 날도 많지만, 무엇을 만들지 결정하고 결과를 판정하는 것은 언제나 사람의 몫입니다.</p>
+<p>이 책의 1부(2~6장)는 정확히 이 워크플로를 여러분의 윈도우 PC에 그대로 세팅하는 과정입니다. 남의 작업실 구경으로 끝나지 않고, 여러분의 작업실이 됩니다.</p>
+<h2 id="13">1.3 이해하려 노력하되, 외우지 않는다<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<p>AI가 코드를 다 써 준다면, 우리는 무엇을 배워야 할까요? 이 책의 대답은 한 문장입니다. <strong>이해하려 노력하되, 외우지 않는다.</strong></p>
+<p>외우지 않아도 되는 것부터 말씀드리겠습니다. 함수 이름의 정확한 철자, 괄호와 세미콜론의 위치, API 옵션의 나열 순서 같은 것들입니다. 예전 프로그래밍 학습에서 시간을 가장 많이 잡아먹던 부분인데, 이제 이런 것은 AI가 사람보다 훨씬 정확하게 기억합니다. 카카오지도에서 마커를 만드는 클래스 이름이 <code>Marker</code>인지 <code>MapMarker</code>인지 헷갈려도 전혀 문제없습니다. AI에게 시키면 되니까요.</p>
+<p>반대로 이해해야 하는 것은 <strong>구조와 흐름</strong>입니다. 이를테면 이런 것들입니다. "내 앱은 장소 데이터를 어디에 저장하고 있지?" "지도에 마커가 그려지기까지 어떤 순서로 코드가 실행되지?" "API 키는 왜 코드에 직접 쓰면 안 되지?" 이런 질문에 대략이라도 답할 수 있으면, AI가 만든 코드가 이상할 때 알아챌 수 있고, 무엇을 고쳐 달라고 해야 할지 정확히 말할 수 있습니다.</p>
+<p>비유하자면 여러분은 건축주이자 현장 감독입니다. 벽돌을 직접 쌓는 법(문법)은 몰라도 되지만, 도면(구조)을 읽을 줄은 알아야 합니다. 도면을 못 읽는 건축주는 시공사가 방 하나를 빼먹어도 완공식 날까지 모릅니다. 이 책의 코드 해설이 길지 않으면서도 꼬박꼬박 등장하는 이유가 이것입니다. 우리는 코드를 "채점"하러 읽는 것이 아니라 "도면을 확인"하러 읽습니다.</p>
+<p><img alt="그림 1.3 — 외울 것과 이해할 것" src="../images/ch01/ch01-f03.png" width="760" /></p>
+<p>그래서 이 책의 실습에는 "설명 요청 프롬프트"가 자주 등장합니다. AI에게 일을 시킨 다음, 이렇게 한 번 더 물어보는 것입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>방금 만든 코드를 프로그래밍을 처음 배우는 사람에게 설명하듯이, 위에서 아래로 실행 순서를 따라가며 설명해줘. 비유를 하나 들어줘.</p>
+</blockquote>
+</div>
+<p>AI는 훌륭한 코딩 도구인 동시에, 지치지 않는 과외 선생님이기도 합니다. 같은 질문을 열 번 해도 짜증 내지 않습니다. 모르는 것을 모른다고 말하는 데 부끄러움을 느낄 필요가 없는 상대라는 점이, 어쩌면 바이브코딩 학습의 가장 큰 축복일지도 모릅니다.</p>
+<h2 id="14">1.4 에이전트에게 일 시키는 마음가짐 — 작게, 확인, 되돌리기<a class="headerlink" href="#14" title="Permanent link">&para;</a></h2>
+<p>AI 에이전트는 유능하지만 완벽하지 않습니다. 자신만만하게 틀린 코드를 내놓기도 하고, 시키지 않은 것까지 고쳐 놓기도 합니다. 그래서 에이전트와 일할 때는 신입 동료와 일할 때와 비슷한 요령이 필요합니다. 이 책 전체를 관통하는 세 가지 원칙으로 정리했습니다.</p>
+<p><strong>첫째, 작게 시킵니다.</strong> "맛집 지도 앱을 통째로 만들어줘"라고 시키면 AI는 뭔가를 만들어 내긴 하지만, 여러분이 통제할 수 없는 커다란 덩어리가 나옵니다. 어디가 잘못됐는지 찾기도 어렵고, 배우는 것도 없습니다. 대신 "지도만 띄워줘" → "마커 하나만 찍어줘" → "마커를 클릭하면 말풍선이 뜨게 해줘"처럼 한 번에 한 걸음씩 시킵니다. 요청이 작을수록 결과를 확인하기 쉽고, 잘못됐을 때 원인을 좁히기 쉽습니다. 이 책의 26개 장 구성 자체가 바로 이 "작게 시키기"의 순서도입니다.</p>
+<p><strong>둘째, 확인합니다.</strong> AI가 "다 했습니다"라고 말하는 것과 실제로 동작하는 것은 다른 문제입니다. 요청 하나가 끝날 때마다 브라우저를 새로고침해서 눈으로 확인하고, 개발자 도구의 콘솔에 빨간 에러가 없는지 봅니다. 확인 없이 다음 요청을 쌓아 올리면, 나중에 문제가 터졌을 때 어느 층에서 금이 갔는지 알 수 없게 됩니다. "한 요청, 한 확인"을 습관으로 만드세요.</p>
+<p><strong>셋째, 되돌립니다.</strong> 확인해 보니 이상하다면, 그 위에 수정 요청을 덧대는 것보다 깨끗하게 되돌리고 다시 시키는 편이 나을 때가 많습니다. Git으로 잘 동작하던 시점을 저장해 두었다면 되돌리기는 명령어 한 줄입니다. 되돌릴 수 있다는 확신이 있으면 실험이 두렵지 않게 되고, 실험이 두렵지 않으면 배움이 빨라집니다. 바이브코딩의 용기는 사실 Git에서 나옵니다.</p>
+<p><img alt="그림 1.4 — 바이브코딩 3원칙: 작게 시키기 · 확인하기 · 되돌리기" src="../images/ch01/ch01-f04.png" width="760" /></p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>AI가 만든 코드를 확인 없이 계속 쌓아 올리는 것이 바이브코딩 실패의 제1원인입니다. 특히 "그냥 알아서 다 해줘" 식의 큰 요청 뒤에는 반드시 동작 확인을 하고, 잘 되는 시점을 Git으로 저장해 두세요. 저장하지 않은 채 다음 요청을 던지는 것은 세이브 없이 보스전에 들어가는 것과 같습니다.</p>
+</div>
+<p>이 세 원칙은 4장에서 배울 "프롬프트 4요소(맥락·목표·제약·출력)"와 함께, 이 책에서 여러분이 얻어 갈 가장 오래가는 기술입니다. 도구는 몇 년 뒤에 바뀔 수 있어도, 에이전트에게 일을 시키는 이 감각은 어떤 AI 도구를 쓰든 그대로 통합니다.</p>
+<h2 id="15-5">1.5 이 책에서 쓸 도구 5종 한눈에 보기<a class="headerlink" href="#15-5" title="Permanent link">&para;</a></h2>
+<p>이제 다음 장부터 하나씩 설치할 도구들을 미리 소개합니다. 각 도구가 "왜" 필요한지만 알아 두면, 설치 과정이 훨씬 덜 지루해집니다.</p>
+<p><img alt="그림 1.5 — 도구 5종의 역할 지도" src="../images/ch01/ch01-f05.png" width="760" /></p>
+<p><strong>① Node.js (2장).</strong> 자바스크립트를 브라우저 밖에서도 실행하게 해 주는 프로그램입니다. 우리가 쓸 개발 서버(Vite)와 Claude Code가 모두 Node.js 위에서 돌아가기 때문에 가장 먼저 설치합니다. 집으로 치면 전기·수도 같은 기반 설비입니다.</p>
+<p><strong>② Git (3장).</strong> 앞서 이야기한 코드 타임머신입니다. 프로젝트의 상태를 사진 찍듯 저장(커밋)해 두었다가 언제든 그 시점으로 돌아갈 수 있습니다. 바이브코딩의 안전벨트이므로, 지도를 띄우기 전에 반드시 먼저 채웁니다.</p>
+<p><strong>③ Claude Code (4장).</strong> 이 책의 주인공인 AI 코딩 에이전트입니다. 터미널에서 실행하며, 한국어로 시키면 파일을 만들고 고치고 실행까지 해 줍니다. 유료 구독(Claude Pro)이 필요하지만, 4장에서 무료 대안도 함께 소개합니다.</p>
+<p><strong>④ GitHub CLI (5장).</strong> 코드를 인터넷 저장소 GitHub에 올리는 명령줄 도구입니다. 나중에 25장에서 우리 지도 앱을 전 세계에 무료로 공개(GitHub Pages 배포)할 때의 기반이 됩니다.</p>
+<p><strong>⑤ Orca (6장).</strong> 여러 에이전트를 나란히 지휘하는 데스크톱 앱입니다. 다섯 가지 중 유일하게 "없어도 책을 끝까지 따라갈 수 있는" 도구지만, 저자의 실제 작업 방식을 체험해 보는 재미가 있습니다.</p>
+<p>여기에 도구는 아니지만 재료가 하나 더 필요합니다. <strong>카카오지도 API 키</strong>(7장)입니다. 카카오가 제공하는 지도 데이터를 우리 앱에서 쓰기 위한 열쇠로, 무료로 발급받을 수 있습니다. 도구 5종을 설치하고 열쇠까지 받으면, 8장부터는 드디어 지도를 띄우기 시작합니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>설치 장(2~6장)에서 도구 버전이 책의 화면과 조금 다르게 보여도 당황하지 마세요. 도구들은 자주 업데이트되지만 큰 흐름은 같습니다. 화면이 많이 다르면 그 화면을 캡처해서 AI에게 "이 화면에서 뭘 눌러야 해?"라고 물어보는 것도 훌륭한 바이브코딩입니다.</p>
+</div>
+<hr />
+<h2 id="16">1.6 마무리<a class="headerlink" href="#16" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">📌 핵심 요약</p>
+<ul>
+<li>바이브코딩은 말로 요청하고 AI가 코드를 작성하는 개발 방식입니다. 타이핑은 AI가, 판단은 사람이 합니다.</li>
+<li>이 책은 저자의 실제 워크플로(Claude Code + Orca + Git + GitHub CLI)를 그대로 따라 만듭니다.</li>
+<li>학습 철학은 "이해하려 노력하되 외우지 않는다" — 문법·철자는 AI에게 맡기고, 구조와 흐름을 읽는 눈을 기릅니다.</li>
+<li>에이전트와 일하는 3원칙: 작게 시키기, 확인하기, 되돌리기. 되돌릴 수 있어야 과감하게 실험할 수 있습니다.</li>
+<li>도구 5종의 역할 — Node.js(기반), Git(안전벨트), Claude Code(에이전트), GitHub CLI(공개), Orca(지휘).</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">🤔 생각해보기</p>
+<p>Q1. 여러분이 지금까지 "배워야 할 게 너무 많아서" 포기했던 만들기 프로젝트가 있나요? 바이브코딩 방식이라면 그 프로젝트의 첫 요청 문장을 어떻게 쓰시겠어요?</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>Q2. "작게 시키기" 원칙에 따라, "맛집 지도 앱 만들어줘"라는 큰 요청을 세 개의 작은 요청으로 쪼개 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">✏️ 연습 문제</p>
+<ol>
+<li>바이브코딩에서 사람이 맡는 역할과 AI가 맡는 역할을 각각 두 가지씩 적어 보세요.</li>
+<li>에이전트와 일하는 3원칙(작게 시키기·확인하기·되돌리기) 중 하나를 골라, 지키지 않았을 때 벌어질 수 있는 문제 상황을 상상해서 써 보세요.</li>
+<li>이 책에서 쓰는 도구 5종을 설치 순서대로 나열하고, 각 도구의 역할을 한 줄로 요약해 보세요.</li>
+<li>"이해하려 노력하되 외우지 않는다"에서, 외우지 않아도 되는 것의 예 두 가지와 이해해야 하는 것의 예 두 가지를 적어 보세요.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">🔎 더 찾아보기</p>
+<ul>
+<li><code>AI 페어 프로그래밍</code> — 사람과 AI가 짝을 이뤄 함께 코드를 만드는 개발 문화 전반을 가리키는 말</li>
+<li><code>프롬프트 엔지니어링</code> — AI에게서 원하는 결과를 얻기 위해 요청문을 설계하는 기술 (4장에서 실전 버전을 배웁니다)</li>
+<li><code>터미널(명령 프롬프트)</code> — 마우스 대신 글자 명령으로 컴퓨터를 조작하는 창. 2장부터 계속 만나게 됩니다</li>
+<li><code>오픈소스</code> — 코드를 공개해 누구나 보고 고칠 수 있게 하는 문화. 우리도 24장에서 코드를 공개합니다</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>다음 장 예고</strong> — 2장에서는 모든 도구의 기반이 되는 Node.js를 설치합니다. 다운로드 버튼이 여러 개라 헷갈리는 공식 사이트에서 무엇을 골라야 하는지, 설치가 잘 됐는지 터미널에서 어떻게 확인하는지, 그리고 초보자를 가장 자주 괴롭히는 PATH 문제까지 스크린샷과 함께 차근차근 해결합니다.</p>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>안드레이 카파시(Andrej Karpathy) — 테슬라의 AI 총괄과 OpenAI 창립 멤버를 지낸 AI 연구자. 2025년 2월 X(트위터)에 올린 글에서 "vibe coding"이라는 표현을 사용해 화제가 되었습니다.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

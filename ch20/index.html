@@ -1,0 +1,1922 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼">
+      
+      
+        <meta name="author" content="YLBook">
+      
+      
+        <link rel="canonical" href="https://shain1912.github.io/vibecoding-map-book/ch20/">
+      
+      
+        <link rel="prev" href="../ch19/">
+      
+      
+        <link rel="next" href="../ch21/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>20장 내 위치 표시 - 바이브코딩으로 만드는 나만의 지도 웹</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#20" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-header__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            바이브코딩으로 만드는 나만의 지도 웹
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              20장 내 위치 표시
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-nav__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    바이브코딩으로 만드는 나만의 지도 웹
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0장 이 책에서 만드는 것
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1부 바이브코딩 준비운동
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1부 바이브코딩 준비운동
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2장 Node.js 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3장 Git for Windows 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4장 Claude Code 설치하고 길들이기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2부 카카오 지도 첫걸음
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2부 카카오 지도 첫걸음
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7장 카카오 개발자 계정과 앱 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8장 Vite로 프로젝트 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9장 첫 지도 띄우기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10장 지도 다루기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3부 나만의 장소 지도 만들기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3부 나만의 장소 지도 만들기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11장 마커 찍기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12장 장소 데이터 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13장 커스텀 오버레이 말풍선
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14장 카테고리 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16장 클릭·검색으로 장소 추가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17장 localStorage 저장
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19장 상세 패널
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4부 한 단계 더
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4부 한 단계 더
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#201-geolocation-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.1 Geolocation API — 브라우저는 내 위치를 어떻게 알까
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.2 권한 프롬프트 — 물어보고 쓰는 문화
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#203" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.3 버튼 달고 위치 요청하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#204-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.4 파란 점 오버레이 — CSS 세 줄의 마법
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#205-https-localhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.5 https와 localhost — 보안 컨텍스트라는 문지방
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#206" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21장 URL로 지도 공유
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5부 세상에 공개하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5부 세상에 공개하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24장 GitHub에 올리기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25장 GitHub Pages 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26장 README와 자랑하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    부록
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 A 프롬프트 템플릿 모음
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 B 트러블슈팅 & 치트시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#201-geolocation-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.1 Geolocation API — 브라우저는 내 위치를 어떻게 알까
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.2 권한 프롬프트 — 물어보고 쓰는 문화
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#203" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.3 버튼 달고 위치 요청하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#204-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.4 파란 점 오버레이 — CSS 세 줄의 마법
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#205-https-localhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.5 https와 localhost — 보안 컨텍스트라는 문지방
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#206" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="20">20장 내 위치 표시<a class="headerlink" href="#20" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">이 장에서 배우는 것</p>
+<ul>
+<li>브라우저에 내장된 <strong>Geolocation API</strong>로 사용자의 현재 위치를 알아냅니다</li>
+<li>위치 <strong>권한 프롬프트</strong>가 왜 뜨는지, 언제 요청해야 좋은지(권한 UX)를 배웁니다</li>
+<li><code>getCurrentPosition</code>의 <strong>성공 콜백 / 실패 콜백</strong> 두 갈래 흐름을 처리합니다</li>
+<li>CSS만으로 만든 <strong>파란 점 오버레이</strong>를 지도 위에 띄웁니다</li>
+<li>위치 기능이 <strong>https 또는 localhost에서만</strong> 동작하는 이유를 이해합니다</li>
+</ul>
+</div>
+<hr />
+<p>3부까지 달려온 우리 지도 앱은 이제 어엿한 CRUD 앱입니다. 장소를 추가하고, 저장하고, 목록에서 고르고, 별점과 메모까지 남길 수 있습니다. 4부에서는 여기에 "있으면 확 편해지는" 기능들을 하나씩 얹어 갑니다. 그 첫 번째가 <strong>내 위치 표시</strong>입니다.</p>
+<p>이런 상황을 상상해 보세요. 여러분이 성수동 골목을 걷다가 문득 "내가 저장해 둔 카페가 이 근처 어디였더라?" 하고 앱을 엽니다. 그런데 지도는 서울시청을 중심으로 떠 있습니다. 지금 내가 어디 있는지부터 지도에서 손으로 찾아야 한다면, 그 지도는 절반만 완성된 것입니다. 카카오맵이든 구글맵이든 모든 지도 앱의 오른쪽 아래에는 나침반 모양 버튼이 있고, 누르면 지도가 <strong>내가 서 있는 곳</strong>으로 날아가 파란 점을 찍어 줍니다. 이번 장에서 우리 앱에도 똑같은 버튼을 답니다.</p>
+<p>재미있는 사실 하나. 이 기능을 만드는 데 카카오 SDK의 도움은 거의 필요 없습니다. 사용자의 위치를 알아내는 능력은 <strong>브라우저 자체</strong>에 내장되어 있기 때문입니다. 카카오는 그렇게 얻은 좌표에 지도를 이동시키고 점을 찍는 마무리만 담당합니다. 즉 이번 장의 주인공은 카카오가 아니라 웹 표준 API인 <strong>Geolocation API</strong>입니다.</p>
+<h2 id="201-geolocation-api">20.1 Geolocation API — 브라우저는 내 위치를 어떻게 알까<a class="headerlink" href="#201-geolocation-api" title="Permanent link">&para;</a></h2>
+<p><code>Geolocation</code>은 "지리적(geo) 위치(location)"라는 뜻 그대로, 브라우저에게 "지금 이 기기가 지구 어디에 있어?"라고 물어보는 표준 API입니다. 크롬, 엣지, 사파리, 파이어폭스 등 여러분이 쓸 만한 브라우저에는 전부 들어 있고, 자바스크립트에서는 <code>navigator.geolocation</code>이라는 객체로 만납니다.</p>
+<p>그런데 브라우저는 GPS 위성과 직접 교신하는 것도 아닌데, 내 위치를 어떻게 아는 걸까요? 사실 브라우저는 운영체제에게 물어보고, 운영체제는 손에 잡히는 단서를 총동원합니다. 대표적인 단서가 세 가지입니다.</p>
+<ul>
+<li><strong>GPS</strong> — 스마트폰이라면 GPS 칩이 위성 신호로 위치를 계산합니다. 오차 수 미터 수준으로 가장 정확하지만, 실내에서는 신호가 약해집니다.</li>
+<li><strong>와이파이</strong> — 주변에 잡히는 와이파이 공유기 목록을 위치 데이터베이스와 대조합니다. "이 조합의 공유기들이 보이면 여기는 강남역 근처"라는 식이죠. 도시에서는 꽤 정확합니다.</li>
+<li><strong>IP 주소</strong> — 마지막 수단입니다. 인터넷 회선의 IP로 대략의 지역을 추정하는데, 시 단위까지만 맞고 동네는 틀리기 일쑤입니다.</li>
+</ul>
+<p><img alt="그림 20.1 — 브라우저가 위치를 알아내는 세 가지 단서" src="../images/ch20/ch20-f01.jpg" width="760" /></p>
+<p>그래서 같은 코드라도 <strong>어떤 기기에서 실행하느냐에 따라 정확도가 다릅니다.</strong> GPS가 달린 스마트폰에서는 파란 점이 내가 선 골목까지 맞히지만, 유선 랜에 연결된 데스크톱 PC에서는 옆 동네를 가리킬 수도 있습니다. 이건 우리 코드의 버그가 아니라 단서의 한계입니다. 이따가 실행 확인을 할 때 "어, 좀 빗나가네?" 싶어도 놀라지 마세요.</p>
+<p>중요한 점이 하나 더 있습니다. 우리 자바스크립트 코드는 이 계산 과정에 <strong>전혀 관여하지 않습니다.</strong> 우리는 그저 "위치 주세요"라고 요청하고, 브라우저가 알아서 최선의 답을 구해 좌표로 돌려줍니다. 복잡한 일은 플랫폼에 맡기고 우리는 결과만 받아 쓰는 것, 바이브코딩과도 닮은 분업입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>개발자도구 콘솔에 <code>navigator.geolocation</code>을 입력해 보세요. <code>Geolocation {}</code> 객체가 나오면 여러분의 브라우저가 위치 기능을 지원한다는 뜻입니다. 요즘 브라우저에서 <code>undefined</code>가 나오는 일은 거의 없지만, "쓰기 전에 있는지 확인한다"는 습관은 코드에도 그대로 들어갑니다. 잠시 뒤에 보게 됩니다.</p>
+</div>
+<h2 id="202">20.2 권한 프롬프트 — 물어보고 쓰는 문화<a class="headerlink" href="#202" title="Permanent link">&para;</a></h2>
+<p>위치는 편리한 만큼 민감한 정보입니다. 내가 어디 있는지는 곧 내가 어디 사는지, 어디서 일하는지, 어디를 다니는지로 이어지니까요. 그래서 브라우저는 아무 웹사이트나 위치를 가져가도록 두지 않습니다. 웹사이트가 처음으로 위치를 요청하는 순간, 브라우저는 코드 실행을 잠시 멈추고 <strong>사용자에게 직접 물어봅니다.</strong></p>
+<p><img alt="그림 20.2 — 브라우저의 위치 권한 프롬프트" src="../images/ch20/ch20-f02.png" width="760" /></p>
+<p>이 대화 상자가 <strong>권한 프롬프트</strong>입니다. 여기서 사용자가 고를 수 있는 답은 크게 세 가지이고, 각각 결과가 다릅니다.</p>
+<table>
+<thead>
+<tr>
+<th>사용자의 선택</th>
+<th>무슨 일이 일어나나</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>허용</strong></td>
+<td>브라우저가 위치를 계산해 성공 콜백으로 좌표를 넘겨줍니다. 이 사이트에 대한 허용이 기억됩니다.</td>
+</tr>
+<tr>
+<td><strong>차단</strong></td>
+<td>실패 콜백이 호출됩니다. 차단도 기억되어, 다음부터는 프롬프트조차 뜨지 않고 곧장 실패합니다.</td>
+</tr>
+<tr>
+<td><strong>무시(닫기)</strong></td>
+<td>이번 요청만 실패하고, 다음에 다시 물어봅니다.</td>
+</tr>
+</tbody>
+</table>
+<p>개발자 입장에서 꼭 새겨야 할 교훈이 두 가지입니다.</p>
+<p>첫째, <strong>거부는 오류가 아니라 정상적인 선택지</strong>입니다. 사용자는 얼마든지 "싫어요"라고 답할 권리가 있고, 우리 앱은 그 경우에도 망가지지 않아야 합니다. 허용만 가정하고 만든 앱은 절반짜리입니다. 그래서 Geolocation API는 처음부터 성공과 실패, <strong>두 갈래 길</strong>을 모두 준비하라고 설계되어 있습니다.</p>
+<p>둘째, <strong>권한은 필요한 순간에 요청해야 합니다.</strong> 접속하자마자 다짜고짜 위치 권한을 요구하는 사이트, 다들 한 번쯤 겪어 보셨죠? "얘가 왜 내 위치를 원하지?" 싶어 반사적으로 차단을 누르게 됩니다. 반면 사용자가 스스로 🧭 버튼을 누른 직후에 뜨는 프롬프트는 다릅니다. "내 위치를 보여 달라"고 방금 내가 요청했으니, 위치 권한을 묻는 이유가 자명합니다. 이것이 권한 UX의 제1원칙, <strong>"사용자의 행동에 대한 응답으로 요청하라"</strong>입니다. 우리 앱이 페이지 로드 시점이 아니라 버튼 클릭 시점에 위치를 요청하는 것은 우연이 아니라 설계입니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>테스트하다가 실수로 <strong>차단</strong>을 눌렀다면, 새로고침해도 프롬프트는 다시 뜨지 않습니다. 차단이 기억되었기 때문입니다. 크롬 주소창 왼쪽의 자물쇠(사이트 정보) 아이콘 → <strong>사이트 설정</strong> → <strong>위치</strong>를 "허용" 또는 "묻기"로 되돌린 뒤 새로고침하세요. 앱을 만들 때 자주 겪는 일이니 되돌리는 길을 기억해 두면 좋습니다.</p>
+</div>
+<h2 id="203">20.3 버튼 달고 위치 요청하기<a class="headerlink" href="#203" title="Permanent link">&para;</a></h2>
+<p>개념 준비는 끝났습니다. 이제 Claude Code에게 시켜 봅시다. 만들 것은 세 가지입니다. 지도 위에 떠 있는 🧭 버튼, 버튼을 눌렀을 때 위치를 요청하는 코드, 그리고 받은 좌표에 파란 점을 찍고 지도를 이동시키는 함수입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>지도 오른쪽 아래에 🧭 내 위치 버튼을 추가해줘. 누르면 Geolocation API로 현재 위치를 얻어서, 지도를 그 자리로 이동하고 카카오맵처럼 파란 점을 표시해줘. 파란 점은 CustomOverlay + CSS로 만들고, 권한이 거부되면 토스트로 알려줘. 위치 요청은 반드시 버튼을 눌렀을 때만 해야 해.</p>
+</blockquote>
+</div>
+<p>프롬프트에 지금까지 배운 개념이 녹아 있는 게 보이시나요? "버튼을 눌렀을 때만"은 20.2의 권한 UX 원칙이고, "거부되면 토스트로"는 실패 콜백 처리이고, "CustomOverlay + CSS"는 13장에서 배운 말풍선 기법의 재활용입니다. 개념을 알고 시키면 프롬프트가 정확해지고, 결과물도 원하는 모양으로 나옵니다.</p>
+<p>Claude Code는 먼저 <code>index.html</code>의 지도 영역에 버튼을 추가합니다.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">main</span> <span class="na">id</span><span class="o">=</span><span class="s">"map-wrap"</span><span class="p">&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"map"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">"btn-mylocation"</span> <span class="na">title</span><span class="o">=</span><span class="s">"내 위치"</span><span class="p">&gt;</span>🧭<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>그리고 <code>style.css</code>에서 이 버튼을 지도 위에 띄웁니다.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">#</span><span class="nn">btn-mylocation</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span><span class="w"> </span><span class="k">right</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--line</span><span class="p">);</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span><span class="w"> </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">6</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.15</span><span class="p">);</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>#map-wrap</code>이 <code>position: relative</code>이므로, 그 안에서 <code>position: absolute</code>를 쓰면 버튼이 지도 위에 겹쳐 뜹니다. <code>border-radius: 50%</code>로 동그란 버튼을 만들고 <code>z-index: 15</code>로 지도 타일보다 위에 올렸습니다. 카카오맵 앱의 그 버튼과 같은 자리, 같은 모양입니다.</p>
+<p><img alt="그림 20.3 — 지도 오른쪽 아래에 자리 잡은 🧭 버튼" src="../images/ch20/ch20-f03.png" width="760" /></p>
+<p>이제 핵심인 <code>src/main.js</code>의 클릭 리스너입니다. 짧지만 이 장의 개념이 전부 들어 있습니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// 내 위치</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-mylocation'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">toast</span><span class="p">(</span><span class="s1">'이 브라우저는 위치를 지원하지 않습니다.'</span><span class="p">);</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="p">(</span><span class="nx">pos</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">showMyLocation</span><span class="p">(</span><span class="nx">pos</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">latitude</span><span class="p">,</span><span class="w"> </span><span class="nx">pos</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">longitude</span><span class="p">),</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">toast</span><span class="p">(</span><span class="s1">'위치 권한이 거부되었습니다.'</span><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>위에서부터 한 줄씩 읽어 봅시다.</p>
+<p><strong>지원 확인부터.</strong> <code>if (!navigator.geolocation)</code> — 위치 기능이 아예 없는 브라우저라면 정중히 안내하고 물러납니다. 20.1에서 말한 "쓰기 전에 있는지 확인" 습관이 바로 이 줄입니다. 요즘 브라우저에서 걸릴 일은 드물지만, 이 세 줄 덕분에 우리 앱은 어떤 환경에서도 에러 없이 우아하게 동작합니다.</p>
+<p><strong>요청은 한 줄.</strong> <code>getCurrentPosition</code>은 이름 그대로 "현재 위치를 얻어라"입니다. 그런데 반환값을 변수에 받지 않는 점이 눈에 띕니다. <code>const pos = navigator.geolocation.getCurrentPosition(...)</code>이 아니에요. 왜일까요? 위치 계산은 <strong>시간이 걸리는 일</strong>이기 때문입니다. 권한 프롬프트에서 사용자가 고민하는 시간, GPS가 위성을 잡는 시간이 얼마나 걸릴지 아무도 모릅니다. 그동안 앱을 얼어붙게 둘 수는 없으니, 브라우저는 "끝나면 이 함수를 불러 줘"라는 <strong>콜백</strong> 방식을 씁니다. 15장의 <code>keywordSearch</code>가 콜백으로 검색 결과를 돌려주던 것과 정확히 같은 패턴입니다. 한 번 배운 패턴이 이렇게 계속 재등장합니다.</p>
+<p><strong>두 갈래 길.</strong> <code>getCurrentPosition</code>은 콜백을 <strong>두 개</strong> 받습니다. 첫 번째 인자는 성공 콜백 — 위치를 얻으면 <code>pos</code> 객체와 함께 호출됩니다. 두 번째 인자는 실패 콜백 — 사용자가 차단했거나, 위치를 계산할 수 없으면 호출됩니다. 성공하면 <code>showMyLocation</code>으로 파란 점을 찍고, 실패하면 <code>toast</code>로 "위치 권한이 거부되었습니다"라고 알립니다. 실패했을 때 아무 반응이 없는 것과, 짧게라도 이유를 알려 주는 것. 사용자가 느끼는 완성도 차이는 생각보다 큽니다.</p>
+<p><strong>좌표 꺼내기.</strong> 성공 콜백이 받는 <code>pos</code>는 <code>GeolocationPosition</code> 객체입니다. 알맹이는 <code>pos.coords</code> 안에 있는데, <code>latitude</code>(위도)와 <code>longitude</code>(경도)가 우리가 쓸 값입니다. 9장에서 배운 위경도 그대로죠. <code>coords</code> 안에는 <code>accuracy</code>(오차 반경, 미터)도 들어 있어서, 지금 받은 좌표가 어느 정도 믿을 만한지도 알 수 있습니다.</p>
+<p><img alt="그림 20.4 — getCurrentPosition의 두 갈래 흐름" src="../images/ch20/ch20-f04.png" width="760" /></p>
+<h2 id="204-css">20.4 파란 점 오버레이 — CSS 세 줄의 마법<a class="headerlink" href="#204-css" title="Permanent link">&para;</a></h2>
+<p>이제 받은 좌표를 화면에 그릴 차례입니다. Claude Code가 <code>src/mapView.js</code>에 추가한 <code>showMyLocation</code> 함수를 봅시다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">myLocationMarker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">showMyLocation</span><span class="p">(</span><span class="nx">lat</span><span class="p">,</span><span class="w"> </span><span class="nx">lng</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">LatLng</span><span class="p">(</span><span class="nx">lat</span><span class="p">,</span><span class="w"> </span><span class="nx">lng</span><span class="p">);</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">myLocationMarker</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">el</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">el</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'my-location-dot'</span><span class="p">;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nx">myLocationMarker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">CustomOverlay</span><span class="p">({</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="nx">el</span><span class="p">,</span><span class="w"> </span><span class="nx">position</span><span class="o">:</span><span class="w"> </span><span class="nx">pos</span><span class="p">,</span><span class="w"> </span><span class="nx">zIndex</span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="nx">myLocationMarker</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">pos</span><span class="p">);</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nx">myLocationMarker</span><span class="p">.</span><span class="nx">setMap</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nx">map</span><span class="p">.</span><span class="nx">setLevel</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="nx">map</span><span class="p">.</span><span class="nx">panTo</span><span class="p">(</span><span class="nx">pos</span><span class="p">);</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>파란 점의 정체는 마커가 아니라 13장에서 배운 <strong>CustomOverlay</strong>입니다. 내용물(<code>content</code>)로 <code>my-location-dot</code> 클래스를 단 빈 <code>div</code> 하나를 넣었을 뿐입니다. 이미지 파일이 아니라 CSS로 그린 점이죠. <code>style.css</code>의 해당 부분은 이렇습니다.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">.</span><span class="nc">my-location-dot</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#2563eb</span><span class="p">;</span><span class="w"> </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">6</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">37</span><span class="w"> </span><span class="mi">99</span><span class="w"> </span><span class="mi">235</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.25</span><span class="p">);</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>읽어 보면 카카오맵의 그 파란 점이 그대로 보입니다. 16px 정사각형을 <code>border-radius: 50%</code>로 동그랗게 말고, 파란색(<code>#2563eb</code>)으로 칠하고, 흰 테두리 3px를 둘렀습니다. 마지막 줄이 백미인데, <code>box-shadow</code>의 번짐(blur)을 0으로 두고 퍼짐(spread)만 6px 주면 그림자가 아니라 <strong>반투명 파란 링</strong>이 됩니다. GPS 오차 범위를 표현하는 듯한 그 은은한 후광이 CSS 한 줄로 완성됩니다.</p>
+<p>자바스크립트 쪽에서 눈여겨볼 것은 <code>let myLocationMarker = null</code>과 <code>if (!myLocationMarker)</code> 조합입니다. 파란 점 오버레이는 <strong>처음 한 번만 만들고, 그다음부터는 재사용</strong>합니다. 버튼을 열 번 누르면 점이 열 개 생기는 게 아니라, 하나뿐인 점이 <code>setPosition(pos)</code>으로 새 위치로 이동합니다. 내 위치는 언제나 한 곳뿐이니 점도 하나여야 한다 — 데이터의 성질이 코드 구조를 결정한 셈입니다. 13장에서 "열린 말풍선은 하나만"이라며 <code>openOverlay</code> 변수 하나로 관리했던 것과 같은 발상입니다.</p>
+<p>마지막 두 줄 <code>setLevel(4)</code>와 <code>panTo(pos)</code>는 10장 복습입니다. 지도를 동네가 보이는 축척으로 당기고, 내 위치까지 부드럽게 미끄러져 갑니다. <code>focusPlace</code>에서 장소로 이동할 때 쓴 바로 그 조합입니다.</p>
+<p>이제 실행해 봅시다. <code>npm run dev</code>가 켜진 상태에서 브라우저를 새로고침하고 🧭 버튼을 누르세요. 권한 프롬프트가 뜨면 <strong>허용</strong>을 누릅니다. 잠시 후 지도가 스르륵 움직이더니, 여러분이 있는 곳에 흰 테두리의 파란 점이 나타납니다.</p>
+<p><img alt="그림 20.5 — 내 위치에 표시된 파란 점" src="../images/ch20/ch20-f05.png" width="520" /></p>
+<p>이번에는 실패 쪽 길도 확인합니다. 주소창의 사이트 설정에서 위치를 <strong>차단</strong>으로 바꾸고 버튼을 다시 눌러 보세요. 앱이 조용히 있는 대신, 화면 아래에 토스트가 떠서 "위치 권한이 거부되었습니다"라고 알려 주면 성공입니다. 두 갈래 길이 모두 잘 닦였습니다. 확인이 끝나면 설정을 다시 "묻기"로 되돌려 두세요.</p>
+<p><img alt="그림 20.6 — 권한 거부 시 토스트 안내" src="../images/ch20/ch20-f06.jpg" width="760" /></p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>데스크톱 PC에서 파란 점이 실제 위치와 몇 블록 어긋나도 정상입니다(20.1의 단서 이야기를 떠올리세요). 정확한 좌표로 테스트하고 싶다면 개발자도구의 <strong>센서(Sensors)</strong> 패널을 이용하세요. ++f12++ → 오른쪽 위 ⋮ 메뉴 → 도구 더보기 → 센서에서 위치를 "Tokyo"나 직접 입력한 위경도로 <strong>가짜 지정(오버라이드)</strong>할 수 있습니다. 여행 앱 개발자들이 서울에 앉아 파리 테스트를 하는 방법입니다.</p>
+</div>
+<h2 id="205-https-localhost">20.5 https와 localhost — 보안 컨텍스트라는 문지방<a class="headerlink" href="#205-https-localhost" title="Permanent link">&para;</a></h2>
+<p>마지막으로, 언젠가 여러분을 반드시 한 번 놀라게 할 함정을 미리 밟아 둡시다. Geolocation API는 <strong>아무 페이지에서나 동작하지 않습니다.</strong> 브라우저는 이 API를 <strong>보안 컨텍스트(secure context)</strong>, 쉽게 말해 "안전하다고 믿을 수 있는 페이지"에서만 열어 줍니다. 기준은 주소입니다.</p>
+<ul>
+<li><code>https://</code>로 시작하는 페이지 — ✅ 동작</li>
+<li><code>http://localhost</code> (우리의 <code>localhost:5173</code> 포함) — ✅ 동작 (개발용 특례)</li>
+<li>그 밖의 <code>http://</code> 페이지 — ❌ 차단. 권한 프롬프트조차 뜨지 않고 곧장 실패 콜백이 불립니다.</li>
+</ul>
+<p>이유는 http의 성질에 있습니다. <code>http://</code>로 주고받는 데이터는 <strong>암호화되지 않은 채</strong> 인터넷을 여행합니다. 같은 와이파이에 있는 누군가가 마음만 먹으면 오가는 내용을 엿볼 수 있다는 뜻입니다. 내 위치처럼 민감한 정보가 그런 맨몸 통신으로 흘러 다니게 둘 수는 없으니, 브라우저가 문 앞에서 막아 버리는 것입니다. <code>https://</code>는 통신 전체를 암호화하므로 통과이고, <code>localhost</code>는 내 컴퓨터 안에서만 도는 통신이라 엿볼 구간 자체가 없으니 개발 편의를 위해 특례로 통과입니다.</p>
+<p><img alt="그림 20.7 — 보안 컨텍스트: 위치 API의 문지방" src="../images/ch20/ch20-f07.png" width="760" /></p>
+<p>지금 우리는 <code>localhost:5173</code>에서 개발 중이니 아무 문제가 없습니다. 함정은 <strong>배포할 때</strong> 나타납니다. 25장에서 GitHub Pages로 배포하면 주소가 <code>https://아이디.github.io/...</code>가 되므로 다행히 통과입니다. 하지만 언젠가 여러분이 다른 방법으로 앱을 올렸는데 주소가 <code>http://</code>라면, 개발 내내 멀쩡하던 내 위치 버튼이 갑자기 침묵할 겁니다. 코드는 그대로인데 주소가 달라져서 생기는 문제 — 이 장을 기억한다면 "아, 보안 컨텍스트!" 하고 5초 만에 원인을 짚을 수 있습니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>같은 이유로, 개발 서버에 <strong>다른 기기로 접속하면</strong>(예: 스마트폰에서 <code>http://192.168.0.x:5173</code>) localhost가 아니므로 위치 기능이 동작하지 않습니다. localhost 특례는 말 그대로 <code>localhost</code>라는 주소에만 적용됩니다. 스마트폰 GPS로 테스트해 보고 싶다면 25장에서 https 주소로 배포한 뒤에 하는 것이 가장 간단합니다.</p>
+</div>
+<h2 id="206">20.6 마무리<a class="headerlink" href="#206" title="Permanent link">&para;</a></h2>
+<p>버튼 하나, 함수 하나, CSS 네 줄. 코드 분량은 이 책에서 손꼽게 적은 장이었지만, 그 뒤에 있는 개념은 결코 가볍지 않았습니다. 브라우저가 위치를 알아내는 방법, 사용자에게 물어보고 쓰는 권한 문화, 성공과 실패 두 갈래를 모두 준비하는 비동기 처리, 그리고 https라는 문지방까지. 앞으로 카메라, 마이크, 알림 같은 다른 브라우저 권한을 만나도 오늘 배운 틀이 그대로 통합니다. 요청은 사용자 행동에 대한 응답으로, 거부는 정상 선택지로, 민감한 API는 보안 컨텍스트에서만.</p>
+<div class="admonition abstract">
+<p class="admonition-title">📌 핵심 요약</p>
+<ul>
+<li><strong>Geolocation API</strong>(<code>navigator.geolocation</code>)는 브라우저 내장 표준 API로, GPS·와이파이·IP를 단서로 위치를 계산합니다. 카카오 SDK와는 별개입니다.</li>
+<li>위치 요청 시 브라우저가 <strong>권한 프롬프트</strong>를 띄우며, 거부는 오류가 아니라 정상적인 선택지입니다. 권한은 페이지 로드 시가 아니라 <strong>사용자가 버튼을 누른 순간</strong> 요청합니다.</li>
+<li><code>getCurrentPosition(성공콜백, 실패콜백)</code> — 성공 시 <code>pos.coords.latitude / longitude</code>로 좌표를 얻고, 실패 시 토스트로 안내합니다.</li>
+<li>파란 점은 <code>CustomOverlay</code> + CSS(<code>border-radius: 50%</code>, 흰 <code>border</code>, 퍼짐만 준 <code>box-shadow</code> 링)로 만들며, 오버레이는 하나만 만들어 <code>setPosition</code>으로 재사용합니다.</li>
+<li>Geolocation은 <strong>https 또는 localhost</strong>(보안 컨텍스트)에서만 동작합니다. http 배포 주소에서는 프롬프트 없이 곧장 실패합니다.</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">🤔 생각해보기</p>
+<p>Q1. 접속하자마자 위치 권한을 요구하는 사이트와 버튼을 눌렀을 때 요구하는 사이트, 사용자로서 느낌이 어떻게 달랐나요? 우리 앱의 다른 기능에도 이 원칙을 적용할 곳이 있을까요?</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>Q2. 파란 점을 <code>Marker</code> 대신 <code>CustomOverlay</code>로 만든 이유는 무엇일까요? 13장의 말풍선을 떠올리며 두 방식의 차이를 설명해 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">✏️ 연습 문제</p>
+<ol>
+<li>성공 콜백에서 <code>pos.coords.accuracy</code>를 콘솔에 출력하도록 Claude Code에게 시켜 보세요. 여러분의 환경에서 오차 반경은 몇 미터로 나오나요? 스마트폰과 PC의 값을 비교해 보세요.</li>
+<li>실패 콜백은 사실 <code>err</code> 객체를 인자로 받습니다. <code>err.code</code>가 1(권한 거부), 2(위치 계산 불가), 3(시간 초과)일 때 각각 다른 토스트 메시지를 보여 주도록 개선해 보세요.</li>
+<li><code>.my-location-dot</code>의 <code>box-shadow</code> 퍼짐 값을 6px에서 12px로, 색의 투명도를 바꿔 가며 링의 느낌이 어떻게 달라지는지 실험해 보세요.</li>
+<li>개발자도구 센서 패널에서 위치를 "Berlin"으로 오버라이드한 뒤 🧭 버튼을 눌러, 파란 점이 베를린에 찍히는지 확인해 보세요.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">🔎 더 찾아보기</p>
+<ul>
+<li><code>watchPosition</code> — 한 번이 아니라 <strong>이동할 때마다 계속</strong> 위치를 받아오는 메서드. 내비게이션처럼 파란 점이 나를 따라다니게 하려면 이것을 씁니다 (해제는 <code>clearWatch</code>).</li>
+<li><code>enableHighAccuracy</code> — <code>getCurrentPosition</code>의 세 번째 인자(옵션)로 넘기는 정확도 우선 모드. 배터리를 더 쓰는 대신 GPS를 적극 활용합니다.</li>
+<li><code>Permissions API</code> — <code>navigator.permissions.query</code>로 권한 상태(granted/denied/prompt)를 <strong>묻기 전에 미리</strong> 확인하는 표준 API.</li>
+<li><code>Geolocation heading/speed</code> — <code>pos.coords</code>에 함께 들어 있는 진행 방향·속도 값. 이동 중인 기기에서만 채워집니다.</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>다음 장 예고</strong> — 내 지도가 근사해질수록 누군가에게 보여 주고 싶어집니다. 21장에서는 지금 보고 있는 지도의 위치와 확대 레벨을 <strong>URL 하나에 담아</strong> 공유하는 기능을 만듭니다. 링크를 받은 친구가 열면 내가 보던 바로 그 화면이 열립니다. 주소창의 <code>#</code> 뒤에 상태를 싣는 URL 해시 기법, 그리고 클립보드 API가 등장합니다.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

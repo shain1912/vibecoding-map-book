@@ -1,0 +1,1962 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼">
+      
+      
+        <meta name="author" content="YLBook">
+      
+      
+        <link rel="canonical" href="https://shain1912.github.io/vibecoding-map-book/ch22/">
+      
+      
+        <link rel="prev" href="../ch21/">
+      
+      
+        <link rel="next" href="../ch23/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>22장 마커 클러스터러 - 바이브코딩으로 만드는 나만의 지도 웹</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#22" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-header__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            바이브코딩으로 만드는 나만의 지도 웹
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              22장 마커 클러스터러
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-nav__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    바이브코딩으로 만드는 나만의 지도 웹
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0장 이 책에서 만드는 것
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1부 바이브코딩 준비운동
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1부 바이브코딩 준비운동
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2장 Node.js 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3장 Git for Windows 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4장 Claude Code 설치하고 길들이기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2부 카카오 지도 첫걸음
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2부 카카오 지도 첫걸음
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7장 카카오 개발자 계정과 앱 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8장 Vite로 프로젝트 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9장 첫 지도 띄우기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10장 지도 다루기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3부 나만의 장소 지도 만들기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3부 나만의 장소 지도 만들기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11장 마커 찍기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12장 장소 데이터 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13장 커스텀 오버레이 말풍선
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14장 카테고리 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16장 클릭·검색으로 장소 추가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17장 localStorage 저장
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19장 상세 패널
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4부 한 단계 더
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4부 한 단계 더
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21장 URL로 지도 공유
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#221-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.1 장소 100개 — 일부러 문제 만들기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.2 클러스터링 — 묶으면 보인다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#223-clusterer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.3 clusterer 확장팩 로드하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#224-markerclusterer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.4 MarkerClusterer 적용하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#225-3-averagecenter-minlevel-minclustersize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.5 옵션 3형제 — averageCenter, minLevel, minClusterSize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#226" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5부 세상에 공개하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5부 세상에 공개하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24장 GitHub에 올리기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25장 GitHub Pages 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26장 README와 자랑하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    부록
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 A 프롬프트 템플릿 모음
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 B 트러블슈팅 & 치트시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#221-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.1 장소 100개 — 일부러 문제 만들기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.2 클러스터링 — 묶으면 보인다
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#223-clusterer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.3 clusterer 확장팩 로드하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#224-markerclusterer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.4 MarkerClusterer 적용하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#225-3-averagecenter-minlevel-minclustersize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.5 옵션 3형제 — averageCenter, minLevel, minClusterSize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#226" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="22">22장 마커 클러스터러<a class="headerlink" href="#22" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">이 장에서 배우는 것</p>
+<ul>
+<li>마커가 100개쯤 되면 지도가 어떻게 망가지는지 직접 시연합니다</li>
+<li>가까운 마커를 숫자 하나로 묶는 <strong>클러스터링</strong> 개념을 배웁니다</li>
+<li>SDK 주소에 <code>&amp;libraries=clusterer</code>를 붙여 클러스터러 확장팩을 로드합니다</li>
+<li><code>kakao.maps.MarkerClusterer</code>를 만들고 <code>addMarkers</code>/<code>removeMarkers</code>로 마커를 맡깁니다</li>
+<li><code>averageCenter</code>·<code>minLevel</code>·<code>minClusterSize</code> 세 가지 옵션의 의미를 이해합니다</li>
+</ul>
+</div>
+<hr />
+<p>우리 지도는 이제 어엿한 앱입니다. 장소를 추가하고(16장), 새로고침해도 남고(17장), 목록과 상세 패널로 관리하고(18~19장), 내 위치를 찍고(20장), 링크로 공유까지 합니다(21장). 그런데 이 앱을 정말 열심히 쓰는 미래의 여러분을 상상해 봅시다. 맛집 도장 깨기 1년 차, 저장한 장소가 100개를 넘겼습니다. 그때 지도는 어떤 모습일까요?</p>
+<p>결론부터 말하면, <strong>핀 지옥</strong>입니다. 서울 지도 전체가 마커로 뒤덮여서 어디에 뭐가 있는지 하나도 안 보입니다. 마커가 마커를 가리고, 클릭하려던 카페 대신 뒤에 숨은 국밥집 말풍선이 열립니다. 데이터가 많아질수록 지도가 오히려 못 쓰게 되는 역설이죠. 다행히 이 문제는 지도 서비스들이 이미 수십 년 고민해 온 문제이고, 표준 해법도 있습니다. 가까운 마커들을 하나로 <strong>묶어서 숫자로 보여 주는</strong> 클러스터링입니다. 이번 장에서는 먼저 문제를 일부러 만들어 눈으로 확인한 다음, 카카오가 주는 클러스터러 확장팩으로 해결합니다. 고치는 코드보다 문제를 만드는 코드가 더 긴, 조금 특이한 장이 될 겁니다.</p>
+<h2 id="221-100">22.1 장소 100개 — 일부러 문제 만들기<a class="headerlink" href="#221-100" title="Permanent link">&para;</a></h2>
+<p>문제를 고치려면 먼저 문제가 눈앞에 있어야 합니다. 그런데 장소 100개를 손으로 하나씩 추가하려면 오늘 하루가 다 갑니다. 이럴 때야말로 AI에게 시킬 일입니다. 앱 코드를 고치는 게 아니라, <strong>브라우저 콘솔에 붙여 넣을 일회용 스크립트</strong>를 짜 달라고 해 봅시다.</p>
+<p>그 전에 딱 하나, 안전벨트부터 맵시다. 지금부터 할 실험은 localStorage에 든 <strong>여러분의 진짜 장소 데이터를 테스트 데이터로 통째로 바꿔치기</strong>합니다. 17장에서 만든 <strong>내보내기</strong> 버튼을 눌러 지금 데이터를 JSON 파일로 백업해 두세요. 실험이 끝나면 <strong>가져오기</strong>로 되돌릴 겁니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>이번 실습은 localStorage를 덮어씁니다. 실습 전에 반드시 사이드바의 <strong>내보내기</strong>로 <code>places.json</code> 백업 파일을 받아 두세요. 백업 없이 덮어쓰면 그동안 모은 장소가 사라집니다. 되돌리기(3장에서 배운 git)로도 못 구합니다 — localStorage는 코드가 아니라 <strong>브라우저 안</strong>에 있으니까요.</p>
+</div>
+<p>백업을 확인했다면 Claude Code에게 시킵니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>브라우저 콘솔에 붙여 넣을 일회용 스크립트를 짜줘. 서울 근처(위도 37.45~37.65, 경도 126.85~127.15) 무작위 좌표로 테스트 장소 100개를 만들어서 localStorage 키 'my-map-places-v1'에 저장하고 새로고침까지 해줘. 장소 스키마는 id/name/category/lat/lng/rating/memo이고 category는 food, cafe, travel, date를 골고루 섞어줘. 앱 파일은 건드리지 마.</p>
+</blockquote>
+</div>
+<p>Claude Code가 만들어 준 스크립트입니다. 개발자도구 콘솔(++f12++)에 통째로 붙여 넣고 Enter를 누르세요.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 테스트용 장소 100개 생성 → localStorage 덮어쓰기 (일회용)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">cats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">'food'</span><span class="p">,</span><span class="w"> </span><span class="s1">'cafe'</span><span class="p">,</span><span class="w"> </span><span class="s1">'travel'</span><span class="p">,</span><span class="w"> </span><span class="s1">'date'</span><span class="p">];</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">bulk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">({</span><span class="w"> </span><span class="nx">length</span><span class="o">:</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">(</span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">'bulk'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'테스트 장소 '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">),</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="nx">cats</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">4</span><span class="p">],</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nx">lat</span><span class="o">:</span><span class="w"> </span><span class="mf">37.45</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nx">lng</span><span class="o">:</span><span class="w"> </span><span class="mf">126.85</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nx">rating</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nx">memo</span><span class="o">:</span><span class="w"> </span><span class="s1">'클러스터 실험용'</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}));</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'my-map-places-v1'</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">bulk</span><span class="p">));</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nx">location</span><span class="p">.</span><span class="nx">reload</span><span class="p">();</span>
+</span></code></pre></div>
+<p>짧지만 배울 게 많은 코드입니다. <code>Array.from({ length: 100 }, ...)</code>은 "길이 100짜리 배열을 만들되, 각 칸을 두 번째 함수로 채워라"라는 관용구입니다. 두 번째 함수의 <code>i</code>는 0부터 99까지의 번호표죠. <code>cats[i % 4]</code>는 나머지 연산으로 네 카테고리를 0,1,2,3,0,1,2,3… 돌려 가며 배정하는 고전적인 요령입니다. 좌표는 <code>Math.random()</code>(0 이상 1 미만의 난수)에 범위를 곱해 서울 언저리에 흩뿌렸습니다. 마지막 두 줄이 핵심인데, 17장에서 배운 그대로 <strong>객체 배열을 JSON 문자열로 바꿔</strong> 우리 앱이 쓰는 키에 저장하고, <code>location.reload()</code>로 새로고침합니다. 새로고침하면 <code>store.js</code>의 <code>load()</code>가 이 데이터를 읽어 들이겠죠. 앱의 저장 방식을 이해하고 있으면, 이렇게 앱 바깥에서 데이터를 주입하는 테스트 도구도 만들 수 있습니다.</p>
+<p>새로고침된 화면을 보세요. 예고한 대로 참사입니다.</p>
+<p><img alt="그림 22.1 — 마커 100개가 뒤덮은 지도 (클러스터러 적용 전)" src="../images/ch22/ch22-f01.jpg" width="760" /></p>
+<p>지도를 축소할수록 상황은 나빠집니다. 서울 전체가 보이는 레벨에서는 마커들이 완전히 포개져서 몇 개인지 셀 수도 없습니다. 마커를 클릭해 보면 어느 게 클릭될지 복불복이고요. 사이드바 목록은 스크롤로 버티지만, 지도는 면적이 정해져 있어서 버틸 수가 없습니다. 이것이 <strong>마커 100개 문제</strong>입니다. 100개에서 이 정도니 1,000개면 브라우저가 버벅이는 성능 문제까지 겹칩니다.</p>
+<h2 id="222">22.2 클러스터링 — 묶으면 보인다<a class="headerlink" href="#222" title="Permanent link">&para;</a></h2>
+<p>해법은 여러분이 이미 매일 보고 있습니다. 카카오맵이나 배달 앱에서 지도를 축소하면 핀 대신 <strong>숫자가 적힌 동그라미</strong>가 나타나죠. 스마트폰 사진 앱이 사진 수천 장을 "서울 234장, 제주 89장"으로 묶어 주는 것도 같은 발상입니다. 낱개로 보여 줄 수 없을 만큼 많으면, <strong>가까운 것끼리 묶고 개수만 보여 준다</strong> — 이것이 클러스터링(clustering)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>입니다.</p>
+<p>동작 원리는 단순합니다. 지도가 축소되어 있을 때, 화면상 가까운 마커들을 한 무리(클러스터)로 묶어 마커 대신 원 하나를 그립니다. <strong>원 안의 숫자는 그 무리에 묶인 마커의 개수</strong>입니다. "이 동네에 저장한 곳이 12군데 있구나"라는 정보는 남기면서, 핀 12개의 시각적 아우성은 지우는 겁니다. 그리고 지도를 확대하면 무리가 점점 잘게 쪼개지다가, 충분히 확대되면 원래의 개별 마커로 돌아옵니다. 멀리서는 요약을, 가까이서는 디테일을 — 좋은 지도의 원칙 그대로입니다.</p>
+<p><img alt="그림 22.2 — 클러스터링 개념도" src="../images/ch22/ch22-f02.png" width="760" /></p>
+<p>이 묶는 계산을 우리가 직접 짜야 할까요? 다행히 아닙니다. 카카오지도 SDK에는 이 일을 통째로 해 주는 <code>MarkerClusterer</code>가 준비되어 있습니다. 다만 15장의 <code>services</code>처럼 기본 패키지가 아닌 <strong>확장팩</strong>입니다. 이름은 <code>clusterer</code>. 우리가 할 일은 확장팩을 켜고, 클러스터러 객체를 만들고, 마커 관리를 그에게 위임하는 것뿐입니다. 하나씩 갑시다.</p>
+<h2 id="223-clusterer">22.3 clusterer 확장팩 로드하기<a class="headerlink" href="#223-clusterer" title="Permanent link">&para;</a></h2>
+<p>15장에서 SDK 주소 뒤에 <code>&amp;libraries=services</code>를 붙이며 "확장팩이 여러 개 필요하면 쉼표로 잇는다"고 예고했었습니다. 그 예고를 회수할 시간입니다. 수정할 파일은 이번에도 <code>src/loader.js</code> 한 곳뿐입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>src/loader.js의 카카오 SDK 주소에서 libraries에 clusterer를 추가해줘. 지금 services만 있는데 쉼표로 이어서 둘 다 로드되게 해줘. 다른 부분은 건드리지 마.</p>
+</blockquote>
+</div>
+<p>바뀐 <code>loader.js</code>입니다. 이번에도 딱 한 줄입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// src/loader.js — 카카오 지도 SDK를 동적으로 불러오는 모듈</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadKakaoSdk</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">VITE_KAKAO_JS_KEY</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">'VITE_KAKAO_JS_KEY가 .env에 없습니다.'</span><span class="p">));</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nx">script</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">      </span><span class="sb">`https://dapi.kakao.com/v2/maps/sdk.js?appkey=</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="sb">`&amp;autoload=false&amp;libraries=services,clusterer`</span><span class="p">;</span><span class="w">   </span><span class="c1">// ← 쉼표로 확장팩 추가!</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nx">script</span><span class="p">.</span><span class="nx">onload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">load</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">kakao</span><span class="p">));</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nx">script</span><span class="p">.</span><span class="nx">onerror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">'카카오 SDK 로드 실패 — 키/도메인 확인'</span><span class="p">));</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">script</span><span class="p">);</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>libraries=services,clusterer</code> — 쿼리 문자열 하나에 값 두 개를 쉼표로 실었습니다. 제대로 들어왔는지는 15장 때와 같은 방법으로 확인합니다. 강력 새로고침(++ctrl+shift+r++) 후 콘솔에 입력해 보세요.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">MarkerClusterer</span>
+</span></code></pre></div>
+<p><code>ƒ (a)</code> 같은 함수(클래스)가 출력되면 성공입니다. <code>undefined</code>가 나온다면 철자를 확인하고 강력 새로고침을 다시 해 보세요. 확장팩을 붙였는데 안 보이는 문제의 8할은 캐시입니다.</p>
+<p><img alt="그림 22.3 — 콘솔에서 MarkerClusterer 로드 확인" src="../images/ch22/ch22-f03.png" width="760" /></p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p><code>services</code>는 검색(15장), <code>clusterer</code>는 클러스터링, 그리고 <code>drawing</code>이라는 세 번째 확장팩(지도 위에 도형 그리기)도 있습니다. 확장팩은 쓰는 것만 싣는 게 원칙입니다. 우리 앱은 검색과 클러스터링만 쓰니 두 개면 충분합니다.</p>
+</div>
+<h2 id="224-markerclusterer">22.4 MarkerClusterer 적용하기<a class="headerlink" href="#224-markerclusterer" title="Permanent link">&para;</a></h2>
+<p>이제 본 공사입니다. 지금까지 우리 <code>mapView.js</code>의 <code>renderPlaces</code>는 마커를 만들 때마다 <code>marker.setMap(map)</code>으로 <strong>한 개씩 직접 지도에 붙이고</strong>, 다시 그릴 때는 한 개씩 떼어 왔습니다. 클러스터러를 쓰면 이 관계가 바뀝니다. 마커를 지도에 직접 붙이는 대신 <strong>클러스터러에게 맡기고</strong>, 붙일지 묶을지는 클러스터러가 지도 레벨을 보며 알아서 결정하게 합니다. 마커 인사팀을 새로 만들어서 채용·배치를 전부 위임하는 셈이죠.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>src/mapView.js에 마커 클러스터러를 적용해줘. createMap에서 kakao.maps.MarkerClusterer를 하나 만들어서 모듈 변수로 들고 있어줘. 옵션은 averageCenter를 켜고, minLevel 6, minClusterSize 3으로. 그리고 renderPlaces에서 마커를 setMap으로 직접 붙이지 말고 클러스터러의 addMarkers로 한꺼번에 맡기고, 다시 그리기 전에는 removeMarkers로 이전 마커들을 클러스터러에서 빼줘. 말풍선 오버레이 로직은 그대로 둬.</p>
+</blockquote>
+</div>
+<p>Claude Code가 고친 <code>mapView.js</code>의 핵심부입니다. 먼저 지도를 만드는 <code>createMap</code> 쪽.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// src/mapView.js — createMap에 클러스터러 생성 추가</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">map</span><span class="p">;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">let</span><span class="w"> </span><span class="nx">clusterer</span><span class="p">;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kd">let</span><span class="w"> </span><span class="nx">markers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span><span class="w"> </span><span class="c1">// { marker, overlay, place }</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">createMap</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span><span class="w"> </span><span class="nx">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">lat</span><span class="o">:</span><span class="w"> </span><span class="mf">37.5665</span><span class="p">,</span><span class="w"> </span><span class="nx">lng</span><span class="o">:</span><span class="w"> </span><span class="mf">126.978</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nx">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nb">Map</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nx">center</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">LatLng</span><span class="p">(</span><span class="nx">center</span><span class="p">.</span><span class="nx">lat</span><span class="p">,</span><span class="w"> </span><span class="nx">center</span><span class="p">.</span><span class="nx">lng</span><span class="p">),</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nx">level</span><span class="p">,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nx">map</span><span class="p">.</span><span class="nx">addControl</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">MapTypeControl</span><span class="p">(),</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">ControlPosition</span><span class="p">.</span><span class="nx">TOPRIGHT</span><span class="p">);</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nx">map</span><span class="p">.</span><span class="nx">addControl</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">ZoomControl</span><span class="p">(),</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">ControlPosition</span><span class="p">.</span><span class="nx">RIGHT</span><span class="p">);</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="nx">clusterer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">MarkerClusterer</span><span class="p">({</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nx">map</span><span class="p">,</span><span class="w">                  </span><span class="c1">// 이 지도 위에서 일한다</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="nx">averageCenter</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">  </span><span class="c1">// 클러스터 위치 = 묶인 마커들의 평균 좌표</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nx">minLevel</span><span class="o">:</span><span class="w"> </span><span class="mf">6</span><span class="p">,</span><span class="w">          </span><span class="c1">// 레벨 6 이상(축소)일 때만 묶는다</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nx">minClusterSize</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w">    </span><span class="c1">// 3개 이상 모여야 묶는다</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">map</span><span class="p">;</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>클러스터러는 지도처럼 앱에 딱 하나만 있으면 되는 물건이라, 지도를 만드는 <code>createMap</code>에서 함께 만들고 모듈 변수 <code>clusterer</code>에 보관합니다. 생성 옵션의 <code>map</code>은 어느 지도 위에서 일할지 알려 주는 항목입니다. 꼭 생성 시점에 넘겨야 하는 것은 아니고 만들어 두었다가 나중에 <code>setMap()</code>으로 연결할 수도 있지만, 우리는 처음부터 붙여 두는 쪽이 간단합니다. 나머지 세 옵션은 다음 절에서 하나씩 뜯어봅니다.</p>
+<p>다음은 <code>renderPlaces</code>. 바뀐 곳은 시작과 끝, 딱 두 군데입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">renderPlaces</span><span class="p">(</span><span class="nx">places</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">closeOverlay</span><span class="p">();</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nx">clusterer</span><span class="p">.</span><span class="nx">removeMarkers</span><span class="p">(</span><span class="nx">markers</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">m</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">marker</span><span class="p">));</span><span class="w">  </span><span class="c1">// ← 이전엔 setMap(null) 반복</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nx">markers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">place</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">places</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">LatLng</span><span class="p">(</span><span class="nx">place</span><span class="p">.</span><span class="nx">lat</span><span class="p">,</span><span class="w"> </span><span class="nx">place</span><span class="p">.</span><span class="nx">lng</span><span class="p">);</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">Marker</span><span class="p">({</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">      </span><span class="nx">position</span><span class="o">:</span><span class="w"> </span><span class="nx">pos</span><span class="p">,</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">      </span><span class="nx">image</span><span class="o">:</span><span class="w"> </span><span class="nx">markerImageFor</span><span class="p">(</span><span class="nx">place</span><span class="p">.</span><span class="nx">category</span><span class="p">),</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">      </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="nx">place</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">      </span><span class="c1">// setMap이 없다! 지도 배치는 클러스터러의 일</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="p">});</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="c1">// ... 말풍선 오버레이와 클릭 리스너는 13장 그대로 ...</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="nx">markers</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="w"> </span><span class="nx">marker</span><span class="p">,</span><span class="w"> </span><span class="nx">overlay</span><span class="p">,</span><span class="w"> </span><span class="nx">place</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span><span class="nx">clusterer</span><span class="p">.</span><span class="nx">addMarkers</span><span class="p">(</span><span class="nx">markers</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">m</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">marker</span><span class="p">));</span><span class="w">  </span><span class="c1">// ← 이전엔 setMap(map) 반복</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>위에서부터 짚어 봅시다.</p>
+<p><strong><code>clusterer.removeMarkers(...)</code></strong> — 다시 그리기 전, 이전 판의 마커들을 클러스터러에서 뺍니다. <code>markers</code> 배열에는 <code>{ marker, overlay, place }</code> 꾸러미가 들어 있으므로 <code>markers.map((m) =&gt; m.marker)</code>로 <strong>마커만 뽑은 배열</strong>을 만들어 넘깁니다. <code>removeMarker</code>(단수)를 반복문으로 100번 부르는 방법도 있지만, 복수형 <code>removeMarkers</code>에 배열을 한 번 넘기는 쪽이 코드도 간결하고 클러스터러에게 일감을 한 번에 맡기는 자연스러운 방식입니다. (공식 문서를 보면 두 메서드 모두 화면 다시 그리기를 미루는 선택적 <code>nodraw</code> 인자를 받습니다 — 성능을 더 조이고 싶어질 때 찾아볼 키워드입니다.)</p>
+<p><strong>마커 생성에 <code>setMap</code>이 없다</strong> — 이게 사고방식의 전환점입니다. 마커는 만들어만 두고 지도에 붙이지 않습니다. 지도에 붙일지, 묶어서 숨길지는 이제 우리가 아니라 클러스터러가 결정합니다. 우리가 직접 <code>setMap(map)</code>을 해 버리면 클러스터러가 묶어도 마커가 따로 또 보이는 유령 현상이 생깁니다.</p>
+<p><strong><code>clusterer.addMarkers(...)</code></strong> — 반복문이 끝난 뒤, 새 마커 전부를 배열로 한 번에 맡깁니다. 이 호출 한 방으로 클러스터러는 현재 지도 레벨을 보고 "묶을 놈은 묶고, 낱개로 보여 줄 놈은 보여 주는" 배치를 끝냅니다. 이후 사용자가 지도를 확대·축소할 때마다 재배치도 알아서 합니다. 우리는 이벤트 하나 달지 않았는데 말이죠.</p>
+<p>말풍선(CustomOverlay)은 클러스터러와 무관하게 13장 방식 그대로 <code>setMap</code>으로 열고 닫습니다. 클러스터러가 관리하는 것은 어디까지나 <strong>마커</strong>뿐입니다.</p>
+<p>새로고침해 봅시다. 아까의 핀 지옥이 있던 자리에, 숫자가 적힌 동그라미 몇 개가 점잖게 앉아 있습니다.</p>
+<p><img alt="그림 22.4 — 클러스터러 적용 후: 숫자 원으로 정리된 지도" src="../images/ch22/ch22-f04.jpg" width="760" /></p>
+<p>덤으로 얻는 것도 있습니다. <strong>성능</strong>입니다. 브라우저 입장에서 마커 하나는 지도 위에 얹힌 그림 조각 하나이고, 지도를 드래그할 때마다 전부 다시 그려야 합니다. 100개면 100개를, 1,000개면 1,000개를요. 클러스터러가 90개를 원 3개로 접어 주면 브라우저는 화면에 실제로 보이는 십수 개만 그리면 됩니다. 보기 좋아지는 김에 빨라지기까지 하는, 드물게 공짜 점심 같은 기능입니다.</p>
+<p>그림 22.1과 그림 22.4는 <strong>같은 데이터</strong>입니다. 데이터는 한 글자도 바뀌지 않았고, 보여 주는 방식만 바뀌었습니다. 원 안의 숫자를 읽어 보세요. "이 동네에 23곳"이라는 요약 정보는 오히려 핀 23개보다 유용합니다. 숫자 원을 클릭해 보세요. 지도가 한 단계 확대되면서 그 무리가 더 작은 무리들로 쪼개집니다. 이 클릭-확대 동작은 클러스터러의 기본 동작이라 우리가 짠 코드가 아닙니다.</p>
+<h2 id="225-3-averagecenter-minlevel-minclustersize">22.5 옵션 3형제 — averageCenter, minLevel, minClusterSize<a class="headerlink" href="#225-3-averagecenter-minlevel-minclustersize" title="Permanent link">&para;</a></h2>
+<p>프롬프트에서 지정한 옵션 세 개를 이제 제대로 이해해 봅시다. 클러스터러의 성격을 결정하는 3형제입니다.</p>
+<table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>우리 설정</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>averageCenter</code></td>
+<td><code>true</code></td>
+<td>클러스터 원을 <strong>묶인 마커들의 평균 좌표</strong>에 그린다 (기본값 <code>false</code>면 첫 마커 위치)</td>
+</tr>
+<tr>
+<td><code>minLevel</code></td>
+<td><code>6</code></td>
+<td><strong>레벨 6 이상</strong>(그만큼 축소된 상태)에서만 클러스터링한다</td>
+</tr>
+<tr>
+<td><code>minClusterSize</code></td>
+<td><code>3</code></td>
+<td><strong>3개 이상</strong> 모여야 묶는다 (기본값 2)</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>averageCenter</code></strong> — 클러스터 원을 지도의 어느 지점에 그릴지 정합니다. 기본값(<code>false</code>)은 무리의 첫 번째 마커 위치에 그립니다. 계산은 공짜지만, 마커들이 오른쪽에 몰려 있는데 원은 왼쪽 끝에 그려지는 어색한 그림이 나올 수 있습니다. <code>true</code>로 켜면 묶인 마커들의 위도·경도 평균 지점, 즉 무리의 <strong>무게중심</strong>에 그립니다. 반 대표를 뽑는데 출석부 1번을 시키느냐, 교실 한가운데 앉은 친구를 시키느냐의 차이랄까요. 화면의 자연스러움은 평균 쪽이 확실히 낫습니다.</p>
+<p><strong><code>minLevel</code></strong> — 클러스터링을 시작하는 축소 레벨입니다. 10장에서 배웠듯 카카오지도의 레벨은 <strong>숫자가 클수록 축소</strong>(넓게 보기)입니다. <code>minLevel: 6</code>은 "레벨 6 이상으로 축소됐을 때만 묶어라"라는 뜻입니다. 뒤집어 말하면 레벨 5 이하로 확대하면 클러스터가 전부 해제되고 개별 마커가 돌아옵니다. 동네 골목이 보일 만큼 확대했는데도 마커가 숫자 원에 숨어 있으면 답답하겠죠. 우리 앱의 4레벨 확대 이동(<code>focusPlace</code>)과도 아귀가 맞습니다. 목록에서 장소를 클릭해 레벨 4로 날아가면, 그 동네 마커들은 항상 낱개로 보입니다.</p>
+<p><strong><code>minClusterSize</code></strong> — 몇 개부터 묶을지 정합니다. 기본값은 2인데, 겨우 2개를 숫자 "2"로 바꾸는 건 좀 야박합니다. 마커 2개는 그냥 보여 줘도 안 지저분하니까요. 우리는 3으로 올려서 "3개 이상 몰릴 때만" 묶게 했습니다. 이 값을 10으로 올리면 웬만해선 안 묶는 느슨한 클러스터러가, 2로 내리면 부지런히 묶는 깐깐한 클러스터러가 됩니다.</p>
+<p><img alt="그림 22.5 — 옵션 3형제가 각각 결정하는 것" src="../images/ch22/ch22-f05.png" width="760" /></p>
+<p>이 세 값에 유일한 정답은 없습니다. 6·3이라는 우리 설정도 "서울 안에 장소 100개"라는 상황에 맞춘 출발점일 뿐입니다. 전국 단위 여행 지도라면 <code>minLevel</code>을 더 올려 넓은 화면에서만 묶는 게 나을 수 있고, 한 동네 맛집 지도라면 내리는 게 나을 수 있습니다. 다행히 실험 비용은 거의 0입니다. "minLevel을 8로 바꿔줘" 한 줄이면 Claude Code가 고쳐 주고, 새로고침 한 번이면 결과가 보입니다. 숫자를 바꿔 가며 내 데이터에 맞는 감을 잡는 것 — 이것도 바이브코딩의 일부입니다.</p>
+<p>이제 옵션이 실제로 동작하는지 눈으로 검증해 봅시다. 지도에서 숫자가 큰 클러스터 하나를 골라 마우스 휠로 천천히 확대해 보세요. 레벨이 내려갈 때마다 큰 무리가 작은 무리로 갈라지고, 레벨 5로 들어서는 순간 숫자 원이 일제히 사라지며 우리의 커스텀 핀들이 촤르륵 나타납니다. 다시 축소하면 역순으로 다시 묶이고요. 14장의 카테고리 필터도 눌러 보세요. 필터를 바꾸면 <code>renderPlaces</code>가 다시 실행되고, <code>removeMarkers</code> → <code>addMarkers</code> 흐름 덕에 클러스터 숫자까지 정확하게 갱신됩니다. ☕카페만 남기면 원 안의 숫자가 카페 개수로 줄어듭니다.</p>
+<p><img alt="그림 22.6 — 확대하면 클러스터가 낱개 마커로 풀린다" src="../images/ch22/ch22-f06.jpg" width="760" /></p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>클러스터 원의 파란 스타일이 마음에 안 든다면 <code>styles</code> 옵션으로 크기·색·글꼴을 통째로 바꿀 수 있습니다. "클러스터러 styles 옵션으로 우리 앱 브랜드 색에 맞는 원을 만들어줘"라고 시키면 됩니다. 묶인 개수 구간별로 다른 스타일(10개 미만은 작게, 100개 이상은 크게)을 주는 것도 가능합니다. 장 끝 🔎 더 찾아보기에서 키워드로 남겨 둡니다.</p>
+</div>
+<p>실험이 끝났으면 데이터를 원래대로 되돌립시다. 사이드바의 <strong>가져오기</strong> 버튼으로 아까 백업해 둔 <code>places.json</code>을 선택하면 끝입니다. 17장에서 "백업은 보험"이라고 했는데, 겨우 다섯 장 만에 보험금을 탔네요. 진짜 데이터로 돌아와도 클러스터러는 그대로 동작합니다. 장소가 적을 때는 조용히 있다가(3개 이상 안 몰리면 묶지 않으니까요), 많아지면 알아서 일하는 — 있는 줄도 모르게 좋은 기능이 됐습니다.</p>
+<h2 id="226">22.6 마무리<a class="headerlink" href="#226" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">📌 핵심 요약</p>
+<ul>
+<li>마커가 수십 개를 넘으면 서로 가리고 겹치는 <strong>마커 100개 문제</strong>가 생기며, 표준 해법은 가까운 마커를 숫자 원으로 묶는 <strong>클러스터링</strong>입니다.</li>
+<li>클러스터러는 확장팩입니다. SDK 주소의 <code>libraries</code>에 쉼표로 이어 <code>libraries=services,clusterer</code>로 로드합니다.</li>
+<li><code>new kakao.maps.MarkerClusterer({ map, ... })</code>를 하나 만들고, 마커는 <code>setMap</code> 대신 <code>addMarkers</code>로 맡기고 <code>removeMarkers</code>로 뺍니다. 배치와 재계산은 클러스터러의 몫입니다.</li>
+<li><code>averageCenter: true</code>는 원을 무리의 평균 좌표에, <code>minLevel</code>은 묶기 시작하는 축소 레벨을, <code>minClusterSize</code>는 묶음의 최소 마커 수를 정합니다.</li>
+<li><strong>클러스터 원 안의 숫자는 묶인 마커의 개수</strong>이고, 원을 클릭하면 지도가 확대되며 무리가 풀립니다.</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">🤔 생각해보기</p>
+<p>Q1. 클러스터러를 쓰면서 마커에 <code>marker.setMap(map)</code>까지 직접 호출하면 어떤 문제가 생길까요? "배치 결정권이 누구에게 있는가"를 중심으로 설명해 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>Q2. <code>minLevel</code>을 1로 낮추면 아무리 확대해도 마커가 묶여 있게 됩니다. 사용자 입장에서 이것이 왜 나쁜 경험인지, 반대로 <code>minLevel</code>을 14로 올리면 무슨 일이 생길지 추리해 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">✏️ 연습 문제</p>
+<ol>
+<li><code>minClusterSize</code>를 2로 바꿔 보고, 마커 딱 2개가 몰린 곳의 표시가 어떻게 달라지는지 확인한 뒤 3으로 되돌리세요.</li>
+<li><code>averageCenter</code>를 <code>false</code>로 바꾸면 클러스터 원의 위치가 어떻게 달라지는지 같은 구도에서 비교해 보고, 다시 <code>true</code>로 되돌리세요.</li>
+<li>22.1의 콘솔 스크립트에서 <code>length: 100</code>을 <code>length: 500</code>으로 올려 500개로도 실험해 보세요. 클러스터 숫자가 어떻게 변하나요? (실험 후 가져오기로 복원하는 것, 잊지 마세요.)</li>
+<li>클러스터 원을 클릭했을 때 지도가 확대되지 않게 막는 옵션의 이름을 카카오지도 문서에서 찾아 Claude Code에게 물어보고, 한 줄로 적어 보세요.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">🔎 더 찾아보기</p>
+<ul>
+<li><code>styles 옵션</code> — 클러스터 원의 크기·색·글꼴을 묶인 개수 구간별로 커스터마이징하는 방법.</li>
+<li><code>disableClickZoom</code> — 클러스터 클릭 시 자동 확대를 끄는 옵션. 끄면 <code>clusterclick</code> 이벤트로 나만의 동작을 달 수 있습니다.</li>
+<li><code>calculator · texts</code> — 숫자 대신 "10+", "많음" 같은 구간 텍스트를 보여 주도록 바꾸는 옵션 짝꿍.</li>
+<li><code>clustered · clusterclick 이벤트</code> — 클러스터가 만들어지거나 클릭될 때를 잡아내는 클러스터러 전용 이벤트들.</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>다음 장 예고</strong> — 지도는 이제 데이터 100개도 거뜬합니다. 그런데 이 앱, 스마트폰에서 열어 보셨나요? 좁은 세로 화면에서는 사이드바가 지도를 다 잡아먹습니다. 23장에서는 개발자도구의 디바이스 모드로 모바일 화면을 흉내 내고, 미디어쿼리와 사이드바 접기 버튼으로 <strong>손 안에서도 쓸 만한 지도</strong>를 만듭니다.</p>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>클러스터링(clustering) — cluster는 "송이·무리"라는 뜻. 가까운 데이터를 한 무리로 묶는 기법을 통칭하며, 지도 마커뿐 아니라 통계·머신러닝에서도 같은 이름으로 쓰입니다.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

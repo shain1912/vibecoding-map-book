@@ -1,0 +1,1936 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼">
+      
+      
+        <meta name="author" content="YLBook">
+      
+      
+        <link rel="canonical" href="https://shain1912.github.io/vibecoding-map-book/ch23/">
+      
+      
+        <link rel="prev" href="../ch22/">
+      
+      
+        <link rel="next" href="../ch24/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>23장 모바일 대응 - 바이브코딩으로 만드는 나만의 지도 웹</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#23" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-header__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            바이브코딩으로 만드는 나만의 지도 웹
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              23장 모바일 대응
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-nav__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    바이브코딩으로 만드는 나만의 지도 웹
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0장 이 책에서 만드는 것
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1부 바이브코딩 준비운동
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1부 바이브코딩 준비운동
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2장 Node.js 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3장 Git for Windows 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4장 Claude Code 설치하고 길들이기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2부 카카오 지도 첫걸음
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2부 카카오 지도 첫걸음
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7장 카카오 개발자 계정과 앱 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8장 Vite로 프로젝트 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9장 첫 지도 띄우기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10장 지도 다루기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3부 나만의 장소 지도 만들기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3부 나만의 장소 지도 만들기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11장 마커 찍기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12장 장소 데이터 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13장 커스텀 오버레이 말풍선
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14장 카테고리 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16장 클릭·검색으로 장소 추가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17장 localStorage 저장
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19장 상세 패널
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4부 한 단계 더
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4부 한 단계 더
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21장 URL로 지도 공유
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.1 폰 없이 폰 화면 보기 — 디바이스 모드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.2 미디어쿼리 — 화면 폭에 따라 옷 갈아입기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#233" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.3 사이드바 접기/펼치기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#234-relayout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.4 지도가 반쪽만 나오는 버그 — relayout()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#235" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.5 터치로 확인하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#236" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5부 세상에 공개하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5부 세상에 공개하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24장 GitHub에 올리기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25장 GitHub Pages 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26장 README와 자랑하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    부록
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 A 프롬프트 템플릿 모음
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 B 트러블슈팅 & 치트시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.1 폰 없이 폰 화면 보기 — 디바이스 모드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.2 미디어쿼리 — 화면 폭에 따라 옷 갈아입기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#233" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.3 사이드바 접기/펼치기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#234-relayout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.4 지도가 반쪽만 나오는 버그 — relayout()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#235" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.5 터치로 확인하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#236" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="23">23장 모바일 대응<a class="headerlink" href="#23" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">이 장에서 배우는 것</p>
+<ul>
+<li>폰 없이 폰 화면을 테스트하는 개발자도구 <strong>디바이스 모드</strong>를 익힙니다</li>
+<li><strong>미디어쿼리</strong>(<code>@media</code>)로 화면 폭에 따라 다른 CSS를 적용합니다</li>
+<li>사이드바 <strong>접기/펼치기</strong>를 만들고 <code>collapsed</code> 클래스와 CSS 트랜지션을 배웁니다</li>
+<li>컨테이너 크기가 바뀐 것을 카카오지도에 알리는 <strong>relayout()</strong>과, 그걸 몰라서 생긴 버그를 고칩니다</li>
+<li>터치 시뮬레이션과 실제 스마트폰 접속으로 모바일 동작을 확인합니다</li>
+</ul>
+</div>
+<hr />
+<p>22장까지 달려온 우리의 지도 앱은 이제 어엿한 서비스의 모습을 갖췄습니다. 검색하고, 추가하고, 별점을 매기고, 저장하고, 공유하고, 장소가 백 개라도 클러스터로 깔끔하게 묶입니다. 슬슬 친구에게 자랑하고 싶어지죠. 그런데 잠깐 상상해 보세요. 다음 장에서 배포를 마치고 친구에게 링크를 보냈습니다. 친구는 그 링크를 어디서 열까요? 십중팔구 <strong>스마트폰</strong>입니다. 통계적으로도 요즘 웹 트래픽의 절반 이상이 모바일에서 나옵니다. 우리는 지금까지 널찍한 PC 모니터에서만 앱을 만들어 왔는데, 정작 첫 관객은 손바닥만 한 화면으로 들어오는 겁니다.</p>
+<p>폰 화면에서 우리 앱이 어떻게 보일지, 열어 보기 전엔 모릅니다. 그리고 미리 말씀드리면, 지금 상태로는 꽤 민망한 모습이 나옵니다. 320픽셀짜리 고정 폭 사이드바가 폰 화면의 대부분을 잡아먹고, 지도는 오른쪽에 가늘게 끼어 있는 신세가 되거든요. 이 장에서는 이 문제를 <strong>반응형 웹</strong>이라는 개념으로 해결합니다. 화면이 넓으면 넓은 대로, 좁으면 좁은 대로 앱이 스스로 모습을 바꾸게 만드는 것이죠. 그 과정에서 CSS의 미디어쿼리, 사이드바 접기 버튼, 그리고 "지도가 반쪽만 그려지는" 흥미로운 버그와 그 해결까지 경험하게 됩니다. 배포 전 마지막 담금질, 시작해 봅시다.</p>
+<h2 id="231">23.1 폰 없이 폰 화면 보기 — 디바이스 모드<a class="headerlink" href="#231" title="Permanent link">&para;</a></h2>
+<p>모바일 대응의 첫 관문은 의외로 CSS가 아니라 <strong>테스트 방법</strong>입니다. 코드를 고칠 때마다 폰을 꺼내 접속할 수는 없으니까요. 다행히 크롬 개발자도구에는 PC 브라우저 안에서 스마트폰 화면을 흉내 내는 <strong>디바이스 모드(Device Mode)</strong>가 있습니다.</p>
+<p><code>npm run dev</code>로 앱을 띄운 상태에서 따라해 보세요.</p>
+<ol>
+<li>브라우저에서 ++f12++ 를 눌러 개발자도구를 엽니다.</li>
+<li>개발자도구 왼쪽 위, 화살표 아이콘 옆의 <strong>📱 모양 아이콘</strong>(기기 툴바 전환)을 클릭합니다. 단축키는 ++ctrl+shift+m++ 입니다.</li>
+<li>화면 상단에 기기 선택 메뉴가 나타납니다. <strong>iPhone SE</strong>나 <strong>Galaxy S20 Ultra</strong> 같은 프리셋을 골라 보세요.</li>
+</ol>
+<p><img alt="그림 23.1 — 크롬 개발자도구 디바이스 모드 진입(기기 툴바와 기기 선택 메뉴)" src="../images/ch23/ch23-f01.png" width="800" /></p>
+<p>기기를 고르는 순간 화면이 좁고 길쭉한 폰 비율로 바뀝니다. iPhone SE 기준으로 폭이 375픽셀인데, 우리 사이드바는 <code>--sidebar-w: 320px</code> 고정 폭이었죠. 375 중에 320을 사이드바가 가져가니, 지도에게 남는 건 겨우 55픽셀. 지도라고 부르기도 민망한 세로 띠 하나가 남습니다. 검색창과 필터 버튼도 비좁게 구겨져 있고요.</p>
+<p><img alt="그림 23.2 — 모바일 대응 전: 사이드바가 화면을 잡아먹고 지도는 오른쪽 띠로 전락한 모습" src="../images/ch23/ch23-f02.png" width="380" /></p>
+<p>이 처참한 화면이 오늘의 출발점입니다. 문제를 눈으로 확인했으니 이제 고칠 수 있습니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>디바이스 모드가 흉내 내는 건 화면 크기·터치·기기 정보 정도입니다. 실제 폰의 성능, 브라우저 버전, 통신 환경까지 똑같지는 않아요. 그래서 개발 중에는 디바이스 모드로 빠르게 확인하고, 배포 전에 한 번은 진짜 폰으로 열어 보는 것이 정석입니다. 진짜 폰으로 여는 방법은 23.5절에서 다룹니다.</p>
+</div>
+<p>한 가지 다행인 점도 짚고 갑시다. <code>index.html</code>의 <code>&lt;head&gt;</code>에는 처음부터 이런 줄이 있었습니다.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1.0"</span> <span class="p">/&gt;</span>
+</span></code></pre></div>
+<p>Vite가 프로젝트를 만들 때 넣어 준 <strong>뷰포트</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 설정입니다. 이 줄이 없으면 모바일 브라우저는 "이 페이지는 PC용이겠거니" 하고 980픽셀짜리 가상 화면에 페이지를 그린 뒤 폰 크기로 축소해 버립니다. 글자가 개미만 해지는 옛날 웹사이트들이 바로 그 경우죠. 이 줄이 있어야 "기기의 실제 폭을 기준으로 그려라"가 되어, 이제부터 작성할 미디어쿼리가 의도대로 동작합니다. 우리가 한 일은 없지만, 도구가 깔아 둔 기본기를 알아보는 것도 실력입니다.</p>
+<h2 id="232">23.2 미디어쿼리 — 화면 폭에 따라 옷 갈아입기<a class="headerlink" href="#232" title="Permanent link">&para;</a></h2>
+<p>문제의 본질을 정리해 봅시다. 사이드바와 지도가 <strong>옆으로 나란히</strong> 서는 배치는 넓은 화면에서는 훌륭하지만 좁은 화면에서는 재앙입니다. 그렇다고 모바일용 HTML을 따로 만들 수는 없습니다. 파일이 두 벌이 되는 순간 기능 하나 고칠 때마다 두 곳을 고쳐야 하니까요. 우리가 원하는 건 이겁니다. <strong>HTML은 한 벌, CSS만 화면 폭에 따라 갈아입기.</strong></p>
+<p>CSS에는 정확히 이 일을 하는 문법이 있습니다. <strong>미디어쿼리(media query)</strong>입니다.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">max-width</span><span class="o">:</span><span class="w"> </span><span class="nt">640px</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="c">/* 화면 폭이 640px 이하일 때만 적용되는 규칙들 */</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>@media (max-width: 640px)</code>는 CSS에게 거는 조건문입니다. "화면 폭이 640픽셀 이하인가?"가 참일 때만 중괄호 안의 규칙이 살아나고, 넓은 화면에서는 통째로 없는 셈 칩니다. 이때 기준이 되는 640px 같은 값을 <strong>브레이크포인트</strong>(breakpoint)<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, 즉 배치가 꺾이는 지점이라고 부릅니다. 폰은 대부분 360~430px, 태블릿 세로는 768px 언저리이니, 640px은 "폰이면 확실히 걸리고 태블릿부터는 PC 배치"가 되는 무난한 경계선입니다.</p>
+<p><img alt="그림 23.3 — 미디어쿼리 개념: 같은 HTML이 화면 폭에 따라 다른 CSS 옷을 입는다" src="../images/ch23/ch23-f03.png" width="760" /></p>
+<p>그럼 좁은 화면에서는 어떤 배치가 좋을까요? 카카오맵이나 구글맵 모바일 화면을 떠올려 보세요. 지도가 화면 전체를 차지하고, 목록은 필요할 때 지도 <strong>위로 미끄러져 나오는</strong> 서랍이 됩니다. 옆자리를 차지하며 지도를 밀어내는 게 아니라, 지도 위에 <strong>겹쳐서</strong> 떠 있는 거죠. 우리도 이 방식으로 갑니다. 설계가 섰으니 Claude Code에게 시킬 차례입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>앱을 모바일에 대응시켜줘. 화면 폭 640px 이하일 때는 ① 사이드바가 지도를 옆으로 밀어내지 말고 position: absolute로 지도 위에 겹치게 하고, 폭은 화면의 84% 정도로 해줘. ② 겹쳐 있다는 게 보이도록 사이드바 오른쪽에 그림자를 넣어줘. ③ 상세 패널은 화면 아래쪽에 좌우로 넓게 붙여줘. HTML은 건드리지 말고 style.css의 미디어쿼리로만 해결해줘.</p>
+</blockquote>
+</div>
+<p>"HTML은 건드리지 말고 CSS로만"이라는 제약을 명시한 것에 주목하세요. 이런 제약이 없으면 AI가 모바일용 마크업을 새로 짜는 큰 공사를 벌일 수도 있습니다. 우리가 원하는 건 옷만 갈아입히는 작은 수술이니, 수술 범위를 프롬프트에 못 박아 두는 겁니다.</p>
+<p>Claude Code가 <code>style.css</code> 맨 아래에 추가한 코드입니다.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c">/* ── 모바일 ────────────────────────────── */</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">max-width</span><span class="o">:</span><span class="w"> </span><span class="nt">640px</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">--sidebar-w</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="kt">vw</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="p">#</span><span class="nn">sidebar</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span><span class="w"> </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.12</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="p">#</span><span class="nn">detail-panel</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span><span class="w"> </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span><span class="w"> </span><span class="k">bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>겨우 다섯 줄인데, 한 줄 한 줄이 알찹니다.</p>
+<ul>
+<li><strong><code>:root { --sidebar-w: 84vw; }</code></strong> — 우리 사이드바 폭은 처음부터 <code>--sidebar-w</code>라는 CSS 변수 하나로 관리돼 왔습니다. 그래서 모바일에서는 그 변수 값만 <code>84vw</code>로 바꿔치기하면, 이 변수를 쓰는 모든 규칙(<code>width</code>, <code>min-width</code>, 잠시 뒤 볼 접기 규칙까지)이 한꺼번에 따라옵니다. <code>vw</code>는 viewport width의 약자로, <code>84vw</code>는 "화면 폭의 84%"입니다. 픽셀 고정값과 달리 어떤 폰에서든 오른쪽에 지도가 빼꼼 보일 만큼의 틈을 남겨 주죠. 값 하나만 바꿨는데 전체가 맞춰 움직인다 — 12장에서 배운 "한 곳에서 관리"의 힘을 CSS에서 다시 확인하는 순간입니다.</li>
+<li><strong><code>position: absolute</code></strong> — 이 한 줄이 배치의 성격을 바꿉니다. 기본 상태의 사이드바는 flex 컨테이너의 한 자리를 차지하며 지도를 옆으로 <strong>밀어내는</strong> 존재였습니다. <code>absolute</code>가 되면 문서의 자리 배치에서 빠져나와 부모(<code>#app</code>) 기준 좌표 위에 <strong>떠 있는</strong> 존재가 됩니다. 자리를 차지하지 않으니 지도는 화면 전체를 쓰고, 사이드바는 그 위에 겹쳐 뜨는 거죠.</li>
+<li><strong><code>box-shadow</code></strong> — 겹쳐 떠 있다는 사실을 눈으로 알려 주는 그림자입니다. 그림자가 없으면 사이드바와 지도가 한 평면처럼 보여서, 사용자가 "이건 닫을 수 있는 서랍"이라는 걸 알아차리기 어렵습니다. 시각적 디테일 하나가 UI의 문법을 전달하는 좋은 예입니다.</li>
+<li><strong><code>#detail-panel</code> 규칙</strong> — 19장에서 만든 상세 패널은 PC에서 오른쪽 위에 280px 폭으로 떠 있었습니다. 모바일에서는 <code>left: 12px</code>과 <code>width: auto</code>로 좌우에 모두 붙여 넓게 펴고, <code>top: auto; bottom: 12px</code>으로 화면 아래에 내려 앉힙니다. 모바일 앱에서 흔히 보는 <strong>바텀 시트</strong> 스타일이죠. 엄지손가락이 닿기 쉬운 아래쪽에 조작 UI를 두는 것은 모바일 UI의 오랜 관습입니다.</li>
+</ul>
+<p>저장하고 디바이스 모드 화면을 보세요. 지도가 화면 전체에 시원하게 깔리고, 사이드바가 그 위에 그림자를 드리우며 떠 있으면 성공입니다. 그림 23.2와 비교하면 다른 앱이라고 해도 믿을 정도입니다.</p>
+<p><img alt="그림 23.4 — 미디어쿼리 적용 후: 지도가 전체 화면을 쓰고 사이드바가 그 위에 겹친 모바일 화면" src="../images/ch23/ch23-f04.png" width="380" /></p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>미디어쿼리를 적용했는데 디바이스 모드에서 아무 변화가 없다면 세 가지를 확인하세요. ① 디바이스 모드의 화면 폭이 정말 640px 이하인지(상단 수치 확인), ② <code>@media</code> 블록이 기존 규칙보다 <strong>아래</strong>에 있는지(같은 우선순위면 나중 규칙이 이깁니다), ③ 오타로 <code>max-width</code>가 <code>min-width</code>로 되어 있지 않은지. 특히 ③은 조건이 정반대가 되는 흔한 실수입니다.</p>
+</div>
+<h2 id="233">23.3 사이드바 접기/펼치기<a class="headerlink" href="#233" title="Permanent link">&para;</a></h2>
+<p>배치는 좋아졌지만 결정적인 문제가 남았습니다. 사이드바가 지도 위에 떠 있을 뿐, <strong>치울 방법이 없습니다.</strong> 화면의 84%를 덮고 있으니 지도를 보려면 사이드바를 접을 수 있어야죠. 사실 이 기능은 모바일만의 것이 아닙니다. PC에서도 지도를 넓게 보고 싶을 때 사이드바를 접고 싶을 때가 있으니, 접기/펼치기는 공통 기능으로 만들고 모바일에서 특히 빛나게 하겠습니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>사이드바 접기/펼치기를 만들어줘. ① 사이드바 헤더 오른쪽에 ◀ 접기 버튼, 지도 왼쪽 위에 ▶ 펼치기 버튼을 두고, 펼치기 버튼은 사이드바가 열려 있을 땐 숨겨줘. ② 접기는 sidebar에 collapsed 클래스를 붙이는 방식으로 하고, CSS 트랜지션으로 왼쪽으로 미끄러지듯 사라지게 해줘. ③ 모바일 미디어쿼리에서도 확실히 화면 밖으로 나가게 처리해줘.</p>
+</blockquote>
+</div>
+<p>먼저 <code>index.html</code>에 버튼 두 개가 생겼습니다.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">header</span> <span class="na">id</span><span class="o">=</span><span class="s">"sidebar-header"</span><span class="p">&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>📍 나만의 지도<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">"btn-collapse"</span> <span class="na">title</span><span class="o">=</span><span class="s">"사이드바 접기"</span><span class="p">&gt;</span>◀<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>...
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">&lt;</span><span class="nt">main</span> <span class="na">id</span><span class="o">=</span><span class="s">"map-wrap"</span><span class="p">&gt;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"map"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">"btn-expand"</span> <span class="na">title</span><span class="o">=</span><span class="s">"사이드바 열기"</span> <span class="na">hidden</span><span class="p">&gt;</span>▶<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p><code>#btn-expand</code>에 붙은 <code>hidden</code> 속성을 눈여겨보세요. 처음에는 사이드바가 열려 있으니 펼치기 버튼은 숨긴 채 시작합니다. HTML 표준 속성 <code>hidden</code>은 자바스크립트에서 <code>요소.hidden = true/false</code>로 켜고 끌 수 있어서, 토스트나 다이얼로그를 숨길 때 이미 여러 번 써 온 방식입니다.</p>
+<p>다음은 <code>style.css</code>입니다. 접힘의 핵심은 기본 사이드바 규칙에 있던 두 줄과, 새로 추가된 한 줄입니다.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">#</span><span class="nn">sidebar</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--sidebar-w</span><span class="p">);</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="c">/* ...기존 규칙... */</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="k">margin-left</span><span class="w"> </span><span class="mf">0.25</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">#</span><span class="nn">sidebar</span><span class="p">.</span><span class="nc">collapsed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="mi">-1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--sidebar-w</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">max-width</span><span class="o">:</span><span class="w"> </span><span class="nt">640px</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="p">#</span><span class="nn">sidebar</span><span class="p">.</span><span class="nc">collapsed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="kt">vw</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>접기의 원리가 재미있습니다. <code>display: none</code>으로 확 꺼 버리는 게 아니라, <strong>왼쪽 마진을 자기 폭만큼 음수로</strong> 줍니다. <code>calc(-1 * var(--sidebar-w))</code>는 "내 폭이 320px이면 -320px"이라는 뜻이죠. 마진이 -320px이 되면 사이드바는 화면 왼쪽 바깥으로 정확히 자기 몸만큼 밀려나 시야에서 사라집니다. 왜 이렇게 돌아갈까요? <code>display: none</code>은 있음/없음의 스위치라 중간 상태가 없어서 <strong>트랜지션이 불가능</strong>하기 때문입니다. 반면 <code>margin-left</code>는 0에서 -320까지 이어지는 숫자이므로, <code>transition: margin-left 0.25s ease</code>가 그 사이를 0.25초 동안 부드럽게 이어 줍니다. 서랍이 스르륵 닫히는 애니메이션이 CSS 두 줄에서 나오는 겁니다.</p>
+<p>모바일 미디어쿼리 안의 <code>margin-left: -100vw</code>도 같은 원리입니다. 모바일 폭은 <code>84vw</code>니까 <code>-84vw</code>면 충분하지 않냐고요? 맞습니다만, AI는 여기에 <code>-100vw</code>, 즉 "화면 폭 전체만큼"이라는 더 확실한 값을 골랐습니다. 그림자까지 포함해 어떤 경우에도 잔상이 남지 않는 안전한 선택이죠.</p>
+<p>이제 버튼과 클래스를 잇는 자바스크립트입니다. <code>sidebar.js</code>의 <code>initSidebar()</code>에 두 줄, 그리고 새 함수 하나가 추가됐습니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-collapse'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">toggleSidebar</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-expand'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">toggleSidebar</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+</span></code></pre></div>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">toggleSidebar</span><span class="p">(</span><span class="nx">open</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'sidebar'</span><span class="p">).</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">'collapsed'</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nx">open</span><span class="p">);</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-expand'</span><span class="p">).</span><span class="nx">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">open</span><span class="p">;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>toggleSidebar(open)</code>는 "사이드바를 열어라/닫아라"를 매개변수 하나로 받는 함수입니다. 첫 줄의 <code>classList.toggle('collapsed', !open)</code>은 14장에서 필터 버튼의 active를 다룰 때 만난 그 문법입니다. 두 번째 인자가 <code>true</code>면 클래스를 붙이고 <code>false</code>면 뗀다고 했죠. 열라는 명령(<code>open</code>이 <code>true</code>)이면 <code>!open</code>은 <code>false</code>가 되어 <code>collapsed</code>가 떨어지고, 닫으라는 명령이면 붙습니다. 둘째 줄은 펼치기 버튼의 표시 상태를 사이드바와 반대로 맞춥니다. 사이드바가 열려 있으면(<code>open === true</code>) ▶ 버튼은 숨고, 접혀 있으면 나타납니다. "지금 열려 있는가"라는 상태 하나에서 클래스와 버튼 표시가 모두 계산되어 나오는, 우리에게 익숙한 단방향 그림입니다.</p>
+<p>저장하고 눌러 봅시다. ◀를 누르면 사이드바가 왼쪽으로 스르륵 사라지고 지도 왼쪽 위에 ▶ 버튼이 나타납니다. ▶를 누르면 다시 스르륵 돌아오고요.</p>
+<p><img alt="그림 23.5 — 사이드바를 접은 모바일 화면: 지도가 전체를 차지하고 좌상단에 ▶ 펼치기 버튼만 남는다" src="../images/ch23/ch23-f05.png" width="380" /></p>
+<h2 id="234-relayout">23.4 지도가 반쪽만 나오는 버그 — relayout()<a class="headerlink" href="#234-relayout" title="Permanent link">&para;</a></h2>
+<p>그런데 PC 화면(디바이스 모드를 끈 상태)에서 접기를 눌러 보면 이상한 광경을 만나게 됩니다. 사이드바가 사라지면서 지도 영역이 넓어졌는데, <strong>새로 드러난 오른쪽 부분이 회색으로 텅 비어 있습니다.</strong> 지도를 드래그하면 그제야 타일이 채워지기도 하고요. 뭔가 덜 그려진 느낌, 9장에서 만났던 회색 화면의 데자뷰입니다.</p>
+<p><img alt="그림 23.6 — 사이드바를 접은 직후의 버그: 새로 넓어진 오른쪽 영역이 회색으로 남아 있다" src="../images/ch23/ch23-f06.jpg" width="760" /></p>
+<p>원인을 추리해 봅시다. 카카오지도는 처음 만들어질 때 컨테이너(<code>#map</code>)의 크기를 재고, 딱 그 크기만큼의 지도 타일을 준비해 그립니다. 그런데 CSS가 사이드바를 치워서 컨테이너가 넓어져도, <strong>지도는 그 사실을 모릅니다.</strong> CSS의 변화가 자바스크립트 객체에게 자동으로 통보되지는 않으니까요. 지도 입장에서 세상은 여전히 예전 크기이고, 새로 생긴 땅은 자기 관할 밖이라 회색으로 남는 겁니다.</p>
+<p>이럴 때 바이브코딩의 정석은 원인 분석문을 쓰는 게 아니라, <strong>증상을 본 그대로 말하는 것</strong>입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>사이드바를 접으면 지도가 넓어지는데, 새로 드러난 오른쪽 영역이 회색으로 비어 있어. 창 크기를 바꾸거나 지도를 드래그해야 그제야 채워져. 사이드바를 접거나 펼친 뒤에 지도가 새 크기에 맞게 다시 그려지도록 고쳐줘.</p>
+</blockquote>
+</div>
+<p>실제로 이 앱을 만들 때 AI가 처음 내놓은 해법은 <code>kakao.maps.event.trigger(map, 'resize')</code>, 즉 지도에게 "크기가 바뀌었다"는 이벤트를 쏘는 방식이었습니다. 얼핏 동작하는 듯했지만 새로 드러난 영역의 타일이 여전히 안 그려지는 경우가 남았습니다. 증상이 남았다고 다시 말하자, AI는 카카오지도 API가 바로 이 상황을 위해 마련해 둔 정식 메서드 <strong><code>relayout()</code></strong>으로 코드를 고쳤습니다. <code>relayout()</code>은 "컨테이너 크기를 다시 재서 지도를 새로 배치하라"는 명령으로, 문서에도 "지도를 표시하는 HTML 요소의 크기를 변경한 후 호출해야 한다"고 안내되어 있는 정공법입니다. 한 번에 완벽한 답이 안 나와도, 증상을 다시 들려주면 더 나은 답으로 수렴한다 — AI와 일하는 감각이 이런 겁니다.</p>
+<p>고쳐진 <code>toggleSidebar()</code>의 최종 모습입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">toggleSidebar</span><span class="p">(</span><span class="nx">open</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'sidebar'</span><span class="p">).</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">'collapsed'</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nx">open</span><span class="p">);</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-expand'</span><span class="p">).</span><span class="nx">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">open</span><span class="p">;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="c1">// 지도 크기가 변하므로 카카오 지도에 알려준다 (CSS 트랜지션 0.25s가 끝난 뒤)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">__map</span><span class="p">.</span><span class="nx">relayout</span><span class="p">(),</span><span class="w"> </span><span class="mf">300</span><span class="p">);</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>마지막 줄을 뜯어봅시다. 왜 <code>relayout()</code>을 바로 부르지 않고 <code>setTimeout</code>으로 <strong>300밀리초 뒤에</strong> 부를까요? 사이드바의 트랜지션이 0.25초, 즉 250밀리초 동안 진행되기 때문입니다. 클래스를 토글한 직후는 사이드바가 아직 미끄러지는 <strong>중간</strong>이라, 그 시점에 크기를 재면 어중간한 크기가 잡힙니다. 애니메이션이 완전히 끝난 뒤(250ms + 여유 50ms)에 재야 최종 크기가 나오죠. CSS 애니메이션과 자바스크립트가 협업할 때 자주 등장하는 타이밍 감각입니다.</p>
+<p><code>window.__map</code>도 궁금할 겁니다. 지도 객체는 <code>main.js</code>가 만들어서 갖고 있는데, <code>sidebar.js</code>에서도 그 지도에게 <code>relayout()</code>을 말해야 합니다. 그래서 <code>main.js</code>가 지도를 만든 직후 전역 창문에 하나 걸어 둔 것이죠.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">window</span><span class="p">.</span><span class="nx">__map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">map</span><span class="p">;</span><span class="w"> </span><span class="c1">// 사이드바 접기에서 지도 크기 갱신용</span>
+</span></code></pre></div>
+<p><code>window</code>에 값을 붙이면 어느 모듈에서나 접근할 수 있습니다. 남용하면 "누가 언제 바꿨는지 모르는" 전역 변수 지옥이 되지만, 앱에 단 하나뿐이고 바뀔 일 없는 지도 객체 하나를 공유하는 정도는 실용적인 타협입니다. 이름 앞의 밑줄 두 개(<code>__map</code>)는 "앱 내부용이니 함부로 만지지 마세요"라는 관례적 표시고요.</p>
+<p>이제 다시 접고 펼쳐 보세요. 사이드바가 미끄러져 나간 직후 지도가 넓어진 영역까지 매끈하게 채워집니다. PC에서도, 디바이스 모드에서도요.</p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p>창 크기를 바꾸거나 컨테이너 크기를 코드로 바꾼 뒤 지도가 이상하게 보이면 십중팔구 <code>relayout()</code> 누락입니다. 반대로 <code>relayout()</code>을 불렀는데도 회색이 남는다면 타이밍 문제입니다. 크기 변화가 <strong>끝난 뒤</strong>에 부르고 있는지, 트랜지션 시간보다 <code>setTimeout</code> 지연이 긴지 확인하세요.</p>
+</div>
+<h2 id="235">23.5 터치로 확인하기<a class="headerlink" href="#235" title="Permanent link">&para;</a></h2>
+<p>레이아웃은 끝났습니다. 마지막 점검은 <strong>터치</strong>입니다. 마우스의 클릭·드래그가 손가락의 탭·스와이프로 바뀌어도 앱이 다 되는지 확인해야죠.</p>
+<p>좋은 소식부터. 디바이스 모드에서는 마우스 커서가 동그란 점으로 바뀌는데, 이 상태의 조작은 브라우저가 터치 이벤트로 바꿔서 페이지에 전달합니다. 그리고 카카오지도 SDK는 터치 대응이 이미 내장되어 있어서, 한 손가락 드래그로 지도 이동, 두 손가락 벌리기(핀치)로 확대·축소가 그냥 됩니다. 디바이스 모드에서 ++shift++ 를 누른 채 드래그하면 두 손가락 핀치를 흉내 낼 수 있으니 확대·축소도 시험해 보세요. 우리가 만든 기능들도 하나씩 눌러 봅니다. 필터 버튼 탭, 목록 탭 → 지도 이동, 지도 탭 → 추가 다이얼로그, 마커 탭 → 상세 패널, 별점 탭. 전부 <code>click</code> 이벤트 기반인데, 모바일 브라우저는 탭을 클릭으로 번역해 주므로 손대지 않아도 잘 동작합니다.</p>
+<p>그래도 눈여겨볼 대목은 있습니다. <strong>버튼 크기</strong>입니다. 마우스 포인터는 1픽셀짜리 정밀 도구지만 손가락 접촉면은 지름 1센티미터가 넘습니다. 그래서 애플·구글의 디자인 가이드는 터치 대상을 최소 44~48픽셀로 권장하죠. 우리 앱의 내 위치·공유 버튼은 42px, 필터 버튼도 여백 포함 30px대라 아슬아슬하게 쓸 만한 수준입니다. 디바이스 모드의 동그란 커서로 필터 버튼을 연달아 눌러 보고, 자꾸 빗나간다 싶으면 "모바일에서 필터 버튼 터치 영역을 키워줘"라고 시키면 됩니다. 미디어쿼리 안에서 <code>padding</code>만 키우면 되는 일입니다.</p>
+<p>마무리는 진짜 폰입니다. 배포 전이라도 같은 와이파이에 물려 있으면 폰에서 개발 서버에 접속할 수 있습니다.</p>
+<ol>
+<li>개발 서버를 이렇게 다시 띄웁니다: <code>npm run dev -- --host</code>. <code>--host</code>는 "내 컴퓨터 밖에서의 접속도 받아라"라는 뜻으로, 터미널에 <code>Local:</code> 주소 외에 <code>Network: http://192.168.x.x:5173/</code> 같은 주소가 추가로 표시됩니다. 처음 띄울 때 윈도우 방화벽 허용 창이 뜨면 허용해 주세요.</li>
+<li>폰 브라우저에서 그 <code>Network:</code> 주소를 입력해 접속합니다.</li>
+</ol>
+<p>그런데 지도가 안 뜨고 콘솔에 403이 찍힐 겁니다. 놀라지 마세요. 7장에서 배운 그 이유입니다. 카카오 개발자 콘솔에는 <code>http://localhost:5173</code>만 등록되어 있는데, 폰은 <code>http://192.168.x.x:5173</code>이라는 다른 주소로 접속했으니 카카오가 문전박대한 것이죠. <strong>developers.kakao.com → 내 애플리케이션 → 앱 설정 → 플랫폼 → Web</strong>에 터미널이 알려 준 <code>Network:</code> 주소를 추가하면 폰에서도 지도가 뜹니다. 우리 앱을 진짜 손가락으로 조작해 보는 첫 순간입니다. 지도를 휙휙 넘기고, 핀치로 줌하고, 사이드바를 접었다 펴 보세요.</p>
+<p><img alt="그림 23.7 — 스마트폰에서 열어 본 나만의 지도 — 접속 예시 (같은 와이파이, Network 주소)" src="../images/ch23/ch23-f07.png" width="360" /></p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>개발용으로 등록한 <code>192.168.x.x</code> 주소는 공유기가 바뀌면 달라질 수 있고, 남에게 필요한 주소도 아닙니다. 테스트가 끝나면 카카오 콘솔에서 지워 두는 편이 깔끔합니다. 25장에서 진짜 배포 주소를 등록할 때 다시 이 화면을 만나게 됩니다.</p>
+</div>
+<h2 id="236">23.6 마무리<a class="headerlink" href="#236" title="Permanent link">&para;</a></h2>
+<p>이 장은 코드 양은 적었지만 "내 화면 밖의 사용자"를 처음으로 생각한 장입니다. 화면 폭이라는 조건에 CSS가 반응하게 만들고, CSS의 변화를 자바스크립트가 지도에게 통역해 주는 연결 고리까지 놓았습니다. 이제 이 앱은 어떤 화면에서 열려도 제 모습을 갖춥니다. 세상에 내보낼 준비가 끝났다는 뜻입니다.</p>
+<div class="admonition abstract">
+<p class="admonition-title">📌 핵심 요약</p>
+<ul>
+<li>개발자도구의 <strong>디바이스 모드</strong>(++ctrl+shift+m++)로 폰 없이 모바일 화면과 터치를 테스트할 수 있습니다.</li>
+<li><strong>미디어쿼리</strong> <code>@media (max-width: 640px)</code>는 화면 폭이 조건에 맞을 때만 CSS를 적용합니다. HTML은 한 벌, CSS만 갈아입힙니다.</li>
+<li>모바일에서는 사이드바를 <code>position: absolute</code>로 지도 <strong>위에 겹치게</strong> 하고, CSS 변수 <code>--sidebar-w</code> 하나만 재정의해 폭을 바꿉니다.</li>
+<li>접기는 <code>collapsed</code> 클래스 + <strong>음수 margin-left</strong> + <code>transition</code>의 합작입니다. <code>display: none</code>은 애니메이션이 안 되기 때문입니다.</li>
+<li>컨테이너 크기가 바뀌면 카카오지도는 스스로 모릅니다. 트랜지션이 <strong>끝난 뒤</strong> <code>map.relayout()</code>을 호출해 알려 줘야 합니다.</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">🤔 생각해보기</p>
+<p>Q1. 접힌 사이드바를 <code>display: none</code>이 아니라 음수 <code>margin-left</code>로 처리한 이유는 무엇이었나요? 만약 <code>display: none</code>으로 바꾸면 사용자 눈에 어떤 차이가 생길까요?</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>Q2. <code>toggleSidebar()</code>의 <code>setTimeout</code> 지연을 300ms에서 0ms로 바꾸면 어떤 문제가 생길까요? 트랜지션 시간(0.25s)과 연결해 설명해 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">✏️ 연습 문제</p>
+<ol>
+<li>디바이스 모드에서 기기를 iPad(768px)로 바꿔 보세요. 미디어쿼리가 적용되나요, 안 되나요? 그 이유를 브레이크포인트 값으로 설명해 보세요.</li>
+<li>디바이스 모드 상단의 "반응형" 모드에서 화면 폭을 손으로 천천히 줄여 보세요. 정확히 몇 픽셀에서 배치가 꺾이는지 확인하고, 640이라는 숫자가 CSS 어디에서 왔는지 짚어 보세요.</li>
+<li>Claude Code에게 시켜 모바일에서는 앱이 <strong>사이드바가 접힌 상태로 시작</strong>하게 만들어 보세요. (힌트: 화면 폭은 <code>window.matchMedia('(max-width: 640px)')</code>로 알 수 있습니다.) 다 해 봤다면 커밋하거나, 마음에 안 들면 git으로 되돌리세요.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">🔎 더 찾아보기</p>
+<ul>
+<li><code>반응형 웹 디자인 (Responsive Web Design)</code> — 오늘 배운 기법들의 정식 명칭. 유동 그리드·유동 이미지·미디어쿼리 3요소로 정리됩니다.</li>
+<li><code>prefers-color-scheme</code> — 화면 폭 말고 "사용자가 다크 모드인가"를 묻는 미디어쿼리. 다크 모드 대응의 출발점입니다.</li>
+<li><code>ResizeObserver</code> — 요소 크기 변화를 자동 감지하는 브라우저 API. <code>setTimeout</code> 없이 <code>relayout()</code> 시점을 잡는 세련된 방법입니다.</li>
+<li><code>PWA (Progressive Web App)</code> — 웹앱을 홈 화면에 설치해 진짜 앱처럼 쓰게 하는 기술. 우리 지도 앱의 다음 진화 후보입니다.</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>다음 장 예고</strong> — 앱은 완성됐습니다. 이제 세상에 공개할 차례입니다. 24장에서는 지금까지 커밋해 온 우리 저장소를 GitHub에 올립니다. <code>gh repo create</code> 한 줄로 원격 저장소를 만들고, <code>.env</code>와 <code>node_modules</code>가 절대 따라 올라가지 않도록 <code>.gitignore</code>를 재점검하고, 첫 <code>git push</code>로 내 코드가 인터넷에 존재하게 되는 순간을 경험합니다.</p>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>뷰포트(viewport) — 브라우저가 웹페이지를 그리는 논리적 화면 영역. 모바일 브라우저는 뷰포트 메타 태그가 없으면 PC 폭(약 980px)을 가정해 그린 뒤 축소해 보여 줍니다. <code>width=device-width</code>는 "기기 실제 폭을 뷰포트로 써라"는 지시입니다.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>브레이크포인트(breakpoint) — 반응형 디자인에서 레이아웃이 바뀌는 기준 폭. 정해진 표준은 없지만 640/768/1024px 같은 값이 관례적으로 쓰입니다.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

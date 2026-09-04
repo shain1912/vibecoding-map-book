@@ -1,0 +1,2055 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI 에이전트와 페어 코딩으로 카카오지도 기반 맛집·여행·데이트 지도 웹앱을 만들어 배포하는 26장 튜토리얼">
+      
+      
+        <meta name="author" content="YLBook">
+      
+      
+        <link rel="canonical" href="https://shain1912.github.io/vibecoding-map-book/ch15/">
+      
+      
+        <link rel="prev" href="../ch14/">
+      
+      
+        <link rel="next" href="../ch16/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>15장 키워드 장소 검색 - 바이브코딩으로 만드는 나만의 지도 웹</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#15" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-header__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            바이브코딩으로 만드는 나만의 지도 웹
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              15장 키워드 장소 검색
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="다크 모드"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="orange"  aria-label="라이트 모드"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="바이브코딩으로 만드는 나만의 지도 웹" class="md-nav__button md-logo" aria-label="바이브코딩으로 만드는 나만의 지도 웹" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    바이브코딩으로 만드는 나만의 지도 웹
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0장 이 책에서 만드는 것
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1부 바이브코딩 준비운동
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1부 바이브코딩 준비운동
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1장 왜 바이브코딩인가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2장 Node.js 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3장 Git for Windows 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4장 Claude Code 설치하고 길들이기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5장 GitHub CLI로 깃허브 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6장 Orca로 에이전트 지휘하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2부 카카오 지도 첫걸음
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2부 카카오 지도 첫걸음
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7장 카카오 개발자 계정과 앱 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8장 Vite로 프로젝트 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9장 첫 지도 띄우기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10장 지도 다루기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3부 나만의 장소 지도 만들기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3부 나만의 장소 지도 만들기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11장 마커 찍기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12장 장소 데이터 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13장 커스텀 오버레이 말풍선
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14장 카테고리 필터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15장 키워드 장소 검색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#151-services-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 services 라이브러리 — 지도 SDK의 확장팩
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 검색창 UI 만들기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#153-placeskeywordsearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Places.keywordSearch — 카카오에게 물어보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#154-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 검색 모듈 만들기 — 상위 7개만 보여 주기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#155-panto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 결과 클릭 → panTo로 지도 이동
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#156" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16장 클릭·검색으로 장소 추가
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17장 localStorage 저장
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18장 사이드바 장소 목록
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19장 상세 패널
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4부 한 단계 더
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4부 한 단계 더
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20장 내 위치 표시
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21장 URL로 지도 공유
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22장 마커 클러스터러
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23장 모바일 대응
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5부 세상에 공개하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5부 세상에 공개하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24장 GitHub에 올리기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25장 GitHub Pages 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26장 README와 자랑하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    부록
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 A 프롬프트 템플릿 모음
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    부록 B 트러블슈팅 & 치트시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#151-services-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 services 라이브러리 — 지도 SDK의 확장팩
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 검색창 UI 만들기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#153-placeskeywordsearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Places.keywordSearch — 카카오에게 물어보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#154-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 검색 모듈 만들기 — 상위 7개만 보여 주기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#155-panto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 결과 클릭 → panTo로 지도 이동
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#156" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.6 마무리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="15">15장 키워드 장소 검색<a class="headerlink" href="#15" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">이 장에서 배우는 것</p>
+<ul>
+<li>지도 SDK의 확장팩인 <strong>services 라이브러리</strong>를 로드합니다 (<code>&amp;libraries=services</code>)</li>
+<li><code>kakao.maps.services.Places</code> 객체와 <code>keywordSearch</code> 메서드로 장소를 검색합니다</li>
+<li><strong>콜백 함수</strong>와 <code>Status.OK</code>로 비동기 응답을 처리하는 법을 배웁니다</li>
+<li>검색 결과 <strong>상위 7개</strong>를 사이드바 목록으로 렌더링합니다</li>
+<li>결과를 클릭하면 <code>panTo</code>로 지도가 그 장소까지 미끄러져 가게 만듭니다</li>
+</ul>
+</div>
+<hr />
+<p>14장까지 우리 지도는 꽤 근사해졌습니다. 마커가 찍히고, 말풍선이 열리고, 카테고리 버튼으로 🍜맛집만 골라 볼 수도 있습니다. 그런데 써 보면 볼수록 한 가지 불편함이 커집니다. <strong>새 장소를 넣으려면 좌표를 알아야 한다</strong>는 점입니다. 12장에서 우리는 카카오맵에서 우클릭해 위도·경도를 복사하는 방법을 배웠지만, 솔직히 말해 매번 그러기는 번거롭습니다. 친구가 "성수동에 괜찮은 카페 있던데"라고 말하면, 우리는 카페 이름만 알지 좌표는 모릅니다.</p>
+<p>생각해 보면 카카오맵 앱에서는 이 문제를 이미 해결하고 있습니다. 검색창에 "성수동 카페"라고 치면 후보 목록이 주르륵 나오고, 하나를 누르면 지도가 그리로 날아가죠. 좌표 따위는 아무도 신경 쓰지 않습니다. 좋은 소식은, 카카오가 바로 그 검색 기능을 우리 같은 개발자에게도 열어 두었다는 것입니다. 이번 장에서는 우리 앱에 <strong>키워드 장소 검색</strong>을 답니다. 검색창에 낱말을 치면 카카오의 방대한 장소 데이터베이스가 답을 주고, 결과를 클릭하면 지도가 그 자리로 이동합니다. 이 장이 끝나면 여러분의 지도는 "보는 지도"에서 "찾는 지도"로 한 단계 진화합니다.</p>
+<h2 id="151-services-sdk">15.1 services 라이브러리 — 지도 SDK의 확장팩<a class="headerlink" href="#151-services-sdk" title="Permanent link">&para;</a></h2>
+<p>시작하기 전에 짚고 갈 개념이 하나 있습니다. 9장에서 불러온 카카오지도 SDK는 사실 <strong>지도를 그리는 일</strong>만 담당합니다. 지도 타일을 내려받아 화면에 깔고, 마커를 찍고, 오버레이를 띄우는 것까지가 기본 SDK의 몫입니다. 장소 검색이나 주소를 좌표로 바꾸는 기능은 기본 패키지에 들어 있지 않습니다.</p>
+<p>게임에 비유하면 기본 SDK는 본편이고, 검색 기능은 <strong>확장팩(DLC)</strong>입니다. 카카오는 이 확장팩에 <code>services</code>라는 이름을 붙였습니다. 확장팩을 켜는 방법은 아주 간단합니다. SDK를 불러오는 주소 뒤에 <code>&amp;libraries=services</code>라는 꼬리표를 하나 붙이면 끝입니다. 왜 처음부터 다 넣어 주지 않냐고요? 검색 기능을 안 쓰는 앱까지 무거운 코드를 내려받게 하는 것은 낭비이기 때문입니다. 필요한 사람만 필요한 만큼 가져가라는 설계죠.</p>
+<p><img alt="그림 15.1 — 기본 SDK와 services 확장팩의 관계" src="../images/ch15/ch15-f01.png" width="760" /></p>
+<p>우리 앱에서 SDK 주소를 조립하는 곳은 9장에서 만든 <code>src/loader.js</code> 한 곳뿐입니다. "SDK 로드는 한 곳에서만"이라는 원칙을 지켜 온 덕분에, 수정할 파일도 한 곳뿐입니다. Claude Code에게 이렇게 시켜 봅시다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>src/loader.js에서 카카오 SDK 주소에 &amp;libraries=services를 추가해줘. 다음 기능으로 장소 키워드 검색을 만들 거야. 다른 부분은 건드리지 마.</p>
+</blockquote>
+</div>
+<p>Claude Code가 고친 <code>loader.js</code>는 이렇습니다. 바뀐 곳은 단 한 줄입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// src/loader.js — 카카오 지도 SDK를 동적으로 불러오는 모듈</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadKakaoSdk</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">VITE_KAKAO_JS_KEY</span><span class="p">;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">'VITE_KAKAO_JS_KEY가 .env에 없습니다.'</span><span class="p">));</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nx">script</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="sb">`https://dapi.kakao.com/v2/maps/sdk.js?appkey=</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="w"> </span><span class="o">+</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="sb">`&amp;autoload=false&amp;libraries=services`</span><span class="p">;</span><span class="w">   </span><span class="c1">// ← 확장팩 추가!</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nx">script</span><span class="p">.</span><span class="nx">onload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">load</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">kakao</span><span class="p">));</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nx">script</span><span class="p">.</span><span class="nx">onerror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">'카카오 SDK 로드 실패 — 키/도메인 확인'</span><span class="p">));</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">script</span><span class="p">);</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">  </span><span class="p">});</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>주소의 물음표(<code>?</code>) 뒤는 <code>이름=값</code> 쌍을 <code>&amp;</code>로 이어 붙이는 <strong>쿼리 문자열</strong>입니다. <code>appkey</code>로 우리가 누구인지 밝히고, <code>autoload=false</code>로 "준비되면 내가 직접 시작하겠다"고 말하고(9장), 이제 <code>libraries=services</code>로 "검색 확장팩도 같이 주세요"라고 요청하는 셈입니다. 확장팩이 여러 개 필요하면 쉼표로 이어서 <code>libraries=services,clusterer</code>처럼 씁니다. 22장에서 마커 클러스터러를 배울 때 실제로 그렇게 확장하게 됩니다.</p>
+<p>제대로 붙었는지 바로 확인해 봅시다. 개발 서버(<code>npm run dev</code>)가 켜진 상태에서 브라우저를 새로고침하고, ++f12++ 로 개발자도구 콘솔을 연 다음 이렇게 입력해 보세요.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">services</span>
+</span></code></pre></div>
+<p><code>{Places: ƒ, Geocoder: ƒ, Status: {…}, ...}</code> 같은 객체가 출력되면 성공입니다. 꼬리표를 붙이기 전이라면 <code>undefined</code>가 나왔을 겁니다. 이 객체 안에 오늘의 주인공 <code>Places</code>가 들어 있습니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">⚠️ 주의</p>
+<p><code>&amp;libraries=services</code>를 붙였는데도 <code>kakao.maps.services</code>가 <code>undefined</code>라면, 십중팔구 <strong>브라우저가 예전 스크립트를 캐시</strong>하고 있는 경우입니다. ++ctrl+shift+r++ 로 강력 새로고침을 해 보세요. 그래도 안 되면 주소에 오타(<code>libraries</code>의 철자, <code>&amp;</code> 누락)가 없는지 <code>loader.js</code>를 다시 확인합니다.</p>
+</div>
+<h2 id="152-ui">15.2 검색창 UI 만들기<a class="headerlink" href="#152-ui" title="Permanent link">&para;</a></h2>
+<p>검색 기능을 부르기 전에, 사용자가 낱말을 입력할 <strong>검색창</strong>부터 필요합니다. 14장에서 만든 필터 버튼 위쪽, 사이드바 제목 바로 아래가 좋은 자리입니다. 검색창(입력칸 + 🔍 버튼)과 그 아래에 결과가 나타날 목록(<code>ul</code>)을 만들어 달라고 시켜 봅시다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>index.html 사이드바 제목 아래에 장소 검색 UI를 추가해줘. 텍스트 입력칸(id=search-input, 플레이스홀더 "장소 검색 (예: 성수동 카페)")과 🔍 버튼(id=btn-search)을 한 줄로 놓고, 그 아래에 검색 결과 목록 ul(id=search-results)을 만들어줘. 결과 목록은 평소에 hidden으로 숨겨두고, style.css에 어울리는 스타일도 넣어줘.</p>
+</blockquote>
+</div>
+<p>Claude Code가 <code>index.html</code>의 사이드바에 추가한 마크업입니다.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"search-box"</span><span class="p">&gt;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">"search-input"</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"장소 검색 (예: 성수동 카페)"</span> <span class="p">/&gt;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">"btn-search"</span><span class="p">&gt;</span>🔍<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">"search-results"</span> <span class="na">hidden</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>구조는 단순합니다. <code>search-box</code> 안에 입력칸과 버튼이 나란히 있고, 결과 목록 <code>search-results</code>는 <strong><code>hidden</code> 속성</strong> 덕분에 평소에는 화면에서 사라져 있습니다. 검색 결과가 생기는 순간에만 자바스크립트로 <code>hidden</code>을 풀어 보여 줄 계획입니다. 13장에서 말풍선을 "필요할 때만 연다"고 했던 것과 같은 발상입니다. 화면의 요소는 상태에 따라 나타나고 사라집니다.</p>
+<p>스타일도 <code>style.css</code>에 함께 들어갑니다. 핵심만 발췌하면 이렇습니다.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">#</span><span class="nn">search-box</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span><span class="w"> </span><span class="k">gap</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="w"> </span><span class="mi">6</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">#</span><span class="nn">search-input</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="k">flex</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="kt">px</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--line</span><span class="p">);</span><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">#</span><span class="nn">btn-search</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--brand</span><span class="p">);</span><span class="w"> </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">#</span><span class="nn">search-results</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="k">list-style</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"> </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--line</span><span class="p">);</span><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="k">max-height</span><span class="p">:</span><span class="w"> </span><span class="mi">240</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">overflow-y</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">}</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">.</span><span class="nc">search-item</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span><span class="w"> </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span><span class="w"> </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">space-between</span><span class="p">;</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">border-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--line</span><span class="p">);</span><span class="w"> </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">}</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">.</span><span class="nc">search-item</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#f0fdfa</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p><code>display: flex</code>와 <code>flex: 1</code> 조합으로 입력칸이 남는 폭을 전부 차지하고, 버튼은 40px만 가져갑니다. 결과 목록에는 <code>max-height</code>와 <code>overflow-y: auto</code>를 걸어서, 결과가 아무리 많아도 목록이 사이드바를 잡아먹지 않고 안에서 스크롤되게 했습니다.</p>
+<p><img alt="그림 15.2 — 사이드바 상단에 추가된 검색창" src="../images/ch15/ch15-f02.png" width="420" /></p>
+<p>브라우저를 새로고침해서 검색창이 예쁘게 자리 잡았는지 확인하세요. 아직 눌러도 아무 일도 일어나지 않습니다. 당연합니다. 두뇌를 아직 안 달았으니까요.</p>
+<h2 id="153-placeskeywordsearch">15.3 Places.keywordSearch — 카카오에게 물어보기<a class="headerlink" href="#153-placeskeywordsearch" title="Permanent link">&para;</a></h2>
+<p>이제 진짜 검색입니다. services 확장팩이 주는 도구 가운데 우리가 쓸 것은 <code>kakao.maps.services.Places</code>입니다. 이름 그대로 "장소" 담당 객체이고, 그중에서도 <code>keywordSearch</code>라는 메서드가 오늘의 핵심입니다. 사용법의 뼈대는 이렇게 생겼습니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">ps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">services</span><span class="p">.</span><span class="nx">Places</span><span class="p">();</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nx">ps</span><span class="p">.</span><span class="nx">keywordSearch</span><span class="p">(</span><span class="s1">'성수동 카페'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="c1">// 응답이 도착하면 여기가 실행된다</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">});</span>
+</span></code></pre></div>
+<p>첫 번째 인자는 검색어입니다. 두 번째 인자가 조금 낯설 텐데, 값이 아니라 <strong>함수</strong>를 통째로 넘기고 있습니다. 이런 함수를 <strong>콜백(callback)</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>이라고 부릅니다. 왜 이런 구조일까요?</p>
+<p><code>keywordSearch</code>를 호출하는 순간, 우리 코드는 인터넷 너머 카카오 서버로 질문을 보냅니다. 답이 돌아오기까지는 짧게는 수십 밀리초, 길게는 몇 초가 걸릴 수 있습니다. 그 시간 동안 브라우저가 하던 일을 전부 멈추고 기다린다면 지도는 얼어붙고 화면은 먹통이 될 겁니다. 그래서 자바스크립트는 기다리지 않습니다. 식당에서 주문하고 <strong>진동벨</strong>을 받아 자리로 돌아가는 것과 같습니다. "음식(검색 결과)이 나오면 이 벨(콜백 함수)을 울려 주세요" 하고 함수를 맡겨 두고, 브라우저는 하던 일을 계속합니다. 답이 도착하는 순간 카카오 SDK가 우리의 콜백을 호출해 주면서, 첫 번째 인자로 <strong>결과 데이터</strong>를, 두 번째 인자로 <strong>상태 코드</strong>를 넣어 줍니다.</p>
+<p>상태 코드부터 봅시다. <code>status</code>에는 세 가지 값 중 하나가 들어옵니다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>의미</th>
+<th>우리의 대응</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kakao.maps.services.Status.OK</code></td>
+<td>검색 성공, 결과 있음</td>
+<td>목록을 그린다</td>
+</tr>
+<tr>
+<td><code>kakao.maps.services.Status.ZERO_RESULT</code></td>
+<td>검색은 됐지만 결과 0건</td>
+<td>"결과가 없습니다" 안내</td>
+</tr>
+<tr>
+<td><code>kakao.maps.services.Status.ERROR</code></td>
+<td>통신 오류 등 실패</td>
+<td>마찬가지로 안내</td>
+</tr>
+</tbody>
+</table>
+<p>성공(<code>OK</code>)이 아닐 때 결과를 그리려 들면 코드가 깨지니, 콜백의 첫 줄에서 <strong>문지기 검사</strong>를 합니다. <code>if (status !== kakao.maps.services.Status.OK) return;</code> — "성공이 아니면 여기서 끝"이라는 관용구입니다. 조건을 겹겹이 중첩하는 대신 아닌 경우를 먼저 내보내는 이 패턴은, 앞으로 여러분이 읽을 수많은 코드에서 계속 만나게 됩니다.</p>
+<p>그럼 성공했을 때 <code>data</code>에는 무엇이 들어 있을까요? 백문이 불여일견입니다. 콘솔에서 직접 실험해 봅시다. 개발자도구 콘솔에 다음을 붙여 넣어 보세요.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">ps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">services</span><span class="p">.</span><span class="nx">Places</span><span class="p">();</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nx">ps</span><span class="p">.</span><span class="nx">keywordSearch</span><span class="p">(</span><span class="s1">'성수동 카페'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">});</span>
+</span></code></pre></div>
+<p><img alt="그림 15.3 — 콘솔에서 keywordSearch 결과 확인" src="../images/ch15/ch15-f03.png" width="760" /></p>
+<p>방금 여러분은 카카오맵 검색창이 하는 일을 코드 다섯 줄로 재현한 것입니다. 카카오가 수십 년 쌓아 온 전국 장소 데이터베이스에 질문 한 줄을 던지고 답을 받았습니다. API를 쓴다는 것은 이런 것입니다. 거인의 어깨 위에 올라타는 일이죠.</p>
+<p><code>data</code>는 장소 객체들의 <strong>배열</strong>입니다. 한 항목을 펼쳐 보면 이런 필드들이 보입니다.</p>
+<ul>
+<li><code>place_name</code> — 장소 이름 (예: "어니언 성수")</li>
+<li><code>road_address_name</code> — 도로명 주소. 없는 곳도 있어서 지번 주소인 <code>address_name</code>이 예비로 있습니다</li>
+<li><code>x</code> — <strong>경도(lng)</strong>, <code>y</code> — <strong>위도(lat)</strong></li>
+<li>그 밖에 전화번호(<code>phone</code>), 카테고리, 카카오맵 상세 페이지 링크(<code>place_url</code>) 등</li>
+</ul>
+<p>여기서 초보자 열에 아홉이 걸려 넘어지는 함정이 하나 있습니다. <strong><code>x</code>가 경도이고 <code>y</code>가 위도</strong>라는 점입니다. 우리는 지금까지 <code>LatLng(위도, 경도)</code> 순서, 즉 lat이 먼저인 세계에서 살아왔는데, 검색 결과는 수학 좌표평면처럼 x(가로 = 경도), y(세로 = 위도)로 줍니다. 게다가 이 값들은 숫자가 아니라 <strong>문자열</strong>(<code>"127.0447"</code>)로 옵니다. 그대로 계산에 쓰면 이상한 일이 생길 수 있으니 <code>Number()</code>로 감싸 숫자로 바꿔 쓰는 습관이 필요합니다. 잠시 뒤 코드에서 실제로 그렇게 처리합니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>검색어에 지역명을 함께 넣으면 결과가 훨씬 정확해집니다. "카페"보다 "성수동 카페", "국밥"보다 "부산 서면 국밥"이 낫습니다. <code>keywordSearch</code>는 옵션 인자로 "지도 중심 근처 우선" 같은 조건도 받을 수 있는데, 장 끝의 🔎 더 찾아보기에서 확장 키워드로 소개합니다.</p>
+</div>
+<h2 id="154-7">15.4 검색 모듈 만들기 — 상위 7개만 보여 주기<a class="headerlink" href="#154-7" title="Permanent link">&para;</a></h2>
+<p>원리를 확인했으니 이제 정식 모듈로 만들 차례입니다. 그런데 모듈을 시키기 전에 준비물이 하나 필요합니다. 15.3절의 표에서 봤듯 검색은 <strong>실패할 수 있는 기능</strong>입니다. 결과가 0건이면 사용자에게 "없다"고 알려 줘야 하는데, 우리 앱에는 아직 그런 알림 수단이 없습니다. <code>alert()</code>는 화면을 가로막는 데다 촌스럽죠. 요즘 앱들이 쓰는 방식은 화면 아래에 잠깐 떴다가 스르르 사라지는 작은 알림, 이른바 <strong>토스트(toast)</strong>입니다. 토스터에서 빵이 톡 튀어나오듯 나타난다고 붙은 이름입니다. 알림은 검색만이 아니라 앞으로 여러 기능(추가 완료, 저장 실패 등)이 함께 쓸 공용 부품이니, 사이드바 모듈에 만들어 두고 어디서든 가져다 쓰겠습니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>화면 하단 중앙에 잠깐 떴다 사라지는 토스트 알림을 만들어줘. index.html에 빈 div(id=toast, hidden)를 두고, sidebar.js에서 toast(msg) 함수를 export 해줘. 메시지를 넣고 hidden을 풀었다가 2초쯤 뒤에 다시 숨기면 되는데, 연달아 호출해도 타이머가 꼬이지 않게 해줘. style.css에 까만 알약 모양 스타일도 추가해줘. 앞으로 여러 기능이 공용으로 쓸 알림이야.</p>
+</blockquote>
+</div>
+<p>Claude Code가 세 파일에 나눠 넣은 결과입니다. 먼저 <code>index.html</code>의 <code>&lt;/body&gt;</code> 근처에 빈 그릇 하나.</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"toast"</span> <span class="na">hidden</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p><code>sidebar.js</code>에는 이 그릇을 채우고 비우는 함수가 들어갑니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// src/sidebar.js — 공용 토스트 알림</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">toastTimer</span><span class="p">;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">toast</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">el</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'toast'</span><span class="p">);</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nx">el</span><span class="p">.</span><span class="nx">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">toastTimer</span><span class="p">);</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="nx">toastTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">),</span><span class="w"> </span><span class="mf">2200</span><span class="p">);</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>읽는 데 30초면 충분한 코드지만 배려가 두 개 숨어 있습니다. 첫째, 메시지를 넣을 때 <code>innerHTML</code>이 아니라 <strong><code>textContent</code></strong>를 씁니다. 알림 문구에는 HTML이 필요 없으니 글자 그대로만 다루는 안전한 통로를 고른 것입니다. 둘째, <code>setTimeout</code>으로 2.2초 뒤에 숨기는데, 그 전에 <code>clearTimeout(toastTimer)</code>으로 <strong>이전 타이머를 취소</strong>합니다. 이 한 줄이 없으면 토스트가 연달아 두 번 뜰 때 첫 번째 타이머가 두 번째 메시지를 너무 일찍 꺼 버리는 미묘한 버그가 생깁니다. <code>style.css</code>의 옷도 확인해 두세요.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">#</span><span class="nn">toast</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">fixed</span><span class="p">;</span><span class="w"> </span><span class="k">bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span><span class="w"> </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translateX</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">);</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#111827</span><span class="p">;</span><span class="w"> </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span><span class="w"> </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="mi">18</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">999</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span><span class="w"> </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.3</span><span class="p">);</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>position: fixed</code>와 <code>left: 50%; transform: translateX(-50%)</code> 조합은 요소를 화면 가로 정중앙에 못 박는 관용구이고, <code>border-radius: 999px</code>는 14장 필터 버튼에서 본 알약 만들기 그대로입니다. <code>toast</code>는 모듈 안에 사는 함수라 콘솔에서 직접 부를 수는 없지만, 걱정할 것 없습니다. 잠시 뒤 검색 모듈이 연결되면 엉터리 검색어 한 번으로 눈앞에서 확인하게 됩니다.</p>
+<p>준비물이 갖춰졌으니 이제 검색 모듈입니다. 우리 앱의 규칙대로 검색 기능도 파일 하나에 담습니다. 이름은 <code>src/search.js</code>. Claude Code에게 설계를 통째로 말해 봅시다. 프롬프트가 길지만, 4장에서 배운 4요소(맥락·목표·제약·출력)를 그대로 담았을 뿐입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">🗣 이렇게 시키세요</p>
+<blockquote>
+<p>src/search.js를 새로 만들어줘. initSearch 함수를 export하고, 그 안에서 kakao.maps.services.Places로 키워드 검색을 구현해줘. 🔍 버튼 클릭이나 Enter 키로 검색을 실행하고, Status.OK가 아니면 toast로 "검색 결과가 없습니다."를 띄우고 목록을 숨겨줘. 성공하면 상위 7개만 #search-results에 이름+주소로 렌더링하고, 항목을 클릭하면 지도를 레벨 3으로 확대해서 그 좌표로 panTo 해줘. x가 경도, y가 위도인 것과 문자열이라는 점을 주의해줘. 만든 initSearch는 main.js에서 호출해줘.</p>
+</blockquote>
+</div>
+<p>프롬프트를 다시 읽어 보세요. "어떻게 짜라"는 코드 이야기는 한 줄도 없습니다. 상위 7개, Enter 키, 실패 시 안내문, x·y 함정처럼 <strong>무엇이 되어야 하는지</strong>만 조목조목 말했습니다. 바이브코딩에서 우리의 역할은 타자수가 아니라 기획자입니다. 요구사항을 정확히 말하는 사람이 좋은 코드를 받습니다. 특히 "x가 경도, y가 위도"처럼 우리가 미리 알고 있는 함정을 프롬프트에 적어 주면, AI가 실수할 확률이 눈에 띄게 줄어듭니다.</p>
+<p>Claude Code가 만들어 준 <code>src/search.js</code>입니다. 한 번에 다 보면 길어 보이니, 검색을 실행하는 앞부분부터 잘라서 함께 읽어 봅시다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// src/search.js — 키워드 장소 검색 (kakao.maps.services.Places)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">escapeHtml</span><span class="p">,</span><span class="w"> </span><span class="nx">getMap</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./mapView.js'</span><span class="p">;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">toast</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./sidebar.js'</span><span class="p">;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kd">let</span><span class="w"> </span><span class="nx">ps</span><span class="p">;</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">initSearch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="nx">ps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">services</span><span class="p">.</span><span class="nx">Places</span><span class="p">();</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'search-input'</span><span class="p">);</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">btn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn-search'</span><span class="p">);</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">resultsEl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'search-results'</span><span class="p">);</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">q</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">      </span><span class="nx">resultsEl</span><span class="p">.</span><span class="nx">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// 빈 검색어면 이전 결과를 닫는다</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">      </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">    </span><span class="nx">ps</span><span class="p">.</span><span class="nx">keywordSearch</span><span class="p">(</span><span class="nx">q</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">status</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">services</span><span class="p">.</span><span class="nx">Status</span><span class="p">.</span><span class="nx">OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">        </span><span class="nx">toast</span><span class="p">(</span><span class="s1">'검색 결과가 없습니다.'</span><span class="p">);</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">        </span><span class="nx">resultsEl</span><span class="p">.</span><span class="nx">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">        </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">      </span><span class="nx">renderResults</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">7</span><span class="p">));</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">    </span><span class="p">});</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">  </span><span class="p">};</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">  </span><span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="nx">run</span><span class="p">);</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="w">  </span><span class="nx">input</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'keydown'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'Enter'</span><span class="p">)</span><span class="w"> </span><span class="nx">run</span><span class="p">();</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">  </span><span class="p">});</span>
+</span></code></pre></div>
+<p>위에서부터 읽어 봅시다.</p>
+<p><strong><code>run</code> 함수</strong> — 검색 한 번의 절차를 담은 함수입니다. 버튼 클릭과 Enter 키, 두 곳에서 같은 일을 해야 하므로 함수로 묶어 재사용합니다. <code>input.value.trim()</code>으로 입력값 양끝의 공백을 잘라 내고, 빈 문자열이면 카카오 서버에 묻지 않고 반환합니다. 빈 검색어로 서버를 괴롭힐 이유가 없으니까요. 다만 그냥 돌아서지 않고 <code>resultsEl.hidden = true</code>로 <strong>이전 검색 결과 목록부터 닫아 줍니다</strong>. 이 한 줄이 없으면, 검색어를 지우고 Enter를 눌렀는데 아까 찾던 결과가 화면에 계속 남아 있는 어색한 상황이 생깁니다. 사용자가 검색창을 비우는 행동에는 "이제 그만 보고 싶다"는 뜻이 담겨 있으니, 그 뜻대로 치워 주는 것이죠.</p>
+<p><strong>콜백 안의 문지기</strong> — 앞 절에서 배운 그대로입니다. <code>Status.OK</code>가 아니면 <code>toast</code>로 사용자에게 알리고, 혹시 이전 검색 결과가 떠 있었다면 <code>resultsEl.hidden = true</code>로 치웁니다. <code>toast</code>는 이 절 첫머리에서 사이드바 모듈에 만들어 둔 바로 그 알림 함수입니다. 파일 위쪽의 <code>import { toast } from './sidebar.js';</code> 한 줄로 가져와 쓰고 있죠. 공용 부품을 미리 만들어 둔 보람이 벌써 나타나는 셈입니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">💡 팁</p>
+<p>지금 문지기는 <code>ZERO_RESULT</code>(결과 0건)와 <code>ERROR</code>(통신 오류)를 구분하지 않고 둘 다 "검색 결과가 없습니다."라는 한 가지 토스트로 처리합니다. 코드가 단순해지는 대신, 서버나 네트워크가 아픈 날에도 사용자에게는 그냥 "결과 없음"으로 보인다는 한계가 있죠. 그래서 "분명 있어야 할 검색어인데 결과가 없다"는 이상한 상황을 만나면 토스트만 믿지 말고 <strong>콘솔부터 열어 보는 습관</strong>을 들이세요. 콜백에서 <code>status</code> 값을 <code>console.log</code>로 찍어 보면 결과가 없는 것인지, 통신이 실패한 것인지 바로 구분됩니다. 두 경우의 안내 문구를 나누는 개선은 연습 문제로 남겨 둡니다.</p>
+</div>
+<p><strong><code>data.slice(0, 7)</code></strong> — 카카오는 한 번에 최대 15개의 결과를 줍니다. 다 보여 주면 좁은 사이드바가 검색 결과로 도배되어 정작 내 장소 목록이 밀려나 버립니다. <code>slice(0, 7)</code>은 배열의 0번부터 7번 <strong>앞까지</strong>, 즉 상위 7개만 잘라 낸 새 배열을 만듭니다. 검색 결과는 정확도 순으로 정렬되어 오기 때문에, 웬만한 검색은 상위 7개 안에서 답이 나옵니다. 화면은 유한하고 사용자의 인내심은 더 유한합니다. 다 보여 주는 것보다 <strong>알맞게 보여 주는 것</strong>이 좋은 UI입니다.</p>
+<p><strong>Enter 키 처리</strong> — 검색창에서 Enter를 치는 것은 만국 공통의 본능입니다. <code>keydown</code> 이벤트에서 <code>e.key === 'Enter'</code>를 확인해 같은 <code>run</code>을 부릅니다. 이 세 줄이 없으면 사용자는 반드시 "왜 엔터가 안 먹지?"라며 어리둥절해합니다.</p>
+<p>이어서 결과를 그리는 <code>renderResults</code>입니다. <code>initSearch</code> 안에 함께 들어 있습니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">renderResults</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nx">resultsEl</span><span class="p">.</span><span class="nx">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nx">resultsEl</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">items</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="sb">`</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="sb">        &lt;li class="search-item" data-i="</span><span class="si">${</span><span class="nx">i</span><span class="si">}</span><span class="sb">"&gt;</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="sb">          &lt;span class="search-info"&gt;</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="sb">            &lt;strong&gt;</span><span class="si">${</span><span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">place_name</span><span class="p">)</span><span class="si">}</span><span class="sb">&lt;/strong&gt;</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="sb">            &lt;small&gt;</span><span class="si">${</span><span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">road_address_name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">address_name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="si">}</span><span class="sb">&lt;/small&gt;</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="sb">          &lt;/span&gt;</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="sb">        &lt;/li&gt;`</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">      </span><span class="p">)</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">      </span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+</span></code></pre></div>
+<p><code>hidden</code>을 풀어 목록을 드러낸 다음, 12장 데이터 렌더링에서 익힌 <strong>배열 → HTML 문자열</strong> 패턴을 그대로 씁니다. <code>items.map(...)</code>으로 항목 하나하나를 <code>&lt;li&gt;</code> 문자열로 바꾸고 <code>join('')</code>으로 이어 붙여 <code>innerHTML</code>에 한 번에 꽂습니다. 주소는 <code>item.road_address_name || item.address_name || ''</code>처럼 <strong>OR 사슬</strong>로 골랐습니다. 도로명 주소가 있으면 그것을, 없으면 지번 주소를, 그마저 없으면 빈 문자열을 쓰라는 뜻입니다. 각 <code>&lt;li&gt;</code>에는 <code>data-i="${i}"</code>로 자기 번호표를 달아 두었습니다. 잠시 뒤 클릭된 항목이 몇 번째인지 알아내는 데 씁니다.</p>
+<p><code>escapeHtml</code>이라는 낯선 함수가 보이나요? 바깥에서 온 문자열(장소 이름·주소)을 <code>innerHTML</code>에 넣을 때 특수문자를 무해하게 바꿔 주는 <strong>안전장치</strong>입니다. 지금은 "외부 데이터를 HTML에 넣을 땐 이걸 씌운다"고만 기억해 두세요. 왜 필요한지, 안 쓰면 무슨 일이 벌어지는지는 19장에서 XSS라는 이름과 함께 제대로 배웁니다.</p>
+<p><img alt="그림 15.4 — &quot;성수동 카페&quot; 검색 결과 상위 7개" src="../images/ch15/ch15-f04.jpg" width="760" /></p>
+<h2 id="155-panto">15.5 결과 클릭 → panTo로 지도 이동<a class="headerlink" href="#155-panto" title="Permanent link">&para;</a></h2>
+<p>목록이 떴으니 마지막 조각입니다. 항목을 클릭하면 지도가 그 장소로 이동해야죠. <code>renderResults</code>의 나머지 부분입니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="w">    </span><span class="nx">resultsEl</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.search-item'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">li</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">items</span><span class="p">[</span><span class="nb">Number</span><span class="p">(</span><span class="nx">li</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">i</span><span class="p">)];</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span><span class="w">   </span><span class="c1">// y가 위도!</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">lng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Number</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span><span class="w">   </span><span class="c1">// x가 경도!</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="c1">// 결과 클릭 → 지도 이동</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nx">li</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="nx">getMap</span><span class="p">().</span><span class="nx">setLevel</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">        </span><span class="nx">getMap</span><span class="p">().</span><span class="nx">panTo</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">LatLng</span><span class="p">(</span><span class="nx">lat</span><span class="p">,</span><span class="w"> </span><span class="nx">lng</span><span class="p">));</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="p">});</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="p">});</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>방금 그린 <code>&lt;li&gt;</code>들을 <code>querySelectorAll</code>로 다시 모아, 하나씩 클릭 리스너를 답니다. <code>li.dataset.i</code>로 번호표를 읽으면 이 <code>&lt;li&gt;</code>가 <code>items</code> 배열의 몇 번째 장소인지 알 수 있습니다. 그리고 15.3절에서 예고한 함정 처리가 여기 있습니다. <code>Number(item.y)</code>가 위도, <code>Number(item.x)</code>가 경도. 문자열을 숫자로 바꾸면서 x·y를 lat·lng로 번역하는 두 줄입니다. 이 두 줄의 순서를 바꾸면 성수동을 검색했는데 지도가 서해 바다 한가운데로 날아가는 마법을 경험하게 됩니다.</p>
+<p>클릭 리스너 안은 단 두 줄입니다. <code>setLevel(3)</code>으로 골목이 보일 만큼 확대하고, <code>panTo</code>로 이동합니다. 10장에서 배운 <code>setCenter</code>와 <code>panTo</code>의 차이를 기억하나요? <code>setCenter</code>는 순간이동, <code>panTo</code>는 <strong>부드럽게 미끄러지는 이동</strong>입니다. 검색 결과로 이동할 때는 panTo가 압도적으로 좋습니다. 지도가 스르륵 움직이는 동안 사용자는 "아, 여기서 저쪽으로 가는구나" 하는 방향 감각을 유지할 수 있거든요. 확대(<code>setLevel</code>)를 먼저 하고 이동하는 순서도 의도적입니다. 좁은 시야로 미끄러져 가야 도착지가 화면 한가운데 크게 잡힙니다.</p>
+<p>마지막으로 이 모듈을 앱에 연결합니다. Claude Code가 <code>main.js</code>에 두 줄을 추가했습니다.</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">initSearch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./search.js'</span><span class="p">;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">// ... 지도 생성 뒤</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nx">initSearch</span><span class="p">();</span>
+</span></code></pre></div>
+<p>이제 전체 흐름을 실행으로 확인해 봅시다. 브라우저를 새로고침하고 순서대로 눌러 보세요.</p>
+<ol>
+<li>검색창에 <strong>성수동 카페</strong>를 입력하고 Enter — 결과 7개가 목록으로 나타납니다.</li>
+<li>마음에 드는 항목을 클릭 — 지도가 확대되며 그 카페 위치로 스르륵 이동합니다.</li>
+<li>이번에는 <strong>ㅁㄴㅇㄹ</strong> 같은 엉터리 검색어로 검색 — 화면 아래에 "검색 결과가 없습니다." 토스트가 뜨고 목록은 숨겨집니다.</li>
+</ol>
+<p><img alt="그림 15.5 — 결과 클릭 후 레벨 3으로 확대 이동한 지도" src="../images/ch15/ch15-f05.jpg" width="760" /></p>
+<p><img alt="그림 15.6 — 결과가 없을 때의 토스트 알림" src="../images/ch15/ch15-f06.jpg" width="760" /></p>
+<p>잘 되나요? 혹시 결과 목록은 뜨는데 클릭해도 지도가 꿈쩍하지 않는다면, 콘솔에 빨간 에러가 있는지부터 보세요. <code>getMap is not a function</code> 류의 에러라면 <code>mapView.js</code>에서 <code>getMap</code>을 export하고 있는지, <code>Cannot read properties of undefined</code> 류라면 <code>initSearch()</code>가 지도 생성 <strong>이후에</strong> 호출되는지 확인하면 됩니다. 에러 메시지를 통째로 복사해 Claude Code에게 붙여 넣고 "이 에러 고쳐줘"라고 시키는 것도 훌륭한 바이브코딩입니다. 에러 메시지는 우리보다 AI가 훨씬 잘 읽습니다.</p>
+<p>세 가지가 모두 동작한다면 이 장의 목표 달성입니다. 그런데 한 가지 아쉬움이 남지 않나요? 검색으로 찾아간 그 카페, <strong>내 지도에 저장</strong>하고 싶어집니다. 지금은 지도가 이동만 할 뿐 마커도 데이터도 남지 않죠. 일부러 남겨 둔 숙제입니다. 바로 다음 장에서 검색 결과 옆에 ＋ 버튼을 달아 해결합니다.</p>
+<div class="admonition info">
+<p class="admonition-title">🔎 REST API 검색과는 뭐가 다를까</p>
+<p>카카오 문서를 구경하다 보면 "로컬 API(REST)"라는, 똑같이 키워드로 장소를 검색하는 API를 만나게 됩니다. 주소(<code>dapi.kakao.com/v2/local/...</code>)로 직접 요청을 보내고 <strong>REST API 키</strong>를 헤더에 실어 인증하는 방식으로, 주로 서버 프로그램에서 씁니다. 우리가 쓴 <code>services</code> 라이브러리는 사실 그 API를 브라우저용으로 곱게 포장한 것입니다. JavaScript 키 하나로 인증이 끝나고, 결과도 바로 쓸 수 있는 형태로 옵니다. 브라우저에서 돌아가는 우리 앱에는 지금 방식이 정답이고, 나중에 백엔드 서버를 만들게 되면 그때 REST 방식을 다시 만나게 될 겁니다.</p>
+</div>
+<h2 id="156">15.6 마무리<a class="headerlink" href="#156" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">📌 핵심 요약</p>
+<ul>
+<li>장소 검색은 기본 SDK가 아닌 <strong>services 확장 라이브러리</strong>의 기능이며, SDK 주소에 <code>&amp;libraries=services</code>를 붙여 로드합니다.</li>
+<li><code>new kakao.maps.services.Places()</code>의 <code>keywordSearch(검색어, 콜백)</code>으로 검색합니다. 응답은 기다리지 않고 <strong>콜백 함수</strong>로 받습니다.</li>
+<li>콜백 첫 줄에서 <code>status !== kakao.maps.services.Status.OK</code>이면 빠져나가는 <strong>문지기 검사</strong>를 합니다.</li>
+<li>검색 결과의 <code>x</code>는 <strong>경도</strong>, <code>y</code>는 <strong>위도</strong>이고 둘 다 <strong>문자열</strong>이므로 <code>Number()</code>로 변환해 <code>LatLng(lat, lng)</code> 순서로 넣습니다.</li>
+<li><code>data.slice(0, 7)</code>로 상위 7개만 렌더링하고, 항목 클릭 시 <code>setLevel(3)</code> 후 <code>panTo</code>로 부드럽게 이동합니다.</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">🤔 생각해보기</p>
+<p>Q1. <code>keywordSearch</code>는 왜 결과를 <code>return</code>으로 돌려주지 않고 콜백 함수로 전달할까요? 진동벨 비유를 떠올리며 여러분의 말로 설명해 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>Q2. 검색 결과의 <code>x</code>·<code>y</code>를 반대로(<code>lat = Number(item.x)</code>) 넣으면 지도는 어디로 이동하게 될까요? 위도 37, 경도 127이라는 숫자를 놓고 추리해 보세요.</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+<p>✍️ <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>__</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">✏️ 연습 문제</p>
+<ol>
+<li><code>data.slice(0, 7)</code>을 <code>data.slice(0, 3)</code>으로 바꿔 결과를 3개만 보여 주도록 Claude Code에게 시켜 보고, 다시 7개로 되돌려 보세요.</li>
+<li>결과 클릭 시 <code>panTo</code>를 <code>setCenter</code>로 바꿔 실행해 보고, 두 이동 방식의 느낌 차이를 직접 비교한 뒤 원래대로 되돌리세요.</li>
+<li>콘솔에서 <code>ps.keywordSearch</code>로 여러분의 학교(또는 회사) 이름을 검색해, 첫 번째 결과의 <code>place_url</code> 값을 열어 보세요. 무엇이 나오나요?</li>
+<li>검색창을 비운 채 🔍 버튼을 눌러도 아무 일이 없는 이유를 <code>run</code> 함수에서 찾아 한 줄로 적어 보세요.</li>
+<li><code>Status.ZERO_RESULT</code>와 <code>Status.ERROR</code>를 구분해서, 진짜 오류일 때는 "잠시 후 다시 시도해 주세요."라는 다른 토스트가 뜨도록 Claude Code에게 시켜 보세요. 확인 후 원래대로 되돌려도 좋습니다.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">🔎 더 찾아보기</p>
+<ul>
+<li><code>categorySearch</code> — 키워드 대신 "카페", "편의점" 같은 카테고리 코드로 검색하는 Places의 또 다른 메서드.</li>
+<li><code>Geocoder</code> — 주소↔좌표를 서로 변환해 주는 services 라이브러리의 다른 도구. "주소로 검색" 기능을 만들 때 씁니다.</li>
+<li><code>Pagination</code> — keywordSearch 콜백의 세 번째 인자. 15개 넘는 결과를 다음 페이지로 넘겨 받을 수 있습니다.</li>
+<li><code>location · radius 옵션</code> — keywordSearch에 옵션 객체를 넘겨 "지도 중심 반경 몇 km 안에서만" 검색하도록 좁히는 방법.</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>다음 장 예고</strong> — 검색으로 장소를 찾을 수 있게 됐으니, 이제 <strong>내 지도에 담을</strong> 차례입니다. 16장에서는 검색 결과마다 ＋ 버튼을 달고, 지도의 빈 곳을 클릭해도 같은 입력 폼이 열리게 만듭니다. 이름·카테고리·메모를 채워 저장하면 곧바로 마커가 찍히는, 진짜 "나만의 지도"의 핵심 기능이 완성됩니다.</p>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>콜백(callback) — "다시(back) 불러 달라(call)"는 뜻 그대로, 어떤 작업이 끝났을 때 실행해 달라고 미리 맡겨 두는 함수. 시간이 걸리는 작업(네트워크 요청, 타이머 등)의 결과를 받는 자바스크립트의 대표적인 방법입니다.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
