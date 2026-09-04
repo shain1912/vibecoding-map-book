@@ -6,7 +6,7 @@
   type: 스크린샷
   caption: "완성된 「나만의 지도」 전체 화면"
   file: images/ch00/ch00-f01.jpg
-  source: images/raw/app-main.jpg
+  source: _working_raw/raw/app-main.jpg
   capture:
     kind: web
     command: null
@@ -21,7 +21,7 @@
   type: 스크린샷
   caption: "마커 클릭 시 나타나는 커스텀 말풍선"
   file: images/ch00/ch00-f02.png
-  source: images/raw/app-bubble-gwangjang.png
+  source: _working_raw/raw/app-bubble-gwangjang.png
   capture:
     kind: web
     command: null
@@ -37,7 +37,7 @@
   type: 스크린샷
   caption: "카테고리 필터로 카페만 표시한 화면"
   file: images/ch00/ch00-f03.jpg
-  source: images/raw/app-cafe-filter.jpg
+  source: _working_raw/raw/app-cafe-filter.jpg
   capture:
     kind: web
     command: null
@@ -53,7 +53,7 @@
   type: 스크린샷
   caption: "키워드 검색 결과와 장소 추가 버튼"
   file: images/ch00/ch00-f04.jpg
-  source: images/raw/app2-search-results.jpg
+  source: _working_raw/raw/app2-search-results.jpg
   capture:
     kind: web
     command: null
@@ -68,7 +68,7 @@
   type: 스크린샷
   caption: "별점과 메모를 편집하는 상세 패널"
   file: images/ch00/ch00-f05.jpg
-  source: images/raw/app-detail-panel.jpg
+  source: _working_raw/raw/app-detail-panel.jpg
   capture:
     kind: web
     command: null
@@ -83,7 +83,7 @@
   type: 일러스트
   caption: "바이브코딩의 흐름: 말하기 → AI가 코드 작성 → 함께 읽기 → 확인하기"
   file: images/ch00/ch00-f06.jpg
-  source: images/raw/ill-vibecoding-pair.jpg
+  source: _working_raw/raw/ill-vibecoding-pair.jpg
   capture:
     kind: manual
     command: null
@@ -285,7 +285,7 @@
   type: 스크린샷
   caption: "`node -v`와 `npm -v` 버전 확인 결과"
   file: images/ch02/ch02-f07.png
-  source: images/raw/term-node-npm-version.png
+  source: _working_raw/raw/term-node-npm-version.png
   capture:
     kind: terminal
     command: "node -v"
@@ -376,7 +376,7 @@
   type: 스크린샷
   caption: "git 버전 확인 성공"
   file: images/ch03/ch03-f05.png
-  source: images/raw/term-git-version.png
+  source: _working_raw/raw/term-git-version.png
   capture:
     kind: terminal
     command: "git -v"
@@ -407,7 +407,7 @@
   type: 일러스트
   caption: "저장소·커밋·브랜치 한 컷 개념도"
   file: images/ch03/ch03-f07.jpg
-  source: images/raw/ill-git-timemachine.jpg
+  source: _working_raw/raw/ill-git-timemachine.jpg
   capture:
     kind: manual
     command: null
@@ -423,7 +423,7 @@
   type: 일러스트
   caption: "챗봇 방식과 Claude Code 방식의 차이"
   file: images/ch04/ch04-f01.jpg
-  source: images/raw/ill-chat-vs-terminal.jpg
+  source: _working_raw/raw/ill-chat-vs-terminal.jpg
   capture:
     kind: manual
     command: null
@@ -468,7 +468,7 @@
   type: 스크린샷
   caption: "claude --version으로 설치 확인"
   file: images/ch04/ch04-f04.png
-  source: images/raw/term-claude-version.png
+  source: _working_raw/raw/term-claude-version.png
   capture:
     kind: terminal
     command: "claude --version"
@@ -562,7 +562,7 @@
   type: 스크린샷
   caption: "gh 버전 확인"
   file: images/ch05/ch05-f03.png
-  source: images/raw/term-gh-auth-status.png
+  source: _working_raw/raw/term-gh-auth-status.png
   capture:
     kind: terminal
     command: "gh --version"
@@ -609,7 +609,7 @@
   type: 스크린샷
   caption: "브라우저의 Device Activation 화면"
   file: images/ch05/ch05-f06.jpg
-  source: images/raw/github-device.jpg
+  source: _working_raw/raw/github-device.jpg
   capture:
     kind: web
     command: null
@@ -625,7 +625,7 @@
   type: 스크린샷
   caption: "인증 완료, Logged in as"
   file: images/ch05/ch05-f07.png
-  source: images/raw/term-gh-auth-status.png
+  source: _working_raw/raw/term-gh-auth-status.png
   capture:
     kind: terminal
     command: "gh auth status"
@@ -655,7 +655,7 @@
   type: 일러스트
   caption: "에이전트 한 명 vs 여러 명 지휘"
   file: images/ch06/ch06-f01.png
-  source: images/raw/ill-multiagent-tree.jpg
+  source: _working_raw/raw/ill-multiagent-tree.jpg
   capture:
     kind: manual
     command: null
@@ -762,7 +762,7 @@
   type: 스크린샷
   caption: "개발자 콘솔의 전체 앱 목록과 \"앱 생성\" 버튼"
   file: images/ch07/ch07-f02.png
-  source: images/raw/kakao-app-list.jpg
+  source: _working_raw/raw/kakao-app-list.jpg
   capture:
     kind: web
     command: null
@@ -777,7 +777,7 @@
   type: 스크린샷
   caption: "앱 생성 창에 앱 이름 입력"
   file: images/ch07/ch07-f03.jpg
-  source: images/raw/kakao-app-create.jpg
+  source: _working_raw/raw/kakao-app-create.jpg
   capture:
     kind: web
     command: null
@@ -793,7 +793,7 @@
   type: 스크린샷
   caption: "앱 > 플랫폼 키 화면의 키 3종 (JavaScript 키에 강조 표시)"
   file: images/ch07/ch07-f04.jpg
-  source: images/raw/kakao-platform-keys.jpg
+  source: _working_raw/raw/kakao-platform-keys.jpg
   capture:
     kind: web
     command: null
@@ -808,7 +808,7 @@
   type: 스크린샷
   caption: "JavaScript 키 수정 화면의 JavaScript SDK 도메인 항목"
   file: images/ch07/ch07-f05.jpg
-  source: images/raw/kakao-jskey-domain.jpg
+  source: _working_raw/raw/kakao-jskey-domain.jpg
   capture:
     kind: web
     command: null
@@ -823,7 +823,7 @@
   type: 스크린샷
   caption: "JavaScript SDK 도메인에 http://localhost:5173 이 등록된 모습"
   file: images/ch07/ch07-f06.jpg
-  source: images/raw/kakao-jssdk-domain.jpg
+  source: _working_raw/raw/kakao-jssdk-domain.jpg
   capture:
     kind: web
     command: null
@@ -870,7 +870,7 @@
   type: 스크린샷
   caption: "npm run dev 실행 후 개발 서버가 켜진 터미널"
   file: images/ch08/ch08-f03.png
-  source: images/raw/term-vite-dev.png
+  source: _working_raw/raw/term-vite-dev.png
   capture:
     kind: terminal
     command: "npm run dev"
@@ -980,7 +980,7 @@
   type: 스크린샷
   caption: "첫 지도! 서울시청을 중심으로 화면 가득 뜬 카카오지도"
   file: images/ch09/ch09-f04.jpg
-  source: images/raw/app-first-map.jpg
+  source: _working_raw/raw/app-first-map.jpg
   capture:
     kind: web
     command: null
@@ -1012,7 +1012,7 @@
   type: 스크린샷
   caption: "카카오 콘솔의 JavaScript SDK 도메인 등록 재확인"
   file: images/ch09/ch09-f06.jpg
-  source: images/raw/kakao-jskey-domain.jpg
+  source: _working_raw/raw/kakao-jskey-domain.jpg
   capture:
     kind: web
     command: null
@@ -1058,7 +1058,7 @@
   type: 스크린샷
   caption: "같은 위치, 다른 레벨: 레벨 3(왼쪽)과 레벨 7(오른쪽)"
   file: images/ch10/ch10-f03.png
-  source: images/raw/app2-level-compare.png
+  source: _working_raw/raw/app2-level-compare.png
   capture:
     kind: web
     command: null
@@ -1074,7 +1074,7 @@
   type: 스크린샷
   caption: "컨트롤이 달린 지도: 오른쪽 위 지도 타입 버튼, 오른쪽 줌 버튼"
   file: images/ch10/ch10-f04.jpg
-  source: images/raw/app-map-controls.jpg
+  source: _working_raw/raw/app-map-controls.jpg
   capture:
     kind: web
     command: null
@@ -1090,7 +1090,7 @@
   type: 스크린샷
   caption: "스카이뷰로 전환한 지도"
   file: images/ch10/ch10-f05.jpg
-  source: images/raw/app-skyview.jpg
+  source: _working_raw/raw/app-skyview.jpg
   capture:
     kind: web
     command: null
@@ -1121,7 +1121,7 @@
   type: 스크린샷
   caption: "서울 시청 위에 찍힌 첫 마커"
   file: images/ch11/ch11-f01.jpg
-  source: images/raw/app2-single-marker.jpg
+  source: _working_raw/raw/app2-single-marker.jpg
   capture:
     kind: web
     command: null
@@ -1137,7 +1137,7 @@
   type: 스크린샷
   caption: "반복문으로 찍은 마커 4개"
   file: images/ch11/ch11-f02.jpg
-  source: images/raw/app2-four-markers.jpg
+  source: _working_raw/raw/app2-four-markers.jpg
   capture:
     kind: web
     command: null
@@ -1184,7 +1184,7 @@
   type: 스크린샷
   caption: "markerImageFor로 만든 카테고리별 커스텀 핀 4종"
   file: images/ch11/ch11-f05.jpg
-  source: images/raw/app2-category-pins.jpg
+  source: _working_raw/raw/app2-category-pins.jpg
   capture:
     kind: web
     command: null
@@ -1200,7 +1200,7 @@
   type: 스크린샷
   caption: "renderPlaces가 그린 나만의 장소 지도"
   file: images/ch11/ch11-f06.jpg
-  source: images/raw/app2-default-map.jpg
+  source: _working_raw/raw/app2-default-map.jpg
   capture:
     kind: web
     command: null
@@ -1216,7 +1216,7 @@
   type: 일러스트
   caption: "데이터와 화면의 분리"
   file: images/ch12/ch12-f01.jpg
-  source: images/raw/ill-data-to-map.jpg
+  source: _working_raw/raw/ill-data-to-map.jpg
   capture:
     kind: manual
     command: null
@@ -1263,7 +1263,7 @@
   type: 스크린샷
   caption: "DEFAULT_PLACES 다섯 곳이 카테고리 핀으로 찍힌 지도"
   file: images/ch12/ch12-f04.jpg
-  source: images/raw/app-default5-pins.jpg
+  source: _working_raw/raw/app-default5-pins.jpg
   capture:
     kind: web
     command: null
@@ -1309,7 +1309,7 @@
   type: 스크린샷
   caption: "기본 InfoWindow가 열린 모습"
   file: images/ch13/ch13-f01.jpg
-  source: images/raw/app-infowindow.jpg
+  source: _working_raw/raw/app-infowindow.jpg
   capture:
     kind: web
     command: null
@@ -1404,7 +1404,7 @@
   type: 스크린샷
   caption: "필터가 없을 때: 모든 카테고리 마커가 뒤섞여 표시된 지도"
   file: images/ch14/ch14-f01.jpg
-  source: images/raw/app-main.jpg
+  source: _working_raw/raw/app-main.jpg
   capture:
     kind: web
     command: null
@@ -1435,7 +1435,7 @@
   type: 스크린샷
   caption: "완성된 필터 바 UI (\"전체\"가 active 상태)"
   file: images/ch14/ch14-f03.png
-  source: images/raw/app-filterbar-all.png
+  source: _working_raw/raw/app-filterbar-all.png
   capture:
     kind: web
     command: null
@@ -1451,7 +1451,7 @@
   type: 스크린샷
   caption: "☕ 카페 필터 적용: 카페 마커만 남은 지도"
   file: images/ch14/ch14-f04.jpg
-  source: images/raw/app-cafe-filter-bubble-detail.jpg
+  source: _working_raw/raw/app-cafe-filter-bubble-detail.jpg
   capture:
     kind: web
     command: null
@@ -1513,7 +1513,7 @@
   type: 스크린샷
   caption: "사이드바 상단에 추가된 검색창"
   file: images/ch15/ch15-f02.png
-  source: images/raw/app-searchbox.png
+  source: _working_raw/raw/app-searchbox.png
   capture:
     kind: web
     command: null
@@ -1545,7 +1545,7 @@
   type: 스크린샷
   caption: "\"성수동 카페\" 검색 결과 상위 7개"
   file: images/ch15/ch15-f04.jpg
-  source: images/raw/app2-search-results.jpg
+  source: _working_raw/raw/app2-search-results.jpg
   capture:
     kind: web
     command: null
@@ -1561,7 +1561,7 @@
   type: 스크린샷
   caption: "결과 클릭 후 레벨 3으로 확대 이동한 지도"
   file: images/ch15/ch15-f05.jpg
-  source: images/raw/app2-search-zoom.jpg
+  source: _working_raw/raw/app2-search-zoom.jpg
   capture:
     kind: web
     command: null
@@ -1577,7 +1577,7 @@
   type: 스크린샷
   caption: "결과가 없을 때의 토스트 알림"
   file: images/ch15/ch15-f06.jpg
-  source: images/raw/app-noresult-toast.jpg
+  source: _working_raw/raw/app-noresult-toast.jpg
   capture:
     kind: web
     command: null
@@ -1609,7 +1609,7 @@
   type: 스크린샷
   caption: "화면 가운데에 뜬 장소 추가 다이얼로그"
   file: images/ch16/ch16-f02.jpg
-  source: images/raw/app-add-dialog.jpg
+  source: _working_raw/raw/app-add-dialog.jpg
   capture:
     kind: web
     command: null
@@ -1624,7 +1624,7 @@
   type: 스크린샷
   caption: "이름을 비우고 추가를 누르면 뜨는 검증 토스트"
   file: images/ch16/ch16-f03.jpg
-  source: images/raw/app2-addname-toast.jpg
+  source: _working_raw/raw/app2-addname-toast.jpg
   capture:
     kind: web
     command: null
@@ -1640,7 +1640,7 @@
   type: 스크린샷
   caption: "검색 결과마다 달린 ＋ 버튼"
   file: images/ch16/ch16-f04.jpg
-  source: images/raw/app-search-results.jpg
+  source: _working_raw/raw/app-search-results.jpg
   capture:
     kind: web
     command: null
@@ -1655,7 +1655,7 @@
   type: 스크린샷
   caption: "＋를 누르면 이름이 미리 채워진 다이얼로그가 열린다"
   file: images/ch16/ch16-f05.jpg
-  source: images/raw/app-add-dialog-cafe.jpg
+  source: _working_raw/raw/app-add-dialog-cafe.jpg
   capture:
     kind: web
     command: null
@@ -1782,7 +1782,7 @@
   type: 스크린샷
   caption: "가져오기 성공 토스트"
   file: images/ch17/ch17-f07.jpg
-  source: images/raw/app2-import-toast.jpg
+  source: _working_raw/raw/app2-import-toast.jpg
   capture:
     kind: web
     command: null
@@ -1814,7 +1814,7 @@
   type: 스크린샷
   caption: "완성된 사이드바 장소 목록: 이모지·이름·카테고리·별점이 줄지어 표시된다"
   file: images/ch18/ch18-f02.jpg
-  source: images/raw/app-main.jpg
+  source: _working_raw/raw/app-main.jpg
   capture:
     kind: web
     command: null
@@ -1829,7 +1829,7 @@
   type: 스크린샷
   caption: "필터와 목록의 동기화: ☕ 카페 필터를 누르면 마커와 목록이 함께 걸러진다"
   file: images/ch18/ch18-f03.jpg
-  source: images/raw/app-cafe-filter-bubble-detail.jpg
+  source: _working_raw/raw/app-cafe-filter-bubble-detail.jpg
   capture:
     kind: web
     command: null
@@ -1844,7 +1844,7 @@
   type: 스크린샷
   caption: "빈 목록 안내: 텅 빈 여백 대신 상황과 다음 행동을 알려준다"
   file: images/ch18/ch18-f04.jpg
-  source: images/raw/app-empty-list.jpg
+  source: _working_raw/raw/app-empty-list.jpg
   capture:
     kind: web
     command: null
@@ -1908,7 +1908,7 @@
   type: 스크린샷
   caption: "마커를 클릭하면 오른쪽 위에 열리는 상세 패널"
   file: images/ch19/ch19-f02.jpg
-  source: images/raw/app-detail-panel.jpg
+  source: _working_raw/raw/app-detail-panel.jpg
   capture:
     kind: web
     command: null
@@ -1923,7 +1923,7 @@
   type: 스크린샷
   caption: "별 5개를 클릭한 직후, 패널과 말풍선의 별이 함께 바뀐 모습"
   file: images/ch19/ch19-f03.jpg
-  source: images/raw/app-detail-star-sync.jpg
+  source: _working_raw/raw/app-detail-star-sync.jpg
   capture:
     kind: web
     command: null
@@ -1970,7 +1970,7 @@
   type: 스크린샷
   caption: "escapeHtml 덕분에 태그가 글자 그대로 표시된 상세 패널"
   file: images/ch19/ch19-f06.jpg
-  source: images/raw/app-escapehtml.jpg
+  source: _working_raw/raw/app-escapehtml.jpg
   capture:
     kind: web
     command: null
@@ -1986,7 +1986,7 @@
   type: 일러스트
   caption: "브라우저가 위치를 알아내는 세 가지 단서"
   file: images/ch20/ch20-f01.jpg
-  source: images/raw/ill-geolocation-dot.jpg
+  source: _working_raw/raw/ill-geolocation-dot.jpg
   capture:
     kind: manual
     command: null
@@ -2063,7 +2063,7 @@
   type: 스크린샷
   caption: "권한 거부 시 토스트 안내"
   file: images/ch20/ch20-f06.jpg
-  source: images/raw/app2-denied-toast.jpg
+  source: _working_raw/raw/app2-denied-toast.jpg
   capture:
     kind: web
     command: null
@@ -2111,7 +2111,7 @@
   type: 스크린샷
   caption: "공유 버튼 클릭: 주소창에 해시가 생기고 복사 토스트가 뜬 화면"
   file: images/ch21/ch21-f02.jpg
-  source: images/raw/app2-share-toast.jpg
+  source: _working_raw/raw/app2-share-toast.jpg
   capture:
     kind: web
     command: null
@@ -2190,7 +2190,7 @@
   type: 스크린샷
   caption: "마커 100개가 뒤덮은 지도 (클러스터러 적용 전)"
   file: images/ch22/ch22-f01.jpg
-  source: images/raw/app-clusterer-100.jpg
+  source: _working_raw/raw/app-clusterer-100.jpg
   capture:
     kind: web
     command: null
@@ -2238,7 +2238,7 @@
   type: 스크린샷
   caption: "클러스터러 적용 후: 숫자 원으로 정리된 지도"
   file: images/ch22/ch22-f04.jpg
-  source: images/raw/app-clusterer.jpg
+  source: _working_raw/raw/app-clusterer.jpg
   capture:
     kind: web
     command: null
@@ -2361,7 +2361,7 @@
   type: 스크린샷
   caption: "사이드바를 접은 직후의 버그: 새로 넓어진 오른쪽 영역이 회색으로 남아 있다"
   file: images/ch23/ch23-f06.jpg
-  source: images/raw/app-sidebar-collapsed-tilebug.jpg
+  source: _working_raw/raw/app-sidebar-collapsed-tilebug.jpg
   capture:
     kind: web
     command: null
@@ -2373,7 +2373,7 @@
 
 - id: ch23-f07
   chapter: 23
-  type: 촬영
+  type: 일러스트
   caption: "실제 스마트폰에서 열어 본 나만의 지도 (같은 와이파이, Network 주소 접속)"
   file: images/ch23/ch23-f07.png
   capture:
@@ -2455,7 +2455,7 @@
   type: 스크린샷
   caption: "깃허브에 올라간 my-map 저장소"
   file: images/ch24/ch24-f05.jpg
-  source: images/raw/gh-repo-main.jpg
+  source: _working_raw/raw/gh-repo-main.jpg
   capture:
     kind: web
     command: null
@@ -2471,7 +2471,7 @@
   type: 스크린샷
   caption: "검수 포인트: .env와 node_modules가 없다"
   file: images/ch24/ch24-f06.png
-  source: images/raw/gh-filelist.png
+  source: _working_raw/raw/gh-filelist.png
   capture:
     kind: web
     command: null
@@ -2533,7 +2533,7 @@
   type: 스크린샷
   caption: "리포지토리 Secrets에 VITE_KAKAO_JS_KEY 등록"
   file: images/ch25/ch25-f03.jpg
-  source: images/raw/gh-secret-new.jpg
+  source: _working_raw/raw/gh-secret-new.jpg
   capture:
     kind: web
     command: null
@@ -2549,7 +2549,7 @@
   type: 스크린샷
   caption: "Settings → Pages에서 Source를 GitHub Actions로"
   file: images/ch25/ch25-f04.jpg
-  source: images/raw/gh-pages-actions.jpg
+  source: _working_raw/raw/gh-pages-actions.jpg
   capture:
     kind: web
     command: null
@@ -2641,7 +2641,7 @@
   type: 스크린샷
   caption: "GitHub 리포 첫 화면에 렌더링된 README"
   file: images/ch26/ch26-f03.png
-  source: images/raw/gh-readme.png
+  source: _working_raw/raw/gh-readme.png
   capture:
     kind: web
     command: null
@@ -2779,6 +2779,7 @@
     crop: window
   status: captured
   source: tools/diagrams/out/ch28-f02.png
+
 
 
 
