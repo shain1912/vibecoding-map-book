@@ -5,3 +5,8 @@ site/
 __pycache__/
 *.pyc
 .DS_Store
+
+# 작업용 원본 캡처 (책에 미사용, 민감 화면 포함 가능)
+_working_raw/
+review_edits.json
+review_scores.json
