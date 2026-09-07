@@ -30,6 +30,7 @@ JTP = {
     "pseudo_per1k": 0.00,
     "drama_per1k": 0.01,
     "degree_per1k": 0.48,
+    "bold_per1k": 0.58,   # <strong>/<b> 실측 (43건 / 74,390자)
 }
 
 # ── 패턴 (JS 구현과 1:1로 일치시킬 것) ─────────────────────────
@@ -154,7 +155,7 @@ def score(a: dict) -> dict:
     pen_drama = min(max(a["drama_per1k"] - JTP["drama_per1k"], 0) / 0.40, 1.0) * 10
     pen_mind = min(a["mindread_per1k"] / 0.30, 1.0) * 8
     pen_contrast = min(a["contrast_per1k"] / 0.30, 1.0) * 7
-    pen_bold = min(max(a["bold_per1k"] - 1.0, 0) / 5.0, 1.0) * 12
+    pen_bold = min(max(a["bold_per1k"] - JTP["bold_per1k"], 0) / 4.0, 1.0) * 12
     len_gap = max(abs(a["sent_len_mean"] - JTP["sent_len_mean"]) - 8, 0)
     pen_len = min(len_gap / 20.0, 1.0) * 8
     total = 100 - (pen_meta + pen_pseudo + pen_drama + pen_mind + pen_contrast + pen_bold + pen_len)
@@ -183,7 +184,7 @@ GATE = {
     "drama_per1k_max": 0.05,
     "mindread_per1k_max": 0.10,
     "contrast_per1k_max": 0.10,
-    "bold_per1k_max": 2.0,
+    "bold_per1k_max": 1.5,   # JTP 실측 0.58의 약 2.5배까지 허용
     "sent_len_min": 33.0,      # 지나친 단문화 방지 (JTP 41.2, 현 교재 42.3)
     "sent_len_max": 50.0,
 }
