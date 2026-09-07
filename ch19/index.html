@@ -1687,16 +1687,16 @@
 <div class="admonition note">
 <p class="admonition-title">이 장에서 배우는 것</p>
 <ul>
-<li>장소 하나를 자세히 보고 편집하는 <strong>상세 패널 UI</strong>를 만듭니다</li>
-<li><strong>별점 버튼(1~5)</strong>으로 평점을 매기고, 클릭 즉시 화면에 반영합니다</li>
+<li>장소 하나를 자세히 보고 편집하는 상세 패널 UI를 만듭니다</li>
+<li>별점 버튼(1~5)으로 평점을 매기고, 클릭 즉시 화면에 반영합니다</li>
 <li>메모를 입력하고 저장하는 흐름과 <code>store.update</code>의 쓰임새를 익힙니다</li>
-<li>삭제 전에 <code>confirm</code>으로 <strong>한 번 더 물어보는</strong> 이유를 배웁니다</li>
-<li><strong>XSS 공격</strong>이 무엇인지 직접 실험해 보고, <code>escapeHtml</code>로 막는 법을 배웁니다 — 이 책의 첫 보안 수업입니다</li>
+<li>삭제 전에 <code>confirm</code>으로 한 번 더 물어보는 이유를 배웁니다</li>
+<li>XSS 공격이 무엇인지 직접 실험해 보고, <code>escapeHtml</code>로 막는 법을 배웁니다 — 이 책의 첫 보안 수업입니다</li>
 </ul>
 </div>
 <hr />
-<p>드디어 퍼즐의 마지막 조각입니다. 16장에서 장소를 <strong>추가</strong>했고, 17장에서 localStorage에 <strong>저장</strong>했고, 18장에서 사이드바 <strong>목록</strong>으로 훑어볼 수 있게 됐습니다. 그런데 아직 못 하는 일이 두 가지 남아 있습니다. 저장해 둔 장소의 별점과 메모를 <strong>고치는 일</strong>, 그리고 이제 안 가는 가게를 <strong>지우는 일</strong>입니다. 프로그래머들은 데이터 다루기의 네 가지 기본기를 CRUD라고 부릅니다. Create(만들기)·Read(읽기)·Update(고치기)·Delete(지우기)의 머리글자죠. 우리는 C와 R을 끝냈고, 이번 장에서 U와 D를 완성합니다.</p>
-<p>이 두 기능이 살 집으로 우리는 <strong>상세 패널</strong>을 만듭니다. 마커나 목록에서 장소를 고르면 지도 오른쪽 위에 카드가 스르륵 나타나서, 그 장소의 이름·카테고리·별점·메모를 보여 주고 그 자리에서 바로 편집까지 하게 해 주는 화면입니다. 카카오맵에서 가게를 눌렀을 때 옆에 뜨는 상세 화면의 미니 버전이라고 생각하면 됩니다. 그리고 이 장의 끝에는 특별한 손님이 기다리고 있습니다. 15장에서 "19장에서 제대로 배운다"고 미뤄 뒀던 <code>escapeHtml</code>의 정체, 즉 <strong>XSS</strong>라는 웹 보안의 고전을 직접 실험으로 만나 봅니다. 여러분의 첫 해킹(과 방어) 실습입니다.</p>
+<p>드디어 퍼즐의 마지막 조각입니다. 16장에서 장소를 추가했고, 17장에서 localStorage에 저장했고, 18장에서 사이드바 목록으로 훑어볼 수 있게 됐습니다. 그런데 아직 못 하는 일이 두 가지 남아 있습니다. 저장해 둔 장소의 별점과 메모를 고치는 일, 그리고 이제 안 가는 가게를 지우는 일입니다. 프로그래머들은 데이터 다루기의 네 가지 기본기를 CRUD라고 부릅니다. Create(만들기)·Read(읽기)·Update(고치기)·Delete(지우기)의 머리글자죠. 우리는 C와 R을 끝냈고, 이번 장에서 U와 D를 완성합니다.</p>
+<p>이 두 기능이 살 집으로 우리는 상세 패널을 만듭니다. 마커나 목록에서 장소를 고르면 지도 오른쪽 위에 카드가 스르륵 나타나서, 그 장소의 이름·카테고리·별점·메모를 보여 주고 그 자리에서 바로 편집까지 하게 해 주는 화면입니다. 카카오맵에서 가게를 눌렀을 때 옆에 뜨는 상세 화면의 미니 버전이라고 생각하면 됩니다. 그리고 이 장의 끝에는 특별한 손님이 기다리고 있습니다. 15장에서 "19장에서 제대로 배운다"고 미뤄 뒀던 <code>escapeHtml</code>의 정체, 즉 XSS라는 웹 보안의 고전을 직접 실험으로 만나 봅니다. 여러분의 첫 해킹(과 방어) 실습입니다.</p>
 <h2 id="191">19.1 상세 패널 설계 — 어디에, 무엇을<a class="headerlink" href="#191" title="Permanent link">&para;</a></h2>
 <p>코드를 시키기 전에 늘 하던 대로 그림부터 그려 봅시다. 상세 패널에 들어갈 내용은 네 덩어리입니다.</p>
 <ol>
@@ -1711,8 +1711,8 @@
 <p>그림 19.1 — 상세 패널의 네 덩어리 구조</p>
 </figcaption>
 </figure>
-<p>자리는 지도 <strong>오른쪽 위</strong>가 좋습니다. 왼쪽은 사이드바가 차지하고 있으니, 반대편에 띄우면 목록과 상세를 나란히 놓고 볼 수 있습니다. 13장의 말풍선처럼 지도 위에 겹쳐 뜨는 요소이므로 <code>position: absolute</code>를 쓰고, 평소에는 <code>hidden</code> 속성으로 숨겨 둡니다. 15장의 검색 결과 목록과 똑같은 작전입니다. 화면 요소는 상태에 따라 나타나고 사라진다 — 이제 익숙한 리듬이죠.</p>
-<p>그런데 한 가지 미리 결정할 것이 있습니다. 패널의 <strong>속 내용물</strong>을 HTML에 미리 다 써 둘까요, 아니면 그때그때 자바스크립트로 만들어 넣을까요? 검색 결과 목록은 후자였습니다. 상세 패널도 후자가 맞습니다. 어떤 장소가 클릭될지, 별점이 몇 개일지, 메모가 뭐라고 적혀 있을지는 <strong>클릭되는 순간에야</strong> 알 수 있으니까요. 그래서 HTML에는 빈 그릇만 두고, 열 때마다 내용을 새로 그려 넣는 방식으로 갑니다. Claude Code에게 그릇과 스타일부터 부탁합시다.</p>
+<p>자리는 지도 오른쪽 위가 좋습니다. 왼쪽은 사이드바가 차지하고 있으니, 반대편에 띄우면 목록과 상세를 나란히 놓고 볼 수 있습니다. 13장의 말풍선처럼 지도 위에 겹쳐 뜨는 요소이므로 <code>position: absolute</code>를 쓰고, 평소에는 <code>hidden</code> 속성으로 숨겨 둡니다. 15장의 검색 결과 목록과 똑같은 작전입니다. 화면 요소는 상태에 따라 나타나고 사라진다 — 이제 익숙한 리듬이죠.</p>
+<p>그런데 한 가지 미리 결정할 것이 있습니다. 패널의 속 내용물을 HTML에 미리 다 써 둘까요, 아니면 그때그때 자바스크립트로 만들어 넣을까요? 검색 결과 목록은 후자였습니다. 상세 패널도 후자가 맞습니다. 어떤 장소가 클릭될지, 별점이 몇 개일지, 메모가 뭐라고 적혀 있을지는 클릭되는 순간에야 알 수 있으니까요. 그래서 HTML에는 빈 그릇만 두고, 열 때마다 내용을 새로 그려 넣는 방식으로 갑니다. Claude Code에게 그릇과 스타일부터 부탁합시다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
 <blockquote>
@@ -1722,7 +1722,7 @@
 <p>Claude Code가 <code>index.html</code>에 넣은 것은 정말로 이 한 줄입니다.</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">section</span> <span class="na">id</span><span class="o">=</span><span class="s">"detail-panel"</span> <span class="na">hidden</span><span class="p">&gt;&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
 </span></code></pre></div>
-<p><code>style.css</code>에 추가된 스타일의 핵심은 이렇습니다.</p>
+<p><code>style.css</code>에 추가된 스타일은 이렇습니다.</p>
 <div class="language-css highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">#</span><span class="nn">detail-panel</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span><span class="w"> </span><span class="k">right</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">280</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span><span class="w"> </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span>
@@ -1739,7 +1739,7 @@
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nt">button</span><span class="p">.</span><span class="nc">primary</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--brand</span><span class="p">);</span><span class="w"> </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--brand</span><span class="p">);</span><span class="w"> </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="nt">button</span><span class="p">.</span><span class="nc">danger</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#dc2626</span><span class="p">;</span><span class="w"> </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fecaca</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span></code></pre></div>
-<p>눈여겨볼 곳은 별점입니다. <code>.star</code>는 평소 회색(<code>#d1d5db</code>)이고, <code>on</code> 클래스가 붙은 것만 노란색(<code>#f59e0b</code>)이 됩니다. 14장 필터 버튼의 <code>active</code> 토글과 똑같은 수법이죠. <strong>모양은 CSS가, 켜고 끄기는 클래스가</strong> 담당합니다. 삭제 버튼에는 <code>danger</code>라는 클래스로 빨간 계열을 입혔습니다. 위험한 버튼은 빨갛게 — 전 세계 UI의 공용어입니다.</p>
+<p>눈여겨볼 곳은 별점입니다. <code>.star</code>는 평소 회색(<code>#d1d5db</code>)이고, <code>on</code> 클래스가 붙은 것만 노란색(<code>#f59e0b</code>)이 됩니다. 14장 필터 버튼의 <code>active</code> 토글과 똑같은 수법이죠. 모양은 CSS가, 켜고 끄기는 클래스가 담당합니다. 삭제 버튼에는 <code>danger</code>라는 클래스로 빨간 계열을 입혔습니다. 위험한 버튼은 빨갛게 — 전 세계 UI의 공용어입니다.</p>
 <h2 id="192-opendetail">19.2 openDetail — 패널을 그리는 함수<a class="headerlink" href="#192-opendetail" title="Permanent link">&para;</a></h2>
 <p>이제 두뇌 차례입니다. 우리 앱의 규칙대로 상세 패널도 파일 하나에 담습니다. 이름은 <code>src/detail.js</code>. 요구사항을 정리해서 통째로 시켜 봅시다.</p>
 <div class="admonition tip">
@@ -1781,12 +1781,12 @@
 </span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="sb">      &lt;button id="detail-delete" class="danger"&gt;삭제&lt;/button&gt;</span>
 </span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="sb">    &lt;/div&gt;`</span><span class="p">;</span>
 </span></code></pre></div>
-<p>첫 줄부터 봅시다. <code>store.get(id)</code>으로 장소 객체를 찾고, 없으면 조용히 반환합니다. 15장에서 배운 <strong>문지기 검사</strong>입니다. 이미 삭제된 장소의 id가 어디선가 굴러들어 와도 앱이 깨지지 않게 막아 줍니다. 그다음 <code>panel.hidden = false</code>로 그릇을 드러내고, <code>innerHTML</code>에 템플릿 문자열로 내용 전체를 한 번에 그려 넣습니다. 12장 이후 계속 써 온 <strong>데이터 → HTML 문자열</strong> 패턴 그대로입니다.</p>
+<p>첫 줄부터 봅시다. <code>store.get(id)</code>으로 장소 객체를 찾고, 없으면 조용히 반환합니다. 15장에서 배운 문지기 검사입니다. 이미 삭제된 장소의 id가 어디선가 굴러들어 와도 앱이 깨지지 않게 막아 줍니다. 그다음 <code>panel.hidden = false</code>로 그릇을 드러내고, <code>innerHTML</code>에 템플릿 문자열로 내용 전체를 한 번에 그려 넣습니다. 12장 이후 계속 써 온 데이터 → HTML 문자열 패턴 그대로입니다.</p>
 <p>가장 재미있는 줄은 별점입니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">].</span><span class="nx">map</span><span class="p">((</span><span class="nx">n</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="sb">`&lt;button class="star </span><span class="si">${</span><span class="nx">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="nx">place</span><span class="p">.</span><span class="nx">rating</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'on'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="sb">" ...&gt;★&lt;/button&gt;`</span><span class="p">)</span>
 </span></code></pre></div>
-<p><code>&lt;button class="star"&gt;★&lt;/button&gt;</code>를 다섯 번 복사해 붙이는 대신, <code>[1, 2, 3, 4, 5]</code> 배열을 <code>map</code>으로 돌려 다섯 개를 <strong>찍어 냅니다</strong>. 각 버튼은 자기 번호 <code>n</code>을 알고 있고, <code>n &lt;= place.rating</code>이면, 그러니까 자기 번호가 현재 별점 이하이면 <code>on</code> 클래스를 답니다. 별점이 3이면 1·2·3번 별에만 <code>on</code>이 붙어 노랗게 빛나는 것이죠. <code>place.rating || 0</code>은 별점이 아직 없는(=<code>undefined</code>) 장소를 0점으로 취급하는 안전장치입니다. 삼항 연산자<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> <code>조건 ? 참일때 : 거짓일때</code>는 이렇게 클래스 이름을 골라 넣을 때 특히 자주 만나게 됩니다.</p>
-<p><code>data-n="${n}"</code>도 눈에 익지 않나요? 15장 검색 결과의 <code>data-i</code>와 같은 <strong>번호표</strong>입니다. 잠시 뒤 클릭된 별이 몇 번째인지 알아내는 데 씁니다. 그리고 이름과 메모에 씌워진 <code>escapeHtml</code> — 아직은 "외부 문자열엔 이걸 씌운다"는 주문으로만 알고 넘어가세요. 19.5절에서 이 주문을 안 외우면 무슨 일이 벌어지는지 눈으로 보게 됩니다.</p>
+<p><code>&lt;button class="star"&gt;★&lt;/button&gt;</code>를 다섯 번 복사해 붙이는 대신, <code>[1, 2, 3, 4, 5]</code> 배열을 <code>map</code>으로 돌려 다섯 개를 찍어 냅니다. 각 버튼은 자기 번호 <code>n</code>을 알고 있고, <code>n &lt;= place.rating</code>이면, 그러니까 자기 번호가 현재 별점 이하이면 <code>on</code> 클래스를 답니다. 별점이 3이면 1·2·3번 별에만 <code>on</code>이 붙어 노랗게 빛나는 것이죠. <code>place.rating || 0</code>은 별점이 아직 없는(=<code>undefined</code>) 장소를 0점으로 취급하는 안전장치입니다. 삼항 연산자<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> <code>조건 ? 참일때 : 거짓일때</code>는 이렇게 클래스 이름을 골라 넣을 때 특히 자주 만나게 됩니다.</p>
+<p><code>data-n="${n}"</code>도 눈에 익지 않나요? 15장 검색 결과의 <code>data-i</code>와 같은 번호표입니다. 잠시 뒤 클릭된 별이 몇 번째인지 알아내는 데 씁니다. 그리고 이름과 메모에 씌워진 <code>escapeHtml</code> — 아직은 "외부 문자열엔 이걸 씌운다"는 주문으로만 알고 넘어가세요. 19.5절에서 이 주문을 안 외우면 무슨 일이 벌어지는지 눈으로 보게 됩니다.</p>
 <figure>
 <p><img alt="마커를 클릭하면 오른쪽 위에 열리는 상세 패널" src="../images/ch19/ch19-f02.jpg" width="760" /></p>
 <figcaption>
@@ -1808,8 +1808,8 @@
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="p">});</span>
 </span></code></pre></div>
 <p>별 버튼 다섯 개를 <code>querySelectorAll</code>로 모아 하나씩 클릭 리스너를 답니다. 클릭되면 번호표(<code>btn.dataset.n</code>)를 읽어 몇 번째 별인지 알아내고 — <code>dataset</code> 값은 언제나 문자열이므로 <code>Number()</code>로 변환하는 습관, 15장에서 배웠죠 — <code>store.update(id, { rating: n })</code>로 저장소에 새 별점을 기록합니다. 17장에서 만든 <code>update</code>는 그 장소 객체에 변경분만 덮어쓰고 <code>save()</code>를 부르니, localStorage 저장까지 이 한 줄로 끝납니다.</p>
-<p>그런데 뒤쪽의 <code>openDetail(id)</code>가 묘합니다. 지금 실행 중인 함수를 <strong>자기가 다시 부릅니다</strong>. 왜일까요? 별점은 방금 3에서 5로 바뀌었는데, 화면의 별들은 여전히 3개만 노란 상태이기 때문입니다. 노란 별을 두 개 더 칠하는 코드를 조심조심 짤 수도 있겠지만, 그보다 훨씬 단순한 방법이 있습니다. <strong>패널을 통째로 다시 그리는 것</strong>입니다. <code>openDetail</code>은 어차피 "현재 데이터를 읽어 패널을 그리는 함수"이니, 데이터를 바꾼 뒤 한 번 더 부르면 바뀐 별점이 반영된 새 패널이 나타납니다. 화면을 요리조리 수선하지 않고 <strong>상태를 바꾸고 → 다시 그린다</strong>. 14장 필터에서 익힌 단방향 흐름이 여기서도 반복됩니다. 요즘 유행하는 React 같은 프레임워크의 핵심 사상도 사실 이것과 똑같습니다. 우리는 그걸 바닐라 자바스크립트로 손수 해 보고 있는 셈입니다.</p>
-<p>그리고 <code>openDetail(id)</code>를 앞뒤로 감싼 두 줄, <code>draft</code>를 보관했다가 되돌려 놓는 코드가 이 방식의 <strong>비용을 계산한 흔적</strong>입니다. 패널을 통째로 다시 그린다는 것은 textarea도 새로 만든다는 뜻입니다. 만약 메모 칸에 <strong>저장 안 한 글</strong>을 쓰던 중에 별을 눌렀다면, 새 textarea에는 저장된 옛 메모가 들어가면서 쓰던 글이 증발해 버립니다. 열심히 쓴 후기 세 줄이 별 한 번 눌렀다고 사라진다면 사용자는 배신감을 느끼겠죠. 그래서 다시 그리기 <strong>전에</strong> textarea의 현재 값을 <code>draft</code> 변수에 피신시켜 두고, 다시 그린 <strong>후에</strong> 그 값을 새 textarea에 되돌려 놓습니다. 철거 전에 귀중품부터 챙기는 것입니다. "통째로 다시 그리기"의 단순함은 지키면서, 그 부작용만 두 줄로 막은 절충안입니다.</p>
+<p>그런데 뒤쪽의 <code>openDetail(id)</code>가 묘합니다. 지금 실행 중인 함수를 자기가 다시 부릅니다. 왜일까요? 별점은 방금 3에서 5로 바뀌었는데, 화면의 별들은 여전히 3개만 노란 상태이기 때문입니다. 노란 별을 두 개 더 칠하는 코드를 조심조심 짤 수도 있겠지만, 그보다 훨씬 단순한 방법이 있습니다. 패널을 통째로 다시 그리는 것입니다. <code>openDetail</code>은 어차피 "현재 데이터를 읽어 패널을 그리는 함수"이니, 데이터를 바꾼 뒤 한 번 더 부르면 바뀐 별점이 반영된 새 패널이 나타납니다. 화면을 요리조리 수선하지 않고 상태를 바꾸고 → 다시 그린다. 14장 필터에서 익힌 단방향 흐름이 여기서도 반복됩니다. 요즘 유행하는 React 같은 프레임워크의 핵심 사상도 사실 이것과 똑같습니다. 우리는 그걸 바닐라 자바스크립트로 손수 해 보고 있습니다.</p>
+<p>그리고 <code>openDetail(id)</code>를 앞뒤로 감싼 두 줄, <code>draft</code>를 보관했다가 되돌려 놓는 코드가 이 방식의 비용을 계산한 흔적입니다. 패널을 통째로 다시 그린다는 것은 textarea도 새로 만든다는 뜻입니다. 만약 메모 칸에 저장 안 한 글을 쓰던 중에 별을 눌렀다면, 새 textarea에는 저장된 옛 메모가 들어가면서 쓰던 글이 증발해 버립니다. 열심히 쓴 후기 세 줄이 별 한 번 눌렀다고 사라진다면 사용자는 배신감을 느끼겠죠. 그래서 다시 그리기 전에 textarea의 현재 값을 <code>draft</code> 변수에 피신시켜 두고, 다시 그린 후에 그 값을 새 textarea에 되돌려 놓습니다. 철거 전에 귀중품부터 챙기는 것입니다. "통째로 다시 그리기"의 단순함은 지키면서, 그 부작용만 두 줄로 막은 절충안입니다.</p>
 <p>한 가지 더 좋은 일이 공짜로 따라옵니다. <code>store.update</code>가 <code>save()</code>를 부르면, 18장에서 심어 둔 <strong>구독 패턴</strong>이 발동합니다. <code>main.js</code>의 <code>store.subscribe(rerender)</code> 덕분에 지도의 마커와 말풍선도 자동으로 다시 그려지죠. 말풍선에는 별점이 ★★★☆☆처럼 표시되고 있었는데(13장), 상세 패널에서 별을 바꾸는 순간 말풍선의 별도 함께 바뀝니다. 우리가 이번 장에서 그 연동 코드를 한 줄도 안 썼는데도요. 데이터의 길목 한 곳(<code>save</code>)에 방송국을 세워 둔 설계가 이렇게 계속 이자를 쳐서 돌아옵니다.</p>
 <figure>
 <p><img alt="별 5개를 클릭한 직후, 패널과 말풍선의 별이 함께 바뀐 모습" src="../images/ch19/ch19-f03.jpg" width="760" /></p>
@@ -1819,7 +1819,7 @@
 </figure>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
-<p>"바꾸고 다시 그리기"를 쓰는 화면에서는 <strong>입력 중이던 값</strong>이 항상 요주의 대상입니다. 우리는 textarea 하나뿐이라 <code>draft</code> 두 줄로 끝났지만, 입력칸이 여러 개라면 챙길 짐도 늘어납니다. React 같은 프레임워크가 입력 상태를 별도로 관리하는 이유가 바로 이 문제 때문입니다. AI가 짜 준 "다시 그리기" 코드를 검토할 때는 "다시 그리는 순간 사용자가 쓰던 값이 날아가지 않아?"라고 한 번 물어보는 습관을 들이세요. 연습 문제에서 이 두 줄을 직접 실험해 봅니다.</p>
+<p>"바꾸고 다시 그리기"를 쓰는 화면에서는 입력 중이던 값이 항상 요주의 대상입니다. 우리는 textarea 하나뿐이라 <code>draft</code> 두 줄로 끝났지만, 입력칸이 여러 개라면 챙길 짐도 늘어납니다. React 같은 프레임워크가 입력 상태를 별도로 관리하는 이유가 바로 이 문제 때문입니다. AI가 짜 준 "다시 그리기" 코드를 검토할 때는 "다시 그리는 순간 사용자가 쓰던 값이 날아가지 않아?"라고 한 번 물어보는 습관을 들이세요. 연습 문제에서 이 두 줄을 직접 실험해 봅니다.</p>
 </div>
 <h2 id="194-confirm">19.4 메모 저장, 그리고 confirm으로 묻는 삭제<a class="headerlink" href="#194-confirm" title="Permanent link">&para;</a></h2>
 <p>남은 두 버튼입니다. 먼저 저장 버튼.</p>
@@ -1828,7 +1828,7 @@
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nx">toast</span><span class="p">(</span><span class="s1">'저장했습니다.'</span><span class="p">);</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="p">});</span>
 </span></code></pre></div>
-<p>textarea의 현재 값을 읽어 <code>store.update</code>로 memo에 덮어쓰고, <code>toast</code>로 "저장했습니다."를 잠깐 띄웁니다. 이 토스트 한 줄을 우습게 보면 안 됩니다. 저장은 눈에 보이는 변화가 없는 동작이라, 알림이 없으면 사용자는 "눌린 건가?" 하며 버튼을 세 번쯤 연타하게 됩니다. <strong>소리 없는 동작에는 반드시 피드백을</strong> — 좋은 UI의 기본 예절입니다.</p>
+<p>textarea의 현재 값을 읽어 <code>store.update</code>로 memo에 덮어쓰고, <code>toast</code>로 "저장했습니다."를 잠깐 띄웁니다. 이 토스트 한 줄을 우습게 보면 안 됩니다. 저장은 눈에 보이는 변화가 없는 동작이라, 알림이 없으면 사용자는 "눌린 건가?" 하며 버튼을 세 번쯤 연타하게 됩니다. 소리 없는 동작에는 반드시 피드백을 — 좋은 UI의 기본 예절입니다.</p>
 <p>다음은 삭제 버튼입니다. 여기엔 처음 보는 함수가 등장합니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">  </span><span class="nx">panel</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#detail-delete'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">confirm</span><span class="p">(</span><span class="sb">`'</span><span class="si">${</span><span class="nx">place</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">'을(를) 삭제할까요?`</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
@@ -1839,7 +1839,7 @@
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="p">});</span>
 </span></code></pre></div>
 <p><code>confirm</code>은 브라우저가 기본으로 제공하는 <strong>확인 다이얼로그</strong>입니다. 호출하면 메시지와 [확인]·[취소] 버튼이 있는 작은 창이 뜨고, 사용자가 답할 때까지 코드 실행이 멈춥니다. 확인을 누르면 <code>true</code>, 취소를 누르면 <code>false</code>가 돌아오죠. 그래서 <code>if (confirm(...))</code> 안에 삭제 코드를 넣으면, 취소를 누른 경우엔 아무 일도 일어나지 않습니다.</p>
-<p>왜 이렇게까지 할까요? 별점 변경은 다시 누르면 그만이고, 메모도 다시 쓰면 됩니다. 하지만 <strong>삭제는 돌이킬 수 없습니다</strong>. <code>store.remove</code>가 실행되고 <code>save()</code>가 localStorage를 덮어쓰는 순간, 그 장소는 이 세상 어디에도 없습니다. 실행 취소(Ctrl+Z) 같은 것도 우리 앱엔 없죠. 이렇게 <strong>되돌릴 수 없는 동작 앞에서는 반드시 한 번 더 묻는다</strong> — 이것도 만국 공통의 UI 관례입니다. 파일을 지울 때, 회원 탈퇴를 할 때, 여러분이 수없이 만나 온 "정말 삭제하시겠습니까?"가 전부 이 <code>confirm</code>의 친척들입니다. 메시지에 <code>place.name</code>을 넣은 것도 의도적입니다. "삭제할까요?"보다 "'성수동 국밥집'을(를) 삭제할까요?"가 실수를 훨씬 잘 막아 줍니다. 내가 <strong>무엇을</strong> 지우려는 건지 눈으로 확인시켜 주니까요.</p>
+<p>왜 이렇게까지 할까요? 별점 변경은 다시 누르면 그만이고, 메모도 다시 쓰면 됩니다. 하지만 삭제는 돌이킬 수 없습니다. <code>store.remove</code>가 실행되고 <code>save()</code>가 localStorage를 덮어쓰는 순간, 그 장소는 이 세상 어디에도 없습니다. 실행 취소(Ctrl+Z) 같은 것도 우리 앱엔 없죠. 이렇게 되돌릴 수 없는 동작 앞에서는 반드시 한 번 더 묻는다 — 이것도 만국 공통의 UI 관례입니다. 파일을 지울 때, 회원 탈퇴를 할 때, 여러분이 수없이 만나 온 "정말 삭제하시겠습니까?"가 전부 이 <code>confirm</code>의 친척들입니다. 메시지에 <code>place.name</code>을 넣은 것도 의도적입니다. "삭제할까요?"보다 "'성수동 국밥집'을(를) 삭제할까요?"가 실수를 훨씬 잘 막아 줍니다. 내가 무엇을 지우려는 건지 눈으로 확인시켜 주니까요.</p>
 <p>확인을 눌렀다면 세 줄이 차례로 실행됩니다. <code>store.remove(id)</code>로 데이터에서 지우고 — 구독 패턴이 마커와 목록도 알아서 치워 줍니다 — <code>closeDetail()</code>로 이제 주인 잃은 패널을 닫고, 토스트로 결과를 알립니다. <code>closeDetail</code>은 파일 끝에 있는 단출한 함수입니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">closeDetail</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">panel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'detail-panel'</span><span class="p">);</span>
@@ -1871,24 +1871,24 @@
 </span></code></pre></div>
 <p>마커를 클릭해도, 사이드바 목록을 클릭해도 같은 상세 패널이 열립니다. 입구는 여러 개, 함수는 하나. 16장에서 추가 다이얼로그를 재사용했던 것과 같은 원칙입니다.</p>
 <h2 id="195-xss">19.5 XSS — 여러분의 첫 보안 실험<a class="headerlink" href="#195-xss" title="Permanent link">&para;</a></h2>
-<p>이제 미뤄 둔 숙제를 풀 시간입니다. 15장부터 코드 곳곳에 등장한 <code>escapeHtml</code>, 도대체 왜 씌우는 걸까요? 백문이 불여일견, <strong>직접 공격을 해 보면서</strong> 배웁시다.</p>
-<p>우리 앱에서 사용자가 입력한 문자열이 <code>innerHTML</code>로 들어가는 곳을 떠올려 보세요. 장소 이름과 메모입니다. 16장의 추가 다이얼로그에서 이름을 아무거나 적을 수 있었죠. 그럼 이름에 글자 대신 <strong>HTML 태그</strong>를 적으면 어떻게 될까요? 지도를 클릭해 추가 다이얼로그를 열고, 이름 칸에 이렇게 넣어 보세요.</p>
+<p>이제 미뤄 둔 숙제를 풉니다. 15장부터 코드 곳곳에 등장한 <code>escapeHtml</code>, 도대체 왜 씌우는 걸까요? 백문이 불여일견, 직접 공격을 해 보면서 배웁시다.</p>
+<p>우리 앱에서 사용자가 입력한 문자열이 <code>innerHTML</code>로 들어가는 곳을 떠올려 보세요. 장소 이름과 메모입니다. 16장의 추가 다이얼로그에서 이름을 아무거나 적을 수 있었죠. 그럼 이름에 글자 대신 HTML 태그를 적으면 어떻게 될까요? 지도를 클릭해 추가 다이얼로그를 열고, 이름 칸에 이렇게 넣어 보세요.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&lt;b&gt;굵은 국밥집&lt;/b&gt;
 </span></code></pre></div>
-<p>저장한 뒤 상세 패널을 열어 봅니다. 우리 앱에서는 <code>&lt;b&gt;굵은 국밥집&lt;/b&gt;</code>이라는 글자가 <strong>꺾쇠까지 그대로</strong> 보입니다. <code>escapeHtml</code>이 일을 한 것입니다. 그런데 만약 이 안전장치가 없었다면? <code>innerHTML</code>은 문자열 속 <code>&lt;b&gt;</code>를 글자가 아니라 "굵게 태그"로 해석해서, 패널에는 <strong>굵은 국밥집</strong>이라고 렌더링됐을 겁니다. 사용자가 입력한 문자열이 우리 앱의 HTML 구조에 <strong>끼어든</strong> 것이죠.</p>
+<p>저장한 뒤 상세 패널을 열어 봅니다. 우리 앱에서는 <code>&lt;b&gt;굵은 국밥집&lt;/b&gt;</code>이라는 글자가 꺾쇠까지 그대로 보입니다. <code>escapeHtml</code>이 일을 한 것입니다. 그런데 만약 이 안전장치가 없었다면? <code>innerHTML</code>은 문자열 속 <code>&lt;b&gt;</code>를 글자가 아니라 "굵게 태그"로 해석해서, 패널에는 굵은 국밥집이라고 렌더링됐을 겁니다. 사용자가 입력한 문자열이 우리 앱의 HTML 구조에 끼어든 것이죠.</p>
 <p>"글씨 좀 굵어지는 게 뭐 어때서?"라고 생각할 수 있습니다. 문제는 태그로 할 수 있는 일이 굵은 글씨 정도가 아니라는 데 있습니다. 이런 이름은 어떨까요.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&lt;img src=x onerror="alert('해킹!')"&gt;
 </span></code></pre></div>
-<p>깨진 이미지 태그입니다. 브라우저는 <code>x</code>라는 이미지를 못 찾으니 <code>onerror</code>에 적힌 <strong>자바스크립트를 실행</strong>합니다. <code>escapeHtml</code>이 없는 앱이라면, 이 "이름"의 장소를 여는 순간 경고창이 뜹니다. 장소 이름을 그렸을 뿐인데 남이 쓴 코드가 내 브라우저에서 돌아간 것입니다. 이런 공격을 <strong>XSS(Cross-Site Scripting, 교차 사이트 스크립팅)</strong><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>라고 부릅니다. 웹에서 가장 오래되고 가장 흔한 공격 중 하나입니다.</p>
+<p>깨진 이미지 태그입니다. 브라우저는 <code>x</code>라는 이미지를 못 찾으니 <code>onerror</code>에 적힌 자바스크립트를 실행합니다. <code>escapeHtml</code>이 없는 앱이라면, 이 "이름"의 장소를 여는 순간 경고창이 뜹니다. 장소 이름을 그렸을 뿐인데 남이 쓴 코드가 내 브라우저에서 돌아간 것입니다. 이런 공격을 <strong>XSS(Cross-Site Scripting, 교차 사이트 스크립팅)</strong><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>라고 부릅니다. 웹에서 가장 오래되고 가장 흔한 공격 중 하나입니다.</p>
 <figure>
 <p><img alt="XSS 공격의 원리: 입력이 코드가 되는 순간" src="../images/ch19/ch19-f05.png" width="760" /></p>
 <figcaption>
 <p>그림 19.5 — XSS 공격의 원리: 입력이 코드가 되는 순간</p>
 </figcaption>
 </figure>
-<p>"내 지도에 내가 이상한 이름을 넣어 봤자 나만 당하는 거 아닌가요?" 좋은 질문입니다. 지금 우리 앱은 데이터가 내 브라우저 안에만 있으니 실제 피해자는 나뿐입니다. 하지만 세 가지를 생각해 보세요. 첫째, 17장에서 만든 <strong>가져오기</strong> 기능으로 남이 준 JSON 파일을 불러올 수 있습니다. 그 파일 속 장소 이름에 공격 코드가 심겨 있다면? 둘째, 15장의 검색 결과도 엄밀히는 <strong>바깥에서 온 데이터</strong>입니다. 카카오를 믿지만, 원칙적으로 외부 데이터는 전부 의심 대상입니다. 셋째, 언젠가 이 앱에 서버를 붙여 여러 사람이 장소를 공유하게 되면, 한 명이 심은 공격 코드가 <strong>모든 방문자의 브라우저</strong>에서 실행됩니다. 진짜 세상의 XSS 사고는 대부분 이런 식으로 터집니다. 방명록에, 댓글에, 닉네임에 심긴 스크립트가 그 페이지를 여는 모든 사람을 공격하는 것이죠.</p>
-<p>참고로 우리 앱의 방어는 이스케이프 한 겹만이 아닙니다. 17장에서 store에 세운 검문소 <code>normalize</code>를 기억하시나요? 가져오기 파일이 들어오면 이름·좌표만이 아니라 <strong><code>id</code>까지</strong> 검사해서, 영문·숫자·밑줄·하이픈으로만 된 id가 아니면 안전한 새 id로 갈아 끼웁니다. id는 화면에 보이는 값이 아니라서 방심하기 쉽지만, <code>data-id="${p.id}"</code>처럼 HTML 속성에 끼워 넣는 코드가 어딘가 생기는 순간 공격 통로가 될 수 있거든요. <strong>들어올 때 검증하고(normalize), 나갈 때 이스케이프한다(escapeHtml)</strong> — 문과 창문에 각각 잠금장치를 다는 이 이중 방어가 보안의 기본 자세입니다. 한쪽을 깜빡해도 다른 쪽이 버텨 주니까요.</p>
-<p>그래서 원칙은 이렇게 외웁니다. <strong>사용자(또는 외부)가 만든 문자열을 innerHTML에 넣을 때는 반드시 이스케이프한다.</strong> 우리의 방패 <code>escapeHtml</code>은 <code>mapView.js</code>에 있는 여섯 줄짜리 함수입니다.</p>
+<p>"내 지도에 내가 이상한 이름을 넣어 봤자 나만 당하는 거 아닌가요?" 좋은 질문입니다. 지금 우리 앱은 데이터가 내 브라우저 안에만 있으니 실제 피해자는 나뿐입니다. 하지만 세 가지를 생각해 보세요. 첫째, 17장에서 만든 가져오기 기능으로 남이 준 JSON 파일을 불러올 수 있습니다. 그 파일 속 장소 이름에 공격 코드가 심겨 있다면? 둘째, 15장의 검색 결과도 엄밀히는 바깥에서 온 데이터입니다. 카카오를 믿지만, 원칙적으로 외부 데이터는 전부 의심 대상입니다. 셋째, 언젠가 이 앱에 서버를 붙여 여러 사람이 장소를 공유하게 되면, 한 명이 심은 공격 코드가 모든 방문자의 브라우저에서 실행됩니다. 진짜 세상의 XSS 사고는 대부분 이런 식으로 터집니다. 방명록에, 댓글에, 닉네임에 심긴 스크립트가 그 페이지를 여는 모든 사람을 공격하는 것이죠.</p>
+<p>참고로 우리 앱의 방어는 이스케이프 한 겹만이 아닙니다. 17장에서 store에 세운 검문소 <code>normalize</code>를 기억하시나요? 가져오기 파일이 들어오면 이름·좌표만이 아니라 <code>id</code>까지 검사해서, 영문·숫자·밑줄·하이픈으로만 된 id가 아니면 안전한 새 id로 갈아 끼웁니다. id는 화면에 보이는 값이 아니라서 방심하기 쉽지만, <code>data-id="${p.id}"</code>처럼 HTML 속성에 끼워 넣는 코드가 어딘가 생기는 순간 공격 통로가 될 수 있거든요. 들어올 때 검증하고(normalize), 나갈 때 이스케이프한다(escapeHtml) — 문과 창문에 각각 잠금장치를 다는 이 이중 방어가 보안의 기본 자세입니다. 한쪽을 깜빡해도 다른 쪽이 버텨 주니까요.</p>
+<p>그래서 원칙은 이렇게 외웁니다. 사용자(또는 외부)가 만든 문자열을 innerHTML에 넣을 때는 반드시 이스케이프한다. 우리의 방패 <code>escapeHtml</code>은 <code>mapView.js</code>에 있는 여섯 줄짜리 함수입니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// src/mapView.js — HTML 특수문자를 무해한 표기로 바꾼다</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[&amp;&lt;&gt;"']/g</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
@@ -1933,7 +1933,7 @@
 </tr>
 </tbody>
 </table>
-<p>이제 15장의 문장을 완성할 수 있습니다. 검색 결과의 <code>place_name</code>에, 상세 패널의 <code>place.name</code>과 <code>place.memo</code>에, 13장 말풍선의 이름에 — 외부에서 온 문자열이 <code>innerHTML</code>을 통과하는 <strong>모든 길목</strong>에 우리 앱은 이미 이 방패를 세워 뒀습니다. 여러분이 아까 <code>&lt;b&gt;굵은 국밥집&lt;/b&gt;</code>을 넣었을 때 태그가 글자 그대로 보인 이유입니다.</p>
+<p>이제 15장의 문장을 완성할 수 있습니다. 검색 결과의 <code>place_name</code>에, 상세 패널의 <code>place.name</code>과 <code>place.memo</code>에, 13장 말풍선의 이름에 — 외부에서 온 문자열이 <code>innerHTML</code>을 통과하는 모든 길목에 우리 앱은 이미 이 방패를 세워 뒀습니다. 여러분이 아까 <code>&lt;b&gt;굵은 국밥집&lt;/b&gt;</code>을 넣었을 때 태그가 글자 그대로 보인 이유입니다.</p>
 <figure>
 <p><img alt="escapeHtml 덕분에 태그가 글자 그대로 표시된 상세 패널" src="../images/ch19/ch19-f06.jpg" width="760" /></p>
 <figcaption>
@@ -1942,32 +1942,32 @@
 </figure>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
-<p><code>textarea</code> 안에 값을 넣을 때도 이스케이프가 필요합니다. "textarea는 입력칸이니까 괜찮겠지"라고 생각하기 쉽지만, 메모에 <code>&lt;/textarea&gt;</code>라는 문자열이 들어 있으면 브라우저가 입력칸을 거기서 닫아 버리고 나머지를 HTML로 해석합니다. 우리 코드가 <code>${escapeHtml(place.memo || '')}</code>로 감싼 이유입니다. 규칙은 예외 없이: <strong>innerHTML로 들어가는 외부 문자열은 전부 이스케이프.</strong></p>
+<p><code>textarea</code> 안에 값을 넣을 때도 이스케이프가 필요합니다. "textarea는 입력칸이니까 괜찮겠지"라고 생각하기 쉽지만, 메모에 <code>&lt;/textarea&gt;</code>라는 문자열이 들어 있으면 브라우저가 입력칸을 거기서 닫아 버리고 나머지를 HTML로 해석합니다. 우리 코드가 <code>${escapeHtml(place.memo || '')}</code>로 감싼 이유입니다. 규칙은 예외 없이: innerHTML로 들어가는 외부 문자열은 전부 이스케이프.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
-<p>이스케이프 말고 근본적으로 안전한 길도 있습니다. <code>el.textContent = place.name</code>처럼 <strong>textContent</strong>에 넣으면 브라우저가 처음부터 순수한 글자로만 취급하므로 XSS가 원천 차단됩니다. 다만 우리처럼 템플릿 문자열로 HTML 구조를 통째로 조립할 때는 쓸 수 없어서, 구조는 innerHTML로 만들되 끼워 넣는 값마다 escapeHtml을 씌우는 절충안을 택한 것입니다. 규모가 커지면 이 문제를 프레임워크(React 등)가 자동으로 처리해 줍니다. AI가 짜 준 코드를 검토할 때 "사용자 입력이 innerHTML에 그대로 들어가는 곳은 없어?"라고 물어보는 습관을 들이세요. 바이브코딩 시대에도 보안 검토의 최종 책임자는 사람입니다.</p>
+<p>이스케이프 말고 근본적으로 안전한 길도 있습니다. <code>el.textContent = place.name</code>처럼 textContent에 넣으면 브라우저가 처음부터 순수한 글자로만 취급하므로 XSS가 원천 차단됩니다. 다만 우리처럼 템플릿 문자열로 HTML 구조를 통째로 조립할 때는 쓸 수 없어서, 구조는 innerHTML로 만들되 끼워 넣는 값마다 escapeHtml을 씌우는 절충안을 택한 것입니다. 규모가 커지면 이 문제를 프레임워크(React 등)가 자동으로 처리해 줍니다. AI가 짜 준 코드를 검토할 때 "사용자 입력이 innerHTML에 그대로 들어가는 곳은 없어?"라고 물어보는 습관을 들이세요. 바이브코딩 시대에도 보안 검토의 최종 책임자는 사람입니다.</p>
 </div>
 <h2 id="196">19.6 실행 확인<a class="headerlink" href="#196" title="Permanent link">&para;</a></h2>
 <p>전체 흐름을 점검해 봅시다. 브라우저를 새로고침하고 순서대로 해 보세요.</p>
 <ol>
 <li>마커를 클릭 — 말풍선과 함께 오른쪽 위에 상세 패널이 열립니다.</li>
 <li>별 다섯 번째를 클릭 — 별 5개가 노래지고, 말풍선의 별도 함께 바뀝니다.</li>
-<li>메모를 적고 저장 — "저장했습니다." 토스트가 뜹니다. <strong>새로고침해도</strong> 메모가 남아 있는지 꼭 확인하세요(17장의 localStorage가 일하고 있다는 증거입니다).</li>
+<li>메모를 적고 저장 — "저장했습니다." 토스트가 뜹니다. 새로고침해도 메모가 남아 있는지 꼭 확인하세요(17장의 localStorage가 일하고 있다는 증거입니다).</li>
 <li>사이드바 목록에서 다른 장소 클릭 — 지도가 이동하며 패널 내용이 그 장소로 바뀝니다.</li>
 <li>삭제 버튼 → 취소 — 아무 일도 없습니다. 다시 삭제 → 확인 — 패널이 닫히고 마커와 목록에서도 사라집니다.</li>
 <li>지도를 클릭해 이름이 <code>&lt;b&gt;테스트&lt;/b&gt;</code>인 장소를 추가 — 상세 패널과 말풍선에 태그가 글자 그대로 보이면, 여러분의 방패는 정상 작동 중입니다.</li>
 </ol>
-<p>여기까지 됐다면 축하합니다. 추가·저장·목록·상세·삭제 — <strong>CRUD가 완성</strong>됐습니다. PLAN의 마일스톤 M5 달성입니다. 여러분의 지도는 이제 남의 데모가 아니라, 매일 열어 쓸 수 있는 진짜 도구입니다.</p>
+<p>여기까지 됐다면 축하합니다. 추가·저장·목록·상세·삭제 — CRUD가 완성됐습니다. PLAN의 마일스톤 M5 달성입니다. 여러분의 지도는 이제 남의 데모가 아니라, 매일 열어 쓸 수 있는 진짜 도구입니다.</p>
 <h2 id="197">19.7 마무리<a class="headerlink" href="#197" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">📌 핵심 요약</p>
 <ul>
 <li>상세 패널은 빈 그릇(<code>&lt;section id="detail-panel" hidden&gt;</code>)만 HTML에 두고, <code>openDetail(id)</code>이 열릴 때마다 현재 데이터로 내용을 다시 그립니다.</li>
-<li>별점은 <code>[1,2,3,4,5].map(...)</code>으로 버튼 5개를 찍어 내고, <code>n &lt;= rating</code>인 별에만 <code>on</code> 클래스를 붙여 색을 켭니다. 클릭하면 <code>store.update</code> 후 <code>openDetail</code>을 다시 불러 <strong>상태 → 다시 그리기</strong>로 반영하되, 쓰던 메모(draft)는 다시 그리기 전에 보관했다가 되돌려 놓습니다.</li>
+<li>별점은 <code>[1,2,3,4,5].map(...)</code>으로 버튼 5개를 찍어 내고, <code>n &lt;= rating</code>인 별에만 <code>on</code> 클래스를 붙여 색을 켭니다. 클릭하면 <code>store.update</code> 후 <code>openDetail</code>을 다시 불러 상태 → 다시 그리기로 반영하되, 쓰던 메모(draft)는 다시 그리기 전에 보관했다가 되돌려 놓습니다.</li>
 <li><code>store.update</code>가 <code>save()</code>를 부르는 순간 구독 패턴이 발동해, 말풍선·목록 등 다른 화면도 자동으로 갱신됩니다.</li>
-<li>되돌릴 수 없는 삭제 앞에서는 <code>confirm</code>으로 한 번 더 묻고, 메시지에 장소 이름을 넣어 무엇을 지우는지 보여 줍니다.</li>
-<li><strong>XSS</strong>는 사용자 입력 속 태그가 <code>innerHTML</code>에서 코드로 해석되는 공격입니다. 외부 문자열이 innerHTML로 들어가는 모든 길목에 <code>escapeHtml</code>(&amp;, &lt;, &gt;, ", ' 다섯 글자를 엔티티로 치환)을 씌워 막습니다.</li>
+<li>되돌릴 수 없는 삭제 앞에서는 <code>confirm</code>으로 한 번 더 묻고, 메시지에 장소 이름을 넣어 무엇을 지우는지 알립니다.</li>
+<li>XSS는 사용자 입력 속 태그가 <code>innerHTML</code>에서 코드로 해석되는 공격입니다. 외부 문자열이 innerHTML로 들어가는 모든 길목에 <code>escapeHtml</code>(&amp;, &lt;, &gt;, ", ' 다섯 글자를 엔티티로 치환)을 씌워 막습니다.</li>
 </ul>
 </div>
 <div class="admonition question">
@@ -1998,7 +1998,7 @@
 </ul>
 </div>
 <blockquote>
-<p><strong>다음 장 예고</strong> — 지도의 기본기가 완성됐으니 4부에서는 한 단계 더 나아갑니다. 20장에서는 <strong>내 위치 표시</strong> 기능을 답니다. 브라우저의 Geolocation API로 현재 위치를 얻어 파란 점으로 표시하고, 위치 권한을 물어보는 프롬프트를 다루는 법, 그리고 이 기능이 https와 localhost에서만 동작하는 이유까지 배웁니다. "지금 내 주변의 저장된 맛집"을 찾는 지도가 됩니다.</p>
+<p><strong>다음 장 예고</strong> — 지도의 기본기가 완성됐으니 4부에서는 한 단계 더 나아갑니다. 20장에서는 내 위치 표시 기능을 답니다. 브라우저의 Geolocation API로 현재 위치를 얻어 파란 점으로 표시하고, 위치 권한을 물어보는 프롬프트를 다루는 법, 그리고 이 기능이 https와 localhost에서만 동작하는 이유까지 배웁니다. "지금 내 주변의 저장된 맛집"을 찾는 지도가 됩니다.</p>
 </blockquote>
 <div class="footnote">
 <hr />

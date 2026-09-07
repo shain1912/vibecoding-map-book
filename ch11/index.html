@@ -1673,8 +1673,8 @@
 </ul>
 </div>
 <hr />
-<p>드디어 3부입니다. 9장에서 지도를 띄웠고, 10장에서 지도를 움직이고 클릭하는 법을 배웠습니다. 그런데 지금 우리 지도는 솔직히 말해 그냥 카카오맵 축소판입니다. 아직 "나만의" 지도라고 부르기엔 부족하죠. 나만의 지도가 되려면 뭐가 필요할까요? <strong>내가 아끼는 장소들이 지도 위에 표시</strong>되어야 합니다.</p>
-<p>지도 앱에서 특정 위치를 가리키는 뾰족한 핀, 그것이 바로 <strong>마커(Marker)</strong>입니다. 카카오맵에서 장소를 검색하면 나타나는 그 핀 말입니다. 이번 장에서는 마커 하나를 찍는 것부터 시작해서, 여러 개를 반복문으로 찍고, 마지막에는 카테고리마다 색과 이모지가 다른 우리만의 예쁜 핀까지 만들어 봅니다. 이 장이 끝나면 지도가 비로소 "내 것" 같아 보이기 시작할 겁니다.</p>
+<p>드디어 3부입니다. 9장에서 지도를 띄웠고, 10장에서 지도를 움직이고 클릭하는 법을 배웠습니다. 그런데 지금 우리 지도는 솔직히 말해 그냥 카카오맵 축소판입니다. 아직 "나만의" 지도라고 부르기엔 부족하죠. 나만의 지도가 되려면 뭐가 필요할까요? 내가 아끼는 장소들이 지도 위에 표시되어야 합니다.</p>
+<p>지도 앱에서 특정 위치를 가리키는 뾰족한 핀을 <strong>마커(Marker)</strong>라고 합니다. 카카오맵에서 장소를 검색하면 나타나는 그 핀 말입니다. 이번 장에서는 마커 하나를 찍는 것부터 시작해서, 여러 개를 반복문으로 찍고, 마지막에는 카테고리마다 색과 이모지가 다른 우리만의 예쁜 핀까지 만들어 봅니다. 이 장이 끝나면 지도가 비로소 "내 것" 같아 보이기 시작할 겁니다.</p>
 <h2 id="111">11.1 첫 마커 하나 찍기<a class="headerlink" href="#111" title="Permanent link">&para;</a></h2>
 <p>가장 작은 것부터 시작합시다. 서울 시청 위에 마커 딱 하나를 찍어 보겠습니다. 언제나처럼 코드를 직접 치는 게 아니라, Claude Code에게 시킵니다.</p>
 <div class="admonition tip">
@@ -1697,7 +1697,7 @@
 <p>첫 줄은 익숙한 얼굴입니다. 9장에서 배운 <code>LatLng</code>, 위도와 경도를 묶어 "지도 위의 한 점"을 표현하는 객체죠. 마커는 지도 위 어딘가에 꽂혀야 하므로, 꽂을 지점부터 정의합니다.</p>
 <p>둘째 줄이 이번 장의 주인공, <strong><code>kakao.maps.Marker</code></strong>입니다. <code>new</code>로 마커 객체를 하나 만들면서 설정 객체를 넘기는데, 최소한 <code>position</code>(어디에 꽂을지)만 있으면 마커가 만들어집니다. 지도를 만들 때 <code>new kakao.maps.Map(container, {...})</code> 하던 것과 같은 패턴이죠. 카카오지도 SDK의 객체들은 대부분 이런 식으로 태어납니다.</p>
 <p>셋째 줄 <code>setMap(map)</code>이 재미있는 부분입니다. 마커를 만들었다고 해서 바로 화면에 보이는 게 아닙니다. 마커는 만들어진 순간 아직 "허공"에 있습니다. <code>setMap(map)</code>을 호출해서 "이 지도 위에 올라가라"라고 말해 줘야 비로소 화면에 나타납니다. 압정을 산 것(생성)과 지도에 꽂은 것(setMap)이 다른 것과 같습니다.</p>
-<p>이 구조의 좋은 점은 <strong>반대로도 된다</strong>는 것입니다. <code>marker.setMap(null)</code>을 호출하면 마커가 지도에서 내려옵니다. 삭제가 아니라 "잠깐 떼어 두기"에 가깝습니다. 나중에 다시 <code>setMap(map)</code> 하면 같은 마커가 다시 나타나죠. 이 켰다 껐다 하는 능력이 14장에서 카테고리 필터를 만들 때 결정적인 역할을 합니다. 지금은 "마커는 setMap으로 붙였다 뗐다 할 수 있다"만 기억해 두세요.</p>
+<p>이 구조의 좋은 점은 반대로도 된다는 것입니다. <code>marker.setMap(null)</code>을 호출하면 마커가 지도에서 내려옵니다. 삭제가 아니라 "잠깐 떼어 두기"에 가깝습니다. 나중에 다시 <code>setMap(map)</code> 하면 같은 마커가 다시 나타나죠. 이 켰다 껐다 하는 능력이 14장에서 카테고리 필터를 만들 때 결정적인 역할을 합니다. 지금은 "마커는 setMap으로 붙였다 뗐다 할 수 있다"만 기억해 두세요.</p>
 <p>저장하고 브라우저를 확인해 봅시다. Vite 개발 서버가 켜져 있다면 저장하는 순간 화면이 자동으로 새로고침됩니다. 서울 시청 위에 파란 몸통에 뾰족한 꼬리가 달린 카카오 기본 마커가 서 있으면 성공입니다.</p>
 <figure>
 <p><img alt="서울 시청 위에 찍힌 첫 마커" src="../images/ch11/ch11-f01.jpg" width="760" /></p>
@@ -1710,7 +1710,7 @@
 <p>마커를 만들 때 <code>position</code>과 함께 <code>map</code>을 넘기면(<code>new kakao.maps.Marker({ position, map })</code>) <code>setMap</code> 호출 없이 곧바로 지도에 올라갑니다. 한 줄이 줄어드는 지름길이지만, 이 책에서는 <code>setMap</code>을 따로 쓰는 쪽을 권합니다. "만들기"와 "붙이기"를 분리해 두면 필터처럼 마커를 붙였다 떼는 기능을 만들 때 코드 흐름이 눈에 잘 들어오기 때문입니다.</p>
 </div>
 <h2 id="112">11.2 마커 여러 개 — 배열과 반복문<a class="headerlink" href="#112" title="Permanent link">&para;</a></h2>
-<p>마커 하나는 찍었습니다. 그런데 우리 지도에 올라갈 장소가 하나일 리 없죠. 맛집, 카페, 여행지… 수십 개는 될 겁니다. 마커 하나에 세 줄이 필요했으니 서른 개면 아흔 줄일까요? 그렇게 코드를 복사-붙여넣기 하고 있다면 뭔가 잘못된 겁니다. 프로그래밍의 오랜 격언이 있습니다. <strong>같은 코드를 두 번 쓰고 있다면, 반복문이 필요한 순간이다.</strong></p>
+<p>마커 하나는 찍었습니다. 그런데 우리 지도에 올라갈 장소가 하나일 리 없죠. 맛집, 카페, 여행지… 수십 개는 될 겁니다. 마커 하나에 세 줄이 필요했으니 서른 개면 아흔 줄일까요? 그렇게 코드를 복사-붙여넣기 하고 있다면 뭔가 잘못된 겁니다. 프로그래밍의 오랜 격언이 있습니다. 같은 코드를 두 번 쓰고 있다면, 반복문이 필요한 순간이다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
 <blockquote>
@@ -1733,7 +1733,7 @@
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="nx">marker</span><span class="p">.</span><span class="nx">setMap</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>구조가 아름답습니다. 위쪽 <code>spots</code>는 <strong>데이터</strong>입니다. 장소 하나가 <code>{ name, lat, lng }</code> 모양의 객체 하나이고, 그런 객체들이 배열 <code>[ ]</code> 안에 나란히 담겨 있습니다. 아래쪽 <code>for...of</code> 반복문은 <strong>동작</strong>입니다. 배열에서 장소를 하나씩 꺼내(<code>spot</code>) 그 좌표로 마커를 만들어 지도에 올립니다. 장소가 4개든 400개든 아래쪽 코드는 한 글자도 바뀌지 않습니다. 배열에 줄만 추가하면 마커가 늘어나죠.</p>
+<p>구조가 아름답습니다. 위쪽 <code>spots</code>는 데이터입니다. 장소 하나가 <code>{ name, lat, lng }</code> 모양의 객체 하나이고, 그런 객체들이 배열 <code>[ ]</code> 안에 나란히 담겨 있습니다. 아래쪽 <code>for...of</code> 반복문은 동작입니다. 배열에서 장소를 하나씩 꺼내(<code>spot</code>) 그 좌표로 마커를 만들어 지도에 올립니다. 장소가 4개든 400개든 아래쪽 코드는 한 글자도 바뀌지 않습니다. 배열에 줄만 추가하면 마커가 늘어나죠.</p>
 <p>새로 등장한 옵션 <code>title</code>도 눈여겨보세요. 마커에 마우스를 올리면 잠시 뒤 장소 이름이 작은 말풍선(브라우저 기본 툴팁)으로 나타나게 해 줍니다. HTML 태그의 <code>title</code> 속성과 같은 역할입니다. 화려하진 않지만 공짜로 얻는 기능이니 챙겨 둡시다. 제대로 예쁜 말풍선은 13장에서 직접 만듭니다.</p>
 <figure>
 <p><img alt="반복문으로 찍은 마커 4개" src="../images/ch11/ch11-f02.jpg" width="760" /></p>
@@ -1741,13 +1741,13 @@
 <p>그림 11.2 — 반복문으로 찍은 마커 4개</p>
 </figcaption>
 </figure>
-<p>여기서 잠깐, 방금 우리가 한 일의 의미를 짚고 넘어가겠습니다. 우리는 방금 <strong>"데이터와 화면을 분리"</strong>했습니다. 장소 정보는 배열에, 그리는 방법은 반복문에. 이 분리는 이 책 후반부 전체를 지탱하는 기둥입니다. 12장에서 이 배열을 제대로 된 장소 데이터 파일로 키우고, 17장에서는 localStorage에 저장하고, 사용자가 장소를 추가하면 배열에 넣고 다시 그리기만 하면 됩니다. 그리는 코드는 그대로인데 데이터만 바뀌는 구조. 오늘 그 첫 단추를 끼운 겁니다.</p>
+<p>여기서 잠깐, 방금 우리가 한 일의 의미를 정리합니다. 우리는 방금 "데이터와 화면을 분리"했습니다. 장소 정보는 배열에, 그리는 방법은 반복문에. 이 분리는 이 책 후반부 전체를 지탱하는 기둥입니다. 12장에서 이 배열을 제대로 된 장소 데이터 파일로 키우고, 17장에서는 localStorage에 저장하고, 사용자가 장소를 추가하면 배열에 넣고 다시 그리기만 하면 됩니다. 그리는 코드는 그대로인데 데이터만 바뀌는 구조. 오늘 그 첫 단추를 끼운 겁니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
 <p>마커가 안 보인다면 십중팔구 좌표 문제입니다. 위도(lat)와 경도(lng)를 서로 바꿔 넣으면 마커가 화면 밖 엉뚱한 곳(심하면 남극 근처 바다)에 찍힙니다. 한국이라면 위도는 33~38 근처, 경도는 126~131 근처의 숫자입니다. "지도는 나오는데 마커가 없어요"라면 좌표 두 숫자를 먼저 의심하세요. 지도를 한참 축소(레벨을 크게)해 보면 엉뚱한 곳에 찍힌 마커를 찾아내는 데 도움이 됩니다.</p>
 </div>
 <h2 id="113-markerimage">11.3 마커 이미지 바꾸기 — MarkerImage<a class="headerlink" href="#113-markerimage" title="Permanent link">&para;</a></h2>
-<p>기본 마커는 훌륭하지만 문제가 하나 있습니다. <strong>전부 똑같이 생겼다</strong>는 겁니다. 맛집도 파란 핀, 카페도 파란 핀, 데이트 명소도 파란 핀. 지도만 봐서는 어떤 장소인지 구분할 방법이 없습니다. 우리 앱의 핵심 기능이 카테고리별 장소 관리인데, 이래서는 곤란하죠.</p>
+<p>기본 마커는 훌륭하지만 문제가 하나 있습니다. 전부 똑같이 생겼다는 겁니다. 맛집도 파란 핀, 카페도 파란 핀, 데이트 명소도 파란 핀. 지도만 봐서는 어떤 장소인지 구분할 방법이 없습니다. 우리 앱의 핵심 기능이 카테고리별 장소 관리인데, 이래서는 곤란하죠.</p>
 <p>카카오지도 SDK는 마커의 생김새를 통째로 바꿀 수 있는 <strong><code>MarkerImage</code></strong>를 제공합니다. 먼저 인터넷에 있는 이미지로 시험해 봅시다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
@@ -1769,9 +1769,9 @@
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="nx">marker</span><span class="p">.</span><span class="nx">setMap</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
 </span></code></pre></div>
 <p><code>MarkerImage</code>는 재료 세 가지를 받습니다.</p>
-<p>첫째, <strong>이미지 주소</strong>(<code>imageSrc</code>)입니다. 웹에서 접근 가능한 이미지 URL이면 됩니다.</p>
-<p>둘째, <strong>크기</strong>(<code>Size</code>)입니다. 이미지를 지도 위에 몇 픽셀 크기로 보여줄지 정합니다. 가로 64, 세로 69픽셀이라는 뜻입니다.</p>
-<p>셋째가 중요합니다. <strong><code>offset</code></strong>, 우리말로 하면 "기준점"입니다. 이게 뭔지 이해하려면 질문을 하나 던져야 합니다. 마커 이미지는 가로세로가 있는 네모난 그림인데, 그 네모의 <strong>어느 지점</strong>이 좌표에 정확히 닿아야 할까요? 핀 모양 이미지라면 당연히 <strong>뾰족한 끝</strong>이 좌표를 찔러야 합니다. 이미지의 왼쪽 위 모서리가 좌표에 붙어 버리면, 핀은 실제 위치보다 오른쪽 아래를 가리키는 것처럼 보이겠죠. <code>offset: new kakao.maps.Point(27, 69)</code>는 "이미지의 왼쪽 위에서 오른쪽으로 27px, 아래로 69px 내려간 지점(즉 핀 끝)을 좌표에 맞춰라"라는 뜻입니다.</p>
+<p>첫째, 이미지 주소(<code>imageSrc</code>)입니다. 웹에서 접근 가능한 이미지 URL이면 됩니다.</p>
+<p>둘째, 크기(<code>Size</code>)입니다. 이미지를 지도 위에 몇 픽셀 크기로 보여줄지 정합니다. 가로 64, 세로 69픽셀이라는 뜻입니다.</p>
+<p>셋째가 중요합니다. <strong><code>offset</code></strong>, 우리말로 하면 "기준점"입니다. 이게 뭔지 이해하려면 질문을 하나 던져야 합니다. 마커 이미지는 가로세로가 있는 네모난 그림인데, 그 네모의 어느 지점이 좌표에 정확히 닿아야 할까요? 핀 모양 이미지라면 당연히 뾰족한 끝이 좌표를 찔러야 합니다. 이미지의 왼쪽 위 모서리가 좌표에 붙어 버리면, 핀은 실제 위치보다 오른쪽 아래를 가리키는 것처럼 보이겠죠. <code>offset: new kakao.maps.Point(27, 69)</code>는 "이미지의 왼쪽 위에서 오른쪽으로 27px, 아래로 69px 내려간 지점(즉 핀 끝)을 좌표에 맞춰라"라는 뜻입니다.</p>
 <figure>
 <p><img alt="offset 기준점의 의미" src="../images/ch11/ch11-f03.png" width="760" /></p>
 <figcaption>
@@ -1788,9 +1788,9 @@
 </figure>
 <h2 id="114-svg-data-uri">11.4 이미지 파일 없이 핀 그리기 — SVG와 data URI<a class="headerlink" href="#114-svg-data-uri" title="Permanent link">&para;</a></h2>
 <p>남의 이미지를 빌려 쓰는 건 시험까지만입니다. 우리 앱에는 카테고리가 4개 있고(맛집·카페·여행·데이트), 카테고리마다 색이 다른 핀을 쓰고 싶습니다. 그럼 핀 이미지 4장을 그림판으로 그려서 프로젝트에 넣어야 할까요? 나중에 카테고리가 추가되면 또 그리고요?</p>
-<p>더 우아한 방법이 있습니다. <strong>코드로 그림을 그리는 겁니다.</strong> 여기서 두 가지 재료가 등장합니다.</p>
+<p>더 우아한 방법이 있습니다. 코드로 그림을 그리는 겁니다. 여기서 두 가지 재료가 등장합니다.</p>
 <p>첫째는 <strong>SVG</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>입니다. 그림을 픽셀 덩어리가 아니라 "도형을 그리는 지시문"으로 표현하는 이미지 형식입니다. "여기 핀 모양 경로를 빨간색으로 채우고, 그 위에 흰 원을 그리고, 가운데에 글자를 써라"라고 텍스트로 적으면 그게 곧 이미지가 됩니다. 텍스트이기 때문에 색이나 글자를 바꾸는 일이 문자열 치환만큼 쉽고, 아무리 확대해도 계단 현상 없이 매끈합니다.</p>
-<p>둘째는 <strong>data URI</strong><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>입니다. 조금 전 <code>MarkerImage</code>는 이미지 "주소"를 요구했습니다. 그런데 주소가 꼭 <code>https://...</code>처럼 서버를 가리켜야 하는 건 아닙니다. <code>data:image/svg+xml;charset=utf-8,&lt;svg...&gt;</code> 형식으로 <strong>이미지의 내용물 자체를 주소 자리에 밀어 넣는</strong> 문법이 있습니다. 택배에 비유하면, 물건 보관함 위치를 알려주는 대신 상자를 통째로 손에 쥐여 주는 셈이죠. 파일도, 서버 요청도 필요 없습니다.</p>
+<p>둘째는 <strong>data URI</strong><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>입니다. 조금 전 <code>MarkerImage</code>는 이미지 "주소"를 요구했습니다. 그런데 주소가 꼭 <code>https://...</code>처럼 서버를 가리켜야 하는 건 아닙니다. <code>data:image/svg+xml;charset=utf-8,&lt;svg...&gt;</code> 형식으로 이미지의 내용물 자체를 주소 자리에 밀어 넣는 문법이 있습니다. 택배에 비유하면, 물건 보관함 위치를 알려주는 대신 상자를 통째로 손에 쥐여 주는 방식입니다. 파일도, 서버 요청도 필요 없습니다.</p>
 <p>이 둘을 합치면 "자바스크립트 문자열로 핀을 그려서 그 자리에서 마커 이미지로 쓰는" 마법이 완성됩니다. 시켜 봅시다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
@@ -1812,10 +1812,10 @@
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="p">});</span>
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>위에서부터 해설해 보겠습니다.</p>
-<p><strong>SVG 문자열.</strong> 백틱(<code>`</code>)으로 감싼 템플릿 문자열 안에 SVG가 통째로 들어 있습니다. 가로 36, 세로 46픽셀의 캔버스에 세 도형을 겹쳐 그립니다. <code>&lt;path&gt;</code>가 물방울을 뒤집은 듯한 핀 몸통입니다. <code>d="M18 0C8 0..."</code>라는 암호 같은 문자열은 "펜을 (18,0)으로 옮기고, 곡선을 그리며 내려와 (18,46)의 뾰족한 끝을 만들고 다시 올라가라"는 그리기 지시문인데, 외울 필요는 전혀 없습니다. 이런 걸 사람 대신 만들어 주는 게 AI의 특기니까요. 그다음 <code>&lt;circle&gt;</code>이 핀 안의 흰 원, <code>&lt;text&gt;</code>가 그 위에 얹히는 이모지입니다. 눈여겨볼 곳은 <code>${color}</code>와 <code>${emoji}</code> 두 군데입니다. 함수가 받은 인자가 문자열 속에 끼워 넣어지는 자리, 즉 <strong>핀의 색과 얼굴이 결정되는 지점</strong>입니다.</p>
+<p>위에서부터 차례로 해설합니다.</p>
+<p><strong>SVG 문자열.</strong> 백틱(<code>`</code>)으로 감싼 템플릿 문자열 안에 SVG가 통째로 들어 있습니다. 가로 36, 세로 46픽셀의 캔버스에 세 도형을 겹쳐 그립니다. <code>&lt;path&gt;</code>가 물방울을 뒤집은 듯한 핀 몸통입니다. <code>d="M18 0C8 0..."</code>라는 암호 같은 문자열은 "펜을 (18,0)으로 옮기고, 곡선을 그리며 내려와 (18,46)의 뾰족한 끝을 만들고 다시 올라가라"는 그리기 지시문인데, 외울 필요는 전혀 없습니다. 이런 걸 사람 대신 만들어 주는 게 AI의 특기니까요. 그다음 <code>&lt;circle&gt;</code>이 핀 안의 흰 원, <code>&lt;text&gt;</code>가 그 위에 얹히는 이모지입니다. 눈여겨볼 곳은 <code>${color}</code>와 <code>${emoji}</code> 두 군데입니다. 함수가 받은 인자가 문자열 속에 끼워 넣어지는 자리, 즉 핀의 색과 얼굴이 결정되는 지점입니다.</p>
 <p><strong>encodeURIComponent.</strong> SVG 문자열을 data URI에 넣기 전에 한 번 감싸 주는 함수입니다. URL이라는 세계에는 <code>&lt;</code>, <code>&gt;</code>, <code>#</code>, 이모지 같은 문자가 그대로 들어갈 수 없어서, 이들을 URL이 소화할 수 있는 <code>%3C</code> 같은 표기로 바꿔 줍니다. 일종의 포장 작업이죠. 이걸 빼먹으면 어떤 브라우저에서는 되고 어떤 브라우저에서는 마커가 안 보이는, 가장 잡기 싫은 유형의 버그가 생깁니다.</p>
-<p><strong>MarkerImage 조립.</strong> 마지막 <code>return</code> 문은 11.3절에서 배운 그대로입니다. 방금 만든 data URI를 주소로, 크기는 36×46, offset은 <code>Point(18, 46)</code>. 가로의 정확히 절반(18)에 세로 맨 끝(46), 즉 <strong>핀의 뾰족한 끝</strong>입니다. 이제 이 함수를 한 줄로 부르면 원하는 색과 이모지의 핀이 뚝딱 나옵니다.</p>
+<p><strong>MarkerImage 조립.</strong> 마지막 <code>return</code> 문은 11.3절에서 배운 그대로입니다. 방금 만든 data URI를 주소로, 크기는 36×46, offset은 <code>Point(18, 46)</code>. 가로의 정확히 절반(18)에 세로 맨 끝(46), 즉 핀의 뾰족한 끝입니다. 이제 이 함수를 한 줄로 부르면 원하는 색과 이모지의 핀이 뚝딱 나옵니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">Marker</span><span class="p">({</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">position</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">kakao</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nx">LatLng</span><span class="p">(</span><span class="mf">37.5665</span><span class="p">,</span><span class="w"> </span><span class="mf">126.978</span><span class="p">),</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nx">image</span><span class="o">:</span><span class="w"> </span><span class="nx">markerImageFor</span><span class="p">(</span><span class="s1">'🍜'</span><span class="p">,</span><span class="w"> </span><span class="s1">'#e74c3c'</span><span class="p">),</span>
@@ -1834,7 +1834,7 @@
 <p>SVG가 어떻게 생긴 그림인지 눈으로 확인하고 싶다면, 코드의 <code>&lt;svg&gt;...&lt;/svg&gt;</code> 부분을 복사해 새 텍스트 파일에 붙여 넣고 <code>pin.svg</code>로 저장한 뒤 브라우저로 열어 보세요. 숫자를 바꿔 저장할 때마다 모양이 어떻게 변하는지 노는 것만으로 SVG와 금세 친해집니다. Claude Code에게 "핀을 더 통통하게 바꿔줘"라고 시켜 보는 것도 좋은 실험입니다.</p>
 </div>
 <h2 id="115-renderplaces">11.5 장소 배열을 마커로 — renderPlaces 함수<a class="headerlink" href="#115-renderplaces" title="Permanent link">&para;</a></h2>
-<p>이제 이 장의 부품들을 하나로 조립할 시간입니다. 11.2절의 "배열 → 반복문 → 마커"와 11.4절의 <code>markerImageFor</code>를 합쳐서, <strong>장소 배열을 통째로 받아 지도에 그려 주는 함수</strong> 하나로 만들겠습니다.</p>
+<p>이제 이 장의 부품들을 하나로 조립합니다. 11.2절의 "배열 → 반복문 → 마커"와 11.4절의 <code>markerImageFor</code>를 합쳐서, 장소 배열을 통째로 받아 지도에 그려 주는 함수 하나로 만들겠습니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
 <blockquote>
@@ -1860,7 +1860,7 @@
 </span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>이 함수의 영혼은 <strong>"지우고 다시 그린다"</strong>에 있습니다. 함수 첫머리에서 기존 마커를 전부 <code>setMap(null)</code>로 내리고 배열을 비운 다음, 받은 장소들로 처음부터 다시 그립니다. "기존 마커 중에 뭐가 바뀌었는지 찾아서 그것만 고치면 더 효율적이지 않나?"라는 생각이 들 수 있습니다. 맞는 말이지만, 그 "찾아서 고치기"가 바로 버그의 온상입니다. 우리 규모(장소 수십~수백 개)에서는 전부 지우고 다시 그려도 눈 깜짝할 사이에 끝나므로, 단순하고 틀릴 수 없는 쪽을 택합니다. <strong>화면은 언제나 데이터를 다시 그린 결과</strong>라는 이 원칙은 14장 필터에서 진가를 발휘합니다. 필터가 바뀌면? 걸러낸 배열로 <code>renderPlaces</code>를 다시 부르면 끝이거든요.</p>
+<p>이 함수의 영혼은 "지우고 다시 그린다"에 있습니다. 함수 첫머리에서 기존 마커를 전부 <code>setMap(null)</code>로 내리고 배열을 비운 다음, 받은 장소들로 처음부터 다시 그립니다. "기존 마커 중에 뭐가 바뀌었는지 찾아서 그것만 고치면 더 효율적이지 않나?"라는 생각이 들 수 있습니다. 맞는 말이지만, 그 "찾아서 고치기"가 바로 버그의 온상입니다. 우리 규모(장소 수십~수백 개)에서는 전부 지우고 다시 그려도 눈 깜짝할 사이에 끝나므로, 단순하고 틀릴 수 없는 쪽을 택합니다. 화면은 언제나 데이터를 다시 그린 결과라는 이 원칙은 14장 필터에서 진가를 발휘합니다. 필터가 바뀌면? 걸러낸 배열로 <code>renderPlaces</code>를 다시 부르면 끝이거든요.</p>
 <p>그러려면 지운다는 것이 가능해야 하고, 그래서 모듈 맨 위의 <code>let markers = []</code>가 필요합니다. 만든 마커들을 배열에 차곡차곡 담아 두지 않으면(마지막 줄 <code>markers.push(marker)</code>), 다음번에 지우고 싶어도 잡을 손잡이가 없습니다. 지도에 올려놓기만 하고 참조를 버린 마커는 우리 손을 떠난 압정과 같습니다.</p>
 <p>이제 사용하는 쪽(main.js)은 이렇게 단순해집니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">renderPlaces</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./mapView.js'</span><span class="p">;</span>
@@ -1880,7 +1880,7 @@
 <p>한 가지 고백할 것이 있습니다. 완성된 앱의 <code>mapView.js</code>를 열어 보면 <code>renderPlaces</code>가 이보다 조금 더 깁니다. 장소마다 이모지·색을 들고 다니는 대신 <code>place.category</code> 하나만 적으면 색과 이모지가 자동으로 정해지고(12장), 마커를 클릭하면 말풍선이 열리고(13장), 마커가 아주 많아지면 자동으로 뭉쳐집니다(22장). 하지만 뼈대는 오늘 만든 이 모습 그대로입니다. 앞으로의 장들은 이 뼈대에 살을 붙이는 과정입니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
-<p><code>renderPlaces</code>를 여러 번 호출했더니 마커가 자꾸 겹쳐 쌓인다면, 함수 첫머리의 "기존 마커 지우기"가 빠졌거나 <code>markers</code> 배열이 함수 <strong>안</strong>에 선언되어 있는 경우입니다. <code>markers</code>는 반드시 함수 밖에 있어야 호출과 호출 사이에 살아남아 이전 마커들을 기억할 수 있습니다. Claude Code가 만든 코드가 이상하게 동작하면 "renderPlaces를 두 번 부르면 마커가 겹치는 것 같아. 원인 찾아서 고쳐줘"라고 증상을 그대로 말해 주세요.</p>
+<p><code>renderPlaces</code>를 여러 번 호출했더니 마커가 자꾸 겹쳐 쌓인다면, 함수 첫머리의 "기존 마커 지우기"가 빠졌거나 <code>markers</code> 배열이 함수 안에 선언되어 있는 경우입니다. <code>markers</code>는 반드시 함수 밖에 있어야 호출과 호출 사이에 살아남아 이전 마커들을 기억할 수 있습니다. Claude Code가 만든 코드가 이상하게 동작하면 "renderPlaces를 두 번 부르면 마커가 겹치는 것 같아. 원인 찾아서 고쳐줘"라고 증상을 그대로 말해 주세요.</p>
 </div>
 <h2 id="116">11.6 마무리<a class="headerlink" href="#116" title="Permanent link">&para;</a></h2>
 <p>지도 위에 우리의 흔적을 남기기 시작했습니다. 마커 하나에서 출발해 배열과 반복문, 이미지 교체, 코드로 그리는 SVG 핀, 그리고 데이터를 화면으로 바꿔 주는 <code>renderPlaces</code>까지. 특히 "데이터 따로, 그리기 따로"와 "지우고 다시 그린다"라는 두 원칙은 이 앱이 끝날 때까지 계속 만나게 될 친구들이니 꼭 챙겨 가세요.</p>
@@ -1888,10 +1888,10 @@
 <p class="admonition-title">📌 핵심 요약</p>
 <ul>
 <li>마커는 <code>new kakao.maps.Marker({ position })</code>로 만들고 <code>setMap(map)</code>으로 지도에 올립니다. <code>setMap(null)</code>이면 내려옵니다.</li>
-<li>마커 여러 개는 장소 <strong>배열(데이터)</strong>과 <strong>반복문(그리기)</strong>으로 분리해 처리합니다. 데이터가 늘어도 그리는 코드는 그대로입니다.</li>
+<li>마커 여러 개는 장소 배열(데이터)과 반복문(그리기)으로 분리해 처리합니다. 데이터가 늘어도 그리는 코드는 그대로입니다.</li>
 <li><code>MarkerImage(주소, Size, { offset })</code>로 마커의 생김새를 바꿉니다. <code>offset</code>은 이미지의 어느 지점을 좌표에 맞출지 정하는 기준점으로, 핀이라면 뾰족한 끝이어야 합니다.</li>
 <li>SVG(텍스트로 그리는 그림) + data URI(내용물을 주소 자리에 넣는 문법) + <code>encodeURIComponent</code>(URL용 포장)를 조합하면 이미지 파일 없이 커스텀 핀을 만들 수 있습니다.</li>
-<li><code>renderPlaces</code>는 기존 마커를 전부 지우고 배열을 처음부터 다시 그립니다. 단순함이 곧 버그 없는 길입니다.</li>
+<li><code>renderPlaces</code>는 기존 마커를 전부 지우고 배열을 처음부터 다시 그립니다. 단순하게 짜는 쪽이 버그를 줄이는 길입니다.</li>
 </ul>
 </div>
 <div class="admonition question">

@@ -1832,7 +1832,7 @@
 <p>2장에서 Node.js를 설치했으니, 이번에는 git 차례입니다. 그런데 솔직히 말해서, git은 처음 듣는 분에게는 꽤 낯선 도구입니다. "버전 관리 시스템"이라는 딱딱한 이름표를 달고 있고, 프로그래머들이 쓰는 전문 도구라는 인상이 강하지요. 코드를 직접 짜지도 않을 건데 이걸 왜 설치해야 할까요?</p>
 <p>답은 이 책의 핵심 정체성인 바이브코딩에 있습니다. 바이브코딩은 말로 시키고 AI가 코드를 쓰는 방식입니다. AI는 빠릅니다. 여러분이 "지도에 마커를 찍어줘"라고 한마디 하면 몇 초 만에 파일 서너 개를 만들거나 고칩니다. 그런데 빠르다는 건 양날의 검입니다. 가끔 AI는 우리가 기대한 것과 전혀 다른 방향으로 코드를 뒤엎어 놓기도 합니다. 잘 돌아가던 화면이 갑자기 하얗게 변하고, 어제까지 멀쩡했던 버튼이 사라지는 일이 실제로 일어납니다.</p>
 <p>이때 필요한 말이 딱 하나 있습니다.</p>
-<p><strong>"방금 전으로 되돌려줘."</strong></p>
+<p>"방금 전으로 되돌려줘."</p>
 <p>이 한마디가 통하려면, 컴퓨터 어딘가에 "방금 전"이 기록되어 있어야 합니다. 그 기록 장치가 바로 git입니다. git은 프로젝트 폴더의 상태를 원하는 순간마다 사진 찍듯 저장해 두고, 언제든 그 시점으로 폴더 전체를 되돌릴 수 있게 해 줍니다. 게임으로 치면 세이브 포인트입니다. 보스전에 들어가기 전에 세이브를 해 두면, 져도 다시 도전할 수 있지요. 세이브 없이 보스전에 들어가는 사람은 없습니다.</p>
 <p>자동차에 비유하면 이렇습니다. AI는 엔진입니다. 엄청나게 빠르지요. git은 안전벨트입니다. 안전벨트가 있다고 사고가 안 나는 건 아니지만, 사고가 나도 다치지 않습니다. 안전벨트를 맨 운전자는 속도를 낼 수 있습니다. 마찬가지로 git이 있으면 AI에게 과감하게 일을 시킬 수 있습니다. "실패해도 되돌리면 그만"이라는 든든함이 바이브코딩의 속도를 만들어 줍니다.</p>
 <p>실제 상황을 하나 상상해 볼까요? 이 책의 후반부에서 여러분은 지도에 카테고리 필터를 붙이게 됩니다. 그때 AI에게 "필터 버튼 디자인을 좀 더 예쁘게 바꿔줘"라고 시켰는데, AI가 버튼만 고치는 게 아니라 화면 전체의 스타일 파일을 통째로 다시 쓰는 바람에 지도가 화면 밖으로 밀려나 버렸다고 합시다. 어디가 어떻게 바뀌었는지 파일을 일일이 뒤져 원상 복구하는 일은, 코드를 모르는 사람에게는 사실상 불가능합니다. 하지만 직전에 세이브가 있다면 이야기가 다릅니다. "되돌려줘" 한마디로 몇 초 만에 사고 이전으로 돌아가고, 이번에는 "버튼 색만 바꿔줘, 다른 파일은 건드리지 마"라고 더 정확하게 다시 시키면 됩니다. 실패가 값싸지면, 시도는 과감해집니다.</p>
@@ -1841,10 +1841,10 @@
 <p class="admonition-title">💡 팁</p>
 <p>저자의 실제 작업 습관을 하나 공개하면 이렇습니다. AI에게 큰 작업을 시키기 전에 반드시 세이브(커밋)를 하나 만들어 둡니다. 그리고 결과가 마음에 안 들면 미련 없이 되돌립니다. 세이브가 자주 있을수록 AI에게 더 과감한 주문을 할 수 있습니다. "일단 시켜 보고, 아니면 되돌린다" — 이게 바이브코딩의 리듬입니다.</p>
 </div>
-<p>참고로 git은 취미용 장난감이 아닙니다. 전 세계 소프트웨어 개발 현장의 표준 도구이고, 우리가 앞으로 쓸 GitHub(5장), Claude Code(4장), Orca(6장)가 모두 git 위에서 굴러갑니다. 오늘 설치하는 이 작은 프로그램이 이 책 전체의 기반 공사인 셈입니다. 이제 설치할 이유가 충분히 생겼으니, 진짜로 설치해 봅시다.</p>
+<p>참고로 git은 취미용 장난감이 아닙니다. 전 세계 소프트웨어 개발 현장의 표준 도구이고, 우리가 앞으로 쓸 GitHub(5장), Claude Code(4장), Orca(6장)가 모두 git 위에서 굴러갑니다. 오늘 설치하는 이 작은 프로그램이 이 책 전체의 기반 공사입니다. 설치할 이유가 충분히 생겼으니 이제 설치합니다.</p>
 <hr />
 <h2 id="32">3.2 이미 설치되어 있는지 확인하기<a class="headerlink" href="#32" title="Permanent link">&para;</a></h2>
-<p>설치 파일을 받기 전에, 혹시 내 컴퓨터에 git이 이미 있는지부터 확인합니다. 다른 프로그램을 설치할 때 함께 딸려 왔을 수도 있거든요. 2장에서 했던 것과 똑같이, 시작 버튼을 눌러 <strong>터미널</strong>(또는 PowerShell)을 열고 아래를 입력한 뒤 Enter를 누릅니다.</p>
+<p>설치 파일을 받기 전에, 혹시 내 컴퓨터에 git이 이미 있는지부터 확인합니다. 다른 프로그램을 설치할 때 함께 딸려 왔을 수도 있거든요. 2장에서 했던 것과 똑같이, 시작 버튼을 눌러 터미널(또는 PowerShell)을 열고 아래를 입력한 뒤 Enter를 누릅니다.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">git</span> <span class="n">-v</span>
 </span></code></pre></div>
 <p>두 가지 결과 중 하나가 나옵니다. <code>git version 2.51.0.windows.1</code>처럼 버전 번호가 나온다면 축하합니다 — 이미 설치되어 있으니 3.5절의 "첫 설정"으로 건너뛰시면 됩니다. 반대로 아래처럼 빨간 글씨의 오류가 나온다면, git이 없다는 뜻입니다.</p>
@@ -1857,23 +1857,23 @@
 <p>"용어가 인식되지 않습니다"라는 문구는 2장에서 본 것과 같은 의미입니다. 윈도우가 <code>git</code>이라는 이름의 프로그램을 어디서 찾아야 할지 모른다는 뜻이지요. 지금부터 설치해서 알려 주면 됩니다.</p>
 <hr />
 <h2 id="33">3.3 다운로드와 설치 시작<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
-<p>브라우저를 열고 주소창에 <strong>gitforwindows.org</strong> 를 입력합니다. "Git for Windows"라는 이름 그대로, 윈도우용 git을 배포하는 공식 사이트입니다. 첫 화면 한가운데의 <strong>Download</strong> 버튼을 누르면 다운로드 페이지로 이동합니다.</p>
+<p>브라우저를 열고 주소창에 gitforwindows.org를 입력합니다. "Git for Windows"라는 이름 그대로, 윈도우용 git을 배포하는 공식 사이트입니다. 첫 화면 한가운데의 Download 버튼을 누르면 다운로드 페이지로 이동합니다.</p>
 <figure>
 <p><img alt="gitforwindows.org 다운로드 페이지" src="../images/ch03/ch03-f02.png" width="760" /></p>
 <figcaption>
 <p>그림 3.2 — gitforwindows.org 다운로드 페이지</p>
 </figcaption>
 </figure>
-<p>다운로드 목록에서 <strong>64-bit Git for Windows Setup</strong>을 선택합니다. 요즘 윈도우 PC는 거의 전부 64비트이니 고민할 필요 없습니다. 내려받은 <code>Git-2.xx.x-64-bit.exe</code> 파일을 더블클릭해 실행합니다. "이 앱이 디바이스를 변경할 수 있도록 허용하시겠어요?"라는 사용자 계정 컨트롤 창이 뜨면 <strong>예</strong>를 누릅니다.</p>
-<p>설치 마법사가 시작되면 라이선스 안내(GNU General Public License) 화면이 먼저 나옵니다. git이 누구나 무료로 쓸 수 있는 오픈소스 소프트웨어라는 안내이니 <strong>Next</strong>를 누릅니다. 설치 경로 선택 화면도 기본값 그대로 <strong>Next</strong>, 구성 요소 선택 화면(바탕화면 아이콘, 탐색기 메뉴 연동 등을 고르는 곳)도 기본값 그대로 <strong>Next</strong>를 누릅니다.</p>
+<p>다운로드 목록에서 64-bit Git for Windows Setup을 선택합니다. 요즘 윈도우 PC는 거의 전부 64비트이니 고민할 필요 없습니다. 내려받은 <code>Git-2.xx.x-64-bit.exe</code> 파일을 더블클릭해 실행합니다. "이 앱이 디바이스를 변경할 수 있도록 허용하시겠어요?"라는 사용자 계정 컨트롤 창이 뜨면 예를 누릅니다.</p>
+<p>설치 마법사가 시작되면 라이선스 안내(GNU General Public License) 화면이 먼저 나옵니다. git이 누구나 무료로 쓸 수 있는 오픈소스 소프트웨어라는 안내이니 Next를 누릅니다. 설치 경로 선택 화면도 기본값 그대로 Next, 구성 요소 선택 화면(바탕화면 아이콘, 탐색기 메뉴 연동 등을 고르는 곳)도 기본값 그대로 Next를 누릅니다.</p>
 <p>여기까지는 쉽습니다. 문제는 그다음부터입니다.</p>
 <hr />
 <h2 id="34">3.4 설치 옵션, 뭘 골라야 할까<a class="headerlink" href="#34" title="Permanent link">&para;</a></h2>
 <p>Git for Windows 설치 마법사는 선택 화면이 유난히 많기로 유명합니다. 에디터 선택, 브랜치 이름, PATH, 줄바꿈 처리… 열 개가 넘는 질문이 연달아 나옵니다. 처음 보면 "내가 뭘 잘못 고르면 큰일 나는 거 아냐?" 하고 겁이 나지요.</p>
-<p>미리 결론부터 말씀드립니다. <strong>모르는 화면은 기본값 그대로 Next.</strong> 이 원칙 하나면 됩니다. Git for Windows의 기본값은 수많은 사용자의 경험이 쌓여 정해진 무난한 선택지라서, 그대로 두어도 이 책의 모든 실습이 잘 돌아갑니다. 그리고 이 화면들에서 무엇을 고르든 설치 후에 전부 바꿀 수 있으니, "잘못 고르면 되돌릴 수 없다"는 걱정은 접어 두셔도 됩니다. 다만 두 개의 화면만은 잠깐 멈춰서 살펴볼 가치가 있습니다.</p>
+<p>결론부터 말하면, 모르는 화면은 기본값 그대로 Next입니다. 이 원칙 하나면 됩니다. Git for Windows의 기본값은 수많은 사용자의 경험이 쌓여 정해진 무난한 선택지라서, 그대로 두어도 이 책의 모든 실습이 잘 돌아갑니다. 그리고 이 화면들에서 무엇을 고르든 설치 후에 전부 바꿀 수 있으니, "잘못 고르면 되돌릴 수 없다"는 걱정은 접어 두셔도 됩니다. 다만 두 개의 화면만은 잠깐 멈춰서 살펴볼 가치가 있습니다.</p>
 <h3 id="choosing-the-default-editor-used-by-git">화면 하나 — 기본 에디터 선택 (Choosing the default editor used by Git)<a class="headerlink" href="#choosing-the-default-editor-used-by-git" title="Permanent link">&para;</a></h3>
-<p>git이 여러분에게 메시지를 입력받아야 할 때 어떤 편집기를 열지 고르는 화면입니다. 기본값이 <strong>Vim</strong>으로 되어 있는데, 이것만은 바꾸시길 권합니다. Vim은 강력하지만 조작법이 워낙 독특해서, 초보자가 실수로 Vim 화면에 들어가면 종료하는 방법조차 몰라 당황하기 딱 좋습니다. 실제로 "Vim에서 나가는 법"은 전 세계 개발자 커뮤니티의 유명한 밈일 정도입니다.</p>
-<p>목록을 펼쳐 <strong>Use the Notepad as Git's default editor</strong>(메모장)를 선택하세요. 만약 Visual Studio Code를 이미 설치해 두셨다면 <strong>Use Visual Studio Code as Git's default editor</strong>도 좋은 선택입니다. 어느 쪽이든, 익숙한 편집기가 열린다는 사실이 중요합니다.</p>
+<p>git이 여러분에게 메시지를 입력받아야 할 때 어떤 편집기를 열지 고르는 화면입니다. 기본값이 Vim으로 되어 있는데, 이것만은 바꾸시길 권합니다. Vim은 강력하지만 조작법이 워낙 독특해서, 초보자가 실수로 Vim 화면에 들어가면 종료하는 방법조차 몰라 당황하기 딱 좋습니다. 실제로 "Vim에서 나가는 법"은 전 세계 개발자 커뮤니티의 유명한 밈일 정도입니다.</p>
+<p>목록을 펼쳐 Use the Notepad as Git's default editor(메모장)를 선택하세요. 만약 Visual Studio Code를 이미 설치해 두셨다면 Use Visual Studio Code as Git's default editor도 좋은 선택입니다. 어느 쪽이든, 익숙한 편집기가 열린다는 사실이 중요합니다.</p>
 <figure>
 <p><img alt="기본 에디터 선택 화면 — 기본값은 Vim" src="../images/ch03/ch03-f03.png" width="620" /></p>
 <figcaption>
@@ -1887,11 +1887,11 @@
 <h3 id="path-adjusting-your-path-environment">화면 둘 — PATH 설정 (Adjusting your PATH environment)<a class="headerlink" href="#path-adjusting-your-path-environment" title="Permanent link">&para;</a></h3>
 <p>2장에서 만난 PATH가 여기서 다시 등장합니다. "git 명령을 어디서 쓸 수 있게 할까?"를 정하는 화면으로, 선택지가 세 개 있습니다.</p>
 <ul>
-<li><strong>Use Git from Git Bash only</strong> — git을 전용 터미널(Git Bash)에서만 쓸 수 있게 합니다. 우리가 쓰는 PowerShell에서는 <code>git</code>이 안 먹히게 되니 <strong>선택하면 안 됩니다.</strong></li>
-<li><strong>Git from the command line and also from 3rd-party software</strong> — PowerShell을 포함한 모든 터미널과 다른 프로그램에서 git을 쓸 수 있게 합니다. <strong>Recommended(권장)</strong> 표시가 붙은 기본값이고, 우리가 고를 답입니다.</li>
+<li><strong>Use Git from Git Bash only</strong> — git을 전용 터미널(Git Bash)에서만 쓸 수 있게 합니다. 우리가 쓰는 PowerShell에서는 <code>git</code>이 안 먹히게 되니 선택하면 안 됩니다.</li>
+<li><strong>Git from the command line and also from 3rd-party software</strong> — PowerShell을 포함한 모든 터미널과 다른 프로그램에서 git을 쓸 수 있게 합니다. Recommended(권장) 표시가 붙은 기본값이고, 우리가 고를 답입니다.</li>
 <li><strong>Use Git and optional Unix tools from the Command Prompt</strong> — 유닉스 도구까지 몽땅 PATH에 넣는 옵션인데, 윈도우 기본 명령과 이름이 겹쳐 부작용이 생길 수 있습니다. 설치 화면 스스로 경고를 띄우는 옵션이니 피합니다.</li>
 </ul>
-<p>가운데 옵션이 기본으로 선택되어 있을 테니, 확인만 하고 <strong>Next</strong>를 누르면 됩니다.</p>
+<p>가운데 옵션이 기본으로 선택되어 있을 테니, 확인만 하고 Next를 누르면 됩니다.</p>
 <figure>
 <p><img alt="PATH 설정 화면. 가운데 Recommended 옵션이 선택된 모습" src="../images/ch03/ch03-f04.png" width="620" /></p>
 <figcaption>
@@ -1899,12 +1899,12 @@
 </figcaption>
 </figure>
 <h3 id="_1">나머지 화면들 — 전부 기본값으로<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>이후로도 질문이 계속 이어집니다. HTTPS 연결 방식, 줄바꿈 처리(Checkout Windows-style, commit Unix-style line endings), 터미널 에뮬레이터(MinTTY), <code>git pull</code>의 기본 동작, 자격 증명 관리자(Git Credential Manager)… 전부 기본값 그대로 <strong>Next</strong>를 누르시면 됩니다. 각각이 무슨 뜻인지 지금 알 필요는 없습니다. 마지막 화면에서 <strong>Install</strong>을 누르면 설치가 진행되고, 잠시 뒤 <strong>Finish</strong>로 마무리됩니다.</p>
+<p>이후로도 질문이 계속 이어집니다. HTTPS 연결 방식, 줄바꿈 처리(Checkout Windows-style, commit Unix-style line endings), 터미널 에뮬레이터(MinTTY), <code>git pull</code>의 기본 동작, 자격 증명 관리자(Git Credential Manager)… 전부 기본값 그대로 Next를 누르시면 됩니다. 각각이 무슨 뜻인지 지금 알 필요는 없습니다. 마지막 화면에서 Install을 누르면 설치가 진행되고, 잠시 뒤 Finish로 마무리됩니다.</p>
 <p>혹시 설치 화면 중에 "Adjusting the name of the initial branch in new repositories"(새 저장소의 첫 브랜치 이름)라는 화면을 보셨다면, 이것도 기본값(Let Git decide)으로 두면 됩니다. 브랜치가 무엇인지는 이 장의 끝에서 곧 만나게 됩니다.</p>
 <hr />
 <h2 id="35">3.5 설치 확인과 첫 설정<a class="headerlink" href="#35" title="Permanent link">&para;</a></h2>
 <h3 id="_2">버전 확인<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>설치가 끝났으면 확인할 차례입니다. 여기서 2장에서 배운 규칙 하나를 복습합니다 — <strong>터미널을 새로 열어야 합니다.</strong> 설치 전에 열어 둔 터미널은 바뀐 PATH를 모르는 상태라서, 거기서는 여전히 <code>git</code>이 인식되지 않습니다. 열려 있던 터미널 창을 닫고, 새 터미널을 열어 입력합니다.</p>
+<p>설치가 끝났으면 제대로 깔렸는지 확인합니다. 여기서 2장에서 배운 규칙 하나를 복습합니다 — 터미널을 새로 열어야 합니다. 설치 전에 열어 둔 터미널은 바뀐 PATH를 모르는 상태라서, 거기서는 여전히 <code>git</code>이 인식되지 않습니다. 열려 있던 터미널 창을 닫고, 새 터미널을 열어 입력합니다.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">git</span> <span class="n">-v</span>
 </span></code></pre></div>
 <figure>
@@ -1916,7 +1916,7 @@
 <p><code>git version 2.xx.x.windows.1</code> 같은 버전 번호가 나오면 성공입니다. 뒤의 숫자는 설치 시점에 따라 다를 수 있고, 달라도 전혀 문제없습니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
-<p>새 터미널을 열었는데도 여전히 "인식되지 않습니다" 오류가 난다면 순서대로 점검해 보세요. 첫째, 정말로 <strong>새</strong> 창인지 확인합니다(탭을 새로 여는 것이 아니라 창을 완전히 닫았다가 다시 엽니다). 둘째, 컴퓨터를 한 번 재부팅하고 다시 시도합니다. PATH 변경이 재부팅 후에야 반영되는 경우가 가끔 있습니다. 셋째, 그래도 안 되면 설치 파일을 다시 실행해 3.4절의 PATH 화면에서 가운데 옵션(Recommended)이 선택되어 있는지 확인하며 재설치합니다. 2장의 Node.js 때와 똑같은 요령입니다.</p>
+<p>새 터미널을 열었는데도 여전히 "인식되지 않습니다" 오류가 난다면 순서대로 점검해 보세요. 첫째, 정말로 새 창인지 확인합니다(탭을 새로 여는 것이 아니라 창을 완전히 닫았다가 다시 엽니다). 둘째, 컴퓨터를 한 번 재부팅하고 다시 시도합니다. PATH 변경이 재부팅 후에야 반영되는 경우가 가끔 있습니다. 셋째, 그래도 안 되면 설치 파일을 다시 실행해 3.4절의 PATH 화면에서 가운데 옵션(Recommended)이 선택되어 있는지 확인하며 재설치합니다. 2장의 Node.js 때와 똑같은 요령입니다.</p>
 </div>
 <h3 id="_3">이름과 이메일 등록하기<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>설치 확인이 끝났으면, 딱 두 줄짜리 첫 설정을 합니다. git은 세이브 포인트(커밋)를 만들 때마다 "누가 저장했는지"를 함께 기록합니다. 그래서 여러분의 이름과 이메일을 미리 알려 주어야 합니다. 터미널에 아래 두 줄을 한 줄씩 입력합니다. 따옴표 안의 내용은 여러분의 것으로 바꾸세요.</p>
@@ -1940,26 +1940,26 @@
 </div>
 <hr />
 <h2 id="36">3.6 딱 세 단어만 알면 됩니다 — 저장소, 커밋, 브랜치<a class="headerlink" href="#36" title="Permanent link">&para;</a></h2>
-<p>git의 명령어는 수십 개가 넘지만, 이 책에서 여러분이 외워야 할 명령은 사실상 없습니다. 4장에서 Claude Code를 설치하고 나면, git 조작도 대부분 말로 시키게 되기 때문입니다. 대신 <strong>개념 세 개</strong>는 머릿속에 있어야 합니다. AI에게 시킬 때도, AI가 한 일을 확인할 때도 이 세 단어가 계속 나오거든요.</p>
+<p>git의 명령어는 수십 개가 넘지만, 이 책에서 여러분이 외워야 할 명령은 사실상 없습니다. 4장에서 Claude Code를 설치하고 나면, git 조작도 대부분 말로 시키게 되기 때문입니다. 대신 개념 세 개는 머릿속에 있어야 합니다. AI에게 시킬 때도, AI가 한 일을 확인할 때도 이 세 단어가 계속 나오거든요.</p>
 <figure>
 <p><img alt="저장소·커밋·브랜치 한 컷 개념도" src="../images/ch03/ch03-f07.jpg" width="760" /></p>
 <figcaption>
 <p>그림 3.7 — 저장소·커밋·브랜치 한 컷 개념도</p>
 </figcaption>
 </figure>
-<p><strong>저장소(repository)</strong> 는 git이 지켜보는 프로젝트 폴더입니다. 평범한 폴더에 "이제부터 여기를 기록해 줘"라고 선언하면(이 선언이 <code>git init</code>입니다) 폴더 안에 <code>.git</code>이라는 숨김 폴더가 생기고, 그 순간부터 폴더는 저장소가 됩니다. 겉보기엔 그냥 폴더인데, 안에 타임머신이 한 대 들어 있는 셈입니다.</p>
-<p><strong>커밋(commit)</strong> 은 세이브 포인트 그 자체입니다. "지금 이 순간의 폴더 전체 상태"를 사진 한 장처럼 찍어서 기록에 남기는 행위이자, 그렇게 남은 기록 하나하나를 부르는 이름입니다. 커밋에는 시각, 아까 등록한 이름과 이메일, 그리고 "지도에 마커 표시 기능 추가"처럼 무엇을 했는지 적는 한 줄 메시지가 함께 저장됩니다. 커밋이 쌓이면 프로젝트의 역사책이 됩니다. 그리고 역사책의 어느 페이지로든 되돌아갈 수 있다는 것 — 이게 3.1절에서 말한 안전벨트의 정체입니다.</p>
-<p>커밋 메시지를 쓰는 요령도 미리 하나 챙겨 두세요. 몇 주 뒤의 내가 읽어도 무슨 세이브인지 알 수 있게, "수정", "작업중" 같은 말 대신 "검색 결과 클릭하면 지도 이동하게 함"처럼 <strong>무엇이 달라졌는지</strong>를 적는 것입니다. 사실 바이브코딩에서는 이 메시지조차 AI가 대신 써 주는 경우가 많지만, AI가 써 준 메시지가 적절한지 알아보는 눈은 여러분에게 있어야 합니다. 세이브 포인트에 이름표가 잘 붙어 있을수록 "어디로 되돌아갈지" 고르기도 쉬워집니다.</p>
+<p><strong>저장소(repository)</strong> 는 git이 지켜보는 프로젝트 폴더입니다. 평범한 폴더에 "이제부터 여기를 기록해 줘"라고 선언하면(이 선언이 <code>git init</code>입니다) 폴더 안에 <code>.git</code>이라는 숨김 폴더가 생기고, 그 순간부터 폴더는 저장소가 됩니다. 겉보기엔 그냥 폴더인데, 안에 타임머신이 한 대 들어 있습니다.</p>
+<p><strong>커밋(commit)</strong> 은 세이브 포인트 그 자체입니다. "지금 이 순간의 폴더 전체 상태"를 사진 한 장처럼 찍어서 기록에 남기는 행위이자, 그렇게 남은 기록 하나하나를 부르는 이름입니다. 커밋에는 시각, 아까 등록한 이름과 이메일, 그리고 "지도에 마커 표시 기능 추가"처럼 무엇을 했는지 적는 한 줄 메시지가 함께 저장됩니다. 커밋이 쌓이면 프로젝트의 역사책이 됩니다. 그리고 역사책의 어느 페이지로든 되돌아갈 수 있습니다. 3.1절에서 말한 안전벨트가 바로 이 기능입니다.</p>
+<p>커밋 메시지를 쓰는 요령도 미리 하나 챙겨 두세요. 몇 주 뒤의 내가 읽어도 무슨 세이브인지 알 수 있게, "수정", "작업중" 같은 말 대신 "검색 결과 클릭하면 지도 이동하게 함"처럼 무엇이 달라졌는지를 적는 것입니다. 사실 바이브코딩에서는 이 메시지조차 AI가 대신 써 주는 경우가 많지만, AI가 써 준 메시지가 적절한지 알아보는 눈은 여러분에게 있어야 합니다. 세이브 포인트에 이름표가 잘 붙어 있을수록 "어디로 되돌아갈지" 고르기도 쉬워집니다.</p>
 <p><strong>브랜치(branch)</strong> 는 실험용 평행 작업 공간입니다. 커밋의 줄기에서 샛길을 하나 내서, 본래 줄기를 건드리지 않고 새로운 시도를 해 보는 기능입니다. 예를 들어 "지도 디자인을 다크 모드로 확 바꿔 보고 싶은데, 망치면 어쩌지?" 싶을 때 샛길을 하나 내고 거기서 마음껏 실험합니다. 실험이 성공하면 본 줄기에 합치고, 실패하면 샛길째 버리면 됩니다. 본 줄기는 처음부터 끝까지 멀쩡합니다. 이 책의 실습은 대부분 <code>main</code>이라는 기본 줄기 하나로 진행하니, 지금은 "그런 샛길을 낼 수도 있구나" 정도만 알아 두면 충분합니다. 참고로 6장에서 만날 Orca의 워크트리도 이 브랜치 개념 위에서 여러 AI 에이전트를 동시에 부리는 기술입니다.</p>
-<p>세 단어를 안전벨트 서사로 다시 엮으면 이렇습니다. <strong>저장소</strong>라는 기록 공간에 <strong>커밋</strong>이라는 세이브 포인트를 쌓아 가며, 위험한 실험은 <strong>브랜치</strong>라는 샛길에서 한다. AI가 코드를 어떻게 뒤엎어 놓아도, 세이브 포인트가 있는 한 우리는 언제든 안전한 과거로 돌아갈 수 있습니다.</p>
+<p>세 단어를 안전벨트 서사로 다시 엮으면 이렇습니다. 저장소라는 기록 공간에 커밋이라는 세이브 포인트를 쌓아 가며, 위험한 실험은 브랜치라는 샛길에서 한다. AI가 코드를 어떻게 뒤엎어 놓아도, 세이브 포인트가 있는 한 우리는 언제든 안전한 과거로 돌아갈 수 있습니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요 (4장 예고편)</p>
-<p>Claude Code를 설치하고 나면, 되돌리기도 이렇게 말로 시키게 됩니다. 명령어를 외울 필요가 없다는 게 어떤 느낌인지 미리 맛보기로 보여 드립니다.</p>
+<p>Claude Code를 설치하고 나면, 되돌리기도 이렇게 말로 시키게 됩니다. 명령어를 외울 필요가 없다는 게 어떤 느낌인지 아래 두 줄로 미리 맛보세요.</p>
 <blockquote>
 <p>지금까지 작업한 걸 "지도 마커 기능 추가"라는 메시지로 커밋해줘.</p>
 <p>방금 네가 고친 것 때문에 화면이 하얗게 나와. 마지막 커밋 상태로 전부 되돌려줘.</p>
 </blockquote>
-<p>두 번째 프롬프트가 바로 이 장에서 말한 안전벨트를 당기는 순간입니다. 이 말이 통하려면 첫 번째 프롬프트, 즉 평소의 부지런한 세이브가 먼저라는 것도 함께 기억해 두세요.</p>
+<p>두 번째 프롬프트가 이 장에서 말한 안전벨트를 당기는 순간입니다. 이 말이 통하려면 첫 번째 프롬프트, 즉 평소의 부지런한 세이브가 먼저라는 것도 함께 기억해 두세요.</p>
 </div>
 <hr />
 <h2 id="37">3.7 마무리<a class="headerlink" href="#37" title="Permanent link">&para;</a></h2>
@@ -1969,7 +1969,7 @@
 <li>git은 프로젝트 폴더 전체를 시점별로 기록하고 되돌리는 도구로, AI에게 과감히 일을 시키게 해 주는 바이브코딩의 안전벨트입니다.</li>
 <li>설치는 gitforwindows.org에서 64비트 설치 파일을 받아 진행하며, 옵션은 기본값이 원칙입니다. 단 기본 에디터는 Vim 대신 Notepad(또는 VS Code)로 바꿉니다.</li>
 <li>PATH 화면에서는 권장 옵션인 "Git from the command line and also from 3rd-party software"를 그대로 둡니다.</li>
-<li>설치 후 <strong>새 터미널</strong>에서 <code>git -v</code>로 확인하고, <code>git config --global</code>로 이름과 이메일을 한 번만 등록합니다.</li>
+<li>설치 후 새 터미널에서 <code>git -v</code>로 확인하고, <code>git config --global</code>로 이름과 이메일을 한 번만 등록합니다.</li>
 <li>저장소는 기록되는 프로젝트 폴더, 커밋은 세이브 포인트, 브랜치는 실험용 샛길입니다.</li>
 </ul>
 </div>
@@ -2002,7 +2002,7 @@
 </ul>
 </div>
 <blockquote>
-<p><strong>다음 장 예고</strong> — 안전벨트를 맸으니 드디어 주인공을 태울 차례입니다. 4장에서는 이 책의 핵심 도구인 <strong>Claude Code</strong>를 설치합니다. 가입과 요금제 선택부터 <code>npm install -g @anthropic-ai/claude-code</code> 설치, 첫 실행과 로그인, 그리고 AI에게 일을 잘 시키는 프롬프트 4요소(맥락·목표·제약·출력)까지 — 말로 코딩하는 첫 경험이 시작됩니다.</p>
+<p><strong>다음 장 예고</strong> — 안전벨트를 맸으니 드디어 주인공을 태울 차례입니다. 4장에서는 이 책의 핵심 도구인 Claude Code를 설치합니다. 가입과 요금제 선택부터 <code>npm install -g @anthropic-ai/claude-code</code> 설치, 첫 실행과 로그인, 그리고 AI에게 일을 잘 시키는 프롬프트 4요소(맥락·목표·제약·출력)까지 — 말로 코딩하는 첫 경험이 시작됩니다.</p>
 </blockquote>
 
 

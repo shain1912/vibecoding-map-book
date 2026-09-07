@@ -1688,27 +1688,27 @@
 <p class="admonition-title">이 장에서 배우는 것</p>
 <ul>
 <li>장소 데이터를 <strong><code>src/store.js</code> 저장소 모듈</strong>로 옮기고, 화면이 <code>store.all()</code>을 보도록 데이터 원천을 바꿉니다</li>
-<li>지도의 빈 곳을 <strong>클릭</strong>하면 장소 추가 다이얼로그가 열리게 만듭니다</li>
-<li>검색 결과마다 <strong>＋ 버튼</strong>을 달아, 같은 다이얼로그를 <strong>재사용</strong>합니다</li>
-<li>폼 값 <strong>검증</strong>(이름 필수)으로 엉터리 데이터가 들어오는 것을 막습니다</li>
-<li><code>store.add()</code>와 <code>Date.now().toString(36)</code>으로 겹치지 않는 <strong>id</strong>를 만듭니다</li>
-<li>이벤트 <strong>버블링</strong>을 이해하고, 클릭 영역 분리와 <code>stopPropagation</code>으로 클릭이 엉뚱한 곳까지 번지는 사고를 막습니다</li>
+<li>지도의 빈 곳을 클릭하면 장소 추가 다이얼로그가 열리게 만듭니다</li>
+<li>검색 결과마다 ＋ 버튼을 달아, 같은 다이얼로그를 재사용합니다</li>
+<li>폼 값 검증(이름 필수)으로 엉터리 데이터가 들어오는 것을 막습니다</li>
+<li><code>store.add()</code>와 <code>Date.now().toString(36)</code>으로 겹치지 않는 id를 만듭니다</li>
+<li>이벤트 버블링을 이해하고, 클릭 영역 분리와 <code>stopPropagation</code>으로 클릭이 엉뚱한 곳까지 번지는 사고를 막습니다</li>
 </ul>
 </div>
 <hr />
-<p>15장 끝에서 우리는 일부러 아쉬움을 하나 남겨 두었습니다. 검색으로 성수동의 카페를 찾아 지도가 스르륵 이동까지 했는데, 정작 그 카페를 <strong>내 지도에 담을 방법이 없었습니다</strong>. 지도는 이동만 할 뿐, 마커도 데이터도 남지 않았죠. 12장에서 만든 기본 장소들만 덩그러니 있는 지도는 아직 "카카오가 준 지도"이지 "나만의 지도"가 아닙니다.</p>
-<p>이번 장에서 그 벽을 넘습니다. 새 장소를 추가하는 입구를 <strong>두 개</strong> 만들 겁니다. 하나는 검색 결과 옆의 ＋ 버튼입니다. "어니언 성수"를 검색해서 ＋를 누르면 이름이 미리 채워진 입력 폼이 뜨고, 카테고리와 메모만 골라 저장하면 끝입니다. 다른 하나는 지도 클릭입니다. 이름은 몰라도 "여기 그 골목!"이라고 위치는 아는 장소가 있잖아요. 지도의 그 자리를 콕 찍으면 같은 폼이 열립니다. 저장 버튼을 누르는 순간 마커가 즉시 지도에 찍힙니다. 앱 개발자들이 흔히 CRUD<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>라고 부르는 네 가지 기본기 중 첫 글자, <strong>C(Create, 생성)</strong>를 오늘 완성하는 셈입니다.</p>
+<p>15장 끝에서 우리는 일부러 아쉬움을 하나 남겨 두었습니다. 검색으로 성수동의 카페를 찾아 지도가 스르륵 이동까지 했는데, 정작 그 카페를 내 지도에 담을 방법이 없었습니다. 지도는 이동만 할 뿐, 마커도 데이터도 남지 않았죠. 12장에서 만든 기본 장소들만 덩그러니 있는 지도는 아직 카카오가 준 지도에 가깝습니다. 내 손으로 담은 장소가 하나도 없으니까요.</p>
+<p>이번 장에서 그 벽을 넘습니다. 새 장소를 추가하는 입구를 두 개 만들 겁니다. 하나는 검색 결과 옆의 ＋ 버튼입니다. "어니언 성수"를 검색해서 ＋를 누르면 이름이 미리 채워진 입력 폼이 뜨고, 카테고리와 메모만 골라 저장하면 끝입니다. 다른 하나는 지도 클릭입니다. 이름은 몰라도 "여기 그 골목!"이라고 위치는 아는 장소가 있잖아요. 지도의 그 자리를 콕 찍으면 같은 폼이 열립니다. 저장 버튼을 누르는 순간 마커가 즉시 지도에 찍힙니다. 앱 개발자들이 흔히 CRUD<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>라고 부르는 네 가지 기본기 중 첫 글자, C(Create, 생성)를 오늘 완성합니다.</p>
 <h2 id="161">16.1 설계 먼저 — 입구는 둘, 문은 하나<a class="headerlink" href="#161" title="Permanent link">&para;</a></h2>
-<p>코드를 시키기 전에 잠깐 설계 이야기를 하겠습니다. 방금 "입구를 두 개 만든다"고 했는데, 초보 시절에 하기 쉬운 실수가 바로 <strong>입구마다 문을 따로 만드는 것</strong>입니다. 검색 추가용 폼 하나, 지도 클릭용 폼 하나. 당장은 돌아가지만, 나중에 폼에 별점 칸을 하나 추가하고 싶어지면 두 군데를 고쳐야 합니다. 한쪽만 고치고 다른 쪽을 잊으면? 사용자는 "어떤 때는 별점이 있고 어떤 때는 없는" 이상한 앱을 만나게 됩니다.</p>
-<p>그래서 우리는 처음부터 이렇게 설계합니다. <strong>입구는 둘이지만 문은 하나.</strong> 장소 추가 다이얼로그를 여는 함수 <code>openAddDialog</code>를 딱 하나 만들고, 검색 ＋ 버튼도, 지도 클릭도 이 함수 하나를 호출하게 합니다. 두 입구의 차이는 함수에 넘기는 재료뿐입니다. 검색 결과에서 왔다면 이름과 좌표를 이미 알고 있으니 <code>{ name, lat, lng }</code>를 넘기고, 지도 클릭에서 왔다면 좌표만 아니까 <code>{ lat, lng }</code>만 넘깁니다. 이름 칸은 비워진 채 열리겠죠.</p>
+<p>코드를 시키기 전에 잠깐 설계 이야기를 하겠습니다. 방금 "입구를 두 개 만든다"고 했는데, 초보 시절에 하기 쉬운 실수가 바로 입구마다 문을 따로 만드는 것입니다. 검색 추가용 폼 하나, 지도 클릭용 폼 하나. 당장은 돌아가지만, 나중에 폼에 별점 칸을 하나 추가하고 싶어지면 두 군데를 고쳐야 합니다. 한쪽만 고치고 다른 쪽을 잊으면? 사용자는 "어떤 때는 별점이 있고 어떤 때는 없는" 이상한 앱을 만나게 됩니다.</p>
+<p>그래서 우리는 처음부터 이렇게 설계합니다. 입구는 둘이지만 문은 하나. 장소 추가 다이얼로그를 여는 함수 <code>openAddDialog</code>를 딱 하나 만들고, 검색 ＋ 버튼도, 지도 클릭도 이 함수 하나를 호출하게 합니다. 두 입구의 차이는 함수에 넘기는 재료뿐입니다. 검색 결과에서 왔다면 이름과 좌표를 이미 알고 있으니 <code>{ name, lat, lng }</code>를 넘기고, 지도 클릭에서 왔다면 좌표만 아니까 <code>{ lat, lng }</code>만 넘깁니다. 이름 칸은 비워진 채 열리겠죠.</p>
 <figure>
 <p><img alt="입구는 둘, 문은 하나: 장소 추가의 전체 흐름" src="../images/ch16/ch16-f01.png" width="760" /></p>
 <figcaption>
 <p>그림 16.1 — 입구는 둘, 문은 하나: 장소 추가의 전체 흐름</p>
 </figcaption>
 </figure>
-<p>이렇게 "같은 일을 하는 코드는 한 곳에만 둔다"는 원칙을 개발자들은 <strong>재사용</strong>이라고 부릅니다. 사실 여러분은 이미 여러 번 경험했습니다. 9장에서 SDK 로드를 <code>loader.js</code> 한 곳에 모아 둔 덕분에 15장에서 확장팩을 붙일 때 한 줄만 고쳤고, 15장의 <code>run</code> 함수 하나를 버튼 클릭과 Enter 키가 함께 썼습니다. 바이브코딩에서도 이 원칙은 그대로 중요합니다. AI에게 "검색 추가 폼 만들어줘", "클릭 추가 폼 만들어줘"라고 따로따로 시키면 AI는 정말로 폼을 두 벌 만들어 버릴 수 있습니다. <strong>공용으로 쓸 것이라고 처음부터 말해 주는 것</strong>, 그것이 기획자인 우리의 일입니다.</p>
-<p>그런데 문을 달기 전에 먼저 해결해야 할 문제가 하나 더 있습니다. 새 장소를 추가하면 그 장소는 <strong>어디에 담기나요?</strong> 지금 우리 장소 데이터는 12장의 <code>defaultPlaces.js</code>가 수출하는 <code>DEFAULT_PLACES</code> 배열이고, 14장의 <code>filteredPlaces()</code>도 이 배열만 바라봅니다. 그런데 <code>DEFAULT_PLACES</code>는 이름 그대로 "기본 데이터"입니다. 여기에 새 장소를 마구 <code>push</code>하기 시작하면 기본과 추가분이 뒤섞여 버리죠. 추가·수정·삭제가 시작되는 지금이, 데이터를 도맡을 전담 창구를 만들 때입니다.</p>
+<p>이렇게 "같은 일을 하는 코드는 한 곳에만 둔다"는 원칙을 개발자들은 재사용이라고 부릅니다. 사실 여러분은 이미 여러 번 경험했습니다. 9장에서 SDK 로드를 <code>loader.js</code> 한 곳에 모아 둔 덕분에 15장에서 확장팩을 붙일 때 한 줄만 고쳤고, 15장의 <code>run</code> 함수 하나를 버튼 클릭과 Enter 키가 함께 썼습니다. 바이브코딩에서도 이 원칙은 그대로 중요합니다. AI에게 "검색 추가 폼 만들어줘", "클릭 추가 폼 만들어줘"라고 따로따로 시키면 AI는 정말로 폼을 두 벌 만들어 버릴 수 있습니다. 공용으로 쓸 것이라고 처음부터 말해 주는 것, 그것이 기획자인 우리의 일입니다.</p>
+<p>그런데 문을 달기 전에 먼저 해결해야 할 문제가 하나 더 있습니다. 새 장소를 추가하면 그 장소는 어디에 담기나요? 지금 우리 장소 데이터는 12장의 <code>defaultPlaces.js</code>가 수출하는 <code>DEFAULT_PLACES</code> 배열이고, 14장의 <code>filteredPlaces()</code>도 이 배열만 바라봅니다. 그런데 <code>DEFAULT_PLACES</code>는 이름 그대로 "기본 데이터"입니다. 여기에 새 장소를 마구 <code>push</code>하기 시작하면 기본과 추가분이 뒤섞여 버리죠. 추가·수정·삭제가 시작되는 지금이, 데이터를 도맡을 전담 창구를 만들 때입니다.</p>
 <h2 id="162-store">16.2 장소 데이터의 이사 — store 모듈 만들기<a class="headerlink" href="#162-store" title="Permanent link">&para;</a></h2>
 <p>전담 창구의 이름은 <code>src/store.js</code>, 역할은 <strong>저장소(store)</strong>입니다. 장소 배열을 이 모듈 안으로 이사시키고, 바깥에서는 배열을 직접 만지는 대신 store가 내주는 창구(메서드)로만 데이터를 읽고 씁니다. 은행에 비유하면, 금고(배열)는 안쪽에 숨기고 창구 직원(<code>all</code>, <code>add</code>)을 통해서만 거래하는 구조입니다. Claude Code에게 시켜 봅시다.</p>
 <div class="admonition tip">
@@ -1717,7 +1717,7 @@
 <p>src/store.js 모듈을 새로 만들어줘. defaultPlaces.js의 기본 장소 배열을 복사해서 places 변수에 담고, 두 가지 메서드가 있는 store 객체를 export 해줘. all()은 현재 장소 배열을 돌려주고, add(place)는 새 장소를 배열에 추가해줘. add에서 id는 'p' + Date.now().toString(36)으로 만들고, rating 0과 memo 빈 문자열을 기본값으로 채워줘. 그리고 sidebar.js의 filteredPlaces()가 DEFAULT_PLACES 대신 store.all()을 보도록 바꿔줘. localStorage 저장은 다음 장에서 붙일 거니까 아직 넣지 말아줘.</p>
 </blockquote>
 </div>
-<p>프롬프트 마지막 문장을 눈여겨보세요. "아직 넣지 말아줘"라고 <strong>범위를 잘라 주는 것</strong>도 훌륭한 프롬프트 기술입니다. AI는 친절이 지나쳐서 시키지 않은 저장 기능까지 한꺼번에 만들어 버리는 경우가 있는데, 그러면 우리가 코드를 따라 읽는 속도가 학습 속도를 추월해 버립니다. Claude Code가 만들어 준 <code>src/store.js</code>입니다.</p>
+<p>프롬프트 마지막 문장을 눈여겨보세요. "아직 넣지 말아줘"라고 범위를 잘라 주는 것도 훌륭한 프롬프트 기술입니다. AI는 친절이 지나쳐서 시키지 않은 저장 기능까지 한꺼번에 만들어 버리는 경우가 있는데, 그러면 우리가 코드를 따라 읽는 속도가 학습 속도를 추월해 버립니다. Claude Code가 만들어 준 <code>src/store.js</code>입니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// src/store.js — 장소 데이터 저장소 (이 장 시점 버전: 저장 기능은 17장에서 붙습니다)</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">DEFAULT_PLACES</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./defaultPlaces.js'</span><span class="p">;</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -1735,7 +1735,7 @@
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="p">},</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">};</span>
 </span></code></pre></div>
-<p><code>let places = [...DEFAULT_PLACES]</code>는 원본 배열을 그대로 쓰지 않고 스프레드(<code>...</code>)로 <strong>복사본</strong>을 만들어 시작합니다. 앞으로 이 배열에는 추가·수정이 일어날 텐데, 원본 <code>DEFAULT_PLACES</code>는 새것 그대로 보존해 두려는 것입니다(17장에서 이 복사가 한층 더 단단한 방식으로 업그레이드됩니다). <code>all()</code>은 현재 배열을 돌려주는 읽기 창구이고, <code>add()</code>가 오늘의 주인공인 쓰기 창구입니다. <code>add()</code> 속의 요술 같은 두 줄(<code>toString(36)</code> id와 <code>...place</code>)은 폼과 연결하는 16.4절에서 찬찬히 뜯어보기로 하고, 지금은 이사부터 마무리합시다. <code>sidebar.js</code>의 바뀐 부분입니다.</p>
+<p><code>let places = [...DEFAULT_PLACES]</code>는 원본 배열을 그대로 쓰지 않고 스프레드(<code>...</code>)로 복사본을 만들어 시작합니다. 앞으로 이 배열에는 추가·수정이 일어날 텐데, 원본 <code>DEFAULT_PLACES</code>는 새것 그대로 보존해 두려는 것입니다(17장에서 이 복사가 한층 더 단단한 방식으로 업그레이드됩니다). <code>all()</code>은 현재 배열을 돌려주는 읽기 창구이고, <code>add()</code>가 오늘의 주인공인 쓰기 창구입니다. <code>add()</code> 속의 요술 같은 두 줄(<code>toString(36)</code> id와 <code>...place</code>)은 폼과 연결하는 16.4절에서 찬찬히 뜯어보기로 하고, 지금은 이사부터 마무리합시다. <code>sidebar.js</code>의 바뀐 부분입니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// src/sidebar.js — 데이터 원천이 DEFAULT_PLACES에서 store로 바뀌었다</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./store.js'</span><span class="p">;</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -1744,8 +1744,8 @@
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">currentFilter</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'all'</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">all</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">category</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">currentFilter</span><span class="p">);</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>14장에서 <code>DEFAULT_PLACES</code>를 직접 바라보던 <code>filteredPlaces()</code>가 이제 <code>store.all()</code>을 바라봅니다. 맨 위의 <code>import { DEFAULT_PLACES } ...</code>도 <code>import { store } ...</code>로 바뀌었습니다. 기본 데이터를 아는 것은 이제 store 하나뿐이고, 화면 쪽 코드는 "장소가 어디서 왔는지" 전혀 모릅니다. 이 한 수가 왜 중요하냐면 — 17장에서 데이터의 출처가 localStorage로 바뀔 때, 화면 쪽 코드는 <strong>한 줄도 고칠 필요가 없어지기</strong> 때문입니다. 출처가 무엇이든 <code>store.all()</code>이라는 창구는 그대로니까요.</p>
-<p>저장하고 브라우저를 확인해 봅시다. 지도도 필터도 <strong>어제와 완전히 똑같이</strong> 동작하면 성공입니다. "고쳤는데 똑같다니?"라고 실망할 것 없습니다. 겉모습은 그대로 두고 속 구조만 바꾸는 작업을 개발자들은 <strong>리팩터링</strong><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>이라고 부르는데, 리팩터링의 성공 판정 기준이 바로 "아무것도 달라 보이지 않을 것"입니다. 필터 버튼을 몇 개 눌러 보고, 콘솔에 에러가 없는지도 확인하세요. 이삿짐은 다 옮겼고 집은 멀쩡합니다. 이제 새 식구(추가 기능)를 들일 준비가 끝났습니다.</p>
+<p>14장에서 <code>DEFAULT_PLACES</code>를 직접 바라보던 <code>filteredPlaces()</code>가 이제 <code>store.all()</code>을 바라봅니다. 맨 위의 <code>import { DEFAULT_PLACES } ...</code>도 <code>import { store } ...</code>로 바뀌었습니다. 기본 데이터를 아는 것은 이제 store 하나뿐이고, 화면 쪽 코드는 "장소가 어디서 왔는지" 전혀 모릅니다. 이 한 수가 왜 중요하냐면 — 17장에서 데이터의 출처가 localStorage로 바뀔 때, 화면 쪽 코드는 한 줄도 고칠 필요가 없어지기 때문입니다. 출처가 무엇이든 <code>store.all()</code>이라는 창구는 그대로니까요.</p>
+<p>저장하고 브라우저를 확인해 봅시다. 지도도 필터도 어제와 완전히 똑같이 동작하면 성공입니다. "고쳤는데 똑같다니?"라고 실망할 것 없습니다. 겉모습은 그대로 두고 속 구조만 바꾸는 작업을 개발자들은 <strong>리팩터링</strong><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>이라고 부르는데, 리팩터링의 성공 판정 기준이 바로 "아무것도 달라 보이지 않을 것"입니다. 필터 버튼을 몇 개 눌러 보고, 콘솔에 에러가 없는지도 확인하세요. 이삿짐은 다 옮겼고 집은 멀쩡합니다. 이제 새 식구(추가 기능)를 들일 준비가 끝났습니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
 <p>이 절처럼 "동작은 그대로, 구조만 변경"하는 작업을 시킬 때는 확인 직후에 커밋해 두는 것이 특히 중요합니다. 다음 절부터 기능이 얹히기 시작하면, 문제가 생겼을 때 "구조 변경 탓인지 새 기능 탓인지" 갈라 볼 수 있는 기준점이 되기 때문입니다. "장소 데이터를 store 모듈로 분리, 커밋해줘"라고 시켜 두세요.</p>
@@ -1791,17 +1791,17 @@
 </span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">wrap</span><span class="p">);</span>
 </span></code></pre></div>
 <p>한 줄씩 함께 읽어 봅시다.</p>
-<p><strong><code>{ name = '', lat, lng }</code></strong> — 함수의 인자 자리에서 객체를 바로 풀어 받고 있습니다. <code>name = ''</code> 부분은 <strong>기본값</strong>입니다. 지도 클릭처럼 <code>name</code> 없이 호출되면 자동으로 빈 문자열이 됩니다. 입구가 둘이어도 함수 하나가 감당할 수 있는 비결이 바로 이 기본값입니다.</p>
-<p><strong><code>closeAddDialog()</code>가 첫 줄인 이유</strong> — 새 다이얼로그를 만들기 전에, 혹시 떠 있을지 모르는 이전 다이얼로그부터 치웁니다. "한 번에 하나만"이라는 제약을 지키는 가장 단순한 방법은 <strong>열기 전에 무조건 닫기</strong>입니다. 13장에서 말풍선을 하나만 열리게 관리했던 것과 똑같은 발상이죠. 사실 잠시 뒤에 볼 CSS에서 배경막이 화면 전체를 덮기 때문에, 다이얼로그가 열린 동안에는 지도도 검색 결과도 클릭할 수 없어 두 겹이 쌓일 상황이 지금은 일어나지 않습니다. 그런데도 이 한 줄을 두는 것이 프로의 습관입니다. 나중에 배경막 디자인이 바뀌거나 다른 코드가 <code>openAddDialog</code>를 연달아 부르는 날이 와도, 이 함수는 스스로 "하나만"을 지켜 냅니다. 자기 규칙을 남에게 의존하지 않는 코드를 <strong>방어적 코드</strong>라고 부릅니다.</p>
-<p><strong><code>document.createElement</code> + <code>innerHTML</code></strong> — 이 다이얼로그는 <code>index.html</code>에 미리 써 두지 않았습니다. 필요한 순간에 자바스크립트로 <code>&lt;div&gt;</code>를 만들고(<code>createElement</code>), 그 속을 템플릿 문자열로 채운 뒤, <code>document.body.appendChild(wrap)</code>으로 화면에 붙입니다. 평소에는 존재하지도 않다가 부를 때만 나타나는 요소입니다.</p>
-<p><strong><code>value="${escapeHtml(name)}"</code></strong> — 검색 결과에서 넘어온 이름이 입력칸에 <strong>미리 채워지는</strong> 부분입니다. 그리고 여기에도 15장에서 만난 안전장치 <code>escapeHtml</code>이 있습니다. 장소 이름은 카카오 서버에서 온 <strong>바깥 데이터</strong>입니다. 바깥 데이터를 HTML에 끼워 넣을 때는 반드시 이 장갑을 낍니다. 이 습관이 왜 목숨줄인지는 19장에서 제대로 다룹니다.</p>
+<p><code>{ name = '', lat, lng }</code> — 함수의 인자 자리에서 객체를 바로 풀어 받고 있습니다. <code>name = ''</code> 부분은 기본값입니다. 지도 클릭처럼 <code>name</code> 없이 호출되면 자동으로 빈 문자열이 됩니다. 입구가 둘이어도 함수 하나가 감당할 수 있는 비결이 바로 이 기본값입니다.</p>
+<p><strong><code>closeAddDialog()</code>가 첫 줄인 이유</strong> — 새 다이얼로그를 만들기 전에, 혹시 떠 있을지 모르는 이전 다이얼로그부터 치웁니다. "한 번에 하나만"이라는 제약을 지키는 가장 단순한 방법은 열기 전에 무조건 닫기입니다. 13장에서 말풍선을 하나만 열리게 관리했던 것과 똑같은 발상이죠. 사실 잠시 뒤에 볼 CSS에서 배경막이 화면 전체를 덮기 때문에, 다이얼로그가 열린 동안에는 지도도 검색 결과도 클릭할 수 없어 두 겹이 쌓일 상황이 지금은 일어나지 않습니다. 그런데도 이 한 줄을 두는 것이 프로의 습관입니다. 나중에 배경막 디자인이 바뀌거나 다른 코드가 <code>openAddDialog</code>를 연달아 부르는 날이 와도, 이 함수는 스스로 "하나만"을 지켜 냅니다. 자기 규칙을 남에게 의존하지 않는 코드를 <strong>방어적 코드</strong>라고 부릅니다.</p>
+<p><code>document.createElement</code> + <code>innerHTML</code> — 이 다이얼로그는 <code>index.html</code>에 미리 써 두지 않았습니다. 필요한 순간에 자바스크립트로 <code>&lt;div&gt;</code>를 만들고(<code>createElement</code>), 그 속을 템플릿 문자열로 채운 뒤, <code>document.body.appendChild(wrap)</code>으로 화면에 붙입니다. 평소에는 존재하지도 않다가 부를 때만 나타나는 요소입니다.</p>
+<p><code>value="${escapeHtml(name)}"</code> — 검색 결과에서 넘어온 이름이 입력칸에 미리 채워지는 부분입니다. 그리고 여기에도 15장에서 만난 안전장치 <code>escapeHtml</code>이 있습니다. 장소 이름은 카카오 서버에서 온 바깥 데이터입니다. 바깥 데이터를 HTML에 끼워 넣을 때는 반드시 이 장갑을 낍니다. 이 습관이 왜 목숨줄인지는 19장에서 제대로 다룹니다.</p>
 <p>닫는 쪽 함수는 짧습니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">closeAddDialog</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'add-dialog'</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>물음표가 붙은 <code>?.</code>는 <strong>옵셔널 체이닝</strong>이라는 문법입니다. "다이얼로그가 있으면 지우고, 없으면 아무 일도 하지 말라"는 뜻입니다. 이게 없으면 다이얼로그가 안 떠 있을 때 <code>null.remove()</code>를 호출하다 에러가 납니다. 짧지만 방어가 들어 있는 한 줄입니다.</p>
-<p>스타일은 <code>style.css</code>에 함께 들어갔습니다. 핵심은 배경막입니다.</p>
+<p>스타일은 <code>style.css</code>에 함께 들어갔습니다. 눈여겨볼 부분은 배경막입니다.</p>
 <div class="language-css highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">#</span><span class="nn">add-dialog</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">fixed</span><span class="p">;</span><span class="w"> </span><span class="k">inset</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.35</span><span class="p">);</span>
@@ -1849,13 +1849,13 @@
 </span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>취소 버튼은 한 줄로 끝입니다. <code>closeAddDialog</code>를 그대로 리스너로 넘겼습니다. 추가 버튼이 이 절의 주인공입니다.</p>
-<p><strong>검증이 저장보다 먼저입니다.</strong> 추가 버튼의 첫 일은 저장이 아니라 <strong>검사</strong>입니다. <code>value.trim()</code>으로 양끝 공백을 잘라 낸 이름이 빈 문자열이면, <code>toast</code>로 "이름을 입력하세요."라고 알리고 <code>return</code>으로 끝냅니다. 15장 콜백의 문지기 검사와 같은 관용구입니다. 여기서 중요한 것은 <code>return</code>이 <strong>다이얼로그를 닫지 않는다</strong>는 점입니다. 폼은 입력값을 그대로 간직한 채 열려 있고, 사용자는 이름만 채워서 다시 누르면 됩니다. 틀렸다고 문전박대하며 처음부터 다시 쓰게 하는 폼은 나쁜 폼입니다.</p>
-<p>왜 이름만 필수일까요? 좌표는 검증할 필요가 없습니다. 두 입구 모두 좌표를 <strong>이미 알고</strong> 다이얼로그를 열었기 때문입니다. 폼에 위도·경도 입력칸이 아예 없다는 점을 눈치채셨나요? 사용자에게 물어볼 필요가 없는 값은 폼에 올리지 않는 것이 좋은 설계입니다. <code>lat</code>, <code>lng</code>는 <code>openAddDialog</code>가 인자로 받아 둔 값을 클로저<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>로 기억하고 있다가 저장 시점에 그대로 씁니다. 카테고리는 select라서 어차피 넷 중 하나가 선택되어 있고, 메모는 없어도 그만인 값입니다. 결국 <strong>사용자가 망칠 수 있는 값은 이름뿐</strong>이고, 그래서 검증도 이름 하나면 충분합니다.</p>
+<p>검증이 저장보다 먼저입니다. 추가 버튼의 첫 일은 저장이 아니라 검사입니다. <code>value.trim()</code>으로 양끝 공백을 잘라 낸 이름이 빈 문자열이면, <code>toast</code>로 "이름을 입력하세요."라고 알리고 <code>return</code>으로 끝냅니다. 15장 콜백의 문지기 검사와 같은 관용구입니다. 여기서 중요한 것은 <code>return</code>이 다이얼로그를 닫지 않는다는 점입니다. 폼은 입력값을 그대로 간직한 채 열려 있고, 사용자는 이름만 채워서 다시 누르면 됩니다. 틀렸다고 문전박대하며 처음부터 다시 쓰게 하는 폼은 나쁜 폼입니다.</p>
+<p>왜 이름만 필수일까요? 좌표는 검증할 필요가 없습니다. 두 입구 모두 좌표를 이미 알고 다이얼로그를 열었기 때문입니다. 폼에 위도·경도 입력칸이 아예 없다는 점을 눈치채셨나요? 사용자에게 물어볼 필요가 없는 값은 폼에 올리지 않는 것이 좋은 설계입니다. <code>lat</code>, <code>lng</code>는 <code>openAddDialog</code>가 인자로 받아 둔 값을 클로저<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>로 기억하고 있다가 저장 시점에 그대로 씁니다. 카테고리는 select라서 어차피 넷 중 하나가 선택되어 있고, 메모는 없어도 그만인 값입니다. 결국 사용자가 망칠 수 있는 값은 이름뿐이고, 그래서 검증도 이름 하나면 충분합니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
-<p>검증 없이 <code>store.add</code>부터 호출하면 어떻게 될까요? 이름이 빈 장소가 데이터에 들어가고, 18장에서 만들 사이드바 목록에 "이름 없는 유령 장소"가 쌓이기 시작합니다. 잘못된 데이터는 <strong>들어오는 문 앞에서</strong> 막는 것이 가장 쌉니다. 일단 들어온 쓰레기 데이터를 나중에 골라내는 일은 몇 배로 고생스럽습니다.</p>
+<p>검증 없이 <code>store.add</code>부터 호출하면 어떻게 될까요? 이름이 빈 장소가 데이터에 들어가고, 18장에서 만들 사이드바 목록에 "이름 없는 유령 장소"가 쌓이기 시작합니다. 잘못된 데이터는 들어오는 문 앞에서 막는 것이 가장 쌉니다. 일단 들어온 쓰레기 데이터를 나중에 골라내는 일은 몇 배로 고생스럽습니다.</p>
 </div>
-<p>검사를 통과하면 드디어 <code>store.add({...})</code>입니다. 폼의 값들을 좌표와 합쳐 객체 하나로 만들어 넘기고 있습니다. 이 <code>store</code>는 16.2절에서 이사를 마친 바로 그 저장소 창구죠. 그때 "나중에 뜯어보자"고 미뤄 둔 <code>add()</code>의 속을 지금 열어 봅니다.</p>
+<p>검사를 통과하면 드디어 <code>store.add({...})</code>입니다. 폼의 값들을 좌표와 합쳐 객체 하나로 만들어 넘기고 있습니다. 이 <code>store</code>는 16.2절에서 이사를 마친 저장소 창구죠. 그때 "나중에 뜯어보자"고 미뤄 둔 <code>add()</code>의 속을 지금 열어 봅니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// src/store.js의 add — 16.2절에서 만든 그대로 (17장에서 이 끝에 저장이 한 줄 더 붙습니다)</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nx">add</span><span class="p">(</span><span class="nx">place</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'p'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mf">36</span><span class="p">);</span>
@@ -1865,10 +1865,10 @@
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="p">},</span>
 </span></code></pre></div>
 <p>짧지만 씹을 거리가 많은 코드입니다.</p>
-<p><strong>id는 왜 필요한가</strong> — 12장에서 설계한 장소 스키마의 첫 필드가 <code>id</code>였습니다. 이름은 겹칠 수 있습니다. "스타벅스"를 두 개 저장하는 순간, 이름으로는 둘을 구별할 수 없죠. 19장에서 장소를 수정·삭제하려면 "정확히 이 장소"를 가리킬 <strong>주민등록번호</strong>가 필요하고, 그것이 id입니다.</p>
-<p><strong><code>Date.now().toString(36)</code></strong> — 그 id를 만드는 재치 있는 한 줄입니다. <code>Date.now()</code>는 1970년 1월 1일부터 지금까지 흐른 시간을 밀리초로 셉니다. <code>1772483920133</code>처럼 13자리 숫자죠. 밀리초는 1초의 천분의 일이니, 사람이 손으로 장소를 추가하는 한 같은 값이 두 번 나올 일은 사실상 없습니다. <strong>시간 자체가 겹치지 않는 번호표</strong>인 셈입니다. 뒤의 <code>.toString(36)</code>은 이 숫자를 <strong>36진수</strong> 문자열로 바꿉니다. 36진수는 숫자 10개(0–9)에 알파벳 26개(a–z)까지 동원해 한 자리를 표현하는 방식이라, 13자리 숫자가 <code>pxk3q2l9</code> 같은 8자리 문자열로 압축됩니다. 앞에 <code>'p'</code>(place의 p)를 붙이면 <code>pmxk3q2l9</code> 같은 형태의 최종 id가 됩니다. 콘솔에서 <code>Date.now().toString(36)</code>을 직접 실행해 보세요. 실행할 때마다 다른 값이 나오는 것을 눈으로 확인할 수 있습니다.</p>
-<p><strong><code>{ id, rating: 0, memo: '', ...place }</code></strong> — 점 세 개(<code>...</code>)는 <strong>스프레드 문법</strong>으로, <code>place</code> 객체의 필드를 그 자리에 쏟아 붓습니다. 순서가 절묘합니다. 기본값(<code>rating: 0, memo: ''</code>)을 <strong>먼저</strong> 깔고 <code>...place</code>를 <strong>나중에</strong> 쏟기 때문에, 폼에서 메모를 입력했다면 그 값이 기본값을 덮어쓰고, 입력하지 않은 필드는 기본값이 살아남습니다. 별점은 폼에 아예 없으니 항상 0으로 시작합니다(별점 매기기는 19장 상세 패널의 몫입니다). 어느 입구로 들어왔든, 이 한 줄을 통과하면 모든 장소가 12장 스키마를 온전히 갖춘 모습이 됩니다.</p>
-<p><strong><code>notifyChange()</code> — 지도에게 소식을 전하는 다리</strong> — 여기가 이번 절의 마지막 퍼즐입니다. <code>store.add</code>는 배열에 장소를 넣을 뿐, <strong>화면은 스스로 갱신되지 않습니다.</strong> 14장에서 세운 단방향 원칙을 떠올려 보세요. 상태를 바꿨으면(<code>store.add</code>) 화면을 다시 그려야(<code>rerender</code>) 마커가 나타납니다. 그런데 <code>rerender</code>는 <code>main.js</code>에 사는 함수고, 이 코드는 <code>search.js</code>에 있죠. 그래서 14장의 <code>onFilter</code>와 똑같은 콜백 방식으로 다리를 놓습니다. <code>search.js</code> 위쪽에 콜백 보관 변수를 두고, <code>initSearch</code>가 받아 둡니다.</p>
+<p><strong>id는 왜 필요한가</strong> — 12장에서 설계한 장소 스키마의 첫 필드가 <code>id</code>였습니다. 이름은 겹칠 수 있습니다. "스타벅스"를 두 개 저장하는 순간, 이름으로는 둘을 구별할 수 없죠. 19장에서 장소를 수정·삭제하려면 "정확히 이 장소"를 가리킬 주민등록번호가 필요하고, 그것이 id입니다.</p>
+<p><code>Date.now().toString(36)</code> — 그 id를 만드는 재치 있는 한 줄입니다. <code>Date.now()</code>는 1970년 1월 1일부터 지금까지 흐른 시간을 밀리초로 셉니다. <code>1772483920133</code>처럼 13자리 숫자죠. 밀리초는 1초의 천분의 일이니, 사람이 손으로 장소를 추가하는 한 같은 값이 두 번 나올 일은 사실상 없습니다. 시간 자체가 겹치지 않는 번호표 노릇을 합니다. 뒤의 <code>.toString(36)</code>은 이 숫자를 <strong>36진수</strong> 문자열로 바꿉니다. 36진수는 숫자 10개(0–9)에 알파벳 26개(a–z)까지 동원해 한 자리를 표현하는 방식이라, 13자리 숫자가 <code>pxk3q2l9</code> 같은 8자리 문자열로 압축됩니다. 앞에 <code>'p'</code>(place의 p)를 붙이면 <code>pmxk3q2l9</code> 같은 형태의 최종 id가 됩니다. 콘솔에서 <code>Date.now().toString(36)</code>을 직접 실행해 보세요. 실행할 때마다 다른 값이 나오는 것을 눈으로 확인할 수 있습니다.</p>
+<p><code>{ id, rating: 0, memo: '', ...place }</code> — 점 세 개(<code>...</code>)는 <strong>스프레드 문법</strong>으로, <code>place</code> 객체의 필드를 그 자리에 쏟아 붓습니다. 순서가 절묘합니다. 기본값(<code>rating: 0, memo: ''</code>)을 먼저 깔고 <code>...place</code>를 나중에 쏟기 때문에, 폼에서 메모를 입력했다면 그 값이 기본값을 덮어쓰고, 입력하지 않은 필드는 기본값이 살아남습니다. 별점은 폼에 아예 없으니 항상 0으로 시작합니다(별점 매기기는 19장 상세 패널의 몫입니다). 어느 입구로 들어왔든, 이 한 줄을 통과하면 모든 장소가 12장 스키마를 온전히 갖춘 모습이 됩니다.</p>
+<p><strong><code>notifyChange()</code> — 지도에게 소식을 전하는 다리</strong> — 여기가 이번 절의 마지막 퍼즐입니다. <code>store.add</code>는 배열에 장소를 넣을 뿐, 화면은 스스로 갱신되지 않습니다. 14장에서 세운 단방향 원칙을 떠올려 보세요. 상태를 바꿨으면(<code>store.add</code>) 화면을 다시 그려야(<code>rerender</code>) 마커가 나타납니다. 그런데 <code>rerender</code>는 <code>main.js</code>에 사는 함수고, 이 코드는 <code>search.js</code>에 있죠. 그래서 14장의 <code>onFilter</code>와 똑같은 콜백 방식으로 다리를 놓습니다. <code>search.js</code> 위쪽에 콜백 보관 변수를 두고, <code>initSearch</code>가 받아 둡니다.</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// src/search.js — 이 장 시점의 다리 (18장에서 구독 패턴으로 승격되며 걷어냅니다)</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">notifyChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{};</span><span class="w">   </span><span class="c1">// 장소 데이터가 바뀌면 호출할 함수 (main.js가 넣어줌)</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
@@ -1881,7 +1881,7 @@
 <div class="language-js highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// src/main.js — 이 장 시점: 추가가 끝나면 지도를 다시 그리도록 rerender를 넘겨준다</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nx">initSearch</span><span class="p">({</span><span class="w"> </span><span class="nx">onChange</span><span class="o">:</span><span class="w"> </span><span class="nx">rerender</span><span class="w"> </span><span class="p">});</span>
 </span></code></pre></div>
-<p>이 다리가 놓인 <strong>다음부터</strong> "추가 버튼을 누르면 마커가 즉시 찍힌다"가 성립합니다. <code>store.add</code>만으로는 배열에만 쌓일 뿐 지도는 옛 그림 그대로거든요. 그리고 솔직히 말하면 이 다리는 임시 가설교입니다. 데이터가 바뀌는 곳이 늘어날 때마다 다리도 하나씩 더 놓아야 한다면 금방 번거로워지겠죠. 18장에서 "데이터가 바뀌면 화면이 알아서 따라오는" 구독 패턴으로 이 다리를 우아하게 대체합니다. 그때까지는 이 명시적인 한 줄이 단방향 흐름을 눈에 보이게 해 주는 좋은 교재입니다.</p>
+<p>이 다리가 놓인 다음부터 "추가 버튼을 누르면 마커가 즉시 찍힌다"가 성립합니다. <code>store.add</code>만으로는 배열에만 쌓일 뿐 지도는 옛 그림 그대로거든요. 그리고 솔직히 말하면 이 다리는 임시 가설교입니다. 데이터가 바뀌는 곳이 늘어날 때마다 다리도 하나씩 더 놓아야 한다면 금방 번거로워지겠죠. 18장에서 "데이터가 바뀌면 화면이 알아서 따라오는" 구독 패턴으로 이 다리를 우아하게 대체합니다. 그때까지는 이 명시적인 한 줄이 단방향 흐름을 눈에 보이게 해 주는 좋은 교재입니다.</p>
 <figure>
 <p><img alt="이름을 비우고 추가를 누르면 뜨는 검증 토스트" src="../images/ch16/ch16-f03.jpg" width="760" /></p>
 <figcaption>
@@ -1930,10 +1930,10 @@
 </span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="w">    </span><span class="p">});</span>
 </span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="w">  </span><span class="p">}</span>
 </span></code></pre></div>
-<p>15장 코드와 달라진 곳을 짚어 봅시다. <code>&lt;li&gt;</code> 안에 <code>.btn-add</code> 버튼이 추가된 것은 예상대로인데, 그보다 조용하지만 중요한 변화가 하나 더 있습니다. 15장에서는 지도 이동 클릭이 <strong><code>&lt;li&gt;</code> 전체</strong>에 달려 있었죠(<code>li.addEventListener('click', ...)</code>). 그런데 지금 코드는 이동 리스너를 이름·주소를 감싼 <strong><code>&lt;span class="search-info"&gt;</code></strong>로 옮겨 달았습니다. 왜 AI가 굳이 이렇게 고쳤을까요?</p>
-<p>15장 코드를 그대로 두고 ＋ 버튼만 얹었다고 상상해 봅시다. 그 순간 버그가 태어납니다. 브라우저에서 클릭 이벤트는 클릭된 요소에서 끝나지 않고 <strong>부모로, 그 부모로 물속의 거품처럼 위로 번져 올라갑니다</strong>. 이것을 이벤트 <strong>버블링(bubbling)</strong>이라고 부릅니다. ＋ 버튼은 <code>&lt;li&gt;</code>의 자식이므로, ＋를 클릭하면 그 클릭이 <code>&lt;li&gt;</code>에게도 전달됩니다. <code>&lt;li&gt;</code>에 이동 리스너가 달려 있다면? ＋를 눌렀는데 다이얼로그가 열리는 <strong>동시에</strong> 지도까지 이동해 버리는 어리둥절한 상황이 벌어지는 겁니다. 우리가 프롬프트에 "＋ 클릭이 지도 이동까지 일으키면 안 돼"라고 못 박은 이유가 바로 이것입니다.</p>
-<p>이 문제의 정공법이 지금 코드에 들어 있는 <strong>클릭 영역 분리</strong>입니다. 이동 리스너를 <code>&lt;li&gt;</code>가 아니라 <code>.search-info</code>에 달면, ＋ 버튼은 <code>.search-info</code>의 자식이 아니라 <strong>형제</strong>이므로 ＋에서 출발한 거품이 아무리 위로 올라가도(<code>li</code> → <code>ul</code> → ...) <code>.search-info</code>를 지나가지 않습니다. 버블링은 부모 방향으로만 번지지, 옆집(형제)으로는 번지지 않거든요. 두 클릭의 영토를 아예 갈라 버린, 구조로 푸는 해법입니다.</p>
-<p>그럼 ＋ 리스너 첫 줄의 <code>e.stopPropagation()</code>은 뭘까요? "이 클릭은 여기서 소화했으니 위로 올려 보내지 마"라고 번짐을 끊는 명령입니다. 영역 분리가 이미 문제를 해결했으니 지금 구조에서는 이 줄이 없어도 지도는 움직이지 않습니다. 즉, 이 한 줄은 <strong>보험</strong>입니다. ＋의 클릭은 여전히 <code>&lt;li&gt;</code>와 <code>&lt;ul&gt;</code>로 번져 올라가고 있고, 나중에 누군가(미래의 우리, 혹은 AI가) <code>&lt;li&gt;</code>나 목록 전체에 클릭 리스너를 다시 다는 순간 잠자던 버그가 깨어납니다. 그 가능성을 문장 하나로 미리 막아 둔 것이죠. 버튼 속의 버튼, 목록 속의 버튼을 만들 때는 "영역을 나눠 달고, 안쪽 버튼에서는 번짐을 끊는다"를 한 세트로 기억해 두세요.</p>
+<p>15장 코드와 달라진 곳을 짚어 봅시다. <code>&lt;li&gt;</code> 안에 <code>.btn-add</code> 버튼이 추가된 것은 예상대로인데, 그보다 조용하지만 중요한 변화가 하나 더 있습니다. 15장에서는 지도 이동 클릭이 <code>&lt;li&gt;</code> 전체에 달려 있었죠(<code>li.addEventListener('click', ...)</code>). 그런데 지금 코드는 이동 리스너를 이름·주소를 감싼 <code>&lt;span class="search-info"&gt;</code>로 옮겨 달았습니다. 왜 AI가 굳이 이렇게 고쳤을까요?</p>
+<p>15장 코드를 그대로 두고 ＋ 버튼만 얹었다고 상상해 봅시다. 그 순간 버그가 태어납니다. 브라우저에서 클릭 이벤트는 클릭된 요소에서 끝나지 않고 부모로, 그 부모로 물속의 거품처럼 위로 번져 올라갑니다. 이것을 이벤트 <strong>버블링(bubbling)</strong>이라고 부릅니다. ＋ 버튼은 <code>&lt;li&gt;</code>의 자식이므로, ＋를 클릭하면 그 클릭이 <code>&lt;li&gt;</code>에게도 전달됩니다. <code>&lt;li&gt;</code>에 이동 리스너가 달려 있다면? ＋를 눌렀는데 다이얼로그가 열리는 동시에 지도까지 이동해 버리는 어리둥절한 상황이 벌어지는 겁니다. 우리가 프롬프트에 "＋ 클릭이 지도 이동까지 일으키면 안 돼"라고 못 박은 이유가 바로 이것입니다.</p>
+<p>이 문제의 정공법이 지금 코드에 들어 있는 클릭 영역 분리입니다. 이동 리스너를 <code>&lt;li&gt;</code>가 아니라 <code>.search-info</code>에 달면, ＋ 버튼은 <code>.search-info</code>의 자식이 아니라 형제이므로 ＋에서 출발한 거품이 아무리 위로 올라가도(<code>li</code> → <code>ul</code> → ...) <code>.search-info</code>를 지나가지 않습니다. 버블링은 부모 방향으로만 번지지, 옆집(형제)으로는 번지지 않거든요. 두 클릭의 영토를 아예 갈라 버린, 구조로 푸는 해법입니다.</p>
+<p>그럼 ＋ 리스너 첫 줄의 <code>e.stopPropagation()</code>은 뭘까요? "이 클릭은 여기서 소화했으니 위로 올려 보내지 마"라고 번짐을 끊는 명령입니다. 영역 분리가 이미 문제를 해결했으니 지금 구조에서는 이 줄이 없어도 지도는 움직이지 않습니다. 즉, 이 한 줄은 보험입니다. ＋의 클릭은 여전히 <code>&lt;li&gt;</code>와 <code>&lt;ul&gt;</code>로 번져 올라가고 있고, 나중에 누군가(미래의 우리, 혹은 AI가) <code>&lt;li&gt;</code>나 목록 전체에 클릭 리스너를 다시 다는 순간 잠자던 버그가 깨어납니다. 그 가능성을 문장 하나로 미리 막아 둔 것이죠. 버튼 속의 버튼, 목록 속의 버튼을 만들 때는 "영역을 나눠 달고, 안쪽 버튼에서는 번짐을 끊는다"를 한 세트로 기억해 두세요.</p>
 <p>마지막의 <code>resultsEl.hidden = true</code>는 UX 다듬기입니다. 다이얼로그가 열리는데 뒤에 검색 결과 목록까지 계속 떠 있으면 화면이 어수선하니, 추가 폼을 여는 순간 목록을 접습니다.</p>
 <figure>
 <p><img alt="검색 결과마다 달린 ＋ 버튼" src="../images/ch16/ch16-f04.jpg" width="760" /></p>
@@ -1941,7 +1941,7 @@
 <p>그림 16.4 — 검색 결과마다 달린 ＋ 버튼</p>
 </figcaption>
 </figure>
-<p>브라우저에서 확인해 봅시다. "성수동 카페"를 검색하고 한 항목의 ＋를 누르면, 검색 목록이 사라지면서 다이얼로그가 뜹니다. 이름 칸에 그 카페의 이름이 <strong>미리 채워져</strong> 있는 것이 포인트입니다. <code>openAddDialog({ name: item.place_name, ... })</code>로 넘긴 이름이 16.3절의 <code>value="${escapeHtml(name)}"</code> 자리에 꽂힌 결과입니다. 카테고리는 첫 옵션인 🍜 맛집으로 열리니, select를 눌러 ☕ 카페로 바꾸고 추가를 누르면 — 토스트가 뜨고, 지도에 새 마커가 즉시 찍힙니다. 16.4절에서 놓은 <code>notifyChange</code> 다리가 제 몫을 하는 순간입니다.</p>
+<p>브라우저에서 확인해 봅시다. "성수동 카페"를 검색하고 한 항목의 ＋를 누르면, 검색 목록이 사라지면서 다이얼로그가 뜹니다. 이름 칸에 그 카페의 이름이 미리 채워져 있는 것이 포인트입니다. <code>openAddDialog({ name: item.place_name, ... })</code>로 넘긴 이름이 16.3절의 <code>value="${escapeHtml(name)}"</code> 자리에 꽂힌 결과입니다. 카테고리는 첫 옵션인 🍜 맛집으로 열리니, select를 눌러 ☕ 카페로 바꾸고 추가를 누르면 — 토스트가 뜨고, 지도에 새 마커가 즉시 찍힙니다. 16.4절에서 놓은 <code>notifyChange</code> 다리가 제 몫을 하는 순간입니다.</p>
 <figure>
 <p><img alt="＋를 누르면 이름이 미리 채워진 다이얼로그가 열린다" src="../images/ch16/ch16-f05.jpg" width="760" /></p>
 <figcaption>
@@ -1970,9 +1970,9 @@
 <p>이제 이 장의 전체 흐름을 처음부터 끝까지 확인해 봅시다. 브라우저를 새로고침하고 순서대로 해 보세요.</p>
 <ol>
 <li><strong>검색 추가</strong> — "성수동 카페" 검색 → ＋ 클릭 → 이름이 채워진 폼 → 카테고리 ☕ 선택 → 추가. 지도에 ☕ 마커가 찍히고 "내 지도에 추가했습니다!" 토스트가 뜹니다.</li>
-<li><strong>클릭 추가</strong> — 지도에서 아무 골목이나 클릭 → 빈 폼 → 이름에 "단골 산책길" 입력 → 카테고리 🏝 → 추가. 클릭했던 바로 그 자리에 마커가 찍힙니다.</li>
-<li><strong>검증</strong> — 지도를 클릭해 폼을 열고, 이름을 비운 채(또는 공백만 입력하고) 추가 클릭 → "이름을 입력하세요." 토스트가 뜨고 폼은 그대로 남아 있습니다.</li>
-<li><strong>취소와 영역 분리</strong> — 폼을 연 채 취소를 눌러 깔끔히 닫히는지 확인합니다. 그리고 다시 검색해서 이번에는 ＋가 아니라 <strong>이름·주소 영역</strong>을 클릭 — 다이얼로그 없이 지도만 이동하고, ＋를 클릭했을 때는 지도가 움직이지 않고 다이얼로그만 열리는지, 두 클릭 영역이 서로를 침범하지 않는지 확인합니다.</li>
+<li><strong>클릭 추가</strong> — 지도에서 아무 골목이나 클릭 → 빈 폼 → 이름에 "단골 산책길" 입력 → 카테고리 🏝 → 추가. 클릭했던 그 자리에 마커가 찍힙니다.</li>
+<li>검증 — 지도를 클릭해 폼을 열고, 이름을 비운 채(또는 공백만 입력하고) 추가 클릭 → "이름을 입력하세요." 토스트가 뜨고 폼은 그대로 남아 있습니다.</li>
+<li>취소와 영역 분리 — 폼을 연 채 취소를 눌러 깔끔히 닫히는지 확인합니다. 그리고 다시 검색해서 이번에는 ＋가 아니라 이름·주소 영역을 클릭 — 다이얼로그 없이 지도만 이동하고, ＋를 클릭했을 때는 지도가 움직이지 않고 다이얼로그만 열리는지, 두 클릭 영역이 서로를 침범하지 않는지 확인합니다.</li>
 </ol>
 <figure>
 <p><img alt="지도 클릭으로 추가한 장소에 마커가 찍힌 모습" src="../images/ch16/ch16-f06.jpg" width="760" /></p>
@@ -1980,21 +1980,21 @@
 <p>그림 16.6 — 지도 클릭으로 추가한 장소에 마커가 찍힌 모습</p>
 </figcaption>
 </figure>
-<p>네 가지가 모두 통과했다면 축하합니다. 여러분의 지도는 이제 <strong>자라는 지도</strong>입니다. 카카오의 전국 데이터베이스에서 골라 담을 수도 있고, 지도 위 어디든 콕 찍어 나만 아는 장소를 새길 수도 있습니다.</p>
+<p>네 가지가 모두 통과했다면 축하합니다. 여러분의 지도는 이제 자라는 지도입니다. 카카오의 전국 데이터베이스에서 골라 담을 수도 있고, 지도 위 어디든 콕 찍어 나만 아는 장소를 새길 수도 있습니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
-<p>＋ 버튼을 눌렀는데 다이얼로그와 함께 지도까지 움직인다면, 십중팔구 이동 리스너가 15장처럼 <strong><code>&lt;li&gt;</code> 전체에 달려 있는</strong> 것입니다(AI가 영역 분리를 빼먹은 경우죠). 추가를 눌렀는데 마커가 안 찍힌다면 <code>notifyChange</code> 다리(<code>initSearch({ onChange: rerender })</code>)가 연결됐는지 보고, 추가한 마커가 필터와 안 맞게 보인다면 <code>filteredPlaces()</code>가 <code>store.all()</code>을 보는지 확인하세요. 증상만 보고도 원인 코드를 짚을 수 있게 되는 것 — 그것이 AI가 짠 코드를 "함께 읽어 온" 사람의 힘입니다. 원인을 짚었으면 고치는 일은 Claude Code에게 시키면 됩니다. "＋ 버튼 클릭이 지도 이동까지 일으켜. 이동 리스너가 li 전체에 달려 있는 것 같은데 search-info 영역으로 옮겨줘."</p>
+<p>＋ 버튼을 눌렀는데 다이얼로그와 함께 지도까지 움직인다면, 십중팔구 이동 리스너가 15장처럼 <code>&lt;li&gt;</code> 전체에 달려 있는 것입니다(AI가 영역 분리를 빼먹은 경우죠). 추가를 눌렀는데 마커가 안 찍힌다면 <code>notifyChange</code> 다리(<code>initSearch({ onChange: rerender })</code>)가 연결됐는지 보고, 추가한 마커가 필터와 안 맞게 보인다면 <code>filteredPlaces()</code>가 <code>store.all()</code>을 보는지 확인하세요. 증상만 보고도 원인 코드를 짚을 수 있게 되는 것 — 그것이 AI가 짠 코드를 "함께 읽어 온" 사람의 힘입니다. 원인을 짚었으면 고치는 일은 Claude Code에게 시키면 됩니다. "＋ 버튼 클릭이 지도 이동까지 일으켜. 이동 리스너가 li 전체에 달려 있는 것 같은데 search-info 영역으로 옮겨줘."</p>
 </div>
-<p>다만 한 가지, 김이 새는 실험을 해 보겠습니다. 방금 추가한 "단골 산책길"이 지도에 잘 찍혀 있죠? 이제 브라우저를 <strong>새로고침</strong>해 보세요. ...사라졌습니다. 애써 담은 장소들이 흔적도 없이 증발하고 12장의 기본 장소들만 남았습니다. 우리의 데이터가 아직 <strong>브라우저의 기억(메모리)</strong> 에만 있었기 때문입니다. 메모리는 새로고침 한 번에 백지가 되는 칠판입니다. 이 허무함을 해결하는 것이 바로 다음 장의 임무입니다.</p>
+<p>다만 한 가지, 김이 새는 실험이 남았습니다. 방금 추가한 "단골 산책길"이 지도에 잘 찍혀 있죠? 이제 브라우저를 새로고침해 보세요. ...사라졌습니다. 애써 담은 장소들이 흔적도 없이 증발하고 12장의 기본 장소들만 남았습니다. 우리의 데이터가 아직 브라우저의 기억(메모리)에만 있었기 때문입니다. 메모리는 새로고침 한 번에 백지가 되는 칠판입니다. 이 허무함은 다음 장에서 해결합니다.</p>
 <h2 id="167">16.7 마무리<a class="headerlink" href="#167" title="Permanent link">&para;</a></h2>
 <div class="admonition abstract">
 <p class="admonition-title">📌 핵심 요약</p>
 <ul>
-<li>장소 데이터의 창구는 이제 <strong><code>src/store.js</code></strong> 하나입니다. <code>filteredPlaces()</code>는 <code>DEFAULT_PLACES</code> 대신 <code>store.all()</code>을 바라보고, 화면은 데이터의 출처를 모릅니다.</li>
-<li>장소 추가의 입구는 둘(검색 ＋ 버튼, 지도 클릭)이지만, 다이얼로그를 여는 함수는 <code>openAddDialog</code> <strong>하나를 재사용</strong>합니다. 같은 일을 하는 코드는 한 곳에만 둡니다.</li>
-<li>저장 전에 <strong>검증</strong>이 먼저입니다. 이름이 비었으면 toast로 알리고 <code>return</code> — 단, 다이얼로그는 닫지 않고 입력값을 보존합니다.</li>
-<li><code>store.add</code>는 <code>'p' + Date.now().toString(36)</code>으로 <strong>겹치지 않는 id</strong>를 만들고, 기본값 뒤에 <code>...place</code>를 펼쳐 스키마를 완성합니다. 데이터를 바꾼 뒤에는 <code>notifyChange</code> 다리로 <code>rerender()</code>를 불러야 마커가 나타납니다(18장에서 구독 패턴으로 승격됩니다).</li>
-<li>클릭 이벤트는 부모로 번져 올라갑니다(<strong>버블링</strong>). 안쪽 버튼의 정공법은 <strong>클릭 영역 분리</strong>(이동은 <code>.search-info</code>, 추가는 <code>.btn-add</code>)이고, <code>e.stopPropagation()</code>은 미래의 조상 리스너를 대비한 보험입니다.</li>
+<li>장소 데이터의 창구는 이제 <code>src/store.js</code> 하나입니다. <code>filteredPlaces()</code>는 <code>DEFAULT_PLACES</code> 대신 <code>store.all()</code>을 바라보고, 화면은 데이터의 출처를 모릅니다.</li>
+<li>장소 추가의 입구는 둘(검색 ＋ 버튼, 지도 클릭)이지만, 다이얼로그를 여는 함수는 <code>openAddDialog</code> 하나를 재사용합니다. 같은 일을 하는 코드는 한 곳에만 둡니다.</li>
+<li>저장 전에 검증이 먼저입니다. 이름이 비었으면 toast로 알리고 <code>return</code> — 단, 다이얼로그는 닫지 않고 입력값을 보존합니다.</li>
+<li><code>store.add</code>는 <code>'p' + Date.now().toString(36)</code>으로 겹치지 않는 id를 만들고, 기본값 뒤에 <code>...place</code>를 펼쳐 스키마를 완성합니다. 데이터를 바꾼 뒤에는 <code>notifyChange</code> 다리로 <code>rerender()</code>를 불러야 마커가 나타납니다(18장에서 구독 패턴으로 승격됩니다).</li>
+<li>클릭 이벤트는 부모로 번져 올라갑니다(버블링). 안쪽 버튼의 정공법은 클릭 영역 분리(이동은 <code>.search-info</code>, 추가는 <code>.btn-add</code>)이고, <code>e.stopPropagation()</code>은 미래의 조상 리스너를 대비한 보험입니다.</li>
 <li>지도 클릭 좌표는 <code>e.latLng.getLat()</code> / <code>e.latLng.getLng()</code>로 얻습니다. 10장의 콘솔 실습이 그대로 실전 기능이 됐습니다.</li>
 </ul>
 </div>
@@ -2022,11 +2022,11 @@
 <li><code>&lt;dialog&gt;</code> 요소 — HTML에 내장된 진짜 다이얼로그 태그. <code>showModal()</code> 메서드와 <code>::backdrop</code> 가상 요소로 우리가 손수 만든 배경막을 공짜로 얻을 수 있습니다.</li>
 <li><code>submit 이벤트와 required 속성</code> — <code>&lt;form&gt;</code>으로 감싸면 브라우저가 기본 제공하는 폼 검증. 우리가 만든 자바스크립트 검증과 비교해 보세요.</li>
 <li><code>crypto.randomUUID()</code> — 브라우저에 내장된 고유 id 생성기. <code>Date.now()</code> 방식보다 충돌 걱정이 원천적으로 없는 표준 도구입니다.</li>
-<li><code>이벤트 캡처링(capturing)</code> — 버블링과 반대로, 이벤트가 조상에서 자손으로 <strong>내려오는</strong> 단계. <code>addEventListener</code>의 세 번째 인자와 관련이 있습니다.</li>
+<li><code>이벤트 캡처링(capturing)</code> — 버블링과 반대로, 이벤트가 조상에서 자손으로 내려오는 단계. <code>addEventListener</code>의 세 번째 인자와 관련이 있습니다.</li>
 </ul>
 </div>
 <blockquote>
-<p><strong>다음 장 예고</strong> — 애써 추가한 장소가 새로고침 한 번에 증발하는 허무함, 방금 겪으셨죠? 17장에서는 브라우저에 내장된 저장 공간 <strong>localStorage</strong>로 데이터를 영속화합니다. <code>store.js</code>를 처음부터 끝까지 해부하면서 JSON 직렬화, 저장이 실패하는 경우의 방어, 그리고 내 데이터를 파일로 내보내고 가져오는 백업 기능까지 만듭니다. 새로고침해도, 컴퓨터를 껐다 켜도 남아 있는 진짜 "나만의 지도"가 됩니다.</p>
+<p><strong>다음 장 예고</strong> — 애써 추가한 장소가 새로고침 한 번에 증발하는 허무함, 방금 겪으셨죠? 17장에서는 브라우저에 내장된 저장 공간 localStorage로 데이터를 영속화합니다. <code>store.js</code>를 처음부터 끝까지 해부하면서 JSON 직렬화, 저장이 실패하는 경우의 방어, 그리고 내 데이터를 파일로 내보내고 가져오는 백업 기능까지 만듭니다. 새로고침해도, 컴퓨터를 껐다 켜도 남아 있는 진짜 "나만의 지도"가 됩니다.</p>
 </blockquote>
 <div class="footnote">
 <hr />

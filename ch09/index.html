@@ -1717,19 +1717,19 @@
 </ul>
 </div>
 <hr />
-<p>드디어 이 순간입니다. 7장에서 열쇠(JavaScript 키)를 발급받았고, 8장에서 집터(Vite 프로젝트)를 닦고 열쇠를 <code>.env</code>에 숨겨 두었습니다. 이번 장이 끝나면 브라우저 화면 가득 <strong>진짜 카카오지도</strong>가 뜹니다. 마우스로 끌면 서울에서 부산까지 움직이고, 휠을 굴리면 골목길까지 확대되는, 카카오맵 앱에서 보던 바로 그 지도가 여러분의 웹페이지 안에서 돌아갑니다.</p>
-<p>책 전체를 통틀어 "와!" 소리가 처음 나오는 장이기도 합니다. 지금까지는 설치하고 가입하고 설정하는, 솔직히 조금 지루한 준비의 연속이었죠. 오늘부터는 만듭니다. 그리고 이 책의 방식대로, 코드는 Claude Code가 짜고 우리는 <strong>시키고, 읽고, 확인</strong>합니다. 복사-붙여넣기가 없습니다. 대신 "왜 이렇게 짰는지"를 함께 뜯어봅니다. 이번 장의 코드는 몇 줄 안 되지만, 그 몇 줄에 웹 개발의 굵직한 개념이 셋이나 들어 있습니다. 외부 스크립트 로드, 비동기 대기, 그리고 좌표계. 천천히 갑시다.</p>
+<p>드디어 이 순간입니다. 7장에서 열쇠(JavaScript 키)를 발급받았고, 8장에서 집터(Vite 프로젝트)를 닦고 열쇠를 <code>.env</code>에 숨겨 두었습니다. 이번 장이 끝나면 브라우저 화면 가득 진짜 카카오지도가 뜹니다. 마우스로 끌면 서울에서 부산까지 움직이고, 휠을 굴리면 골목길까지 확대되는, 카카오맵 앱에서 보던 그 지도가 여러분의 웹페이지 안에서 돌아갑니다.</p>
+<p>책 전체를 통틀어 "와!" 소리가 처음 나오는 장이기도 합니다. 지금까지는 설치하고 가입하고 설정하는, 솔직히 조금 지루한 준비의 연속이었죠. 오늘부터는 만듭니다. 그리고 이 책의 방식대로, 코드는 Claude Code가 짜고 우리는 시키고, 읽고, 확인합니다. 복사-붙여넣기가 없습니다. 대신 "왜 이렇게 짰는지"를 함께 뜯어봅니다. 이번 장의 코드는 몇 줄 안 되지만, 그 몇 줄에 웹 개발의 굵직한 개념이 셋이나 들어 있습니다. 외부 스크립트 로드, 비동기 대기, 그리고 좌표계. 천천히 갑시다.</p>
 <h2 id="91-sdk">9.1 SDK — 카카오가 미리 만들어 둔 지도 부품 상자<a class="headerlink" href="#91-sdk" title="Permanent link">&para;</a></h2>
 <p>지도를 밑바닥부터 만든다고 상상해 보세요. 전 세계 도로 데이터를 구하고, 확대 단계마다 타일 이미지를 준비하고, 마우스 드래그를 계산하고... 대기업 팀이 몇 년을 매달리는 일입니다. 다행히 우리는 그럴 필요가 없습니다. 카카오가 그 모든 것을 <strong>SDK</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>라는 이름의 자바스크립트 파일 하나에 담아 두었기 때문입니다.</p>
-<p>카카오지도 JavaScript SDK는 한마디로 <strong>지도 부품 상자</strong>입니다. 이 파일을 우리 페이지에 불러오기만 하면, <code>kakao.maps</code>라는 이름 아래 지도 만들기(<code>Map</code>), 좌표 다루기(<code>LatLng</code>), 마커 찍기(<code>Marker</code>) 같은 완제품 부품이 우르르 쏟아집니다. 우리가 할 일은 부품을 조립하는 것뿐입니다.</p>
+<p>카카오지도 JavaScript SDK는 한마디로 지도 부품 상자입니다. 이 파일을 우리 페이지에 불러오기만 하면, <code>kakao.maps</code>라는 이름 아래 지도 만들기(<code>Map</code>), 좌표 다루기(<code>LatLng</code>), 마커 찍기(<code>Marker</code>) 같은 완제품 부품이 우르르 쏟아집니다. 우리가 할 일은 부품을 조립하는 것뿐입니다.</p>
 <p>그럼 이 파일을 어떻게 불러올까요? 웹페이지가 외부 자바스크립트를 불러오는 표준 방법은 HTML의 <code>script</code> 태그입니다. 카카오 공식 문서에도 처음에는 이런 방법이 나옵니다.</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cm">&lt;!-- 방법 1: index.html에 직접 적기 (우리는 이 방법을 안 씁니다) --&gt;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://dapi.kakao.com/v2/maps/sdk.js?appkey=0123abcd4567efgh8901ijkl2345mnop"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </span></code></pre></div>
-<p>주소 뒤에 <code>?appkey=...</code>가 붙어 있죠. 7장에서 배운 대로, 카카오 서버는 요청마다 열쇠를 확인합니다. <code>script</code> 태그로 SDK를 요청할 때 열쇠를 함께 내미는 방법이 바로 이 <strong>주소 뒤에 붙이는 물음표 뒷부분</strong>(쿼리 문자열이라고 부릅니다)입니다.</p>
-<p>간단해 보이는데, 왜 우리는 이 방법을 안 쓸까요? 위 코드를 다시 보세요. <strong>키가 HTML에 그대로 박혀 있습니다.</strong> 8장에서 우리는 키를 <code>.env</code> 파일에 숨기고, <code>.gitignore</code>로 GitHub에 올라가지 않게 막았습니다. 그런데 HTML에 키를 직접 적는 순간 그 노력이 물거품이 됩니다. <code>index.html</code>은 GitHub에 올라가는 파일이니까요.</p>
-<p>"그럼 HTML에서도 <code>.env</code>를 읽으면 되잖아?" 좋은 생각이지만, 안타깝게도 순수한 HTML은 변수를 읽지 못합니다. <code>import.meta.env.VITE_KAKAO_JS_KEY</code>라는 마법은 <strong>자바스크립트 안에서만</strong> 통합니다.</p>
-<p>그래서 방법 2, <strong>동적 로드</strong>가 등장합니다. HTML에 <code>script</code> 태그를 미리 적어 두는 대신, 자바스크립트 코드가 실행되는 시점에 <code>script</code> 태그를 <strong>코드로 만들어서</strong> 페이지에 꽂아 넣는 방식입니다. 자바스크립트 안에서라면 <code>.env</code>의 키를 읽어 주소에 끼워 넣을 수 있죠. 정리하면 이렇습니다.</p>
+<p>주소 뒤에 <code>?appkey=...</code>가 붙어 있죠. 7장에서 배운 대로, 카카오 서버는 요청마다 열쇠를 확인합니다. <code>script</code> 태그로 SDK를 요청할 때 열쇠를 함께 내미는 방법이 바로 이 주소 뒤에 붙이는 물음표 뒷부분(쿼리 문자열이라고 부릅니다)입니다.</p>
+<p>간단해 보이는데, 왜 우리는 이 방법을 안 쓸까요? 위 코드를 다시 보세요. 키가 HTML에 그대로 박혀 있습니다. 8장에서 우리는 키를 <code>.env</code> 파일에 숨기고, <code>.gitignore</code>로 GitHub에 올라가지 않게 막았습니다. 그런데 HTML에 키를 직접 적는 순간 그 노력이 물거품이 됩니다. <code>index.html</code>은 GitHub에 올라가는 파일이니까요.</p>
+<p>"그럼 HTML에서도 <code>.env</code>를 읽으면 되잖아?" 좋은 생각이지만, 안타깝게도 순수한 HTML은 변수를 읽지 못합니다. <code>import.meta.env.VITE_KAKAO_JS_KEY</code>라는 마법은 자바스크립트 안에서만 통합니다.</p>
+<p>그래서 방법 2, <strong>동적 로드</strong>가 등장합니다. HTML에 <code>script</code> 태그를 미리 적어 두는 대신, 자바스크립트 코드가 실행되는 시점에 <code>script</code> 태그를 코드로 만들어서 페이지에 꽂아 넣는 방식입니다. 자바스크립트 안에서라면 <code>.env</code>의 키를 읽어 주소에 끼워 넣을 수 있죠. 정리하면 이렇습니다.</p>
 <table>
 <thead>
 <tr>
@@ -1767,16 +1767,16 @@
 <p>"동적(dynamic)"이라는 말이 나오면 "실행 중에, 그때그때"로 바꿔 읽으세요. 동적 로드는 "페이지가 실행되는 도중에 그때그때 스크립트를 불러온다"는 뜻입니다. 반대말 "정적(static)"은 "미리 정해져 있다"입니다.</p>
 </div>
 <h2 id="92-autoloadfalse">9.2 autoload=false — 택배 도착과 조립 완료는 다르다<a class="headerlink" href="#92-autoloadfalse" title="Permanent link">&para;</a></h2>
-<p>동적 로드에는 함정이 하나 숨어 있습니다. SDK 파일 다운로드가 끝났다고 해서 <strong>지도를 만들 준비까지 끝난 것은 아니라는</strong> 점입니다.</p>
-<p>택배로 조립식 책장을 주문했다고 해 봅시다. 택배 상자가 현관에 도착했습니다(파일 다운로드 완료). 그 순간 바로 책을 꽂을 수 있나요? 아니죠. 상자를 뜯고 부품을 조립하는 시간이 따로 필요합니다. 카카오 SDK도 같습니다. 파일이 도착한 뒤 내부적으로 지도 모듈을 준비하는 <strong>초기화</strong> 작업이 한 박자 더 있습니다. 이 준비가 끝나기 전에 <code>new kakao.maps.Map(...)</code>으로 지도를 만들려 들면, "그런 건 아직 없는데요?"라는 에러가 납니다. 얄궂게도 이 에러는 <strong>날 때도 있고 안 날 때도 있습니다.</strong> 네트워크가 빠른 날엔 잘 되다가, 느린 날엔 갑자기 죽는 식이죠. 이런 "타이밍 운"에 기대는 코드가 가장 잡기 어려운 버그를 만듭니다.</p>
-<p>카카오는 이 문제를 위한 공식 장치를 준비해 두었습니다. SDK 주소 뒤에 <strong><code>autoload=false</code></strong> 라는 옵션을 붙이는 것입니다. "파일이 도착해도 <strong>자동으로 조립하지 말고</strong> 기다려"라는 뜻입니다. 그 대신 우리가 원하는 시점에 <code>kakao.maps.load(콜백)</code>을 부르면, SDK가 조립을 시작하고 <strong>조립이 완전히 끝난 순간</strong> 우리가 넘긴 콜백 함수<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>를 실행해 줍니다. 순서를 그림으로 그리면 이렇습니다.</p>
+<p>동적 로드에는 함정이 하나 숨어 있습니다. SDK 파일 다운로드가 끝났다고 해서 지도를 만들 준비까지 끝난 것은 아니라는 점입니다.</p>
+<p>택배로 조립식 책장을 주문했다고 해 봅시다. 택배 상자가 현관에 도착했습니다(파일 다운로드 완료). 그 순간 바로 책을 꽂을 수 있나요? 아니죠. 상자를 뜯고 부품을 조립하는 시간이 따로 필요합니다. 카카오 SDK도 같습니다. 파일이 도착한 뒤 내부적으로 지도 모듈을 준비하는 초기화 작업이 한 박자 더 있습니다. 이 준비가 끝나기 전에 <code>new kakao.maps.Map(...)</code>으로 지도를 만들려 들면, "그런 건 아직 없는데요?"라는 에러가 납니다. 얄궂게도 이 에러는 날 때도 있고 안 날 때도 있습니다. 네트워크가 빠른 날엔 잘 되다가, 느린 날엔 갑자기 죽는 식이죠. 이런 "타이밍 운"에 기대는 코드가 가장 잡기 어려운 버그를 만듭니다.</p>
+<p>카카오는 이 문제를 위한 공식 장치를 준비해 두었습니다. SDK 주소 뒤에 <code>autoload=false</code> 라는 옵션을 붙이는 것입니다. "파일이 도착해도 자동으로 조립하지 말고 기다려"라는 뜻입니다. 그 대신 우리가 원하는 시점에 <code>kakao.maps.load(콜백)</code>을 부르면, SDK가 조립을 시작하고 조립이 완전히 끝난 순간 우리가 넘긴 콜백 함수<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>를 실행해 줍니다. 순서를 그림으로 그리면 이렇습니다.</p>
 <figure>
 <p><img alt="autoload=false일 때 SDK가 준비되는 순서" src="../images/ch09/ch09-f02.png" width="760" /></p>
 <figcaption>
 <p>그림 9.2 — autoload=false일 때 SDK가 준비되는 순서</p>
 </figcaption>
 </figure>
-<p>정리하면 우리의 로드 전략은 세 문장입니다. <strong>자바스크립트로 <code>script</code> 태그를 만들어 꽂는다. 주소에는 <code>.env</code>에서 읽은 키와 <code>autoload=false</code>를 붙인다. 그리고 <code>kakao.maps.load()</code>의 콜백 안에서만 지도를 만든다.</strong> 이 전략을 코드로 옮길 시간입니다. 물론, 우리 손으로 치는 게 아니라요.</p>
+<p>정리하면 우리의 로드 전략은 세 문장입니다. 자바스크립트로 <code>script</code> 태그를 만들어 꽂는다. 주소에는 <code>.env</code>에서 읽은 키와 <code>autoload=false</code>를 붙인다. 그리고 <code>kakao.maps.load()</code>의 콜백 안에서만 지도를 만든다. 이제 이 전략을 코드로 옮깁니다. 물론, 우리 손으로 치는 게 아니라요.</p>
 <h2 id="93-claude-code">9.3 Claude Code에게 로더를 시키자<a class="headerlink" href="#93-claude-code" title="Permanent link">&para;</a></h2>
 <p>Claude Code를 열고(프로젝트 폴더에서 <code>claude</code>를 실행하는 것, 이제 익숙하시죠) 이렇게 시켜 봅시다. 4장에서 배운 프롬프트 4요소 — 맥락·목표·제약·출력 — 을 담았습니다.</p>
 <div class="admonition tip">
@@ -1806,23 +1806,23 @@
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>열여덟 줄. 짧지만 알찬 코드입니다. 위에서부터 함께 읽어 봅시다.</p>
-<p><strong><code>export function loadKakaoSdk()</code></strong> — 이 파일이 바깥 세상에 내놓는 함수는 딱 하나입니다. <code>export</code>를 붙였으니 다른 파일에서 <code>import</code>해서 쓸 수 있습니다. 이렇게 "SDK 불러오기"라는 한 가지 일만 하는 파일로 분리해 두면, 나중에 지도 코드가 아무리 커져도 로드 문제는 이 파일 하나만 보면 됩니다.</p>
-<p><strong><code>return new Promise((resolve, reject) =&gt; {...})</code></strong> — Promise는 "지금은 안 끝났지만 <strong>언젠가 끝나면 알려줄게</strong>"라는 약속 증서입니다. SDK 다운로드는 네트워크를 타는 일이라 몇 밀리초가 걸릴지 아무도 모릅니다. 그래서 함수가 결과 대신 약속을 반환하고, 일이 잘 끝나면 <code>resolve</code>(약속 이행), 잘못되면 <code>reject</code>(약속 파기)를 부릅니다. 이 약속을 받는 쪽에서는 <code>await loadKakaoSdk()</code>라고 쓰면 "약속이 이행될 때까지 여기서 기다렸다가 다음 줄로 간다"가 됩니다. 다음 절에서 실제로 그렇게 씁니다.</p>
-<p><strong><code>const key = import.meta.env.VITE_KAKAO_JS_KEY;</code></strong> — 8장의 주인공이 재등장했습니다. Vite가 <code>.env</code> 파일에서 읽어 둔 키를 꺼내는 코드입니다. 바로 아래 <code>if (!key)</code>는 방어 코드입니다. 키가 비어 있으면 어차피 지도는 안 뜰 텐데, 그때 카카오 서버의 불친절한 에러를 보는 대신 <strong>"VITE_KAKAO_JS_KEY가 .env에 없습니다"라는 한국어 문장</strong>을 보게 됩니다. 미래의 나를 위한 친절이죠. 좋은 코드는 실패할 때 더 빛납니다.</p>
-<p><strong><code>document.createElement('script')</code> ~ <code>document.head.appendChild(script)</code></strong> — 9.1절에서 예고한 동적 로드의 실체입니다. <code>script</code> 태그를 코드로 만들고, <code>src</code> 주소에 키를 끼워 넣고, 마지막 줄에서 페이지의 <code>&lt;head&gt;</code>에 꽂습니다. 꽂히는 순간 브라우저가 다운로드를 시작합니다.</p>
-<p><strong><code>&amp;autoload=false</code></strong> — 9.2절에서 배운 "자동 조립 금지" 옵션입니다. 지금 주소에 붙은 옵션은 키와 이것 둘뿐이지만, 앞서 예고한 대로 이 주소는 앞으로 두 번 더 자랍니다. 장소 검색을 만드는 15장에서 <code>services</code>, 마커를 묶는 22장에서 <code>clusterer</code>라는 부록 라이브러리를 <code>&amp;libraries=</code> 옵션으로 하나씩 이어 붙여 최종형이 됩니다. 필요한 시점에 필요한 부품만 청구서에 올리는 셈이죠. 지금은 "부록은 나중에 추가한다"로만 기억해 두세요.</p>
-<p><strong><code>script.onload = () =&gt; kakao.maps.load(() =&gt; resolve(kakao));</code></strong> — 이 코드의 심장입니다. 괄호가 겹쳐 있어 어지럽다면 시간 순서로 풀어 읽으세요. ① 파일 다운로드가 끝나면(<code>onload</code>) → ② SDK 조립을 시작시키고(<code>kakao.maps.load</code>) → ③ 조립까지 끝나면 약속을 이행한다(<code>resolve</code>). 택배 도착과 조립 완료를 모두 기다린 뒤에야 약속이 이행되므로, 이 함수를 <code>await</code>한 다음 줄에서는 <strong>안심하고</strong> 지도를 만들 수 있습니다.</p>
-<p><strong><code>script.onerror = () =&gt; reject(...)</code></strong> — 다운로드 자체가 실패하면(인터넷 끊김, 잘못된 키 등) 약속을 파기하면서 "키/도메인 확인"이라는 힌트를 남깁니다. 이 힌트가 9.7절 트러블슈팅에서 활약합니다.</p>
+<p><code>export function loadKakaoSdk()</code> — 이 파일이 바깥 세상에 내놓는 함수는 딱 하나입니다. <code>export</code>를 붙였으니 다른 파일에서 <code>import</code>해서 쓸 수 있습니다. 이렇게 "SDK 불러오기"라는 한 가지 일만 하는 파일로 분리해 두면, 나중에 지도 코드가 아무리 커져도 로드 문제는 이 파일 하나만 보면 됩니다.</p>
+<p><code>return new Promise((resolve, reject) =&gt; {...})</code> — Promise는 "지금은 안 끝났지만 언젠가 끝나면 알려줄게"라는 약속 증서입니다. SDK 다운로드는 네트워크를 타는 일이라 몇 밀리초가 걸릴지 아무도 모릅니다. 그래서 함수가 결과 대신 약속을 반환하고, 일이 잘 끝나면 <code>resolve</code>(약속 이행), 잘못되면 <code>reject</code>(약속 파기)를 부릅니다. 이 약속을 받는 쪽에서는 <code>await loadKakaoSdk()</code>라고 쓰면 "약속이 이행될 때까지 여기서 기다렸다가 다음 줄로 간다"가 됩니다. 다음 절에서 실제로 그렇게 씁니다.</p>
+<p><code>const key = import.meta.env.VITE_KAKAO_JS_KEY;</code> — 8장의 주인공이 재등장했습니다. Vite가 <code>.env</code> 파일에서 읽어 둔 키를 꺼내는 코드입니다. 바로 아래 <code>if (!key)</code>는 방어 코드입니다. 키가 비어 있으면 어차피 지도는 안 뜰 텐데, 그때 카카오 서버의 불친절한 에러를 보는 대신 "VITE_KAKAO_JS_KEY가 .env에 없습니다"라는 한국어 문장을 보게 됩니다. 미래의 나를 위한 친절이죠. 좋은 코드는 실패할 때 더 빛납니다.</p>
+<p><code>document.createElement('script')</code> ~ <code>document.head.appendChild(script)</code> — 9.1절에서 예고한 동적 로드의 실체입니다. <code>script</code> 태그를 코드로 만들고, <code>src</code> 주소에 키를 끼워 넣고, 마지막 줄에서 페이지의 <code>&lt;head&gt;</code>에 꽂습니다. 꽂히는 순간 브라우저가 다운로드를 시작합니다.</p>
+<p><code>&amp;autoload=false</code> — 9.2절에서 배운 "자동 조립 금지" 옵션입니다. 지금 주소에 붙은 옵션은 키와 이것 둘뿐이지만, 앞서 예고한 대로 이 주소는 앞으로 두 번 더 자랍니다. 장소 검색을 만드는 15장에서 <code>services</code>, 마커를 묶는 22장에서 <code>clusterer</code>라는 부록 라이브러리를 <code>&amp;libraries=</code> 옵션으로 하나씩 이어 붙여 최종형이 됩니다. 필요한 시점에 필요한 부품만 청구서에 올립니다. 지금은 "부록은 나중에 추가한다"로만 기억해 두세요.</p>
+<p><code>script.onload = () =&gt; kakao.maps.load(() =&gt; resolve(kakao));</code> — 이 코드의 심장입니다. 괄호가 겹쳐 있어 어지럽다면 시간 순서로 풀어 읽으세요. ① 파일 다운로드가 끝나면(<code>onload</code>) → ② SDK 조립을 시작시키고(<code>kakao.maps.load</code>) → ③ 조립까지 끝나면 약속을 이행한다(<code>resolve</code>). 택배 도착과 조립 완료를 모두 기다린 뒤에야 약속이 이행되므로, 이 함수를 <code>await</code>한 다음 줄에서는 안심하고 지도를 만들 수 있습니다.</p>
+<p><code>script.onerror = () =&gt; reject(...)</code> — 다운로드 자체가 실패하면(인터넷 끊김, 잘못된 키 등) 약속을 파기하면서 "키/도메인 확인"이라는 힌트를 남깁니다. 이 힌트가 9.7절 트러블슈팅에서 활약합니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
-<p><code>onerror</code>는 만능 경보기가 아닙니다. <strong>파일 다운로드가 네트워크 수준에서 실패했을 때만</strong> 울립니다. 광고 차단 확장 프로그램이나 보안 정책(CSP)이 스크립트를 막거나, 어떤 이유로 <code>kakao.maps.load()</code>의 콜백이 끝내 호출되지 않으면, 에러 한 줄 없이 약속이 영원히 대기 상태로 남아 앱이 조용히 멈출 수 있습니다. 지도가 소식 없이 잠잠하면 콘솔과 함께 <strong>Network 탭에서 <code>dapi.kakao.com</code> 요청이 정말 성공했는지</strong> 확인하는 습관을 들이세요. (심화 과제 — "일정 시간 안에 로드가 안 끝나면 실패로 처리하는 타임아웃과, 두 번 호출해도 스크립트가 중복 삽입되지 않는 장치를 넣어줘"라고 Claude Code에게 시켜 보세요.)</p>
+<p><code>onerror</code>는 만능 경보기가 아닙니다. 파일 다운로드가 네트워크 수준에서 실패했을 때만 울립니다. 광고 차단 확장 프로그램이나 보안 정책(CSP)이 스크립트를 막거나, 어떤 이유로 <code>kakao.maps.load()</code>의 콜백이 끝내 호출되지 않으면, 에러 한 줄 없이 약속이 영원히 대기 상태로 남아 앱이 조용히 멈출 수 있습니다. 지도가 소식 없이 잠잠하면 콘솔과 함께 Network 탭에서 <code>dapi.kakao.com</code> 요청이 정말 성공했는지 확인하는 습관을 들이세요. (심화 과제 — "일정 시간 안에 로드가 안 끝나면 실패로 처리하는 타임아웃과, 두 번 호출해도 스크립트가 중복 삽입되지 않는 장치를 넣어줘"라고 Claude Code에게 시켜 보세요.)</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">💡 팁</p>
-<p>Claude Code가 만들어 준 코드가 책과 한 글자도 다르지 않을 필요는 없습니다. 변수 이름이 다르거나 에러 메시지 문구가 달라도, <strong>"Promise 반환, .env에서 키, autoload=false, load 콜백에서 resolve"</strong> 네 기둥이 서 있으면 같은 코드입니다. 다르게 나온 부분이 궁금하면 "왜 이렇게 짰어?"라고 바로 물어보세요. 자기가 짠 코드는 자기가 제일 잘 설명합니다.</p>
+<p>Claude Code가 만들어 준 코드가 책과 한 글자도 다르지 않을 필요는 없습니다. 변수 이름이 다르거나 에러 메시지 문구가 달라도, "Promise 반환, .env에서 키, autoload=false, load 콜백에서 resolve" 네 기둥이 서 있으면 같은 코드입니다. 다르게 나온 부분이 궁금하면 "왜 이렇게 짰어?"라고 바로 물어보세요. 자기가 짠 코드는 자기가 제일 잘 설명합니다.</p>
 </div>
 <h2 id="94-indexhtml-map">9.4 지도가 들어갈 자리 — index.html의 #map<a class="headerlink" href="#94-indexhtml-map" title="Permanent link">&para;</a></h2>
-<p>부품 상자는 준비됐고, 이제 지도를 <strong>어디에</strong> 그릴지 정할 차례입니다. 카카오 SDK는 "이 상자 안에 지도를 그려줘"라고 HTML 요소 하나를 지정받아야 합니다. 관례적으로 <code>id="map"</code>을 붙인 <code>div</code>를 씁니다. 이 장 시점의 <code>index.html</code>은 이렇게 단순합니다.</p>
+<p>부품 상자는 준비됐고, 이제 지도를 어디에 그릴지 정합니다. 카카오 SDK는 "이 상자 안에 지도를 그려줘"라고 HTML 요소 하나를 지정받아야 합니다. 관례적으로 <code>id="map"</code>을 붙인 <code>div</code>를 씁니다. 이 장 시점의 <code>index.html</code>은 이렇게 단순합니다.</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"ko"</span><span class="p">&gt;</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -1839,13 +1839,13 @@
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
 <p><code>&lt;div id="map"&gt;&lt;/div&gt;</code> — 이 빈 상자가 지도의 캔버스입니다. 지금은 텅 비어 있지만, 잠시 후 자바스크립트가 이 안을 지도 타일로 가득 채웁니다. (앞으로 장이 진행되면서 이 HTML에는 사이드바, 검색창, 상세 패널이 하나씩 늘어납니다. 뼈대는 오늘 세우는 이 구조 그대로입니다.)</p>
-<p>여기서 <strong>초보자의 90%가 걸려 넘어지는 함정</strong>을 미리 밟고 지나갑시다. 빈 <code>div</code>의 높이는 <strong>0</strong>입니다. HTML의 <code>div</code>는 내용물만큼만 키가 크는데, 내용이 없으니 키도 없는 거죠. 높이가 0인 상자에 지도를 그리면? 지도는 정상적으로 만들어지지만 <strong>보이지 않습니다.</strong> 에러도 안 납니다. 그냥 하얀 화면만 나옵니다. 그래서 CSS로 상자의 크기를 명시해 줘야 합니다. <code>src/style.css</code>에 들어갈 핵심 규칙입니다.</p>
+<p>여기서 초보자의 90%가 걸려 넘어지는 함정을 미리 밟고 지나갑시다. 빈 <code>div</code>의 높이는 0입니다. HTML의 <code>div</code>는 내용물만큼만 키가 크는데, 내용이 없으니 키도 없는 거죠. 높이가 0인 상자에 지도를 그리면? 지도는 정상적으로 만들어지는데 화면에 나타나지 않습니다. 에러도 안 납니다. 그냥 하얀 화면만 나옵니다. 그래서 CSS로 상자의 크기를 명시해 줘야 합니다. <code>src/style.css</code>에 들어갈 핵심 규칙입니다.</p>
 <div class="language-css highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">html</span><span class="o">,</span><span class="w"> </span><span class="nt">body</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">app</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">map</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>"화면 전체 높이를 <code>html</code>부터 <code>#map</code>까지 릴레이로 물려준다"는 뜻입니다. <code>#map</code>에만 <code>height: 100%</code>를 주면 안 되냐고요? 안 됩니다. CSS의 <code>100%</code>는 "<strong>부모의</strong> 100%"라서, 부모(<code>#app</code>), 그 부모(<code>body</code>), 그 부모(<code>html</code>)까지 전원이 100%여야 비로소 화면 전체가 됩니다. 한 명이라도 빠지면 릴레이가 끊겨 다시 높이 0이 됩니다. 이 함정은 9.7절에서 다시 만납니다.</p>
+<p>"화면 전체 높이를 <code>html</code>부터 <code>#map</code>까지 릴레이로 물려준다"는 뜻입니다. <code>#map</code>에만 <code>height: 100%</code>를 주면 안 되냐고요? 안 됩니다. CSS의 <code>100%</code>는 "부모의 100%"라서, 부모(<code>#app</code>), 그 부모(<code>body</code>), 그 부모(<code>html</code>)까지 전원이 100%여야 비로소 화면 전체가 됩니다. 한 명이라도 빠지면 릴레이가 끊겨 다시 높이 0이 됩니다. 이 함정은 9.7절에서 다시 만납니다.</p>
 <h2 id="95-3-center-level">9.5 지도 생성 3요소 — 컨테이너, center, level<a class="headerlink" href="#95-3-center-level" title="Permanent link">&para;</a></h2>
 <p>이제 마지막 조각, 지도를 실제로 만드는 코드입니다. Claude Code에게 이어서 시킵니다.</p>
 <div class="admonition tip">
@@ -1879,11 +1879,11 @@
 </span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
 </span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="nx">main</span><span class="p">();</span>
 </span></code></pre></div>
-<p><strong><code>async function main()</code> / <code>await loadKakaoSdk()</code></strong> — 9.3절에서 예고한 약속 받기입니다. <code>await</code>는 async 함수 안에서만 쓸 수 있어서 <code>main</code>에 <code>async</code>가 붙었습니다. 이 한 줄이 "SDK 조립 완료까지 대기"를 의미하므로, 그 아래에서는 <code>kakao.maps</code>를 마음껏 써도 됩니다.</p>
-<p><strong><code>try { ... } catch (e) { ... }</code></strong> — 약속이 파기되면(<code>reject</code>) <code>catch</code>로 떨어집니다. 우리는 에러를 조용히 삼키는 대신, 지도 자리에 "지도를 불러오지 못했습니다"와 실패 이유를 띄웁니다. 사용자는 무슨 일이 났는지 알 수 있고, 개발자인 우리는 <code>e.message</code>에 담긴 힌트(키 없음? 로드 실패?)로 원인을 좁힐 수 있습니다.</p>
-<p>그리고 핵심, <strong><code>new kakao.maps.Map(컨테이너, 옵션)</code></strong>. 지도 한 장을 만드는 데 필요한 재료는 딱 셋입니다.</p>
-<p>첫째, <strong>컨테이너</strong>. 지도를 그릴 HTML 요소입니다. <code>document.getElementById('map')</code>으로 9.4절에서 만든 빈 상자를 집어 건넵니다.</p>
-<p>둘째, <strong>center</strong>. 지도가 처음 열릴 때 화면 한가운데 올 지점입니다. 좌표는 <code>kakao.maps.LatLng(위도, 경도)</code>로 만듭니다. LatLng는 위도(<strong>Lat</strong>itude)와 경도(<strong>L</strong>o<strong>ng</strong>itude)를 합친 이름인데, 지구 위의 한 점을 숫자 두 개로 찍는 전 세계 공통 주소 체계입니다. <strong>위도</strong>는 적도를 0으로 남북 방향 위치를(북쪽으로 갈수록 커짐), <strong>경도</strong>는 영국 그리니치를 0으로 동서 방향 위치를 나타냅니다. 서울시청은 위도 37.5665, 경도 126.978. 대한민국 땅이라면 위도는 대략 33~38, 경도는 124~132 사이입니다. 여러분 동네 좌표를 얻는 방법은 12장에서 배우니, 오늘은 서울시청에서 출발합시다.</p>
+<p><code>async function main()</code> / <code>await loadKakaoSdk()</code> — 9.3절에서 예고한 약속 받기입니다. <code>await</code>는 async 함수 안에서만 쓸 수 있어서 <code>main</code>에 <code>async</code>가 붙었습니다. 이 한 줄이 "SDK 조립 완료까지 대기"를 의미하므로, 그 아래에서는 <code>kakao.maps</code>를 마음껏 써도 됩니다.</p>
+<p><code>try { ... } catch (e) { ... }</code> — 약속이 파기되면(<code>reject</code>) <code>catch</code>로 떨어집니다. 우리는 에러를 조용히 삼키는 대신, 지도 자리에 "지도를 불러오지 못했습니다"와 실패 이유를 띄웁니다. 사용자는 무슨 일이 났는지 알 수 있고, 개발자인 우리는 <code>e.message</code>에 담긴 힌트(키 없음? 로드 실패?)로 원인을 좁힐 수 있습니다.</p>
+<p>그리고 핵심, <code>new kakao.maps.Map(컨테이너, 옵션)</code>. 지도 한 장을 만드는 데 필요한 재료는 딱 셋입니다.</p>
+<p>첫째, 컨테이너. 지도를 그릴 HTML 요소입니다. <code>document.getElementById('map')</code>으로 9.4절에서 만든 빈 상자를 집어 건넵니다.</p>
+<p>둘째, center. 지도가 처음 열릴 때 화면 한가운데 올 지점입니다. 좌표는 <code>kakao.maps.LatLng(위도, 경도)</code>로 만듭니다. LatLng는 위도(Latitude)와 경도(Longitude)를 합친 이름인데, 지구 위의 한 점을 숫자 두 개로 찍는 전 세계 공통 주소 체계입니다. 위도는 적도를 0으로 남북 방향 위치를(북쪽으로 갈수록 커짐), 경도는 영국 그리니치를 0으로 동서 방향 위치를 나타냅니다. 서울시청은 위도 37.5665, 경도 126.978. 대한민국 땅이라면 위도는 대략 33~38, 경도는 124~132 사이입니다. 여러분 동네 좌표를 얻는 방법은 12장에서 배우니, 오늘은 서울시청에서 출발합시다.</p>
 <figure>
 <p><img alt="위도와 경도: 숫자 두 개로 지구 위 한 점 찍기" src="../images/ch09/ch09-f03.png" width="760" /></p>
 <figcaption>
@@ -1892,9 +1892,9 @@
 </figure>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
-<p><code>LatLng</code>는 이름 그대로 <strong>위도가 먼저, 경도가 나중</strong>입니다. 순서를 바꿔 <code>LatLng(126.978, 37.5665)</code>라고 쓰면 에러 없이 지도가 뜨는데, 중심이 서울이 아니라 엉뚱한 바다 한가운데입니다. 지도가 떴는데 온통 파란색이라면 십중팔구 위경도가 뒤집힌 겁니다.</p>
+<p><code>LatLng</code>는 이름 그대로 위도가 먼저, 경도가 나중입니다. 순서를 바꿔 <code>LatLng(126.978, 37.5665)</code>라고 쓰면 에러 없이 지도가 뜨는데, 중심이 서울이 아니라 엉뚱한 바다 한가운데입니다. 지도가 떴는데 온통 파란색이라면 십중팔구 위경도가 뒤집힌 겁니다.</p>
 </div>
-<p>셋째, <strong>level</strong>. 확대 단계입니다. 숫자가 <strong>작을수록 확대</strong>(1이면 건물 하나가 큼직하게), <strong>클수록 축소</strong>(14면 한반도 전체)입니다. "레벨이 높은데 왜 더 멀리 보이지?"라고 헷갈리기 쉬운데, "레벨 = 헬리콥터의 고도"라고 기억하면 편합니다. 높이 올라갈수록 넓게, 대신 작게 보이니까요. 레벨 7은 도시의 여러 동네가 한눈에 들어오는 적당한 높이입니다. 레벨 감각은 다음 장에서 손으로 바꿔 보며 익힙니다.</p>
+<p>셋째, level. 확대 단계입니다. 숫자가 작을수록 확대(1이면 건물 하나가 큼직하게), 클수록 축소(14면 한반도 전체)입니다. "레벨이 높은데 왜 더 멀리 보이지?"라고 헷갈리기 쉬운데, "레벨 = 헬리콥터의 고도"라고 기억하면 편합니다. 높이 올라갈수록 넓게, 대신 작게 보이니까요. 레벨 7은 도시의 여러 동네가 한눈에 들어오는 적당한 높이입니다. 레벨 감각은 다음 장에서 손으로 바꿔 보며 익힙니다.</p>
 <h2 id="96">9.6 실행 — 첫 지도와의 만남<a class="headerlink" href="#96" title="Permanent link">&para;</a></h2>
 <p>모든 조각이 맞춰졌습니다. 터미널에서 개발 서버를 켭니다. (8장에서 켜 둔 채였다면 저장만 해도 Vite가 알아서 새로고침해 줍니다.)</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>npm run dev
@@ -1906,13 +1906,13 @@
 <p>그림 9.4 — 첫 지도! 서울시청을 중심으로 화면 가득 뜬 카카오지도</p>
 </figcaption>
 </figure>
-<p>축하합니다! 여러분의 웹페이지에 지도가 떴습니다. 잠깐 놀다 가세요. 마우스로 끌어서 고향 동네까지 가 보고, 휠로 확대해서 자주 가는 골목도 찾아보세요. 이 지도는 이미지 한 장이 아니라 <strong>살아 있는 지도</strong>입니다. 움직일 때마다 SDK가 필요한 지도 타일을 카카오 서버에서 실시간으로 받아와 이어 붙이고 있는 겁니다. 그 모든 통신에 여러분의 JavaScript 키가 신분증으로 쓰이고 있고요. 7장, 8장, 9장의 조각이 지금 이 화면 한 장에서 전부 맞물려 돌아가고 있습니다.</p>
-<p>놀다 오셨으면, 개발자에게 더 중요한 화면을 하나 확인합시다. <code>F12</code>(또는 <code>Ctrl+Shift+I</code>)로 브라우저 <strong>개발자 도구</strong>를 열고 <strong>Console</strong> 탭을 보세요. 빨간 에러 없이 조용하다면 완벽한 성공입니다. 콘솔은 앞으로 우리의 계기판입니다. 지도가 잘 떠도 콘솔을 한 번 들여다보는 습관을 들이면, 문제를 사용자보다 먼저 발견하는 개발자가 됩니다.</p>
+<p>축하합니다! 여러분의 웹페이지에 지도가 떴습니다. 잠깐 놀다 가세요. 마우스로 끌어서 고향 동네까지 가 보고, 휠로 확대해서 자주 가는 골목도 찾아보세요. 이 지도는 이미지 한 장이 아니라 살아 있는 지도입니다. 움직일 때마다 SDK가 필요한 지도 타일을 카카오 서버에서 실시간으로 받아와 이어 붙이고 있는 겁니다. 그 모든 통신에 여러분의 JavaScript 키가 신분증으로 쓰이고 있고요. 7장, 8장, 9장의 조각이 지금 이 화면 한 장에서 전부 맞물려 돌아가고 있습니다.</p>
+<p>놀다 오셨으면, 개발자에게 더 중요한 화면을 하나 확인합시다. <code>F12</code>(또는 <code>Ctrl+Shift+I</code>)로 브라우저 개발자 도구를 열고 Console 탭을 보세요. 빨간 에러 없이 조용하다면 완벽한 성공입니다. 콘솔은 앞으로 우리의 계기판입니다. 지도가 잘 떠도 콘솔을 한 번 들여다보는 습관을 들이면, 문제를 사용자보다 먼저 발견하는 개발자가 됩니다.</p>
 <h2 id="97">9.7 트러블슈팅 — 지도가 안 뜰 때 보는 처방전<a class="headerlink" href="#97" title="Permanent link">&para;</a></h2>
 <p>첫 지도는 유난히 사고가 잦습니다. 등장인물이 많기 때문이죠. 카카오 콘솔의 설정, <code>.env</code>의 키, CSS 높이, SDK 타이밍까지 넷 중 하나만 어긋나도 지도는 침묵합니다. 다행히 증상별로 범인이 거의 정해져 있습니다. 위에서부터 순서대로 확인하세요.</p>
-<p><strong>증상 1: 하얀(또는 텅 빈) 화면 — 에러도 없다.</strong> 범인은 십중팔구 <strong><code>#map</code>의 높이 0</strong>입니다(9.4절의 함정). 개발자 도구의 Elements 탭에서 <code>#map</code>을 클릭해 보세요. 요소는 있는데 크기가 <code>너비×0</code>으로 나오면 확정입니다. <code>html, body, #app, #map</code>에 <code>height: 100%</code> 릴레이가 끊긴 곳이 없는지 <code>style.css</code>를 점검하세요. 지도를 만든 <strong>뒤에</strong> 늦게 높이가 생긴 경우라면 새로고침 한 번으로도 해결됩니다.</p>
-<p><strong>증상 2: 401 (Unauthorized) — "너 누구야?"</strong> 콘솔이나 Network 탭에 <code>401</code>이 찍혔을 때 <strong>가장 흔한 원인</strong>은 카카오 서버가 <strong>열쇠 자체를 인정하지 않은 경우</strong>입니다. 점검 순서는 이렇습니다. ① <code>.env</code>의 변수 이름이 정확히 <code>VITE_KAKAO_JS_KEY</code>인가(<code>VITE_</code> 접두사가 없으면 Vite가 아예 안 읽어 줍니다). ② 값이 <strong>JavaScript 키</strong>가 맞는가(REST API 키를 붙여 넣는 실수가 정말 많습니다. 7장의 플랫폼 키 화면에서 열을 다시 확인하세요). ③ 키 앞뒤에 따옴표나 공백이 붙지 않았는가. ④ 그리고 결정적으로 — <strong><code>.env</code>를 고쳤으면 개발 서버를 껐다 켰는가.</strong> Vite는 <code>.env</code>를 서버 시작 시점에 한 번만 읽습니다. 터미널에서 <code>Ctrl+C</code>로 끄고 <code>npm run dev</code>로 다시 켜세요.</p>
-<p><strong>증상 3: 403 (Forbidden) — "너는 알겠는데, 여기선 안 돼."</strong> 가장 흔한 원인은, 키는 진짜인데 <strong>요청이 출발한 주소가 등록되어 있지 않은 경우</strong>입니다. 7장에서 배운 도메인 제한이 작동한 것이죠. 참고로 "401=키, 403=도메인" 짝은 공식 분류표가 아니라 가장 흔한 원인을 가리키는 나침반이니, 어느 쪽이든 Network 탭에서 실패한 요청을 클릭해 실제 요청 URL과 응답을 눈으로 확인하고 시작하세요. 카카오 콘솔(developers.kakao.com) → 전체 앱 → 내 앱 → <strong>앱 &gt; 플랫폼 키 → JavaScript 키</strong>의 <strong>JavaScript SDK 도메인</strong>에 <code>http://localhost:5173</code>이 있는지 확인하세요. 있는데도 403이라면 오타를 의심하세요. 프로토콜(<code>http</code>/<code>https</code>)은 하나만 등록해도 양쪽에서 인정되지만 <strong>호스트와 포트는 정확히 일치</strong>해야 합니다. 포트가 <code>5173</code>이 아니거나(8장에서 배웠듯 5173이 사용 중이면 Vite가 5174로 옮겨 앉습니다 — 그러면 5174도 등록해야 합니다), 호스트 철자가 다르거나, 끝에 <code>/</code>가 더 붙은 경우가 단골입니다.</p>
+<p><strong>증상 1: 하얀(또는 텅 빈) 화면 — 에러도 없다.</strong> 범인은 십중팔구 <code>#map</code>의 높이 0입니다(9.4절의 함정). 개발자 도구의 Elements 탭에서 <code>#map</code>을 클릭해 보세요. 요소는 있는데 크기가 <code>너비×0</code>으로 나오면 확정입니다. <code>html, body, #app, #map</code>에 <code>height: 100%</code> 릴레이가 끊긴 곳이 없는지 <code>style.css</code>를 점검하세요. 지도를 만든 뒤에 늦게 높이가 생긴 경우라면 새로고침 한 번으로도 해결됩니다.</p>
+<p><strong>증상 2: 401 (Unauthorized) — "너 누구야?"</strong> 콘솔이나 Network 탭에 <code>401</code>이 찍혔을 때 가장 흔한 원인은 카카오 서버가 열쇠 자체를 인정하지 않은 경우입니다. 점검 순서는 이렇습니다. ① <code>.env</code>의 변수 이름이 정확히 <code>VITE_KAKAO_JS_KEY</code>인가(<code>VITE_</code> 접두사가 없으면 Vite가 아예 안 읽어 줍니다). ② 값이 JavaScript 키가 맞는가(REST API 키를 붙여 넣는 실수가 정말 많습니다. 7장의 플랫폼 키 화면에서 열을 다시 확인하세요). ③ 키 앞뒤에 따옴표나 공백이 붙지 않았는가. ④ 그리고 결정적으로 — <code>.env</code>를 고쳤으면 개발 서버를 껐다 켰는가. Vite는 <code>.env</code>를 서버 시작 시점에 한 번만 읽습니다. 터미널에서 <code>Ctrl+C</code>로 끄고 <code>npm run dev</code>로 다시 켜세요.</p>
+<p><strong>증상 3: 403 (Forbidden) — "너는 알겠는데, 여기선 안 돼."</strong> 가장 흔한 원인은, 키는 진짜인데 요청이 출발한 주소가 등록되어 있지 않은 경우입니다. 7장에서 배운 도메인 제한이 작동한 것이죠. 참고로 "401=키, 403=도메인" 짝은 공식 분류표가 아니라 가장 흔한 원인을 가리키는 나침반이니, 어느 쪽이든 Network 탭에서 실패한 요청을 클릭해 실제 요청 URL과 응답을 눈으로 확인하고 시작하세요. 카카오 콘솔(developers.kakao.com) → 전체 앱 → 내 앱 → 앱 &gt; 플랫폼 키 → JavaScript 키의 JavaScript SDK 도메인에 <code>http://localhost:5173</code>이 있는지 확인하세요. 있는데도 403이라면 오타를 의심하세요. 프로토콜(<code>http</code>/<code>https</code>)은 하나만 등록해도 양쪽에서 인정되지만 호스트와 포트는 정확히 일치해야 합니다. 포트가 <code>5173</code>이 아니거나(8장에서 배웠듯 5173이 사용 중이면 Vite가 5174로 옮겨 앉습니다 — 그러면 5174도 등록해야 합니다), 호스트 철자가 다르거나, 끝에 <code>/</code>가 더 붙은 경우가 단골입니다.</p>
 <figure>
 <p><img alt="도메인 미등록 시 콘솔에 찍히는 403 에러" src="../images/ch09/ch09-f05.png" width="760" /></p>
 <figcaption>
@@ -1925,19 +1925,19 @@
 <p>그림 9.6 — 카카오 콘솔의 JavaScript SDK 도메인 등록 재확인</p>
 </figcaption>
 </figure>
-<p><strong>증상 4: "지도를 불러오지 못했습니다: VITE_KAKAO_JS_KEY가 .env에 없습니다."</strong> 우리가 loader.js에 심어 둔 방어 코드가 작동한 겁니다. <code>.env</code> 파일이 프로젝트 <strong>최상위 폴더</strong>(package.json 옆)에 있는지, 파일 이름이 <code>.env.txt</code>처럼 되어 버리진 않았는지 확인하고, 역시 서버를 재시작하세요.</p>
+<p><strong>증상 4: "지도를 불러오지 못했습니다: VITE_KAKAO_JS_KEY가 .env에 없습니다."</strong> 우리가 loader.js에 심어 둔 방어 코드가 작동한 겁니다. <code>.env</code> 파일이 프로젝트 최상위 폴더(package.json 옆)에 있는지, 파일 이름이 <code>.env.txt</code>처럼 되어 버리진 않았는지 확인하고, 역시 서버를 재시작하세요.</p>
 <p><strong>증상 5: 회색 바탕만 있고 지도 타일이 안 나온다.</strong> 지도 객체는 만들어졌는데 타일을 못 받았거나, 숨겨진(크기 0) 상자에 그렸다가 나중에 상자가 커진 경우입니다. 먼저 Network 탭에서 빨간 실패 요청이 있으면 증상 2·3의 처방을 따르세요. 통신은 멀쩡한데 회색이라면 상자 크기가 나중에 바뀐 경우이니 새로고침을 해 보고, 그래도 반복되면 "지도 컨테이너 크기가 바뀐 뒤 relayout을 호출해야 한다"는 것이 원인입니다 — 사이드바를 접었다 펴는 23장에서 정식으로 다룹니다.</p>
-<p>그리고 이 모든 처방보다 강력한 만능 열쇠가 하나 있습니다. <strong>에러를 Claude Code에게 그대로 보여주는 것</strong>입니다.</p>
+<p>그리고 이 모든 처방보다 강력한 만능 열쇠가 하나 있습니다. 에러를 Claude Code에게 그대로 보여주는 것입니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">🗣 이렇게 시키세요</p>
 <blockquote>
 <p>지도가 안 떠. 브라우저 콘솔에 이런 에러가 나와: (콘솔의 빨간 에러 메시지를 그대로 복사해서 붙여넣기) 원인을 찾아서 고쳐줘. 카카오 콘솔 설정 문제라면 뭘 확인해야 하는지 알려줘.</p>
 </blockquote>
-<p>바이브코딩의 디버깅 제1원칙: <strong>에러 메시지를 요약하지 말고 통째로 붙여넣는다.</strong> "지도가 안 떠"보다 에러 원문 한 줄이 백 배 많은 정보를 담고 있습니다. 코드 문제라면 Claude Code가 직접 고치고, 콘솔 설정 문제라면 확인할 화면을 짚어 줍니다.</p>
+<p>바이브코딩의 디버깅 제1원칙: 에러 메시지를 요약하지 말고 통째로 붙여넣는다. "지도가 안 떠"보다 에러 원문 한 줄이 백 배 많은 정보를 담고 있습니다. 코드 문제라면 Claude Code가 직접 고치고, 콘솔 설정 문제라면 확인할 화면을 짚어 줍니다.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">⚠️ 주의</p>
-<p>401·403을 고치겠다고 이것저것 만지다가 <strong>키를 채팅창이나 커뮤니티에 통째로 붙여넣지 않도록</strong> 조심하세요. 에러 메시지에는 키가 들어 있지 않아 안전하지만, <code>.env</code> 내용이나 SDK 요청 URL 전체를 복사하면 키가 딸려 갑니다. 질문할 때는 키 부분을 <code>0123abcd...</code>처럼 가리는 습관을 들이세요.</p>
+<p>401·403을 고치겠다고 이것저것 만지다가 키를 채팅창이나 커뮤니티에 통째로 붙여넣지 않도록 조심하세요. 에러 메시지에는 키가 들어 있지 않아 안전하지만, <code>.env</code> 내용이나 SDK 요청 URL 전체를 복사하면 키가 딸려 갑니다. 질문할 때는 키 부분을 <code>0123abcd...</code>처럼 가리는 습관을 들이세요.</p>
 </div>
 <h2 id="98">9.8 마무리<a class="headerlink" href="#98" title="Permanent link">&para;</a></h2>
 <p>이번 장에서 우리는 책의 첫 번째 "만들기"를 해냈습니다. Claude Code에게 시켜 SDK를 동적으로 불러오는 <code>loader.js</code>를 만들었고, <code>autoload=false</code>와 <code>kakao.maps.load()</code>로 타이밍 문제를 원천 봉쇄했으며, 컨테이너·center·level 세 재료로 지도를 띄웠습니다. 그리고 지도가 안 뜨는 다섯 가지 상황의 처방전까지 챙겼습니다.</p>
@@ -1946,10 +1946,10 @@
 <p class="admonition-title">📌 핵심 요약</p>
 <ul>
 <li>SDK는 카카오가 만들어 둔 지도 부품 상자이며, <code>kakao.maps</code> 아래의 부품을 조립해 지도를 만듭니다.</li>
-<li>HTML에 <code>script</code> 태그를 직접 적으면 키가 노출되므로, 자바스크립트에서 <code>.env</code>의 키를 읽어 <code>script</code> 태그를 만들어 꽂는 <strong>동적 로드</strong>를 씁니다.</li>
+<li>HTML에 <code>script</code> 태그를 직접 적으면 키가 노출되므로, 자바스크립트에서 <code>.env</code>의 키를 읽어 <code>script</code> 태그를 만들어 꽂는 동적 로드를 씁니다.</li>
 <li>파일 다운로드 완료 ≠ 사용 준비 완료. <code>autoload=false</code>로 자동 초기화를 막고, <code>kakao.maps.load()</code> 콜백 안에서만 지도를 만듭니다.</li>
 <li><code>loader.js</code>는 이 과정을 Promise로 감싸, <code>await loadKakaoSdk()</code> 한 줄로 "준비 완료까지 대기"를 표현합니다.</li>
-<li>지도 생성 3요소: <strong>컨테이너</strong>(<code>#map</code> div — CSS 높이 필수!), <strong>center</strong>(<code>LatLng(위도, 경도)</code> — 위도가 먼저), <strong>level</strong>(작을수록 확대).</li>
+<li>지도 생성 3요소: 컨테이너(<code>#map</code> div — CSS 높이 필수!), center(<code>LatLng(위도, 경도)</code> — 위도가 먼저), level(작을수록 확대).</li>
 <li>트러블슈팅: 빈 화면 → <code>#map</code> 높이 0, 401 → 키 문제(<code>VITE_</code> 접두사, JS 키 확인, 서버 재시작), 403 → JavaScript 키의 SDK 도메인에 <code>http://localhost:5173</code> 미등록. (401·403 짝은 "가장 흔한 원인" 기준이니 Network 탭의 실패 요청도 함께 확인합니다.)</li>
 </ul>
 </div>
@@ -1980,7 +1980,7 @@
 </ul>
 </div>
 <blockquote>
-<p><strong>다음 장 예고</strong> — 지도가 떴으니 이제 지도를 <strong>길들일</strong> 차례입니다. 10장에서는 코드로 지도를 부리는 법을 배웁니다. 중심을 순간이동시키는 <code>setCenter</code>와 부드럽게 미끄러지는 <code>panTo</code>의 차이, 확대 레벨 조절, 지도 위에 확대/축소 버튼 붙이기, 그리고 지도를 클릭한 곳의 좌표를 알아내는 이벤트까지. 16장에서 "클릭해서 장소 추가"를 만들 때 쓸 밑재료를 미리 만져 봅니다.</p>
+<p><strong>다음 장 예고</strong> — 지도가 떴으니 이제 지도를 길들일 차례입니다. 10장에서는 코드로 지도를 부리는 법을 배웁니다. 중심을 순간이동시키는 <code>setCenter</code>와 부드럽게 미끄러지는 <code>panTo</code>의 차이, 확대 레벨 조절, 지도 위에 확대/축소 버튼 붙이기, 그리고 지도를 클릭한 곳의 좌표를 알아내는 이벤트까지. 16장에서 "클릭해서 장소 추가"를 만들 때 쓸 밑재료를 미리 만져 봅니다.</p>
 </blockquote>
 <div class="footnote">
 <hr />
