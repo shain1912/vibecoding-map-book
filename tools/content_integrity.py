@@ -31,6 +31,9 @@ def parts(md: str) -> dict:
             "caps": caps, "inline": inline, "prose_len": len(prose)}
 
 
+ALLOW_HEADING_TEXT = False
+
+
 def check(before: str, after: str) -> tuple[bool, list[str]]:
     b, a = parts(before), parts(after)
     errs: list[str] = []
@@ -38,7 +41,12 @@ def check(before: str, after: str) -> tuple[bool, list[str]]:
     if b["code"] != a["code"]:
         errs.append(f"코드 블록 변경됨 ({len(b['code'])} -> {len(a['code'])})")
     if b["heads"] != a["heads"]:
-        errs.append(f"헤딩 변경됨 ({len(b['heads'])} -> {len(a['heads'])})")
+        if len(b["heads"]) != len(a["heads"]):
+            errs.append(f"헤딩 개수 변경됨 ({len(b['heads'])} -> {len(a['heads'])})")
+        elif not ALLOW_HEADING_TEXT:
+            changed = [(x, y) for x, y in zip(b["heads"], a["heads"]) if x != y]
+            errs.append(f"헤딩 문구 변경됨 {len(changed)}곳 "
+                        f"(의도한 수정이면 --allow-heading-text): {changed[:2]}")
     if b["imgs"] != a["imgs"]:
         errs.append(f"그림 참조 변경됨 ({len(b['imgs'])} -> {len(a['imgs'])})")
     if b["links"] != a["links"]:
@@ -59,8 +67,11 @@ def check(before: str, after: str) -> tuple[bool, list[str]]:
 
 
 def main() -> None:
-    if sys.argv[1:2] == ["--git"]:
-        files = sys.argv[2:]
+    global ALLOW_HEADING_TEXT
+    argv = [x for x in sys.argv[1:] if x != "--allow-heading-text"]
+    ALLOW_HEADING_TEXT = "--allow-heading-text" in sys.argv
+    if argv[:1] == ["--git"]:
+        files = argv[1:]
         bad = 0
         for f in files:
             before = subprocess.run(["git", "show", f"HEAD:{f}"], capture_output=True, text=True,
@@ -73,8 +84,8 @@ def main() -> None:
             bad += 0 if ok else 1
         sys.exit(1 if bad else 0)
 
-    before = Path(sys.argv[1]).read_text(encoding="utf-8")
-    after = Path(sys.argv[2]).read_text(encoding="utf-8")
+    before = Path(argv[0]).read_text(encoding="utf-8")
+    after = Path(argv[1]).read_text(encoding="utf-8")
     ok, errs = check(before, after)
     print("OK" if ok else "BAD")
     for e in errs:

@@ -1,0 +1,128 @@
+{
+ "files": {
+  "ch00.md": {
+   "before": 55.1,
+   "after": 98.5
+  },
+  "ch01.md": {
+   "before": 38.0,
+   "after": 97.9
+  },
+  "ch02.md": {
+   "before": 68.8,
+   "after": 97.8
+  },
+  "ch03.md": {
+   "before": 48.8,
+   "after": 99.3
+  },
+  "ch04.md": {
+   "before": 91.6,
+   "after": 100.0
+  },
+  "ch05.md": {
+   "before": 43.2,
+   "after": 97.9
+  },
+  "ch06.md": {
+   "before": 42.5,
+   "after": 97.7
+  },
+  "ch07.md": {
+   "before": 60.5,
+   "after": 98.8
+  },
+  "ch08.md": {
+   "before": 57.1,
+   "after": 99.3
+  },
+  "ch09.md": {
+   "before": 49.9,
+   "after": 99.5
+  },
+  "ch10.md": {
+   "before": 67.3,
+   "after": 98.0
+  },
+  "ch11.md": {
+   "before": 42.4,
+   "after": 98.0
+  },
+  "ch12.md": {
+   "before": 46.0,
+   "after": 98.3
+  },
+  "ch13.md": {
+   "before": 76.5,
+   "after": 100.0
+  },
+  "ch14.md": {
+   "before": 46.7,
+   "after": 98.8
+  },
+  "ch15.md": {
+   "before": 63.0,
+   "after": 97.8
+  },
+  "ch16.md": {
+   "before": 54.4,
+   "after": 98.5
+  },
+  "ch17.md": {
+   "before": 36.3,
+   "after": 98.7
+  },
+  "ch18.md": {
+   "before": 66.8,
+   "after": 98.9
+  },
+  "ch19.md": {
+   "before": 48.0,
+   "after": 99.1
+  },
+  "ch20.md": {
+   "before": 72.2,
+   "after": 98.7
+  },
+  "ch21.md": {
+   "before": 11.7,
+   "after": 98.5
+  },
+  "ch22.md": {
+   "before": 64.0,
+   "after": 98.0
+  },
+  "ch23.md": {
+   "before": 47.8,
+   "after": 99.7
+  },
+  "ch24.md": {
+   "before": 45.0,
+   "after": 98.2
+  },
+  "ch25.md": {
+   "before": 52.1,
+   "after": 98.4
+  },
+  "ch26.md": {
+   "before": 36.5,
+   "after": 98.0
+  },
+  "ch27.md": {
+   "before": 70.2,
+   "after": 98.8
+  },
+  "ch28.md": {
+   "before": 83.6,
+   "after": 99.5
+  },
+  "index.md": {
+   "before": 87.8,
+   "after": 100.0
+  }
+ },
+ "overall": {
+  "before": 50.3,
+  "after": 98.7
+ }
+}
