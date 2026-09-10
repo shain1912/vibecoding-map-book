@@ -64,9 +64,9 @@ nav:
       - 1장 왜 바이브코딩인가: ch01.md
       - 2장 Node.js 설치: ch02.md
       - 3장 Git for Windows 설치: ch03.md
-      - 4장 Claude Code 설치하고 길들이기: ch04.md
+      - 4장 Claude Code 설치와 첫 사용: ch04.md
       - 5장 GitHub CLI로 깃허브 연결: ch05.md
-      - 6장 Orca로 에이전트 지휘하기: ch06.md
+      - 6장 Orca로 여러 에이전트 다루기: ch06.md
   - 2부 카카오 지도 첫걸음:
       - 7장 카카오 개발자 계정과 앱 만들기: ch07.md
       - 8장 Vite로 프로젝트 시작: ch08.md
@@ -90,7 +90,7 @@ nav:
   - 5부 세상에 공개하기:
       - 24장 GitHub에 올리기: ch24.md
       - 25장 GitHub Pages 배포: ch25.md
-      - 26장 README와 자랑하기: ch26.md
+      - 26장 README 작성과 공개: ch26.md
   - 부록:
       - 부록 A 프롬프트 템플릿 모음: ch27.md
       - 부록 B 트러블슈팅 & 치트시트: ch28.md
