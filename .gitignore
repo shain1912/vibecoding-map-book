@@ -11,8 +11,7 @@ _working_raw/
 review_edits.json
 review_scores.json
 
-# 원고 내보내기 산출물 (빌드로 다시 만든다)
-원고_전체.docx
+# 원고 내보내기 중간 산출물
 _docx_input.md
 
 # 최영림 교수님 원고(문체 기준용, 미출간 원고이므로 공개 저장소에 올리지 않는다)
