@@ -5,9 +5,12 @@ sys.path.insert(0, "tools")
 import tone_scan as T
 
 END = re.compile(r"([가-힣]{2,7})[.?!]$")
-LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else 3
+ARGS = sys.argv[1:]
+FILES = [a for a in ARGS if a.endswith(".md")]
+NUMS = [a for a in ARGS if a.isdigit()]
+LIMIT = int(NUMS[0]) if NUMS else 3
 total = 0
-for path in sorted(glob.glob("chapters/ch*.md")):
+for path in FILES or sorted(glob.glob("chapters/*.md")):
     for no, k, line in T.scan_file(path):
         if k != "산문":
             continue
