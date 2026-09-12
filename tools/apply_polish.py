@@ -179,6 +179,24 @@ def align(doc_texts: list[str], src_texts: list[str], floor: float = 0.42) -> di
             if bj is not None and best >= floor:
                 m[i] = bj
                 used.add(bj)
+
+    # 앞뒤가 모두 짝지어졌고 사이에 남은 문단이 한 개씩뿐이면 그 둘을 짝으로 본다.
+    # docx 는 예전 초고라 글자가 많이 달라 유사도만으로는 못 찾는 자리가 있다.
+    for i in range(len(a)):
+        if i in m:
+            continue
+        prev = next((k for k in range(i - 1, -1, -1) if k in m), None)
+        nxt = next((k for k in range(i + 1, len(a)) if k in m), None)
+        if prev is None or nxt is None or nxt - prev != 2:
+            continue
+        lo, hi = m[prev], m[nxt]
+        gap = [j for j in range(lo + 1, hi) if j not in used]
+        if len(gap) == 1:
+            j = gap[0]
+            r = len(b[j]) / max(len(a[i]), 1)
+            if 0.45 <= r <= 2.4:
+                m[i] = j
+                used.add(j)
     return m
 
 

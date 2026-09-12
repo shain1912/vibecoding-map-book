@@ -83,7 +83,7 @@ ATTACH_COUNT = r"""
   const t = document.body.innerText;
   const m = t.match(/and other (\d+) files/);
   if (m) return 1 + (+m[1]);
-  return (t.match(/\bch\d\d\.txt/g) || []).length;
+  return (t.match(/\b[\w-]+\.txt\b/g) || []).length;
 }
 """
 

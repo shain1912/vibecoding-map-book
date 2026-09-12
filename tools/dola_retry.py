@@ -20,7 +20,9 @@ OUT = ROOT / "prose" / "retry"
 
 
 def one(ch: str) -> int:
-    orig_p = ROOT / "chapters" / f"{ch}.md"
+    orig_p = ROOT / "윤문비교" / "원문" / f"{ch}.md"
+    if not orig_p.exists():
+        orig_p = ROOT / "chapters" / f"{ch}.md"
     cur_p = ROOT / "윤문비교" / ch / "D_Dola_보정.md"
     sent_p = ROOT / "윤문비교" / ch / "보낼산문.txt"
     if not (orig_p.exists() and cur_p.exists() and sent_p.exists()):
