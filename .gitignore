@@ -22,3 +22,6 @@ _docx_input.md
 prose/
 *.docx.bak
 *.docx.numbak
+*.docx.refbak
+*.docx.fnbak
+*.docx.twobak

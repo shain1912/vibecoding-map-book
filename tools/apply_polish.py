@@ -32,8 +32,26 @@ OFFSET = 4                      # 리포 ch00 -> 최종 04장
 CODE_FONT = "Consolas"
 CODE_SIZE = 107950              # 8.5pt (docx EMU)
 
-SEG = re.compile(r"(`[^`\n]+`|\*\*[^*\n]+\*\*)")
+SEG = re.compile(r"(`[^`\n]+`|\*\*[^*\n]+\*\*|\[\^\w+\])")
 BULLET = re.compile(r"^\s*(?:[•▪·]|[-*+]\s|\d+[.)]\s)")
+
+
+# '장'이 세는 단위로 쓰인 자리 (카드 두 장, 사진 세 장)
+NOT_CHAPTER = re.compile(r"(카드|사진|종이|용지|스티커|이미지)\s*$")
+
+KEYS = {
+    "f5": "F5", "f12": "F12", "enter": "Enter", "esc": "Esc", "tab": "Tab",
+    "ctrl": "Ctrl", "shift": "Shift", "alt": "Alt", "space": "Space",
+}
+
+
+def key_markup(t: str) -> str:
+    """mkdocs 의 ++ctrl+shift+r++ 표기를 사람이 읽는 형태로 바꾼다."""
+    def one(m):
+        parts = [KEYS.get(x, x.upper()) for x in m.group(1).split("+") if x]
+        return "+".join(parts)
+
+    return re.sub(r"\+\+([A-Za-z0-9+]+)\+\+", one, t)
 
 
 def renum(t: str) -> str:
@@ -41,17 +59,44 @@ def renum(t: str) -> str:
     def fig(m):
         return f"그림 {int(m.group(1)) + OFFSET}.{m.group(2)}"
 
-    def chap(m):
-        n = int(m.group(1))
-        return f"{n + OFFSET}장" if 0 <= n <= 28 - OFFSET else m.group(0)
-
     def sec(m):
         return f"{int(m.group(1)) + OFFSET}.{m.group(2)}절"
 
+    def rng(m):
+        return f"{int(m.group(1)) + OFFSET}~{int(m.group(2)) + OFFSET}장"
+
+    def chap(m):
+        n = int(m.group(1))
+        if NOT_CHAPTER.search(t[:m.start()]):
+            return m.group(0)
+        return f"{n + OFFSET}장" if 0 <= n <= 28 - OFFSET else m.group(0)
+
+    t = key_markup(t)
     t = re.sub(r"그림\s*(\d{1,2})\.(\d{1,2})", fig, t)
     t = re.sub(r"(?<![\d.])(\d{1,2})\.(\d{1,2})절", sec, t)
-    t = re.sub(r"(?<![\d.])(\d{1,2})장", chap, t)
+    t = re.sub(r"(?<![\d.])(\d{1,2})\s*[~∼-]\s*(\d{1,2})장", rng, t)
+    t = re.sub(r"(?<![\d.~-])(\d{1,2})장", chap, t)
     return t
+
+
+DUAL_FIG = re.compile(r"그림\s*\d{1,2}\.\d{1,2}\s+(그림\s*\d{1,2}\.\d{1,2})")
+DUAL_SEC = re.compile(r"(?<![\d.])\d{1,2}\.\d{1,2}\s+(\d{1,2}\.\d{1,2})(?![\d])")
+DUAL_CH = re.compile(r"(?<![\d.])\d{1,2}장\s+(\d{1,2}장)")
+
+
+def fix_numbers(t: str) -> str:
+    """편집 중 남은 옛 번호를 지우거나, 아직 안 올린 번호를 올린다.
+
+    옛 번호와 새 번호가 나란히 있으면 (예: '1장 5장') 뒤엣것만 남긴다.
+    그런 흔적이 없으면 리포 번호로 보고 최종 번호로 올린다.
+    """
+    dual = False
+    for rx in (DUAL_FIG, DUAL_SEC, DUAL_CH):
+        t2 = rx.sub(lambda m: m.group(1), t)
+        if t2 != t:
+            dual = True
+            t = t2
+    return key_markup(t) if dual else renum(t)
 
 
 def norm(s: str) -> str:
@@ -70,6 +115,8 @@ def segments(md: str) -> list[tuple[str, str]]:
             out.append((part[1:-1], "code"))
         elif part.startswith("**") and part.endswith("**"):
             out.append((part[2:-2], "bold"))
+        elif part.startswith("[^") and part.endswith("]"):
+            out.append((part[2:-1], "sup"))      # 각주 표시는 위첨자 숫자로
         else:
             out.append((part, "text"))
     return out
@@ -102,6 +149,8 @@ def rewrite(p, md: str) -> None:
         f.size = CODE_SIZE if kind == "code" else base["size"]
         f.bold = True if kind == "bold" else base["bold"]
         f.italic = base["italic"]
+        if kind == "sup":
+            f.superscript = True
         if base["color"] is not None:
             f.color.rgb = base["color"]
 
@@ -141,7 +190,9 @@ def final_path(n: int) -> Path | None:
 
 def do_chapter(n: int, dry: bool, verbose: bool) -> None:
     ch = f"ch{n - OFFSET:02d}"
-    src_md = ROOT / "chapters" / f"{ch}.md"
+    src_md = ROOT / "윤문비교" / "원문" / f"{ch}.md"
+    if not src_md.exists():
+        src_md = ROOT / "chapters" / f"{ch}.md"
     new_md = ROOT / "윤문비교" / ch / "D_Dola_보정.md"
     docx_path = final_path(n)
     if not (src_md.exists() and new_md.exists() and docx_path):
@@ -165,10 +216,8 @@ def do_chapter(n: int, dry: bool, verbose: bool) -> None:
     m = align(doc_texts, src_texts)
     changed = 0
     for di, si in sorted(m.items()):
-        if new_texts[si] == src_texts[si]:
-            continue
         target = renum(new_texts[si])
-        if norm(target) == norm(doc_texts[di]):
+        if target == doc_texts[di]:
             continue
         if verbose and changed < 3:
             print(f"  - 원본: {doc_texts[di][:70]}")
@@ -177,7 +226,22 @@ def do_chapter(n: int, dry: bool, verbose: bool) -> None:
             rewrite(cand[di][1], target)
         changed += 1
 
+    # 짝을 못 찾은 본문과 코드 블록에도 번호 체계를 맞춰 준다
+    matched = {cand[i][0] for i in m}
+    left = 0
+    for i, p in enumerate(d.paragraphs):
+        if i in matched or not p.text.strip():
+            continue
+        if p.style.name not in ("Normal", "Source Code"):
+            continue
+        fixed = fix_numbers(p.text)
+        if fixed != p.text:
+            if not dry:
+                rewrite(p, fixed.replace("`", ""))
+            left += 1
+
     print(f"{n:02d}장 ({ch}): 본문 {len(doc_texts)}개 중 {len(m)}개 짝지음 · {changed}개 교체"
+          + (f" · 번호만 고친 줄 {left}개" if left else "")
           + (" [미리보기]" if dry else ""))
 
     if not dry and changed:
