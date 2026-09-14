@@ -1,5 +1,11 @@
 # 바이브코딩으로 만드는 나만의 지도 웹
 
+## 출판사 제출 파일 다운로드
+
+[출판사제출.zip 다운로드 (2026-09-12, 약 110MB)](https://github.com/shain1912/vibecoding-map-book/releases/download/publisher-submission-20260912/default.zip)
+
+본문 Word 파일 30개, 그림 181개, 그림 목록과 제출 안내를 포함합니다. 압축 파일은 크기 제한으로 GitHub 릴리스에 보관합니다.
+
 > AI 에이전트(Claude Code)에게 말로 시켜서, 카카오지도 API 기반 **나만의 맛집·여행·데이트 지도 웹앱**을 만들어 GitHub Pages에 공개하기까지 — 26장 + 부록 2편, 200쪽+ 튜토리얼 책.
 
 ![완성 앱](docs/images/raw/app-main.jpg)
